@@ -5,6 +5,20 @@ workspace/*
 # Project planning files (internal documentation)
 PROJECT_PLAN.md
 CLAUDE.md
+TERMINAL_FINDINGS.md
+TOKEN_OPTIMIZATION.md
+BRANCH_PROTECTION_SETUP.md
+
+# Spec files that should only be in workspace
+*-spec.md
+*_architecture.md
+
+# Backup folders
+.backup/
+backup/
+
+# Installation scripts (use installers folder instead)
+install.sh
 
 # Node modules
 node_modules/

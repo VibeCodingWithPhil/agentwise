@@ -1,0 +1,47 @@
+MIT License with Additional Terms
+
+Copyright (c) 2024 Philip Ritmeester (VibeCodingWithPhil)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+ADDITIONAL TERMS AND RESTRICTIONS:
+
+1. ATTRIBUTION: The name "Agentwise" and its creator "Philip Ritmeester" must not
+   be used to endorse or promote products derived from this software without
+   specific prior written permission.
+
+2. NO IMPERSONATION: You may not claim to be the original author or creator of
+   Agentwise. Any derivative work must clearly state that it is based on or
+   derived from Agentwise.
+
+3. NO RESALE AS-IS: You may not resell, rebrand, or redistribute Agentwise as
+   your own product. However, you MAY:
+   - Use Agentwise commercially in your own projects
+   - Build commercial applications using Agentwise
+   - Offer services based on Agentwise
+   - Include Agentwise as part of a larger commercial product
+
+4. TRADEMARK: The name "Agentwise" is retained by the original author and may
+   not be used as the primary name for derivative works.
+
+5. CONTRIBUTIONS: By contributing to this project, you agree that your
+   contributions will be licensed under this same license.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+For questions about these terms, please contact the author through the
+GitHub repository: https://github.com/VibeCodingWithPhil/agentwise
