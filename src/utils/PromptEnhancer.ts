@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
-export type EnhancementMode = 'create' | 'task';
+export type EnhancementMode = 'create' | 'task' | 'image-analysis';
 
 export interface EnhancementOptions {
   mode: EnhancementMode;
@@ -35,10 +35,21 @@ export class PromptEnhancer {
 
   async enhance(
     prompt: string, 
-    options: EnhancementOptions
-  ): Promise<EnhancedPrompt> {
+    options: EnhancementOptions | string
+  ): Promise<EnhancedPrompt | string> {
+    // Handle string parameter for backward compatibility and image mode
+    if (typeof options === 'string') {
+      if (options === 'image-analysis') {
+        return this.enhanceForImageAnalysis(prompt);
+      }
+      // Legacy string mode handling
+      return this.enhanceForTask(prompt, '');
+    }
+    
     if (options.mode === 'create') {
       return this.enhanceForCreation(prompt);
+    } else if (options.mode === 'image-analysis') {
+      return this.enhanceForImageAnalysis(prompt);
     } else {
       return this.enhanceForTask(prompt, options.projectContext || '');
     }
@@ -473,5 +484,103 @@ export class PromptEnhancer {
     recommendations: string[]
   ): string {
     return `FEATURE: ${prompt}\n\nCONTEXT: Existing project\n\n${clarifications.join('\n')}`;
+  }
+
+  private async enhanceForImageAnalysis(prompt: string): Promise<string> {
+    // Parse the image context from the prompt
+    const imageMatch = prompt.match(/\[Image Context: ([^\]]+)\]/);
+    const userDescription = prompt.replace(/\[Image Context: [^\]]+\]/, '').trim();
+    
+    // Analyze what the user is asking for
+    const analysis = this.analyzeImageRequest(userDescription);
+    
+    // Build enhanced prompt with clear instructions
+    const enhancedParts = [
+      '## Visual Analysis Request',
+      '',
+      '### User Request',
+      userDescription || 'Analyze the provided image and suggest improvements or implementation.',
+      '',
+      '### Analysis Focus Areas',
+    ];
+
+    // Add specific focus areas based on the request
+    if (analysis.isUI) {
+      enhancedParts.push(
+        '1. **UI/UX Analysis**',
+        '   - Component structure and hierarchy',
+        '   - Layout and spacing issues',
+        '   - Color scheme and visual consistency',
+        '   - Responsive design considerations',
+        '   - Accessibility concerns'
+      );
+    }
+
+    if (analysis.isError) {
+      enhancedParts.push(
+        '2. **Error Analysis**',
+        '   - Error message interpretation',
+        '   - Stack trace analysis',
+        '   - Potential root causes',
+        '   - Debugging steps',
+        '   - Solution recommendations'
+      );
+    }
+
+    if (analysis.isArchitecture) {
+      enhancedParts.push(
+        '3. **Architecture Analysis**',
+        '   - System components and relationships',
+        '   - Data flow patterns',
+        '   - Integration points',
+        '   - Scalability considerations',
+        '   - Security implications'
+      );
+    }
+
+    if (analysis.isImplementation) {
+      enhancedParts.push(
+        '4. **Implementation Guidance**',
+        '   - Required components/modules',
+        '   - Technology stack recommendations',
+        '   - Code structure suggestions',
+        '   - Best practices to follow',
+        '   - Step-by-step implementation plan'
+      );
+    }
+
+    // Add general instructions
+    enhancedParts.push(
+      '',
+      '### Expected Deliverables',
+      '1. Detailed analysis of the visual elements',
+      '2. Identification of issues or requirements',
+      '3. Concrete implementation suggestions with code examples',
+      '4. Best practices and optimization recommendations',
+      '5. Potential edge cases and considerations',
+      '',
+      '### Technical Context',
+      '- Provide code snippets in appropriate languages',
+      '- Consider modern web standards and practices',
+      '- Ensure accessibility and performance',
+      '- Include error handling and validation',
+      '- Follow clean code principles'
+    );
+
+    return enhancedParts.join('\n');
+  }
+
+  private analyzeImageRequest(description: string): any {
+    const lower = description.toLowerCase();
+    
+    return {
+      isUI: /ui|ux|design|layout|component|style|css|button|form|page|screen|interface/.test(lower),
+      isError: /error|bug|issue|problem|broken|fix|debug|wrong|incorrect/.test(lower),
+      isArchitecture: /architecture|diagram|flow|system|structure|database|schema/.test(lower),
+      isImplementation: /implement|build|create|develop|code|convert|make/.test(lower),
+      isResponsive: /responsive|mobile|tablet|desktop|breakpoint/.test(lower),
+      needsAccessibility: /accessibility|a11y|aria|screen reader/.test(lower),
+      needsOptimization: /optimize|performance|speed|fast|slow/.test(lower)
+    };
   }
 }
