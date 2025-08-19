@@ -250,38 +250,26 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] Hallucination detection and prevention
 - [x] Automatic agent discovery for custom agents
 
-### 🚧 In Progress
-- [ ] **Web UI Dashboard** *(Tentative - under evaluation)*
-  - Real-time monitoring interface
-  - Visual agent status tracking
-  - Progress visualization
+### 🚧 In Development
+- [ ] **Web UI Dashboard** - Real-time monitoring interface
+  - Agent status visualization
+  - Progress tracking
+  - Task distribution graphs
 
-### 📋 Q1 2025 - MCP Integration
-- [ ] **Model Context Protocol Support**
+### 📋 Coming Soon (Q1-Q2 2025)
+- [ ] **MCP Integration** - Model Context Protocol support
   - [ ] Figma MCP - Design system integration
-  - [ ] GitHub MCP - Repository management
+  - [ ] GitHub MCP - Enhanced repository management
   - [ ] Database MCP - Direct database access
-  - [ ] AWS/Cloud MCP - Infrastructure management
-  - [ ] Slack/Discord MCP - Team communication
 
-### 🔮 Q2 2025 - Advanced Features
-- [ ] **Agent Learning System** - Pattern learning and optimization
-- [ ] **Custom Agent Generator** - AI-powered agent creation
-- [ ] **Agent Marketplace** - Community-contributed agents
-- [ ] **Dependency-Aware Scheduling** - Optimal task distribution
-- [ ] **Multi-Project Management** - Simultaneous project handling
+### 🤔 Under Evaluation
+Features being considered based on community needs:
+- Custom agent generator UI
+- Additional MCP integrations
+- Performance analytics
+- Webhook support
 
-### 🏢 Q3 2025 - Enterprise
-- [ ] **Security & Compliance** - RBAC, audit logging, compliance checking
-- [ ] **Advanced Analytics** - Performance metrics, cost tracking
-- [ ] **Cloud Execution** - Distributed agent processing
-
-### 🌟 Q4 2025 - AI Evolution
-- [ ] **Multi-Modal Agents** - Image/voice understanding
-- [ ] **Autonomous Problem Solving** - Self-debugging capabilities
-- [ ] **Cross-Language Support** - Polyglot development
-
-See [ROADMAP.md](ROADMAP.md) for detailed timeline and contribution opportunities.
+We're keeping Agentwise focused and lightweight. See [ROADMAP.md](ROADMAP.md) for details.
 
 ## 📄 License
 

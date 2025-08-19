@@ -1,7 +1,7 @@
 # Agentwise Roadmap
 
 ## 🎯 Vision
-Agentwise aims to become the premier multi-agent orchestration system for Claude Code, enabling developers to leverage specialized AI agents working in parallel to build complex applications with unprecedented speed and quality.
+Agentwise is a focused, lightweight multi-agent orchestration system for Claude Code that enables developers to leverage specialized AI agents working in parallel. We prioritize simplicity, reliability, and practical features that deliver immediate value.
 
 ## 📅 Release Timeline
 
@@ -21,18 +21,18 @@ Agentwise aims to become the premier multi-agent orchestration system for Claude
 - [x] Hallucination detection and prevention
 - [x] Enhanced command handler with validation
 
-### 🚧 Phase 3: Web UI Dashboard (Under Evaluation)
-**Status: Tentative - Currently being evaluated for feasibility and user value**
+### 🚧 Phase 3: Web UI Dashboard (In Development)
+**Status: Actively being developed**
 
 - [ ] **Monitoring Dashboard Web UI**
   - Real-time agent status visualization
   - Progress tracking interface
   - Task distribution graphs
   - Performance metrics display
-  - *Note: This feature is under consideration and may be modified or postponed based on user feedback*
+  - Agent output logs viewer
 
-### 📋 Phase 4: MCP Integration (Q1 2025)
-**Model Context Protocol Support**
+### 📋 Phase 4: MCP Integration (Q1-Q2 2025)
+**Model Context Protocol Support - Confirmed**
 
 #### Core MCP Features
 - [ ] MCP Server implementation for Agentwise
@@ -40,117 +40,34 @@ Agentwise aims to become the premier multi-agent orchestration system for Claude
 - [ ] Standardized tool interfaces
 - [ ] Resource sharing between agents
 
-#### MCP Tool Integrations
+#### Priority MCP Integrations
 - [ ] **Figma MCP** - Design system integration
-  - Agents can fetch design tokens
-  - Component specifications
-  - Auto-generate UI from Figma designs
+  - Fetch design tokens and specifications
+  - Auto-generate UI components from designs
   
-- [ ] **GitHub MCP** - Repository management
-  - Direct PR creation by agents
-  - Issue tracking integration
-  - Code review automation
+- [ ] **GitHub MCP** - Enhanced repository management
+  - Direct PR/issue creation by agents
+  - Code review integration
   
 - [ ] **Database MCP** - Direct database access
-  - Schema inspection
+  - Schema inspection and migration generation
   - Query optimization suggestions
-  - Migration generation
-  
-- [ ] **AWS/Cloud MCP** - Infrastructure management
-  - Resource provisioning
-  - Deployment automation
-  - Cost optimization
-  
-- [ ] **Slack/Discord MCP** - Team communication
-  - Progress notifications
-  - Agent status updates
-  - Collaborative debugging
 
-### 📋 Phase 5: Advanced Features (Q2 2025)
+### 🤔 Under Evaluation (Future Considerations)
 
-#### Agent Capabilities
-- [ ] **Agent Learning System**
-  - Agents learn from successful patterns
-  - Knowledge sharing between agents
-  - Performance optimization over time
+The following features are being considered but may not be implemented to maintain project simplicity:
 
-- [ ] **Custom Agent Generator**
-  - AI-powered agent creation from descriptions
-  - Automatic capability detection
-  - Specialization fine-tuning
+#### Possible Enhancements
+- **Custom Agent Generator** - UI for creating new agents
+- **Agent Templates** - Pre-built agent configurations
+- **Performance Analytics** - Basic metrics and reporting
+- **Webhook Support** - Integration with external services
 
-- [ ] **Agent Marketplace**
-  - Community-contributed agents
-  - Verified agent templates
-  - Rating and review system
-
-#### Orchestration Enhancements
-- [ ] **Dependency-Aware Scheduling**
-  - Automatic task dependency detection
-  - Optimal agent assignment
-  - Parallel execution optimization
-
-- [ ] **Multi-Project Management**
-  - Simultaneous project handling
-  - Resource allocation across projects
-  - Priority-based scheduling
-
-- [ ] **Distributed Execution**
-  - Cloud-based agent execution
-  - Horizontal scaling
-  - Load balancing
-
-### 🔮 Phase 6: Enterprise Features (Q3 2025)
-
-#### Security & Compliance
-- [ ] **Role-Based Access Control**
-  - User permissions management
-  - Agent access restrictions
-  - Audit logging
-
-- [ ] **Compliance Checking**
-  - GDPR/CCPA compliance validation
-  - Security vulnerability scanning
-  - License compatibility checking
-
-- [ ] **Secret Management**
-  - Vault integration
-  - Encrypted credential storage
-  - Automatic rotation
-
-#### Monitoring & Analytics
-- [ ] **Advanced Monitoring Dashboard**
-  - Real-time agent performance metrics
-  - Cost tracking and optimization
-  - Predictive analytics
-
-- [ ] **Reporting System**
-  - Project progress reports
-  - Agent efficiency metrics
-  - Resource utilization analysis
-
-- [ ] **Alerting & Notifications**
-  - Customizable alert rules
-  - Multiple notification channels
-  - Escalation policies
-
-### 🌟 Phase 7: AI Evolution (Q4 2025)
-
-#### Next-Generation AI Features
-- [ ] **Multi-Modal Agents**
-  - Image understanding for UI/UX agents
-  - Voice interaction support
-  - Video tutorial generation
-
-- [ ] **Autonomous Problem Solving**
-  - Self-debugging capabilities
-  - Automatic error recovery
-  - Predictive issue prevention
-
-- [ ] **Cross-Language Support**
-  - Polyglot agent capabilities
-  - Automatic language detection
-  - Cross-platform development
+#### Community-Driven Features
+We'll prioritize features based on community feedback and contributions:
+- Additional MCP integrations (AWS, Slack, etc.)
+- Language-specific agent templates
+- Framework-specific optimizations
 
 ## 🤝 Community Contributions
 
