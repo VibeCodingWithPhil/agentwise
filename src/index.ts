@@ -2,6 +2,7 @@
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { exec } from 'child_process';
 
 async function main() {
   console.log(`
@@ -21,6 +22,7 @@ Available Commands:
   /init-import              - Import external project
   /task-import              - Execute import with planning
   /generate-agent <spec>    - Create custom agent
+  /monitor                   - Open monitoring dashboard
 
 Status: ✅ System Ready
 `);
@@ -38,6 +40,23 @@ Status: ✅ System Ready
   if (await fs.pathExists(workspacePath)) {
     const projects = await fs.readdir(workspacePath);
     console.log(`\nProjects in Workspace: ${projects.length}`);
+  }
+
+  // Auto-start monitor if not running
+  const monitorPath = path.join(__dirname, 'monitor');
+  if (await fs.pathExists(monitorPath)) {
+    exec('lsof -ti:3001,3002', (error, stdout) => {
+      if (!stdout || stdout.trim() === '') {
+        console.log('\n📊 Starting Agentwise Monitor...');
+        exec(`cd ${monitorPath} && ./start.sh`, (error) => {
+          if (!error) {
+            console.log('Monitor dashboard available at: http://localhost:3001');
+          }
+        });
+      } else {
+        console.log('\n📊 Monitor dashboard already running at: http://localhost:3001');
+      }
+    });
   }
 
   console.log('\nTo use Agentwise, run any command from within Claude Code.');

@@ -40,18 +40,53 @@ Agentwise is a focused, lightweight multi-agent orchestration system for Claude 
 - [ ] Standardized tool interfaces
 - [ ] Resource sharing between agents
 
-#### Priority MCP Integrations
+#### Priority MCP Integrations with Agent-Specific Usage
+
 - [ ] **Figma MCP** - Design system integration
-  - Fetch design tokens and specifications
-  - Auto-generate UI components from designs
+  - **Frontend Specialist**: Fetch design tokens, generate components
+  - **Testing Specialist**: Visual regression testing against designs
+  - Auto-generate UI components from Figma designs
   
-- [ ] **GitHub MCP** - Enhanced repository management
-  - Direct PR/issue creation by agents
-  - Code review integration
+- [ ] **GitHub MCP** - Enhanced repository management  
+  - **All Agents**: Direct PR/issue creation
+  - **DevOps Specialist**: CI/CD pipeline management
+  - **Backend Specialist**: API documentation generation
+  - Code review integration across all agents
   
 - [ ] **Database MCP** - Direct database access
-  - Schema inspection and migration generation
-  - Query optimization suggestions
+  - **Database Specialist**: Schema optimization, index recommendations
+  - **Backend Specialist**: Query generation and ORM setup
+  - **Testing Specialist**: Test data management
+  - Migration generation and validation
+
+#### Agent-Specific MCP Enhancements
+
+Each agent will leverage MCPs relevant to their specialization:
+
+**Frontend Specialist MCPs:**
+- Figma MCP for design implementation
+- Browser DevTools MCP for performance testing
+- Component Library MCPs (Storybook, etc.)
+
+**Backend Specialist MCPs:**
+- Database MCP for query optimization
+- API Documentation MCP (Swagger/OpenAPI)
+- Authentication Provider MCPs
+
+**Database Specialist MCPs:**
+- Database MCP for all database operations
+- Migration Tool MCPs
+- Performance Monitoring MCPs
+
+**DevOps Specialist MCPs:**
+- GitHub MCP for CI/CD
+- Cloud Provider MCPs (AWS, GCP, Azure)
+- Container Registry MCPs
+
+**Testing Specialist MCPs:**
+- Test Framework MCPs
+- Browser Automation MCPs
+- Performance Testing MCPs
 
 ### 🤔 Under Evaluation (Future Considerations)
 
