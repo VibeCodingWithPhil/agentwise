@@ -13,9 +13,11 @@ BRANCH_PROTECTION_SETUP.md
 *-spec.md
 *_architecture.md
 
-# Backup folders
+# Backup folders (but not src/backup)
 .backup/
 backup/
+.backups/
+!src/backup/
 
 # Installation scripts (use installers folder instead)
 install.sh

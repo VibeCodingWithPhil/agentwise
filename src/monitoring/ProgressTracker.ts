@@ -538,8 +538,8 @@ export class ProgressTracker extends EventEmitter {
       return;
     }
     
-    // Get current task states from MD files
-    const tasks = await this.mdWatcher.getProjectTasks(projectId);
+    // Get current task states from MD files (triggers update)
+    await this.mdWatcher.getProjectTasks(projectId);
     
     // Get statistics from MD files
     const stats = await this.mdParser.getProjectStatistics(projectPath);

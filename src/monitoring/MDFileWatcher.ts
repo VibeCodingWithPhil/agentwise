@@ -298,8 +298,8 @@ export class MDFileWatcher extends EventEmitter {
     return tasks;
   }
 
-  private async findFiles(directory: string, pattern: string): Promise<string[]> {
-    // Simple file finder - in production, use glob library
+  private async findFiles(directory: string, _pattern: string): Promise<string[]> {
+    // Simple file finder - pattern parameter kept for future use
     const files: string[] = [];
     
     // This is a simplified implementation
