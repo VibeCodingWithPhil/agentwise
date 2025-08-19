@@ -1,0 +1,73 @@
+# Workspace - User projects (private data)
+workspace/
+workspace/*
+
+# Project planning files (internal documentation)
+PROJECT_PLAN.md
+CLAUDE.md
+
+# Node modules
+node_modules/
+*/node_modules/
+
+# Environment files
+.env
+.env.*
+*.env
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Build outputs
+dist/
+build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Lock files (optional - you might want to keep package-lock.json)
+# package-lock.json
+# yarn.lock
+
+# User-specific files
+.active-project
+progress.json
+projects.json
+
+# Backup files
+*.backup
+*.bak
+
+# Python cache (if any Python scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Keep .claude folder and its contents
+!.claude/
+!.claude/**/*
