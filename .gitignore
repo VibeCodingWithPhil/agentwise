@@ -8,6 +8,8 @@ CLAUDE.md
 TERMINAL_FINDINGS.md
 TOKEN_OPTIMIZATION.md
 BRANCH_PROTECTION_SETUP.md
+MONITORING_FIX_PLAN.md
+*_FIX_PLAN.md
 
 # Spec files that should only be in workspace
 *-spec.md
