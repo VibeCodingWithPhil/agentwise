@@ -1,7 +1,7 @@
 # Agentwise Monitoring Dashboard - Design Specifications
 
 ## Overview
-Create a real-time monitoring dashboard that visualizes the progress of multiple AI agents working on projects in parallel. The dashboard should auto-launch when agents start working and provide live updates as tasks complete.
+Create a real-time monitoring dashboard that visualizes the progress of multiple AI agents working on projects in parallel. The dashboard should auto-launch when agents start working and provide live updates as tasks complete. **IMPORTANT**: The system supports dynamic agent creation, so the UI must handle any number of agents beyond the default 5.
 
 ## Design Requirements
 
@@ -16,246 +16,632 @@ Create a real-time monitoring dashboard that visualizes the progress of multiple
 - Text Primary: #ffffff
 - Text Secondary: #9ca3af
 - Borders: #27272a
+- Scroll Track: #1a1a1e
+- Scroll Thumb: #7c3aed
 
-### 2. Layout Structure
+### 2. Dynamic Layout Structure
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  [Logo] Agentwise Monitor    [Project: Name]    [●] Live    │
 ├─────────────────────────────────────────────────────────────┤
-│                                                             │
+│                          ▼ SCROLLABLE AREA ▼               │
 │  ┌──────────────┐  ┌─────────────────────────────────────┐ │
-│  │              │  │                                     │ │
-│  │   Overall    │  │      Agent Progress Grid           │ │
-│  │   Progress   │  │                                     │ │
-│  │              │  │                                     │ │
-│  └──────────────┘  └─────────────────────────────────────┘ │
-│                                                             │
+│  │              │  │    Agent Progress Grid (Dynamic)     │ │
+│  │   Overall    │  │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐  │ │
+│  │   Progress   │  │  │Agent│ │Agent│ │Agent│ │Agent│  │ │
+│  │              │  │  └─────┘ └─────┘ └─────┘ └─────┘  │ │
+│  │   [Sticky]   │  │  ┌─────┐ ┌─────┐ ┌─────┐ [+MORE]  │ │
+│  └──────────────┘  │  │Agent│ │Agent│ │Agent│  ↓ ↓ ↓   │ │
+│                    └─────────────────────────────────────┘ │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │                 Phase Timeline                         │ │
+│  │                 Phase Timeline (Horizontal Scroll)     │ │
 │  └────────────────────────────────────────────────────────┘ │
 │                                                             │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │                 Live Task Feed                         │ │
+│  │          Live Task Feed (Virtual Scroll)               │ │
 │  └────────────────────────────────────────────────────────┘ │
 │                                                             │
 │  ┌──────────────┐  ┌─────────────────────────────────────┐ │
-│  │   Metrics    │  │      Token Usage Graph              │ │
+│  │   Metrics    │  │    Token Usage Graph (Scrollable)    │ │
 │  └──────────────┘  └─────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 3. Components Specification
+### 3. Components Specification (ENHANCED)
 
-#### Header Bar
+#### Header Bar (Fixed Position)
 - **Logo**: Agentwise icon (stylized "A" with orbiting dots)
 - **Project Name**: Current active project
 - **Live Indicator**: Pulsing green dot when agents active
 - **Time Elapsed**: Running timer since project start
-- **Quick Actions**: Pause, Stop, Settings buttons
+- **Agent Count Badge**: Shows total number of active agents (e.g., "12 Agents")
+- **Quick Actions**: Pause, Stop, Settings, Add Agent buttons
 
-#### Overall Progress (Left Panel)
+#### Overall Progress (Sticky Left Panel)
+- **Position**: Fixed on scroll, always visible
 - **Large Circular Progress Ring**
   - Diameter: 200px
-  - Stroke: Gradient from purple to green
-  - Center: Large percentage number
+  - Stroke: Gradient animation from purple to green
+  - Center: Large percentage with smooth transitions
   - Below: "X of Y tasks completed"
 - **Estimated Time Remaining**
   - Display: "~X minutes remaining"
-  - Update: Real-time calculation
+  - Updates with smooth number transitions
+- **Phase Indicator**: Current phase name with progress
 
-#### Agent Progress Grid (5 Cards)
-Each agent card should display:
-- **Agent Avatar**: Unique icon for each specialist
-  - Frontend: Monitor icon (🖥️)
-  - Backend: Server icon (🗄️)
-  - Database: Database icon (🗃️)
-  - DevOps: Gear icon (⚙️)
-  - Testing: Check icon (✓)
-- **Agent Name**: e.g., "Frontend Specialist"
-- **Status Indicator**: 
-  - Idle (gray)
-  - Working (animated purple pulse)
-  - Completed (green)
-  - Error (red)
-- **Progress Bar**: Individual task progress
-- **Current Task**: Truncated text with tooltip
-- **Tasks Count**: "12/15 tasks"
-
-#### Phase Timeline (Horizontal)
-- **Phase Blocks**: Connected by lines
-  - Each phase shows name and progress
-  - Color coding: Gray (pending), Purple (active), Green (complete)
-  - Smooth animations between phases
-- **Phase Details on Hover**:
-  - Phase name
-  - Start/end time
-  - Task breakdown
-  - Agent assignments
-
-#### Live Task Feed (Scrollable)
-- **Task Items** (newest on top):
-  ```
-  [10:45:23] ✅ Frontend Specialist: Created login component
-  [10:44:15] 🔄 Backend Specialist: Setting up authentication...
-  [10:43:02] ❌ Testing Specialist: Unit test failed - retrying
-  ```
-- **Filters**: All, Completed, In Progress, Failed
-- **Auto-scroll**: Option to follow latest
-- **Search**: Quick filter by keyword
-
-#### Metrics Panel
-- **Key Metrics Cards**:
-  - Total Tasks
-  - Completion Rate
-  - Average Task Duration
-  - Failed Tasks
-  - Active Agents
-- **Visual Style**: Mini cards with icons and numbers
-
-#### Token Usage Graph
-- **Line Chart**: Real-time token consumption
-- **X-axis**: Time (last 30 minutes)
-- **Y-axis**: Tokens used
-- **Multiple Lines**: One per agent (color-coded)
-- **Total Counter**: Cumulative tokens with cost estimate
-
-### 4. Animations & Interactions
-
-#### Smooth Transitions
-- Progress bars: Ease-in-out animation (300ms)
-- Task completion: Slide + fade effect
-- Phase transitions: Glow effect when completing
-- Agent status: Pulse animation when working
-
-#### Hover States
-- Cards: Subtle scale (1.02) and shadow
-- Buttons: Brightness increase
-- Progress rings: Show detailed tooltip
-
-#### Real-time Updates
-- WebSocket connection for live data
-- Update frequency: Every 500ms
-- Smooth number transitions (no jumps)
-- Notification sounds (optional) for completions
-
-### 5. Responsive Breakpoints
-- **Desktop**: Full layout (1920x1080 optimal)
-- **Laptop**: Compress spacing (1366x768)
-- **Tablet**: Stack panels vertically
-- **Mobile**: Single column, collapsible sections
-
-### 6. Special Features
-
-#### Alert System
-- **Success Toast**: Green, top-right, auto-dismiss (3s)
-- **Error Modal**: Red border, requires acknowledgment
-- **Warning Banner**: Orange, persistent until resolved
-
-#### Multi-Project Support
-- **Project Switcher**: Dropdown in header
-- **Project Tabs**: Optional tabbed interface
-- **Quick Compare**: Side-by-side view (2 projects max)
-
-#### Export Options
-- **Download Report**: PDF with charts and metrics
-- **Export Data**: JSON/CSV of all task data
-- **Share Link**: Generate shareable dashboard URL
-
-### 7. Performance Indicators
-
-#### Visual Feedback for Performance
-- **Fast Tasks** (< 30s): Green indicator
-- **Normal Tasks** (30s - 2min): Default
-- **Slow Tasks** (> 2min): Yellow indicator
-- **Stalled Tasks** (> 5min): Red alert
-
-#### Agent Health Status
-- **CPU Usage**: Mini bar per agent
-- **Memory**: Visual indicator if high
-- **Queue Length**: Number of pending tasks
-
-### 8. Accessibility
-- **High Contrast Mode**: Toggle option
-- **Font Size**: Adjustable (S/M/L)
-- **Screen Reader**: Proper ARIA labels
-- **Keyboard Navigation**: Tab through sections
-
-### 9. Loading States
-- **Initial Load**: Skeleton screens with shimmer
-- **Data Refresh**: Subtle spinner in corner
-- **Connection Lost**: Clear warning banner
-
-### 10. Empty States
-- **No Active Project**: Welcome screen with quick start
-- **No Tasks**: Friendly message with suggestions
-- **All Complete**: Celebration animation
-
-## Technical Implementation Notes
-
-### Auto-Launch Behavior
-1. Dashboard opens automatically when:
-   - `/create` command initiates new project
-   - `/task` command starts work
-   - `/init-import` begins import process
-   - Any agent starts processing
-
-2. Dashboard URL: `http://localhost:3001/dashboard`
-
-3. Opens in default browser with:
-   - Full screen mode preferred
-   - Dark theme auto-selected
-   - WebSocket connection established
-
-### Data Structure
+#### Agent Progress Grid (DYNAMIC & SCROLLABLE)
+**Grid Layout**:
 ```javascript
-{
-  projectId: "project-123",
-  projectName: "E-commerce Platform",
-  startTime: "2024-08-19T10:00:00Z",
-  overallProgress: 45,
-  currentPhase: 2,
-  agents: [
-    {
-      id: "frontend-specialist",
-      status: "working",
-      currentTask: "Building checkout component",
-      progress: 60,
-      tasksCompleted: 8,
-      tasksTotal: 15
-    }
-  ],
-  phases: [...],
-  tasks: [...],
-  metrics: {...}
+// Responsive grid calculation
+const gridColumns = Math.min(4, agentCount);
+const gridRows = Math.ceil(agentCount / gridColumns);
+const cardWidth = (containerWidth - (gaps * (gridColumns - 1))) / gridColumns;
+```
+
+**Agent Card Design**:
+- **Size**: Min 180px × 200px, Max 250px × 280px
+- **Default Agent Icons**:
+  - Frontend: Monitor (🖥️)
+  - Backend: Server (🗄️)
+  - Database: Database (🗃️)
+  - DevOps: Gear (⚙️)
+  - Testing: Check (✓)
+- **Custom Agent Icons**: Dynamic icon based on specialization
+  - Security: Shield (🛡️)
+  - AI/ML: Brain (🧠)
+  - Mobile: Phone (📱)
+  - Custom: First letter of name in circle
+
+**Card Content**:
+```html
+<div class="agent-card" data-agent-id="{{agentId}}">
+  <div class="agent-header">
+    <div class="agent-icon {{status}}">{{icon}}</div>
+    <div class="agent-name">{{name}}</div>
+  </div>
+  <div class="agent-status">{{status}}</div>
+  <div class="progress-bar">
+    <div class="progress-fill" style="width: {{progress}}%"></div>
+  </div>
+  <div class="current-task">{{currentTask}}</div>
+  <div class="task-count">{{completed}}/{{total}} tasks</div>
+  <div class="agent-metrics">
+    <span class="duration">{{duration}}</span>
+    <span class="tokens">{{tokens}}</span>
+  </div>
+</div>
+```
+
+**Grid Scrolling**:
+- Vertical scroll when > 8 agents
+- Smooth scroll with momentum
+- Lazy loading for performance
+- Show "X more agents" indicator
+
+#### Phase Timeline (Horizontal Scroll)
+- **Scrollable Container**: Overflow-x: auto
+- **Dynamic Width**: Adjusts based on number of phases
+- **Phase Blocks**: 
+  - Min width: 150px per phase
+  - Connected by animated progress lines
+  - Show agent assignments on hover
+- **Smart Scrolling**: Auto-scroll to active phase
+
+#### Live Task Feed (Virtual Scrolling)
+```javascript
+// Virtual scrolling for performance
+const VirtualTaskFeed = {
+  visibleItems: 50,
+  totalItems: allTasks.length,
+  itemHeight: 40,
+  containerHeight: 400,
+  
+  renderVisibleItems() {
+    const startIndex = Math.floor(scrollTop / itemHeight);
+    const endIndex = startIndex + visibleItems;
+    return tasks.slice(startIndex, endIndex);
+  }
+};
+```
+
+#### Metrics Panel (Responsive Grid)
+```css
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
 }
 ```
 
-## Figma Design Guidelines
+### 4. Animations & Interactions (DETAILED)
 
-When creating in Figma:
-1. Use 8px grid system
-2. Border radius: 8px for cards, 4px for buttons
-3. Shadows: 0 4px 6px rgba(0, 0, 0, 0.1)
-4. Typography:
-   - Headers: Inter Bold, 24px
-   - Subheaders: Inter Semibold, 18px
-   - Body: Inter Regular, 14px
-   - Mono: JetBrains Mono for code/logs
+#### CSS Animations
+```css
+/* Pulse animation for live indicator */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.2); }
+}
 
-5. Create components for:
-   - Agent cards
-   - Progress rings
-   - Task items
-   - Phase blocks
-   - Metric cards
+/* Progress bar fill animation */
+@keyframes progressFill {
+  from { width: var(--from-width); }
+  to { width: var(--to-width); }
+}
 
-6. Include states for:
-   - Default
-   - Hover
-   - Active
-   - Disabled
-   - Loading
-   - Error
+/* Agent card entrance animation */
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px) scale(0.95);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1);
+  }
+}
 
-This dashboard should feel professional, modern, and aligned with developer tools aesthetics while maintaining clarity and usability for monitoring multiple AI agents in real-time.
+/* Task completion celebration */
+@keyframes celebrate {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+```
+
+#### JavaScript Animations
+```javascript
+// Smooth number transitions
+function animateNumber(element, from, to, duration = 300) {
+  const startTime = performance.now();
+  const update = (currentTime) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeOutCubic(progress);
+    const current = from + (to - from) * eased;
+    element.textContent = Math.round(current);
+    
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  };
+  requestAnimationFrame(update);
+}
+
+// Stagger animation for agent cards
+function animateAgentCards() {
+  const cards = document.querySelectorAll('.agent-card');
+  cards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 50}ms`;
+    card.classList.add('animate-in');
+  });
+}
+```
+
+### 5. Real-time Updates (WebSocket Implementation)
+
+```javascript
+// WebSocket connection for real-time updates
+class DashboardSocket {
+  constructor() {
+    this.ws = new WebSocket('ws://localhost:3001/dashboard');
+    this.reconnectAttempts = 0;
+    this.setupEventHandlers();
+  }
+
+  setupEventHandlers() {
+    this.ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      this.handleUpdate(data);
+    };
+
+    this.ws.onclose = () => {
+      this.reconnect();
+    };
+  }
+
+  handleUpdate(data) {
+    switch(data.type) {
+      case 'agent:added':
+        this.addAgentCard(data.agent);
+        break;
+      case 'task:completed':
+        this.updateTaskProgress(data.taskId);
+        this.animateCompletion(data.agentId);
+        break;
+      case 'phase:changed':
+        this.scrollToPhase(data.phase);
+        break;
+      case 'progress:update':
+        this.smoothUpdateProgress(data.progress);
+        break;
+    }
+  }
+
+  addAgentCard(agent) {
+    const grid = document.getElementById('agent-grid');
+    const card = this.createAgentCard(agent);
+    grid.appendChild(card);
+    
+    // Animate entrance
+    requestAnimationFrame(() => {
+      card.classList.add('animate-in');
+    });
+    
+    // Recalculate grid layout
+    this.recalculateGrid();
+  }
+
+  recalculateGrid() {
+    const grid = document.getElementById('agent-grid');
+    const agentCount = grid.children.length;
+    
+    if (agentCount > 8) {
+      grid.classList.add('scrollable');
+      grid.style.maxHeight = '600px';
+    }
+    
+    // Adjust columns based on count
+    const columns = Math.min(4, Math.ceil(Math.sqrt(agentCount)));
+    grid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+  }
+}
+```
+
+### 6. Responsive Design (Breakpoints & Behavior)
+
+```css
+/* Desktop (1920px+) */
+@media (min-width: 1920px) {
+  .agent-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .dashboard-container {
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+}
+
+/* Laptop (1366px - 1919px) */
+@media (min-width: 1366px) and (max-width: 1919px) {
+  .agent-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .agent-card {
+    min-width: 160px;
+  }
+}
+
+/* Tablet (768px - 1365px) */
+@media (min-width: 768px) and (max-width: 1365px) {
+  .agent-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .overall-progress {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .agent-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .dashboard-container {
+    padding: 10px;
+  }
+  .phase-timeline {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+```
+
+### 7. Dynamic Agent Handling
+
+```javascript
+class AgentManager {
+  constructor() {
+    this.agents = new Map();
+    this.defaultAgents = ['frontend', 'backend', 'database', 'devops', 'testing'];
+    this.customAgentCount = 0;
+  }
+
+  addAgent(agentData) {
+    const agent = {
+      id: agentData.id,
+      name: agentData.name,
+      type: agentData.type || 'custom',
+      icon: this.getAgentIcon(agentData),
+      color: this.getAgentColor(agentData),
+      status: 'idle',
+      progress: 0,
+      tasks: []
+    };
+
+    this.agents.set(agent.id, agent);
+    this.renderAgent(agent);
+    
+    // Update UI counters
+    this.updateAgentCount();
+    
+    // Trigger layout recalculation
+    this.recalculateLayout();
+  }
+
+  getAgentIcon(agentData) {
+    const iconMap = {
+      'frontend': '🖥️',
+      'backend': '🗄️',
+      'database': '🗃️',
+      'devops': '⚙️',
+      'testing': '✓',
+      'security': '🛡️',
+      'ai-ml': '🧠',
+      'mobile': '📱',
+      'cloud': '☁️',
+      'analytics': '📊'
+    };
+
+    // Check for known types
+    if (iconMap[agentData.type]) {
+      return iconMap[agentData.type];
+    }
+
+    // Generate custom icon
+    return this.generateCustomIcon(agentData.name);
+  }
+
+  generateCustomIcon(name) {
+    // Create SVG with first letter
+    const letter = name.charAt(0).toUpperCase();
+    return `
+      <svg class="custom-agent-icon" viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="18" fill="#7c3aed"/>
+        <text x="20" y="26" text-anchor="middle" fill="white" font-size="20">
+          ${letter}
+        </text>
+      </svg>
+    `;
+  }
+
+  getAgentColor(agentData) {
+    // Generate consistent color based on agent name
+    const colors = [
+      '#7c3aed', // Purple
+      '#3b82f6', // Blue
+      '#10b981', // Green
+      '#f59e0b', // Orange
+      '#ef4444', // Red
+      '#8b5cf6', // Violet
+      '#14b8a6', // Teal
+      '#f97316', // Dark Orange
+      '#ec4899', // Pink
+      '#06b6d4'  // Cyan
+    ];
+
+    const index = agentData.name.charCodeAt(0) % colors.length;
+    return colors[index];
+  }
+
+  recalculateLayout() {
+    const container = document.getElementById('agent-grid');
+    const agentCount = this.agents.size;
+    
+    // Enable scrolling for many agents
+    if (agentCount > 8) {
+      container.classList.add('scroll-container');
+      container.style.maxHeight = '600px';
+      container.style.overflowY = 'auto';
+    }
+
+    // Adjust grid columns
+    let columns;
+    if (agentCount <= 4) columns = agentCount;
+    else if (agentCount <= 8) columns = 4;
+    else if (agentCount <= 12) columns = 4;
+    else columns = 5;
+
+    container.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+  }
+}
+```
+
+### 8. Scroll Management
+
+```javascript
+class ScrollManager {
+  constructor() {
+    this.setupSmoothScroll();
+    this.setupScrollIndicators();
+    this.setupVirtualScrolling();
+  }
+
+  setupSmoothScroll() {
+    // Custom smooth scrolling with easing
+    document.querySelectorAll('.scrollable').forEach(element => {
+      element.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY;
+        const scrollSpeed = 0.8;
+        
+        element.scrollBy({
+          top: delta * scrollSpeed,
+          behavior: 'smooth'
+        });
+      });
+    });
+  }
+
+  setupScrollIndicators() {
+    // Show scroll indicators when content overflows
+    const checkScroll = (element) => {
+      const hasScroll = element.scrollHeight > element.clientHeight;
+      
+      if (hasScroll) {
+        element.classList.add('has-scroll');
+        
+        // Add top/bottom shadows based on scroll position
+        element.addEventListener('scroll', () => {
+          const scrollTop = element.scrollTop;
+          const scrollHeight = element.scrollHeight - element.clientHeight;
+          
+          element.classList.toggle('scrolled-top', scrollTop > 10);
+          element.classList.toggle('scrolled-bottom', scrollTop < scrollHeight - 10);
+        });
+      }
+    };
+
+    document.querySelectorAll('.scrollable').forEach(checkScroll);
+  }
+
+  setupVirtualScrolling() {
+    // Virtual scrolling for task feed
+    const taskFeed = document.getElementById('task-feed');
+    const virtualScroller = new VirtualScroller(taskFeed, {
+      itemHeight: 40,
+      buffer: 5,
+      renderItem: (task) => this.renderTaskItem(task)
+    });
+  }
+}
+```
+
+### 9. Performance Optimization
+
+```javascript
+// Use requestAnimationFrame for smooth updates
+class UpdateQueue {
+  constructor() {
+    this.updates = [];
+    this.isProcessing = false;
+  }
+
+  add(update) {
+    this.updates.push(update);
+    if (!this.isProcessing) {
+      this.process();
+    }
+  }
+
+  process() {
+    this.isProcessing = true;
+    
+    requestAnimationFrame(() => {
+      const batch = this.updates.splice(0, 10); // Process 10 updates per frame
+      
+      batch.forEach(update => update());
+      
+      if (this.updates.length > 0) {
+        this.process();
+      } else {
+        this.isProcessing = false;
+      }
+    });
+  }
+}
+
+// Debounce resize events
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    dashboard.recalculateLayout();
+  }, 250);
+});
+```
+
+### 10. Auto-Launch Configuration
+
+```javascript
+// Auto-launch dashboard when agents start
+class DashboardLauncher {
+  static launch(projectData) {
+    const dashboardUrl = 'http://localhost:3001/dashboard';
+    
+    // Check if dashboard is already open
+    fetch(`${dashboardUrl}/ping`)
+      .then(response => {
+        if (!response.ok) {
+          this.openDashboard(dashboardUrl, projectData);
+        } else {
+          // Dashboard already open, just update project
+          this.updateDashboard(projectData);
+        }
+      })
+      .catch(() => {
+        this.openDashboard(dashboardUrl, projectData);
+      });
+  }
+
+  static openDashboard(url, projectData) {
+    // Open in default browser
+    const { exec } = require('child_process');
+    const platform = process.platform;
+    
+    let command;
+    if (platform === 'darwin') {
+      command = `open "${url}?project=${projectData.id}"`;
+    } else if (platform === 'win32') {
+      command = `start "${url}?project=${projectData.id}"`;
+    } else {
+      command = `xdg-open "${url}?project=${projectData.id}"`;
+    }
+    
+    exec(command);
+  }
+}
+```
+
+## Implementation Notes for Figma Make
+
+### Required Libraries
+```json
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io-client": "^4.5.0",
+    "framer-motion": "^10.16.0",
+    "recharts": "^2.5.0",
+    "react-window": "^1.8.8",
+    "tailwindcss": "^3.3.0"
+  }
+}
+```
+
+### Component Structure
+```
+src/
+├── components/
+│   ├── Dashboard.tsx
+│   ├── Header.tsx
+│   ├── OverallProgress.tsx
+│   ├── AgentGrid.tsx
+│   ├── AgentCard.tsx
+│   ├── PhaseTimeline.tsx
+│   ├── TaskFeed.tsx
+│   ├── Metrics.tsx
+│   └── TokenGraph.tsx
+├── hooks/
+│   ├── useWebSocket.ts
+│   ├── useAnimations.ts
+│   └── useVirtualScroll.ts
+├── utils/
+│   ├── scrollManager.ts
+│   ├── updateQueue.ts
+│   └── agentManager.ts
+└── styles/
+    ├── dashboard.css
+    ├── animations.css
+    └── responsive.css
+```
+
+This enhanced design ensures the dashboard can handle any number of agents dynamically, with smooth scrolling, responsive layouts, and real-time updates while maintaining excellent performance.
