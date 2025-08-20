@@ -39,18 +39,21 @@ Subject to the terms of this license, you are granted the following rights:
 
 ### 3. Commercial License Required
 
-A commercial license is ONLY required if you are:
+A commercial license is REQUIRED if you are:
 
-- Creating a competing multi-agent orchestration product
+- Using Agentwise source code to create ANY competing product
+- Copying, referencing, or deriving from Agentwise code for competing products
 - Reselling or rebranding Agentwise itself
-- Offering Agentwise as a hosted service (SaaS)
-- Building a product that directly competes with Agentwise
-- Incorporating substantial Agentwise code into a competing product
+- Offering Agentwise or its capabilities as a service (SaaS)
+- Embedding Agentwise technology into your product for end-users
+- Using Agentwise code as reference to build similar orchestration systems
+- Incorporating ANY Agentwise code into products that replicate its functionality
 
 **You DO NOT need a commercial license to:**
-- Use Agentwise to build websites, apps, or software for your clients
-- Use Agentwise in your company's development process
-- Create commercial products using Agentwise as a development tool
+- Use Agentwise as a tool to build websites, apps, or software for clients
+- Use Agentwise in your company's internal development process
+- Create commercial products USING Agentwise (but not embedding it)
+- Build your own orchestration system from scratch through prompting (without using our code)
 
 **Commercial License Options:**
 - **One-Time License**: $25,000 USD (perpetual use)
@@ -119,17 +122,20 @@ This license shall be governed by the laws of the jurisdiction in which the copy
 
 ## FAQ
 
-**Q: Can I use Agentwise for my personal projects?**
-A: Yes! Personal, non-commercial use is free and encouraged.
+**Q: Can I use Agentwise to build commercial projects?**
+A: Yes! You can use Agentwise as a tool to build any commercial projects for clients.
 
-**Q: Can I use Agentwise at my company?**
-A: Commercial use requires a commercial license. Contact us for pricing.
+**Q: Can I look at the code to learn how it works and build my own?**
+A: No. You cannot use our source code as reference to build competing products. However, you CAN build your own system from scratch using AI prompting, just like we did.
 
-**Q: Can I contribute to Agentwise?**
-A: Absolutely! We welcome contributions via pull requests.
+**Q: Can I embed Agentwise in my product?**
+A: This requires a commercial license since you'd be giving your users access to Agentwise technology.
 
-**Q: Can I create my own version of Agentwise?**
-A: Yes, for non-commercial use with proper attribution. Commercial forks require a license.
+**Q: Can I use Agentwise at my company internally?**
+A: Yes! Internal use for development is allowed without a commercial license.
+
+**Q: What if I want to build something similar?**
+A: Build it from scratch with AI prompting (like we did) - that's perfectly fine! Just don't use our source code.
 
 **Q: How do I get a commercial license?**
 A: Contact @vibecodingwithphil on Discord or via GitHub.

@@ -270,23 +270,32 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 <table>
 <tr>
 <td align="center">
-<h3>5x</h3>
+<h3>10x</h3>
 <p>Faster Development</p>
 </td>
 <td align="center">
-<h3>60%</h3>
+<h3>99%</h3>
 <p>Token Reduction</p>
 </td>
 <td align="center">
-<h3>100%</h3>
-<p>Test Coverage</p>
+<h3>100+</h3>
+<p>Agents Supported</p>
 </td>
 <td align="center">
-<h3>24/7</h3>
-<p>Agent Availability</p>
+<h3>26+</h3>
+<p>MCP Integrations</p>
 </td>
 </tr>
 </table>
+
+### Key Metrics:
+- **Development Speed**: 10x faster than traditional development
+- **Token Optimization**: 99% reduction - 100 agents use same tokens as 1
+- **Agent Scalability**: Support for 100+ specialized agents
+- **Integration Coverage**: 26+ MCP servers integrated
+- **Model Support**: Claude, Ollama, LM Studio, OpenRouter
+- **File Processing**: PDF, Word, Figma, websites
+- **Learning Capability**: Self-improving agents with persistence
 
 ## 🗺️ Roadmap
 
@@ -310,7 +319,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] **Figma Integration** - Extract and convert Figma designs to code
 - [x] **Website Cloning** - Clone and customize existing websites with Firecrawl
 
-### 🚀 Next Phase (Q1-Q2 2025)
+### 🚀 Next Phase (2026)
 - [ ] **Agent Marketplace** - Share and discover custom agents
 - [ ] **Visual Workflow Editor** - Drag-and-drop orchestration
 - [ ] **Enterprise Features** - SSO, audit logs, compliance
@@ -346,24 +355,28 @@ We're planning to extend Agentwise to support additional AI CLI tools:
 This project uses the **Agentwise Custom License** - see the [LICENSE](LICENSE) file for details.
 
 ### ✅ **What You CAN Do (Free)**
-- Use Agentwise to build commercial websites, apps, and software for clients
-- Use Agentwise in your company's development workflow
-- Modify and customize for your projects
-- Create and sell products built WITH Agentwise
+- Use Agentwise as a tool to build commercial websites, apps, and software
+- Use Agentwise in your company's internal development workflow
+- Create and sell products built WITH Agentwise (not embedding it)
 - Personal, educational, and research use
+- Build your own orchestration system from scratch (without using our code)
 
 ### ⚠️ **What Requires a Commercial License** ($25k one-time or $10k/year)
-- Creating a competing multi-agent orchestration product
-- Reselling or rebranding Agentwise itself
-- Offering Agentwise as a hosted service (SaaS)
-- Building products that directly compete with Agentwise
+- Using Agentwise source code to build competing products
+- Copying or referencing our code for similar systems
+- Embedding Agentwise into your product for end-users
+- Reselling or rebranding Agentwise
+- Offering Agentwise capabilities as a service (SaaS)
+- Using our code as a reference to build orchestration systems
 
 ### ❌ **What You CANNOT Do**
+- Use our source code to build competing products
 - Remove copyright notices
 - Use "Agentwise" name for your products
 - Claim you created Agentwise
+- Study our code to replicate functionality
 
-**TL;DR**: You can use Agentwise to build anything you want for free. You only need a license if you're competing with Agentwise itself.
+**TL;DR**: Use Agentwise to BUILD projects = Free. Use our CODE to compete = License required.
 
 For commercial licensing questions:
 - Discord: @vibecodingwithphil
