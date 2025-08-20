@@ -259,7 +259,7 @@ export class EnhancedPhaseManager {
       // Create a status file to track phase transitions
       const statusFile = path.join(
         this.projectPath,
-        'agent-todo',
+        'agent-todos',
         agent,
         'phase-status.json'
       );
@@ -336,7 +336,7 @@ export class EnhancedPhaseManager {
    * Auto-mark tasks based on completed work
    */
   async autoMarkCompletedTasks(agent: string, completedWork: string[]): Promise<void> {
-    const agentDir = path.join(this.projectPath, 'agent-todo', agent);
+    const agentDir = path.join(this.projectPath, 'agent-todos', agent);
     const phaseFiles = await this.findPhaseFiles(agentDir);
 
     for (const phaseFile of phaseFiles) {

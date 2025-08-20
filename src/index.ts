@@ -3,6 +3,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { exec } from 'child_process';
+import { MonitorCommand } from './commands/MonitorCommand';
 
 async function main() {
   console.log(`
@@ -22,7 +23,7 @@ Available Commands:
   /init-import              - Import external project
   /task-import              - Execute import with planning
   /generate-agent <spec>    - Create custom agent
-  /monitor                   - Open monitoring dashboard
+  /monitor [subcommand]     - Monitor dashboard & global install
 
 Status: ✅ System Ready
 `);
@@ -61,6 +62,14 @@ Status: ✅ System Ready
 
   console.log('\nTo use Agentwise, run any command from within Claude Code.');
   console.log('Example: /create a todo app with React and Node.js\n');
+  
+  // Handle /monitor command if passed as argument
+  const args = process.argv.slice(2);
+  if (args.length > 0 && args[0] === '/monitor') {
+    const monitorCommand = new MonitorCommand();
+    await monitorCommand.handle(args.slice(1));
+    return;
+  }
 }
 
 main().catch(console.error);

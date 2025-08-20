@@ -182,9 +182,24 @@ Agentwise isn't just another tool - it's the first to solve Claude Code's bigges
 ### Prerequisites
 
 - **Node.js** 18.0 or higher
-- **Claude Code** CLI installed
+- **Claude Code** CLI installed with **--dangerously-skip-permissions** flag
 - **Git** for version control
 - **macOS/Linux** or **Windows with WSL**
+
+⚠️ **Important**: Agentwise requires Claude Code to be started with the `--dangerously-skip-permissions` flag for full functionality:
+
+```bash
+# Always start Claude Code with this flag when using Agentwise
+claude --dangerously-skip-permissions
+```
+
+**Why this flag is needed:**
+- Enables global command installation
+- Allows cross-platform script execution
+- Permits monitor dashboard file access
+- Required for agent file operations
+
+**Security Note**: This flag reduces some Claude Code security restrictions. Only use it with trusted projects and in secure environments.
 
 ### Installation
 
@@ -240,6 +255,15 @@ Agentwise includes a comprehensive web-based monitoring dashboard that provides 
 #### Starting the Monitor
 ```bash
 /monitor                    # Opens dashboard at http://localhost:3001
+/monitor install            # Install global agentwise-monitor command
+/monitor status             # Check installation status
+/monitor help               # Show monitor command help
+```
+
+**Global Command**: After installation, use `agentwise-monitor` from anywhere:
+```bash
+agentwise-monitor           # Start monitor from any directory
+agentwise-monitor status    # Check system status
 ```
 
 Or manually:
@@ -282,7 +306,7 @@ The monitoring dashboard is designed for local development use only. It runs on 
 | Command | Description | Example |
 |---------|-------------|---------|
 | `/generate-agent <type>` | Create custom agent | `/generate-agent "security-specialist"` |
-| `/monitor` | Open real-time monitoring dashboard | `/monitor` |
+| `/monitor [subcommand]` | Monitor dashboard & global install | `/monitor install` |
 
 #### Model Configuration
 | Command | Description | Example |
