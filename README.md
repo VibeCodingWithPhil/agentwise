@@ -139,21 +139,45 @@ Invoke-WebRequest -Uri "https://github.com/VibeCodingWithPhil/agentwise/releases
 
 ### Command Reference
 
+#### Project Management
 | Command | Description | Example |
 |---------|-------------|---------|
 | `/create <idea>` | Start new project from scratch | `/create "social media dashboard"` |
+| `/create-plan <idea>` | Collaborative planning session | `/create-plan "mobile app"` |
 | `/projects` | List and select projects | `/projects` |
 | `/task <feature>` | Add feature to active project | `/task "add dark mode"` |
 | `/task-[project] <feature>` | Add feature to specific project | `/task-dashboard "add charts"` |
-| `/create-plan <idea>` | Collaborative planning session | `/create-plan "mobile app"` |
+| `/task-plan <feature>` | Plan feature collaboratively | `/task-plan "payment system"` |
+
+#### Import & Integration
+| Command | Description | Example |
+|---------|-------------|---------|
 | `/init-import` | Import existing project | `/init-import` |
+| `/task-import` | Copy and integrate project | `/task-import` |
+| `/upload <file>` | Upload documents or design files | `/upload ./design.fig components` |
+| `/clone-website <url>` | Clone and customize websites | `/clone-website https://example.com similar` |
+
+#### Agent Management
+| Command | Description | Example |
+|---------|-------------|---------|
 | `/generate-agent <type>` | Create custom agent | `/generate-agent "security-specialist"` |
+| `/monitor` | Open monitoring dashboard | `/monitor` |
+
+#### Model Configuration
+| Command | Description | Example |
+|---------|-------------|---------|
 | `/setup-ollama` | Setup Ollama for local models | `/setup-ollama` |
 | `/setup-lmstudio` | Setup LM Studio integration | `/setup-lmstudio` |
 | `/local-models` | List available local models | `/local-models` |
 | `/configure-routing` | Configure model routing | `/configure-routing optimize` |
-| `/upload` | Upload documents or design files | `/upload ./design.fig components` |
-| `/clone-website` | Clone and customize websites | `/clone-website https://example.com similar` |
+
+#### Development Tools
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/image` | Visual context with file browser | `/image` |
+| `/security-review` | Run security analysis | `/security-review` |
+| `/deploy` | Deploy to production | `/deploy production` |
+| `/rollback` | Rollback deployment | `/rollback` |
 
 ### Project Structure
 
@@ -175,20 +199,32 @@ agentwise/
 
 ```mermaid
 graph TD
-    A[User Command] --> B[Agentwise Core]
-    B --> C[Prompt Enhancement]
-    C --> D[Task Distribution]
-    D --> E1[Frontend Agent]
-    D --> E2[Backend Agent]
-    D --> E3[Database Agent]
-    D --> E4[DevOps Agent]
-    D --> E5[Testing Agent]
-    E1 --> F[Phase Sync]
-    E2 --> F
-    E3 --> F
-    E4 --> F
-    E5 --> F
-    F --> G[Project Output]
+    A[User Command] --> B[Agentwise Orchestrator]
+    B --> C[Smart Model Router]
+    C --> D[Claude/Ollama/LM Studio]
+    B --> E[Dynamic Task Distributor]
+    E --> F[Tech Stack Validator]
+    F --> G[Agent Selection]
+    G --> H1[Frontend Specialist]
+    G --> H2[Backend Specialist]
+    G --> H3[Database Specialist]
+    G --> H4[DevOps Specialist]
+    G --> H5[Testing Specialist]
+    G --> H6[Designer Specialist]
+    G --> H7[Custom Agents]
+    H1 --> I[MCP Integration]
+    H2 --> I
+    H3 --> I
+    H4 --> I
+    H5 --> I
+    H6 --> I
+    H7 --> I
+    I --> J[26+ MCP Servers]
+    J --> K[Phase Controller]
+    K --> L[Self-Improving Agents]
+    L --> M[Performance Analytics]
+    M --> N[Token Optimizer 99%]
+    N --> O[Project Output]
 ```
 
 ## 🤝 Contributing
@@ -309,15 +345,27 @@ We're planning to extend Agentwise to support additional AI CLI tools:
 
 This project uses the **Agentwise Custom License** - see the [LICENSE](LICENSE) file for details.
 
-**Key Points:**
-- ✅ **Free** for personal, educational, and research use
-- ✅ Modify and create derivatives for non-commercial use
-- ✅ Contribute improvements back to the project
-- ⚠️ **Commercial use requires a license** ($25k one-time or $10k/year)
-- ❌ Cannot create competing products without license
-- ❌ Cannot use "Agentwise" name for derivatives
+### ✅ **What You CAN Do (Free)**
+- Use Agentwise to build commercial websites, apps, and software for clients
+- Use Agentwise in your company's development workflow
+- Modify and customize for your projects
+- Create and sell products built WITH Agentwise
+- Personal, educational, and research use
 
-For commercial licensing, contact:
+### ⚠️ **What Requires a Commercial License** ($25k one-time or $10k/year)
+- Creating a competing multi-agent orchestration product
+- Reselling or rebranding Agentwise itself
+- Offering Agentwise as a hosted service (SaaS)
+- Building products that directly compete with Agentwise
+
+### ❌ **What You CANNOT Do**
+- Remove copyright notices
+- Use "Agentwise" name for your products
+- Claim you created Agentwise
+
+**TL;DR**: You can use Agentwise to build anything you want for free. You only need a license if you're competing with Agentwise itself.
+
+For commercial licensing questions:
 - Discord: @vibecodingwithphil
 - GitHub: [@VibeCodingWithPhil](https://github.com/VibeCodingWithPhil)
 

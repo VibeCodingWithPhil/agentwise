@@ -24,23 +24,33 @@ Subject to the terms of this license, you are granted the following rights:
 - Create derivative works for non-commercial purposes
 - Contribute improvements back to the original Agentwise repository
 
+#### ✅ PERMITTED (With Attribution)
+- Use the Software to build commercial projects and applications
+- Use the Software in your company's development workflow
+- Create commercial applications using Agentwise's capabilities
+
 #### ❌ PROHIBITED (Without Commercial License)
 - Use the Software or its source code to create a competing product
-- Sell, rent, lease, or sublicense the Software
-- Use the Software for commercial projects or services
-- Offer the Software as a service (SaaS) for profit
+- Sell, rent, lease, or sublicense the Software itself
+- Offer Agentwise as a service (SaaS) for profit
+- Rebrand or resell Agentwise as your own product
 - Use the name "Agentwise" for any derivative products
 - Remove or alter copyright notices
 
 ### 3. Commercial License Required
 
-Commercial use of Agentwise requires a separate commercial license. This includes but is not limited to:
+A commercial license is ONLY required if you are:
 
-- Using Agentwise in commercial products or services
-- Building a business around Agentwise functionality
-- Offering Agentwise capabilities as a paid service
-- Using Agentwise to develop applications for commercial sale
-- Incorporating Agentwise code into proprietary software
+- Creating a competing multi-agent orchestration product
+- Reselling or rebranding Agentwise itself
+- Offering Agentwise as a hosted service (SaaS)
+- Building a product that directly competes with Agentwise
+- Incorporating substantial Agentwise code into a competing product
+
+**You DO NOT need a commercial license to:**
+- Use Agentwise to build websites, apps, or software for your clients
+- Use Agentwise in your company's development process
+- Create commercial products using Agentwise as a development tool
 
 **Commercial License Options:**
 - **One-Time License**: $25,000 USD (perpetual use)
