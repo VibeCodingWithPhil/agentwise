@@ -329,15 +329,47 @@ The monitoring dashboard is designed for local development use only. It runs on 
 ```
 agentwise/
 ├── .claude/                 # Claude Code integration
-│   ├── agents/             # Agent definitions
-│   └── commands/           # Custom commands
-├── src/                    # Core system
-│   ├── orchestrator/       # Agent orchestration
-│   ├── monitoring/         # Progress tracking
-│   └── utils/              # Helper utilities
-├── docs/                   # Documentation
-├── installers/             # Platform installers
+│   ├── agents/             # Agent definitions (frontend, backend, etc.)
+│   └── commands/           # Custom command handlers
+├── src/                    # Core system architecture
+│   ├── agents/             # Dynamic agent management
+│   ├── ai/                 # AI prompt enhancement & optimization
+│   ├── analytics/          # Performance & usage analytics
+│   ├── backup/             # Project backup & restore system
+│   ├── cli/                # Command-line interface handlers
+│   ├── commands/           # Command implementations
+│   │   ├── GlobalMonitorInstaller.ts  # Cross-platform global commands
+│   │   ├── MonitorCommand.ts           # Monitor dashboard controller
+│   │   ├── ImageCommand.ts             # Visual context processing
+│   │   ├── ModelCommands.ts            # Local model management
+│   │   └── UploadHandler.ts            # Document & design file processing
+│   ├── context/            # Project context & persistence
+│   ├── learning/           # Self-improving agent capabilities
+│   ├── mcp/                # MCP server integration (26+ servers)
+│   ├── models/             # Smart model routing & local model support
+│   ├── monitor/            # Real-time dashboard (Next.js app)
+│   │   ├── server/         # WebSocket server for live updates
+│   │   └── src/            # Dashboard UI components
+│   ├── monitoring/         # Task completion & progress tracking
+│   ├── optimization/       # Token optimization (99% reduction)
+│   ├── orchestration/      # Multi-agent coordination
+│   ├── orchestrator/       # Agent orchestration & management
+│   ├── project-registry/   # Project synchronization system
+│   ├── projects/           # Project management utilities
+│   ├── spec-templates/     # Project specification templates
+│   ├── utils/              # Helper utilities & shared code
+│   └── validation/         # Code, style, and tech stack validation
+├── config/                 # Configuration files
+├── docs/                   # Comprehensive documentation
+│   ├── examples/           # Usage examples & tutorials
+│   ├── monitor-command.md  # Monitor command documentation
+│   ├── architecture.md     # System architecture details
+│   ├── mcp-integration.md  # MCP server integration guide
+│   └── smart-model-routing.md  # Model routing documentation
+├── installers/             # Platform-specific installers
 └── workspace/              # Project workspaces (git-ignored)
+    └── [project-name]/     # Individual project directories
+        └── agent-todos/    # Agent task management per project
 ```
 
 ### Architecture
