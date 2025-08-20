@@ -107,48 +107,48 @@ These aren't just features - they're solutions to the most requested capabilitie
 <tr>
 <td width="50%">
 
-#### 🤖 Multi-Agent System
-- **Dynamic Agent Generation** ✨
-- **Designer Specialist Agent** 🎨
-- Custom agent creation on-demand
-- Parallel task execution
-- Inter-agent communication
-- Phase-based synchronization
+#### 🤖 Multi-Agent Orchestration
+- **8 Specialist Agents** (Frontend, Backend, Database, DevOps, Testing, Deployment, Designer, Code Review)
+- **Dynamic Agent Generation** for custom specialists ✨
+- **99% Token Optimization** - 100 agents = 1 agent cost 💎
+- **Parallel Execution** with intelligent task distribution
+- **Self-Improving Agents** with learning persistence 🧠
+- **Phase-based Synchronization** across all agents
 
 </td>
 <td width="50%">
 
-#### 🛠️ Development Tools
-- **Tech Stack Validator** ✅
-- **MCP Integration (24+ servers)** 🔌
-- **Performance Analytics** 📈
-- **Self-Improving Agents** 🧠
-- **Local Model Support** 🖥️
-- **Ultimate Token Optimization** 💎
+#### 🛠️ Advanced Development Tools
+- **Cross-Platform Global Commands** (Windows/WSL/Linux/macOS) 🌍
+- **Real-Time Monitor Dashboard** with live WebSocket updates 📊
+- **Tech Stack Validator** with compatibility checking ✅
+- **MCP Integration (26+ servers)** - Figma, GitHub, Firecrawl, etc. 🔌
+- **Smart Model Routing** (Claude, Ollama, LM Studio, OpenRouter) 🎯
+- **Performance Analytics** with comprehensive metrics 📈
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-#### 📦 Project Management
-- **Smart Agent Selection** 🎯
-- Workspace isolation
-- Project registry
-- Context preservation
-- Version control integration
-- Collaborative planning
+#### 📄 File & Content Processing
+- **Document Upload** (PDF, Word, RTF, Markdown) 📄
+- **Figma Design Processing** - Convert designs to code 🎨
+- **Image Context Understanding** - Visual file browser 🖼️
+- **Website Cloning** with Firecrawl integration 🌐
+- **Project Import/Export** with backup system 📦
+- **Context Preservation** across sessions
 
 </td>
 <td width="50%">
 
 #### 🎮 Claude Code Integration
-- Native `/create` command
-- `/task` for feature addition
-- `/projects` for management
-- **MCP-powered agents** 🚀
-- Seamless agent invocation
-- Built-in commands
+- **Native Commands** - `/create`, `/task`, `/monitor`, `/projects` 
+- **Global Command Installation** - `agentwise-monitor` available anywhere
+- **Seamless Agent Invocation** with intelligent selection
+- **Project Registry Sync** with automatic management
+- **Security Hardened** with path validation & input sanitization 🔒
+- **Built-in Help System** with comprehensive documentation
 
 </td>
 </tr>
