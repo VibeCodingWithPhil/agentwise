@@ -284,17 +284,42 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 
 We're keeping Agentwise focused and lightweight. See [ROADMAP.md](ROADMAP.md) for details.
 
+## 💖 Support Agentwise
+
+Agentwise is developed and maintained through community support. Your donations help continue development and add new features!
+
+### Ways to Support:
+- **PayPal Donations**: [Donate via PayPal](https://www.paypal.com/donate/?hosted_button_id=KAVQY4M7RJJBA)
+- **GitHub Sponsors**: Click the "Sponsor" button above
+- **Commercial License**: For business use, see [LICENSE](LICENSE)
+
+Every donation, no matter the size, is greatly appreciated and helps keep Agentwise free for personal use! 🙏
+
+## 🔮 Future CLI Support
+
+We're planning to extend Agentwise to support additional AI CLI tools:
+
+- **Crush CLI** - Coming soon
+- **Qwen Coder** - In planning
+- **Gemini CLI** - Under evaluation  
+- **Cursor CLI** - Researching integration
+- **More** - Suggest your favorite CLI!
+
 ## 📄 License
 
-This project is licensed under a Modified MIT License - see the [LICENSE](LICENSE) file for details.
+This project uses the **Agentwise Custom License** - see the [LICENSE](LICENSE) file for details.
 
 **Key Points:**
-- ✅ Use commercially in your projects
-- ✅ Modify and distribute
-- ✅ Private and commercial use
-- ❌ Cannot resell as your own product
-- ❌ Cannot claim original authorship
+- ✅ **Free** for personal, educational, and research use
+- ✅ Modify and create derivatives for non-commercial use
+- ✅ Contribute improvements back to the project
+- ⚠️ **Commercial use requires a license** ($25k one-time or $10k/year)
+- ❌ Cannot create competing products without license
 - ❌ Cannot use "Agentwise" name for derivatives
+
+For commercial licensing, contact:
+- Discord: @vibecodingwithphil
+- GitHub: [@VibeCodingWithPhil](https://github.com/VibeCodingWithPhil)
 
 ## 🙏 Acknowledgments
 

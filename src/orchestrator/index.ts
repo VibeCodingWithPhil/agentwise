@@ -8,6 +8,7 @@ import { DynamicAgentGenerator } from '../agents/DynamicAgentGenerator';
 import { MCPIntegrationManager } from '../mcp/MCPIntegrationManager';
 import { SmartModelRouter } from '../models/SmartModelRouter';
 import { ModelCommands } from '../commands/ModelCommands';
+import { UsageAnalytics } from '../analytics/UsageAnalytics';
 
 /**
  * Main orchestrator entry point
@@ -20,6 +21,10 @@ async function main() {
   console.log(`Command: ${command}`);
   console.log(`Project: ${projectId}`);
   console.log(`Idea: ${projectIdea}`);
+
+  // Initialize analytics (privacy-respecting)
+  const analytics = new UsageAnalytics();
+  const startTime = Date.now();
 
   try {
     // Handle model-related commands
@@ -60,8 +65,18 @@ async function main() {
       default:
         throw new Error(`Unknown command: ${command}`);
     }
+    
+    // Track successful command execution
+    const duration = Date.now() - startTime;
+    await analytics.trackCommand(command, true, duration);
+    
   } catch (error) {
     console.error('❌ Orchestration failed:', error);
+    
+    // Track failed command execution
+    const duration = Date.now() - startTime;
+    await analytics.trackCommand(command, false, duration, error.message);
+    
     process.exit(1);
   }
 }
