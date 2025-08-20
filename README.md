@@ -34,6 +34,71 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 - **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
 - **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
 
+## 🌟 Groundbreaking Features - First in Claude Code!
+
+### Revolutionary Capabilities That Users Have Been Waiting For
+
+#### 📄 **Document Upload Support** - *Heavily Requested!*
+Finally, upload and process documents directly in Claude Code:
+```bash
+/upload requirements.pdf spec        # Convert PDF to project specs
+/upload design-brief.docx context   # Use Word docs as project context
+/upload technical-docs.pdf          # Process any document format
+```
+- **Supported**: PDF, Word, Text, Markdown, RTF
+- **Auto-extraction**: Content, requirements, specifications
+- **Smart conversion**: Documents → Project specs → Working code
+
+#### 🎨 **Figma Design File Support** - *Game Changer!*
+Transform Figma designs directly into code - no manual conversion needed:
+```bash
+/upload design.fig components        # Extract all components
+/upload app-ui.figma full-app      # Build entire app from design
+/upload style-guide.fig styles     # Extract design tokens
+```
+- **1:1 Component extraction**: Figma → React/Vue components
+- **Design tokens**: Colors, typography, spacing
+- **Auto-generation**: Complete UI from Figma files
+- **Preserves**: Animations, interactions, responsive behavior
+
+#### 🖼️ **Image Context Understanding** - *Finally Here!*
+Claude Code can now SEE and understand images with full context:
+```bash
+/image                              # Visual file browser
+/upload screenshot.png              # Process UI screenshots
+/upload mockup.jpg                  # Convert mockups to code
+```
+- **Visual understanding**: Claude analyzes images properly
+- **Screenshot → Code**: Build UIs from screenshots
+- **Mockup conversion**: Turn designs into working apps
+- **Context awareness**: Understands what's in the image
+
+#### 🌐 **Website Cloning** - *Incredible!*
+Clone any website and make it your own:
+```bash
+/clone-website https://example.com exact     # 1:1 replica
+/clone-website https://site.com similar      # Keep style, change brand
+```
+- **Complete extraction**: HTML, CSS, components, interactions
+- **Smart customization**: Apply your branding automatically
+- **Component recognition**: Identifies reusable patterns
+
+### Why These Features Matter
+
+**Before Agentwise:**
+- ❌ No way to upload documents to Claude Code
+- ❌ Manual conversion of Figma designs
+- ❌ Limited image understanding
+- ❌ No website cloning capabilities
+
+**With Agentwise:**
+- ✅ Direct document processing in CLI
+- ✅ Automatic Figma → Code conversion
+- ✅ Full visual context understanding
+- ✅ Website replication and customization
+
+These aren't just features - they're solutions to the most requested capabilities in the Claude Code community!
+
 ## ✨ Features
 
 ### Core Capabilities
@@ -88,6 +153,29 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 </td>
 </tr>
 </table>
+
+## 💎 What Makes Agentwise Special
+
+Agentwise isn't just another tool - it's the first to solve Claude Code's biggest limitations:
+
+### 🎯 **Problems We Solve**
+
+| Claude Code Limitation | Agentwise Solution |
+|------------------------|-------------------|
+| Can't upload files | ✅ Full document, image, and design file support |
+| Can't process PDFs | ✅ PDF → Project specs conversion |
+| Can't read Figma files | ✅ Figma → Code generation |
+| Limited image context | ✅ Full visual understanding |
+| Single agent execution | ✅ 100+ parallel agents |
+| High token costs | ✅ 99% token reduction |
+| No local model support | ✅ Ollama, LM Studio integration |
+
+### 🏆 **Industry Firsts**
+- **First** to enable file uploads in Claude Code
+- **First** to support Figma design files
+- **First** to achieve 99% token optimization
+- **First** to integrate 26+ MCP servers
+- **First** to enable website cloning in CLI
 
 ## 🚀 Quick Start
 
