@@ -41,8 +41,9 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 <td width="50%">
 
 #### 🤖 Multi-Agent System
-- 5 default specialized agents
-- Custom agent generation
+- **Dynamic Agent Generation** ✨
+- **Designer Specialist Agent** 🎨
+- Custom agent creation on-demand
 - Parallel task execution
 - Inter-agent communication
 - Phase-based synchronization
@@ -51,11 +52,12 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 <td width="50%">
 
 #### 🛠️ Development Tools
+- **Tech Stack Validator** ✅
+- **MCP Integration (24+ servers)** 🔌
 - Project scaffolding
 - Code generation
 - Automated testing
 - Deployment workflows
-- Progress tracking
 
 </td>
 </tr>
@@ -63,6 +65,7 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 <td width="50%">
 
 #### 📦 Project Management
+- **Smart Agent Selection** 🎯
 - Workspace isolation
 - Project registry
 - Context preservation
@@ -76,6 +79,7 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 - Native `/create` command
 - `/task` for feature addition
 - `/projects` for management
+- **MCP-powered agents** 🚀
 - Seamless agent invocation
 - Built-in commands
 
