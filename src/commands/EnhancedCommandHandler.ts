@@ -7,6 +7,7 @@ import { HallucinationDetector } from '../validation/HallucinationDetector';
 import { ProjectManager } from '../projects/ProjectManager';
 import { PromptEnhancer } from '../ai/PromptEnhancer';
 import { PhaseOrchestrator } from '../orchestration/PhaseOrchestrator';
+import { ProjectRegistrySync } from '../project-registry/ProjectRegistrySync';
 
 export interface CommandContext {
   command: string;
@@ -44,6 +45,10 @@ export class EnhancedCommandHandler {
    */
   async handleCreate(prompt: string): Promise<CommandResult> {
     console.log('\\n🤖 Analyzing project requirements...');
+
+    // Sync registry before creating new project
+    const registrySync = new ProjectRegistrySync();
+    await registrySync.syncRegistry();
 
     // Select appropriate agents
     const selection = await this.agentSelector.selectAgents(prompt);
@@ -85,6 +90,10 @@ export class EnhancedCommandHandler {
    * Handle task command with validation and backup
    */
   async handleTask(prompt: string, projectName?: string): Promise<CommandResult> {
+    // Sync registry before task operations
+    const registrySync = new ProjectRegistrySync();
+    await registrySync.syncRegistry();
+    
     // Determine project
     const project = projectName || await this.projectManager.getCurrentProject();
     if (!project) {

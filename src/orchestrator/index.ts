@@ -9,6 +9,7 @@ import { MCPIntegrationManager } from '../mcp/MCPIntegrationManager';
 import { SmartModelRouter } from '../models/SmartModelRouter';
 import { ModelCommands } from '../commands/ModelCommands';
 import { UsageAnalytics } from '../analytics/UsageAnalytics';
+import { ProjectRegistrySync } from '../project-registry/ProjectRegistrySync';
 
 /**
  * Main orchestrator entry point
@@ -83,6 +84,11 @@ async function main() {
 
 async function handleCreate(_projectId: string, projectIdea: string) {
   console.log('📝 Generating project specifications...');
+  
+  // Sync registry before project operations
+  const registrySync = new ProjectRegistrySync();
+  console.log('🔄 Syncing project registry...');
+  await registrySync.syncRegistry();
   
   const projectPath = process.cwd();
   const specsPath = path.join(projectPath, 'specs');
@@ -190,6 +196,12 @@ async function handleCreate(_projectId: string, projectIdea: string) {
 
 async function handleTask(_projectId: string, _feature: string) {
   console.log('📝 Adding feature to existing project...');
+  
+  // Sync registry before project operations
+  const registrySync = new ProjectRegistrySync();
+  console.log('🔄 Syncing project registry...');
+  await registrySync.syncRegistry();
+  
   // Implementation for task command
 }
 
