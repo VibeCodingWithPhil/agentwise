@@ -225,6 +225,39 @@ Invoke-WebRequest -Uri "https://github.com/VibeCodingWithPhil/agentwise/releases
 
 ## 📚 Documentation
 
+### 📊 Real-Time Monitoring Dashboard
+
+Agentwise includes a comprehensive web-based monitoring dashboard that provides real-time visibility into your agent orchestration:
+
+#### Features
+- **Live Agent Status**: Real-time progress tracking for all active agents
+- **Task Feed**: Live stream of task completions and updates
+- **Interactive Controls**: Pause, resume, or manage individual agents
+- **Progress Visualization**: Progress bars, completion percentages, and timelines
+- **System Health**: CPU, memory, and network monitoring
+- **Multi-Project Support**: Automatic project detection and switching
+
+#### Starting the Monitor
+```bash
+/monitor                    # Opens dashboard at http://localhost:3001
+```
+
+Or manually:
+```bash
+cd src/monitor
+./start.sh                  # Starts both WebSocket server and web UI
+```
+
+#### Dashboard Sections
+- **Agent Grid**: Visual cards showing each agent's status, progress, and current task
+- **Task Feed**: Real-time activity log with timestamps and agent assignments
+- **Overall Progress**: Project-wide completion metrics and token usage
+- **System Health**: Resource utilization and performance metrics
+- **Emergency Controls**: Quick pause/resume and emergency shutdown
+
+#### Security Note
+The monitoring dashboard is designed for local development use only. It runs on localhost and should not be exposed to external networks without additional security measures.
+
 ### Command Reference
 
 #### Project Management
@@ -249,7 +282,7 @@ Invoke-WebRequest -Uri "https://github.com/VibeCodingWithPhil/agentwise/releases
 | Command | Description | Example |
 |---------|-------------|---------|
 | `/generate-agent <type>` | Create custom agent | `/generate-agent "security-specialist"` |
-| `/monitor` | Open monitoring dashboard | `/monitor` |
+| `/monitor` | Open real-time monitoring dashboard | `/monitor` |
 
 #### Model Configuration
 | Command | Description | Example |

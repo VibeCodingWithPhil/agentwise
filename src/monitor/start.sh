@@ -23,6 +23,10 @@ echo ""
 echo "Dashboard will be available at: http://localhost:3001"
 echo "Press Ctrl+C to stop both servers"
 echo ""
+
+# Open browser automatically
+sleep 3 && (command -v open >/dev/null && open http://localhost:3001) || (command -v xdg-open >/dev/null && xdg-open http://localhost:3001) || echo "Browser auto-open not supported on this system" &
+
 npm run dev
 
 # Cleanup on exit

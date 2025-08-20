@@ -10,6 +10,8 @@ import { SmartModelRouter } from '../models/SmartModelRouter';
 import { ModelCommands } from '../commands/ModelCommands';
 import { UsageAnalytics } from '../analytics/UsageAnalytics';
 import { ProjectRegistrySync } from '../project-registry/ProjectRegistrySync';
+import { ProgressTracker } from '../monitoring/ProgressTracker';
+import { WebSocketIntegration } from '../monitoring/WebSocketIntegration';
 
 /**
  * Main orchestrator entry point
@@ -26,6 +28,18 @@ async function main() {
   // Initialize analytics (privacy-respecting)
   const analytics = new UsageAnalytics();
   const startTime = Date.now();
+
+  // Initialize monitoring
+  const progressTracker = new ProgressTracker();
+  const wsIntegration = new WebSocketIntegration(progressTracker);
+  
+  // Connect to monitor dashboard if available
+  try {
+    await wsIntegration.connect();
+    console.log('📊 Monitor integration initialized');
+  } catch (error) {
+    console.log('📊 Monitor dashboard not available (this is optional)');
+  }
 
   try {
     // Handle model-related commands

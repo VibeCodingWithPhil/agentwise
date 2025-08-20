@@ -69,7 +69,7 @@ async function parseTaskFile(filePath) {
 
 // Update agent status from file system
 async function updateAgentStatus(projectPath) {
-  const agentTodoDir = path.join(projectPath, 'agent-todo');
+  const agentTodoDir = path.join(projectPath, 'agent-todos');
   
   try {
     const agentDirs = await fs.readdir(agentTodoDir);
@@ -176,7 +176,7 @@ async function watchProject(projectPath) {
     watcher.close();
   }
   
-  const agentTodoDir = path.join(projectPath, 'agent-todo');
+  const agentTodoDir = path.join(projectPath, 'agent-todos');
   
   watcher = chokidar.watch(agentTodoDir, {
     persistent: true,
@@ -239,7 +239,7 @@ async function findActiveProject() {
       const projectPath = path.join(workspacePath, project);
       const stats = await fs.stat(projectPath);
       if (stats.isDirectory()) {
-        const agentTodoDir = path.join(projectPath, 'agent-todo');
+        const agentTodoDir = path.join(projectPath, 'agent-todos');
         if (await fs.access(agentTodoDir).then(() => true).catch(() => false)) {
           return {
             name: project,
