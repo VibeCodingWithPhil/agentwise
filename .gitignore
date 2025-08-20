@@ -11,6 +11,12 @@ BRANCH_PROTECTION_SETUP.md
 MONITORING_FIX_PLAN.md
 *_FIX_PLAN.md
 
+# Commercial License (keep private)
+COMMERCIAL_LICENSE_TEMPLATE.md
+COMMERCIAL_LICENSE_*.md
+commercial-licenses/
+issued-licenses/
+
 # Spec files that should only be in workspace
 *-spec.md
 *_architecture.md

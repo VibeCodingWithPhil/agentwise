@@ -1,0 +1,103 @@
+================================================================================
+                              IMPORTANT LEGAL NOTICE
+================================================================================
+
+                                   AGENTWISE
+                     Copyright (c) 2024-2025 Philip Ritmeester
+                              ALL RIGHTS RESERVED
+
+================================================================================
+                            PROPRIETARY SOFTWARE NOTICE
+================================================================================
+
+This software is PROPRIETARY and CONFIDENTIAL. The source code is protected by 
+copyright law and international treaties. By accessing this repository, you 
+acknowledge and agree to the following:
+
+1. LICENSE REQUIREMENT
+   ━━━━━━━━━━━━━━━━━━━━
+   This is NOT open source software. This is proprietary software with a 
+   custom license. See LICENSE file for complete terms.
+
+2. SOURCE CODE RESTRICTIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━
+   ⚠️ YOU MAY NOT:
+   • Study, analyze, or reference this source code to build competing products
+   • Copy ANY code for use in other projects
+   • Create derivative works based on this implementation
+   • Use this code as inspiration or reference for similar systems
+   
+   Violation: $100,000 statutory damages per violation + legal costs
+
+3. COMMERCIAL USE
+   ━━━━━━━━━━━━━━━━━
+   Commercial licenses required for:
+   • Embedding Agentwise in products ($25,000 perpetual / $10,000 annual)
+   • Offering as a service (SaaS)
+   • Creating competing products using our code
+   
+   Contact: @vibecodingwithphil (Discord) or @VibeCodingWithPhil (GitHub)
+
+4. PERMITTED USE
+   ━━━━━━━━━━━━━━━
+   ✅ You MAY use Agentwise as a TOOL to build applications
+   ✅ You MAY use for personal/educational purposes
+   ✅ You MAY contribute improvements back to this repository
+
+5. TRACKING & ENFORCEMENT
+   ━━━━━━━━━━━━━━━━━━━━━━━
+   This software includes usage analytics and violation detection.
+   We actively monitor for unauthorized use and will pursue legal action.
+
+================================================================================
+                              LEGAL ENFORCEMENT
+================================================================================
+
+By downloading, cloning, forking, or otherwise accessing this repository:
+
+1. You ACKNOWLEDGE you have read and understood the LICENSE
+2. You AGREE to be bound by all terms and conditions
+3. You CONSENT to usage tracking and compliance monitoring
+4. You UNDERSTAND violations will result in legal action
+
+If you do not agree to these terms, you must:
+- Immediately cease all use of the software
+- Delete all copies from your systems
+- Remove any forks from your accounts
+
+================================================================================
+                           COPYRIGHT PROTECTION
+================================================================================
+
+This software is protected under:
+- Copyright Law (17 U.S.C. §§ 101 et seq.)
+- Digital Millennium Copyright Act (DMCA)
+- International copyright treaties
+- Trade secret law
+
+Unauthorized use may result in:
+- Civil penalties up to $150,000 per work infringed
+- Criminal prosecution with fines up to $250,000
+- Imprisonment up to 5 years for willful infringement
+- Injunctive relief and seizure of infringing materials
+
+================================================================================
+                            CONTACT INFORMATION
+================================================================================
+
+For licensing inquiries:
+- Discord: @vibecodingwithphil
+- GitHub: @VibeCodingWithPhil
+
+To report violations:
+- Email: legal@agentwise.dev
+- GitHub: File confidential security advisory
+
+================================================================================
+
+Remember: You can build your own orchestration system using AI prompting 
+(as we did). You just cannot use OUR source code to do it.
+
+This notice must remain with all copies and distributions of the software.
+
+================================================================================

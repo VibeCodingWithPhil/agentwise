@@ -18,8 +18,9 @@
     "agents",
     "orchestration"
   ],
-  "author": "",
-  "license": "MIT",
+  "author": "Philip Ritmeester <@VibeCodingWithPhil>",
+  "license": "PROPRIETARY - See LICENSE file",
+  "private": true,
   "dependencies": {
     "blessed": "^0.1.81",
     "chalk": "^5.3.0",

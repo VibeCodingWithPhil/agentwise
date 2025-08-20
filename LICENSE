@@ -1,147 +1,206 @@
-# Agentwise Custom License
+# Agentwise Proprietary License
 Version 1.0, January 2025
 
 Copyright (c) 2024-2025 Philip Ritmeester (@VibeCodingWithPhil)
+All Rights Reserved.
+
+## IMPORTANT NOTICE
+
+This software and associated documentation files (the "Software") are the proprietary and confidential property of Philip Ritmeester. The Software is protected by copyright law and international treaties. Unauthorized use, reproduction, or distribution of this Software, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under law.
 
 ## TERMS AND CONDITIONS
 
 ### 1. Definitions
 
-- **"Software"** refers to Agentwise and all associated documentation, source code, and materials.
-- **"Commercial Use"** means any use of the Software for direct or indirect financial gain or commercial advantage.
-- **"Non-Commercial Use"** means personal, educational, or research use without financial gain.
-- **"Derivative Work"** means any work based on or derived from the Software.
+- **"Software"** means Agentwise, including all source code, object code, documentation, data files, configurations, and any derivatives thereof.
+- **"Source Code"** means the human-readable form of the Software, including all modules, interfaces, scripts, and related materials.
+- **"Commercial Use"** means ANY use that generates revenue, provides commercial advantage, or is used in a business context.
+- **"Derivative Work"** means any work that is based upon, derived from, inspired by, or references the Software or its Source Code.
+- **"Competing Product"** means any software, service, or system that provides multi-agent orchestration, AI agent coordination, or similar functionality.
 
-### 2. Grant of Rights
+### 2. Grant of Limited License
 
-Subject to the terms of this license, you are granted the following rights:
+Subject to strict compliance with all terms herein, you are granted a LIMITED, NON-EXCLUSIVE, NON-TRANSFERABLE, REVOCABLE license to:
 
-#### ✅ PERMITTED (Non-Commercial)
-- Use the Software for personal projects
-- Use the Software for educational purposes
-- Use the Software for research
-- Modify the Software for personal use
-- Create derivative works for non-commercial purposes
-- Contribute improvements back to the original Agentwise repository
+#### PERMITTED Uses (No Fee Required):
+1. Use the Software as a development tool to create end-user applications
+2. Use the Software internally within your organization for development purposes
+3. Create applications using the Software's output (not embedding the Software itself)
+4. Personal, educational, or research use without commercial benefit
 
-#### ✅ PERMITTED (With Attribution)
-- Use the Software to build commercial projects and applications
-- Use the Software in your company's development workflow
-- Create commercial applications using Agentwise's capabilities
+#### STRICTLY PROHIBITED Without Commercial License:
+1. **Source Code Restrictions:**
+   - Viewing, studying, analyzing, or referencing the Source Code to create competing products
+   - Using ANY portion of the Source Code in competing products
+   - Reverse engineering, decompiling, or disassembling the Software
+   - Creating derivative works based on the Software's implementation
+   - Using the Source Code as inspiration, reference, or guidance for similar systems
 
-#### ❌ PROHIBITED (Without Commercial License)
-- Use the Software or its source code to create a competing product
-- Sell, rent, lease, or sublicense the Software itself
-- Offer Agentwise as a service (SaaS) for profit
-- Rebrand or resell Agentwise as your own product
-- Use the name "Agentwise" for any derivative products
-- Remove or alter copyright notices
+2. **Distribution Restrictions:**
+   - Redistributing, sublicensing, selling, or transferring the Software
+   - Offering the Software as a service (SaaS, PaaS, IaaS)
+   - Embedding or bundling the Software in commercial products
+   - Providing access to the Software's functionality to third parties
 
-### 3. Commercial License Required
+3. **Intellectual Property Violations:**
+   - Removing, altering, or obscuring proprietary notices
+   - Using "Agentwise" name, logos, or trademarks
+   - Claiming authorship or ownership of the Software
+   - Misrepresenting the origin or ownership of the Software
 
-A commercial license is REQUIRED if you are:
+### 3. Commercial License Requirement
 
-- Using Agentwise source code to create ANY competing product
-- Copying, referencing, or deriving from Agentwise code for competing products
-- Reselling or rebranding Agentwise itself
-- Offering Agentwise or its capabilities as a service (SaaS)
-- Embedding Agentwise technology into your product for end-users
-- Using Agentwise code as reference to build similar orchestration systems
-- Incorporating ANY Agentwise code into products that replicate its functionality
+A Commercial License is MANDATORY for:
 
-**You DO NOT need a commercial license to:**
-- Use Agentwise as a tool to build websites, apps, or software for clients
-- Use Agentwise in your company's internal development process
-- Create commercial products USING Agentwise (but not embedding it)
-- Build your own orchestration system from scratch through prompting (without using our code)
+1. **Competing Use Cases:**
+   - Creating ANY multi-agent orchestration system using our Source Code
+   - Building products that replicate Agentwise functionality
+   - Using our Source Code as reference for competing products
+   - Developing similar AI coordination systems based on our implementation
 
-**Commercial License Options:**
-- **One-Time License**: $25,000 USD (perpetual use)
-- **Annual License**: $10,000 USD/year (renewable)
-- **Enterprise License**: Contact for custom pricing
+2. **Embedding or Integration:**
+   - Including Agentwise in products distributed to end-users
+   - Offering Agentwise capabilities as part of your service
+   - Providing programmatic access to Agentwise functionality
 
-To obtain a commercial license, contact:
+3. **Service Provision:**
+   - Hosting Agentwise for third-party use
+   - Offering Agentwise as a managed service
+   - Reselling or rebranding Agentwise
+
+**Commercial License Terms:**
+- One-Time Perpetual License: $25,000 USD
+- Annual License: $10,000 USD per year
+- Enterprise License: Contact for pricing
+- All licenses are non-transferable and per-organization
+
+**To Obtain Commercial License:**
+Contact Philip Ritmeester:
 - Discord: @vibecodingwithphil
-- GitHub: [@VibeCodingWithPhil](https://github.com/VibeCodingWithPhil)
-- Email: See GitHub profile
+- GitHub: @VibeCodingWithPhil
 
-### 4. Open Source Derivative Works
+### 4. Intellectual Property Rights
 
-Creating open source derivatives is permitted under these conditions:
+1. **Ownership:** The Software is and shall remain the sole property of Philip Ritmeester. No title or ownership rights are transferred.
 
-1. **Attribution Required**: Must prominently display:
-   ```
-   Based on Agentwise (https://github.com/VibeCodingWithPhil/agentwise)
-   Original work by Philip Ritmeester (@VibeCodingWithPhil)
-   ```
+2. **Copyright Protection:** The Software is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties.
 
-2. **Contribution Preferred**: You are encouraged to contribute improvements directly to Agentwise rather than creating separate forks.
+3. **Trade Secrets:** The Software contains trade secrets and proprietary know-how that belong to Philip Ritmeester. You agree to maintain the confidentiality of these trade secrets.
 
-3. **Name Restriction**: Cannot use "Agentwise" in the name of derivative works.
+4. **Patents:** Any patentable inventions or improvements arising from the Software remain the property of Philip Ritmeester.
 
-4. **License Inheritance**: Derivative works must use this same license or a more restrictive one.
+### 5. Audit Rights
 
-### 5. Warranty Disclaimer
+Philip Ritmeester reserves the right to audit your use of the Software to ensure compliance with this License. You agree to:
+- Maintain accurate records of Software usage
+- Provide access to relevant systems and records upon request
+- Cooperate fully with any compliance audit
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+### 6. Enforcement and Remedies
 
-### 6. Termination
+1. **Automatic Termination:** This License automatically terminates upon any breach of its terms.
 
-This license automatically terminates if you:
-- Violate any terms of this license
-- Use the Software commercially without a commercial license
-- Fail to comply with attribution requirements
+2. **Injunctive Relief:** You acknowledge that breach of this License would cause irreparable harm for which monetary damages would be inadequate. Philip Ritmeester is entitled to seek injunctive relief without bond.
 
-Upon termination, you must cease all use of the Software and destroy all copies.
+3. **Damages:** You agree to pay:
+   - Actual damages suffered by Philip Ritmeester
+   - Statutory damages of $100,000 per violation
+   - All legal fees and costs of enforcement
 
-### 7. Tracking and Analytics
+4. **Criminal Prosecution:** Willful violation may result in criminal prosecution under applicable laws.
 
-The Software may include analytics to track usage patterns and adoption. This helps improve the Software and understand its impact. No personal data is collected without consent.
+### 7. Technical Protection Measures
 
-### 8. Support and Donations
+The Software may include technical measures to:
+- Track usage and detect violations
+- Disable functionality upon license breach
+- Report unauthorized use to Philip Ritmeester
+- Watermark or fingerprint output
 
-Agentwise is developed and maintained through community support. Donations are greatly appreciated:
+Circumventing these measures is strictly prohibited and constitutes a breach of this License.
 
-- PayPal: https://www.paypal.com/donate/?hosted_button_id=KAVQY4M7RJJBA
-- GitHub Sponsors: See repository
+### 8. Data Collection and Privacy
 
-### 9. Future Compatibility
+The Software may collect anonymous usage data to:
+- Verify license compliance
+- Improve the Software
+- Detect unauthorized use
+- Track adoption metrics
 
-We plan to support additional CLI tools including:
-- Crush CLI
-- Qwen Coder
-- Gemini CLI
-- Cursor CLI
-- Other popular AI development tools
+By using the Software, you consent to this data collection. Personal data is handled in accordance with applicable privacy laws.
 
-### 10. Governing Law
+### 9. Warranty Disclaimer
 
-This license shall be governed by the laws of the jurisdiction in which the copyright holder resides.
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. PHILIP RITMEESTER DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. USE OF THE SOFTWARE IS AT YOUR OWN RISK.
+
+### 10. Limitation of Liability
+
+IN NO EVENT SHALL PHILIP RITMEESTER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, REGARDLESS OF THE CAUSE OF ACTION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. TOTAL LIABILITY SHALL NOT EXCEED THE LICENSE FEES PAID.
+
+### 11. Indemnification
+
+You agree to indemnify, defend, and hold harmless Philip Ritmeester from any claims, damages, losses, or expenses arising from your use of the Software or breach of this License.
+
+### 12. Export Compliance
+
+You agree to comply with all applicable export laws and regulations. The Software may not be exported to prohibited countries or individuals.
+
+### 13. Governing Law and Jurisdiction
+
+This License is governed by the laws of the jurisdiction where Philip Ritmeester resides, without regard to conflict of law principles. Any disputes shall be resolved exclusively in the courts of that jurisdiction. You consent to personal jurisdiction and venue in such courts.
+
+### 14. Severability
+
+If any provision of this License is held invalid or unenforceable, the remaining provisions shall continue in full force and effect. The invalid provision shall be reformed to the extent necessary to make it enforceable.
+
+### 15. Entire Agreement
+
+This License constitutes the entire agreement between the parties regarding the Software and supersedes all prior agreements and understandings. Any modifications must be in writing and signed by Philip Ritmeester.
+
+### 16. No Waiver
+
+Failure to enforce any provision of this License shall not constitute a waiver of that provision or any other provision.
+
+### 17. Assignment
+
+You may not assign or transfer this License or any rights hereunder without the prior written consent of Philip Ritmeester.
+
+### 18. Survival
+
+Sections 4 (Intellectual Property), 6 (Enforcement), 9 (Warranty), 10 (Limitation), 11 (Indemnification), and 13 (Governing Law) shall survive termination of this License.
 
 ---
 
-## FAQ
+## ACCEPTANCE
 
-**Q: Can I use Agentwise to build commercial projects?**
-A: Yes! You can use Agentwise as a tool to build any commercial projects for clients.
+BY DOWNLOADING, INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE. IF YOU DO NOT AGREE, DO NOT USE THE SOFTWARE.
 
-**Q: Can I look at the code to learn how it works and build my own?**
-A: No. You cannot use our source code as reference to build competing products. However, you CAN build your own system from scratch using AI prompting, just like we did.
+## VIOLATIONS
 
-**Q: Can I embed Agentwise in my product?**
-A: This requires a commercial license since you'd be giving your users access to Agentwise technology.
+To report license violations or unauthorized use:
+- Email: legal@agentwise.dev
+- GitHub: File a confidential security advisory
 
-**Q: Can I use Agentwise at my company internally?**
-A: Yes! Internal use for development is allowed without a commercial license.
+## FREQUENTLY ASKED QUESTIONS
 
-**Q: What if I want to build something similar?**
-A: Build it from scratch with AI prompting (like we did) - that's perfectly fine! Just don't use our source code.
+**Q: Can I use Agentwise to build commercial applications?**
+A: Yes, you can use Agentwise as a tool to build applications for commercial sale, as long as you don't embed Agentwise itself in the product.
 
-**Q: How do I get a commercial license?**
-A: Contact @vibecodingwithphil on Discord or via GitHub.
+**Q: Can I learn from the code to build my own system?**
+A: No. You cannot study our source code to build competing products. Build your own system from scratch using AI prompting instead.
+
+**Q: What happens if I violate the license?**
+A: The license terminates immediately, and you may face legal action including damages of $100,000 per violation plus legal costs.
+
+**Q: Can I contribute to Agentwise?**
+A: Yes, but all contributions become the property of Philip Ritmeester under this same license.
+
+**Q: Is this license open source?**
+A: No. This is a proprietary license. The source is visible but strictly controlled.
 
 ---
 
-By using Agentwise, you agree to these terms. If you do not agree, do not use the Software.
+**Last Updated:** January 2025
+**License Version:** 1.0
 
-Last updated: January 2025
+Copyright (c) 2024-2025 Philip Ritmeester. All Rights Reserved.
