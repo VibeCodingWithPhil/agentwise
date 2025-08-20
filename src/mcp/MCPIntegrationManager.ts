@@ -119,6 +119,16 @@ export class MCPIntegrationManager {
         capabilities: ['container-management', 'compose-operations', 'image-building']
       },
 
+      // Web Scraping & Cloning MCPs
+      {
+        name: 'firecrawl',
+        command: 'npx',
+        args: ['-y', '@firecrawl/mcp-server'],
+        capabilities: ['website-scraping', 'design-extraction', 'component-analysis', 'site-cloning'],
+        requiredAuth: { type: 'api_key', envVar: 'FIRECRAWL_API_KEY' },
+        setupInstructions: 'Get API key from https://firecrawl.dev'
+      },
+
       // API & Service MCPs
       {
         name: 'stripe',
@@ -268,6 +278,7 @@ export class MCPIntegrationManager {
         mcpServers: [
           this.serverRegistry.get('figma')!,
           this.serverRegistry.get('shadcn-ui')!,
+          this.serverRegistry.get('firecrawl')!,
           this.serverRegistry.get('github')!,
           this.serverRegistry.get('playwright')!,
           this.serverRegistry.get('memory')!
@@ -332,6 +343,7 @@ export class MCPIntegrationManager {
         agentName: 'designer-specialist',
         mcpServers: [
           this.serverRegistry.get('figma')!,
+          this.serverRegistry.get('firecrawl')!,
           this.serverRegistry.get('canva')!,
           this.serverRegistry.get('shadcn-ui')!,
           this.serverRegistry.get('brave-search')!,

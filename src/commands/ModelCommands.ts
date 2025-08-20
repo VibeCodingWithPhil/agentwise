@@ -16,10 +16,10 @@ export class ModelCommands {
   /**
    * Handle /setup-ollama command
    */
-  async handleSetupOllama(): Promise<void> {
+  async handleSetupOllama(autoInstall: boolean = true): Promise<void> {
     console.log(chalk.blue('🚀 Setting up Ollama for local model support...\n'));
     
-    const success = await this.router.setupOllama();
+    const success = await this.router.setupOllama(autoInstall);
     
     if (success) {
       await this.router.discoverModels();

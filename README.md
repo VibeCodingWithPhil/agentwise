@@ -152,6 +152,8 @@ Invoke-WebRequest -Uri "https://github.com/VibeCodingWithPhil/agentwise/releases
 | `/setup-lmstudio` | Setup LM Studio integration | `/setup-lmstudio` |
 | `/local-models` | List available local models | `/local-models` |
 | `/configure-routing` | Configure model routing | `/configure-routing optimize` |
+| `/upload` | Upload documents or design files | `/upload ./design.fig components` |
+| `/clone-website` | Clone and customize websites | `/clone-website https://example.com similar` |
 
 ### Project Structure
 
@@ -260,15 +262,17 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] Hallucination detection and prevention
 - [x] Automatic agent discovery for custom agents
 
-### ✅ Recently Completed (Q4 2024)
+### ✅ Recently Completed (Q4 2024 - Q1 2025)
 - [x] **Web UI Dashboard** - Real-time monitoring interface with live agent status
-- [x] **MCP Integration** - 24+ MCP servers fully integrated (Figma, GitHub, Database, etc.)
+- [x] **MCP Integration** - 26+ MCP servers (Figma, Firecrawl, Shadcn UI, GitHub, etc.)
 - [x] **Performance Analytics** - Comprehensive metrics, error tracking, and insights
 - [x] **Self-Improving Agents** - Learning capabilities with knowledge persistence
 - [x] **Ultimate Token Optimization** - 99% reduction achieved (100 agents = 1 agent cost)
 - [x] **Smart Model Routing** - Automatic model selection based on task requirements
 - [x] **Local Model Support** - Full Ollama, LM Studio, and OpenRouter integration
-- [x] **Hybrid AI Strategy** - Mix local and cloud models for optimal cost/performance
+- [x] **Document Upload** - Process PDFs, Word docs, and design files
+- [x] **Figma Integration** - Extract and convert Figma designs to code
+- [x] **Website Cloning** - Clone and customize existing websites with Firecrawl
 
 ### 🚀 Next Phase (Q1-Q2 2025)
 - [ ] **Agent Marketplace** - Share and discover custom agents

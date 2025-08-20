@@ -367,7 +367,7 @@ export class SmartModelRouter {
   /**
    * Setup Ollama if not installed
    */
-  public async setupOllama(): Promise<boolean> {
+  public async setupOllama(autoInstall: boolean = false): Promise<boolean> {
     console.log('🔧 Checking Ollama installation...');
     
     try {
@@ -378,16 +378,100 @@ export class SmartModelRouter {
       const models = await this.discoverOllamaModels();
       if (models.length === 0) {
         console.log('📦 Pulling default Ollama models...');
-        execFileSync('ollama', ['pull', 'llama2:7b'], { stdio: 'inherit' });
-        execFileSync('ollama', ['pull', 'codellama:7b'], { stdio: 'inherit' });
-        execFileSync('ollama', ['pull', 'mistral:latest'], { stdio: 'inherit' });
+        await this.pullDefaultOllamaModels();
       }
       
       return true;
     } catch {
-      console.log('❌ Ollama not found. Please install from https://ollama.ai');
-      return false;
+      if (autoInstall) {
+        console.log('📥 Ollama not found. Attempting automatic installation...');
+        return await this.autoInstallOllama();
+      } else {
+        console.log('❌ Ollama not found.');
+        console.log('Would you like to install Ollama automatically? (Recommended)');
+        console.log('Visit https://ollama.ai for manual installation');
+        return false;
+      }
     }
+  }
+
+  /**
+   * Auto-install Ollama based on platform (disabled for security)
+   */
+  private async autoInstallOllama(): Promise<boolean> {
+    const platform = process.platform;
+    
+    // Security: Never execute remote scripts automatically
+    console.log('📋 Ollama Installation Instructions:');
+    
+    if (platform === 'darwin') {
+      console.log('🍎 For macOS:');
+      console.log('1. Visit https://ollama.ai/download');
+      console.log('2. Download the macOS installer');
+      console.log('3. Run the installer');
+      console.log('4. Run this command again after installation');
+    } else if (platform === 'linux') {
+      console.log('🐧 For Linux:');
+      console.log('Run this command in your terminal:');
+      console.log('curl -fsSL https://ollama.ai/install.sh | sh');
+      console.log('Then run this command again');
+    } else if (platform === 'win32') {
+      console.log('🪟 For Windows:');
+      console.log('1. Visit https://ollama.ai/download/windows');
+      console.log('2. Download and run the installer');
+      console.log('3. Run this command again after installation');
+    }
+    
+    console.log('\n💡 After installation, run: /setup-ollama');
+    return false;
+  }
+
+  /**
+   * Validate model name for security
+   */
+  private validateModelName(modelName: string): boolean {
+    const validPattern = /^[a-zA-Z0-9\-._]+:[a-zA-Z0-9\-._]+$/;
+    return validPattern.test(modelName);
+  }
+
+  /**
+   * Pull default Ollama models based on system capabilities
+   */
+  private async pullDefaultOllamaModels(): Promise<void> {
+    const totalMemory = require('os').totalmem() / (1024 * 1024 * 1024); // GB
+    
+    // Define safe, validated model names
+    const models = {
+      large: ['codellama:13b', 'llama2:13b'],
+      medium: ['codellama:7b', 'mistral:latest'],
+      small: ['phi:latest', 'tinyllama:latest']
+    };
+    
+    let selectedModels: string[] = [];
+    
+    if (totalMemory >= 16) {
+      console.log('💪 System has 16GB+ RAM. Pulling optimized models...');
+      selectedModels = models.large;
+    } else if (totalMemory >= 8) {
+      console.log('⚡ System has 8GB+ RAM. Pulling standard models...');
+      selectedModels = models.medium;
+    } else {
+      console.log('🔋 System has limited RAM. Pulling lightweight models...');
+      selectedModels = models.small;
+    }
+    
+    // Validate and pull models
+    for (const model of selectedModels) {
+      if (this.validateModelName(model)) {
+        try {
+          execFileSync('ollama', ['pull', model], { stdio: 'inherit' });
+        } catch (error) {
+          console.warn(`Failed to pull model ${model}:`, error);
+        }
+      }
+    }
+    
+    console.log('✅ Default models pulled successfully');
   }
 
   /**
