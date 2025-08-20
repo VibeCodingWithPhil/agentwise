@@ -6,6 +6,9 @@ import { SpecGenerator } from './SpecGenerator';
 import { DynamicTaskDistributor } from './DynamicTaskDistributor';
 import { DynamicAgentGenerator } from '../agents/DynamicAgentGenerator';
 import { MCPIntegrationManager } from '../mcp/MCPIntegrationManager';
+import { UltimateTokenOptimizer } from '../optimization/UltimateTokenOptimizer';
+import { PerformanceAnalytics } from '../analytics/PerformanceAnalytics';
+import { SelfImprovingAgent } from '../learning/SelfImprovingAgent';
 
 /**
  * Main orchestrator entry point
@@ -55,6 +58,8 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   const taskDistributor = new DynamicTaskDistributor();
   const agentGenerator = new DynamicAgentGenerator();
   const mcpManager = new MCPIntegrationManager();
+  const tokenOptimizer = new UltimateTokenOptimizer();
+  const analytics = new PerformanceAnalytics();
   
   // Generate enhanced specs with validation
   const specs = await specGenerator.generate(projectIdea, 'create');
