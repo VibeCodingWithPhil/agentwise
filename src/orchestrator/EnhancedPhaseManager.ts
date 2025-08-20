@@ -1,6 +1,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { MDTaskUpdater } from '../monitoring/MDTaskUpdater';
+import { TaskCompletionDetector } from '../monitoring/TaskCompletionDetector';
 
 export interface PhaseTask {
   id: string;
@@ -22,21 +23,24 @@ export interface PhaseProgress {
 export class EnhancedPhaseManager {
   private projectPath: string;
   private mdTaskUpdater: MDTaskUpdater;
+  private taskCompletionDetector: TaskCompletionDetector;
   private phaseWatchers: Map<string, fs.FSWatcher> = new Map();
+  private completionCheckInterval: NodeJS.Timeout | null = null;
 
   constructor(projectPath: string) {
     this.projectPath = projectPath;
     this.mdTaskUpdater = new MDTaskUpdater();
+    this.taskCompletionDetector = new TaskCompletionDetector(projectPath);
   }
 
   /**
    * Start monitoring all phase files for all agents
    */
   async startPhaseMonitoring(): Promise<void> {
-    const agentTodoDir = path.join(this.projectPath, 'agent-todo');
+    const agentTodoDir = path.join(this.projectPath, 'agent-todos');
     
     if (!await fs.pathExists(agentTodoDir)) {
-      console.warn('No agent-todo directory found');
+      console.warn('No agent-todos directory found');
       return;
     }
 
@@ -52,6 +56,62 @@ export class EnhancedPhaseManager {
     }
 
     console.log(`✅ Started monitoring phases for ${agents.length} agents`);
+    
+    // Start automatic task completion detection
+    await this.startTaskCompletionDetection();
+  }
+
+  /**
+   * Start automatic task completion detection
+   */
+  private async startTaskCompletionDetection(): Promise<void> {
+    // Run initial scan
+    console.log('🔍 Running initial task completion scan...');
+    await this.runTaskCompletionScan();
+    
+    // Set up periodic scanning (every 30 seconds)
+    this.completionCheckInterval = setInterval(async () => {
+      await this.runTaskCompletionScan();
+    }, 30000);
+    
+    console.log('✅ Automatic task completion detection started');
+  }
+
+  /**
+   * Run task completion scan
+   */
+  private async runTaskCompletionScan(): Promise<void> {
+    try {
+      const results = await this.taskCompletionDetector.scanAndUpdateCompletedTasks(this.projectPath);
+      
+      if (results.length > 0) {
+        const totalCompleted = results.reduce((sum, r) => sum + r.tasksCompleted, 0);
+        if (totalCompleted > 0) {
+          console.log(`🎯 Automatically marked ${totalCompleted} tasks as complete across ${results.length} agents`);
+        }
+      }
+    } catch (error) {
+      console.error('Error during task completion scan:', error);
+    }
+  }
+
+  /**
+   * Stop monitoring and cleanup
+   */
+  async stopMonitoring(): Promise<void> {
+    // Clear interval
+    if (this.completionCheckInterval) {
+      clearInterval(this.completionCheckInterval);
+      this.completionCheckInterval = null;
+    }
+    
+    // Close file watchers
+    for (const watcher of this.phaseWatchers.values()) {
+      watcher.close();
+    }
+    this.phaseWatchers.clear();
+    
+    console.log('🛑 Phase monitoring stopped');
   }
 
   /**
@@ -142,7 +202,7 @@ export class EnhancedPhaseManager {
    * Mark tasks as complete in a phase file
    */
   async markTasksComplete(agent: string, phase: number, taskDescriptions: string[]): Promise<void> {
-    const phaseFile = path.join(this.projectPath, 'agent-todo', agent, `phase${phase}-todo.md`);
+    const phaseFile = path.join(this.projectPath, 'agent-todos', agent, `phase${phase}-todo.md`);
     
     if (!await fs.pathExists(phaseFile)) {
       console.warn(`Phase file not found: ${phaseFile}`);
@@ -187,7 +247,7 @@ export class EnhancedPhaseManager {
     // Check if there's a next phase
     const nextPhaseFile = path.join(
       this.projectPath, 
-      'agent-todo', 
+      'agent-todos', 
       agent, 
       `phase${completedPhase + 1}-todo.md`
     );
@@ -221,7 +281,7 @@ export class EnhancedPhaseManager {
    * Get overall project progress across all phases and agents
    */
   async getProjectProgress(): Promise<any> {
-    const agentTodoDir = path.join(this.projectPath, 'agent-todo');
+    const agentTodoDir = path.join(this.projectPath, 'agent-todos');
     
     if (!await fs.pathExists(agentTodoDir)) {
       return { agents: {}, overallProgress: 0 };
@@ -315,22 +375,12 @@ export class EnhancedPhaseManager {
     }
   }
 
-  /**
-   * Stop all watchers
-   */
-  stopMonitoring(): void {
-    for (const [key, watcher] of this.phaseWatchers) {
-      watcher.close();
-    }
-    this.phaseWatchers.clear();
-    console.log('Stopped phase monitoring');
-  }
 
   /**
    * Initialize phase files for a new project
    */
   async initializePhaseFiles(agents: string[], phases: number): Promise<void> {
-    const agentTodoDir = path.join(this.projectPath, 'agent-todo');
+    const agentTodoDir = path.join(this.projectPath, 'agent-todos');
     await fs.ensureDir(agentTodoDir);
 
     for (const agent of agents) {

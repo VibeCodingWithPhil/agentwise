@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import { DynamicAgentManager } from './DynamicAgentManager';
 import { PhaseController } from './PhaseController';
+import { EnhancedPhaseManager } from './EnhancedPhaseManager';
 import { SpecGenerator } from './SpecGenerator';
 import { DynamicTaskDistributor } from './DynamicTaskDistributor';
 import { DynamicAgentGenerator } from '../agents/DynamicAgentGenerator';
@@ -178,7 +179,7 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   
   // Create phase files for agents with tasks
   for (const agent of selectedAgents) {
-    const agentPath = path.join(projectPath, 'agent-todo', agent.name);
+    const agentPath = path.join(projectPath, 'agent-todos', agent.name);
     
     // Create phase files
     for (let i = 0; i < phases.length; i++) {
@@ -204,6 +205,11 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   
   // Launch only selected agents
   await agentManager.launchAgentsOptimized(projectPath, agentsWithTasks);
+  
+  // Start enhanced phase monitoring for task completion tracking
+  console.log('🔍 Starting enhanced phase monitoring...');
+  const enhancedPhaseManager = new EnhancedPhaseManager(projectPath);
+  await enhancedPhaseManager.startPhaseMonitoring();
   
   console.log('✅ Orchestration complete! Agents are now working on your project.');
 }
