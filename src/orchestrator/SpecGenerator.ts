@@ -1,12 +1,21 @@
-// Import statements removed as they're not used in this file
+import { TechSpecValidator, ValidationResult } from '../validation/TechSpecValidator';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
 export interface ProjectSpecs {
   mainSpec: string;
   projectSpec: string;
   todoSpec: string;
+  validationReport?: string;
+  isValid?: boolean;
 }
 
 export class SpecGenerator {
+  private validator: TechSpecValidator;
+  
+  constructor() {
+    this.validator = new TechSpecValidator();
+  }
   
   async generate(projectIdea: string, mode: 'create' | 'task'): Promise<ProjectSpecs> {
     console.log('🤖 Enhancing project specifications...');
@@ -15,10 +24,61 @@ export class SpecGenerator {
     // In production, this would call Claude API for enhancement
     const enhanced = await this.enhanceWithAI(projectIdea, mode);
     
-    return {
+    // Generate initial specs
+    let specs: ProjectSpecs = {
       mainSpec: this.generateMainSpec(enhanced),
       projectSpec: this.generateProjectSpec(enhanced),
       todoSpec: this.generateTodoSpec(enhanced)
+    };
+    
+    // Validate tech stack
+    console.log('🔍 Validating tech stack for accuracy...');
+    const validationResult = await this.validator.validateTechStack(specs);
+    
+    // If there are critical errors, regenerate with optimized stack
+    if (!validationResult.isValid && validationResult.optimizedStack) {
+      console.log('⚠️  Tech stack has conflicts. Optimizing...');
+      enhanced.tech = this.mapOptimizedStackToTech(validationResult.optimizedStack);
+      
+      // Regenerate specs with optimized stack
+      specs = {
+        mainSpec: this.generateMainSpec(enhanced),
+        projectSpec: this.generateProjectSpec(enhanced),
+        todoSpec: this.generateTodoSpec(enhanced)
+      };
+      
+      // Re-validate to ensure fixes worked
+      const revalidation = await this.validator.validateTechStack(specs);
+      validationResult.isValid = revalidation.isValid;
+      validationResult.errors = revalidation.errors;
+    }
+    
+    // Generate validation report
+    const report = await this.validator.generateValidationReport(validationResult);
+    specs.validationReport = report;
+    specs.isValid = validationResult.isValid;
+    
+    // Save validation report
+    const projectPath = process.cwd();
+    const specsPath = path.join(projectPath, 'specs');
+    await fs.ensureDir(specsPath);
+    await fs.writeFile(path.join(specsPath, 'validation-report.md'), report);
+    
+    // Log validation summary
+    console.log(`✅ Tech Stack Validation: ${validationResult.isValid ? 'PASSED' : 'FAILED'}`);
+    console.log(`   Errors: ${validationResult.errors.length}, Warnings: ${validationResult.warnings.length}`);
+    console.log(`   Recommendations: ${validationResult.recommendations.length}`);
+    
+    return specs;
+  }
+  
+  private mapOptimizedStackToTech(optimizedStack: any): any {
+    return {
+      frontend: optimizedStack.frontend?.framework || 'React',
+      backend: optimizedStack.backend?.framework || 'Node.js',
+      database: optimizedStack.backend?.database || 'PostgreSQL',
+      deployment: optimizedStack.deployment?.containerization || 'Docker',
+      testing: optimizedStack.testing?.framework || 'Jest'
     };
   }
   

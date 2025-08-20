@@ -1,0 +1,1164 @@
+{
+  "mcpServers": {
+    "figma": {
+      "name": "figma",
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-mcp-server"
+      ],
+      "capabilities": [
+        "design-access",
+        "component-export",
+        "design-tokens"
+      ],
+      "requiredAuth": {
+        "type": "token",
+        "envVar": "FIGMA_TOKEN"
+      },
+      "setupInstructions": "Requires Figma paid plan with Dev Mode access"
+    },
+    "shadcn-ui": {
+      "name": "shadcn-ui",
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn-ui-mcp-server"
+      ],
+      "capabilities": [
+        "component-library",
+        "react-components",
+        "vue-components",
+        "svelte-components"
+      ]
+    },
+    "canva": {
+      "name": "canva",
+      "command": "npx",
+      "args": [
+        "-y",
+        "canva-mcp-server"
+      ],
+      "capabilities": [
+        "design-creation",
+        "template-access"
+      ],
+      "requiredAuth": {
+        "type": "api_key",
+        "envVar": "CANVA_API_KEY"
+      }
+    },
+    "postgresql": {
+      "name": "postgresql",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres"
+      ],
+      "capabilities": [
+        "database-query",
+        "schema-inspection",
+        "read-only"
+      ],
+      "env": {
+        "DATABASE_URL": "${POSTGRES_URL}"
+      }
+    },
+    "mongodb": {
+      "name": "mongodb",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mongodb-mcp-server"
+      ],
+      "capabilities": [
+        "nosql-query",
+        "collection-management",
+        "aggregation"
+      ],
+      "env": {
+        "MONGODB_URI": "${MONGODB_URI}"
+      }
+    },
+    "mysql": {
+      "name": "mysql",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mysql-mcp-server"
+      ],
+      "capabilities": [
+        "database-query",
+        "schema-inspection"
+      ],
+      "env": {
+        "MYSQL_CONNECTION": "${MYSQL_URL}"
+      }
+    },
+    "github": {
+      "name": "github",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "capabilities": [
+        "repo-management",
+        "issue-tracking",
+        "pr-management"
+      ],
+      "requiredAuth": {
+        "type": "token",
+        "envVar": "GITHUB_TOKEN"
+      }
+    },
+    "git": {
+      "name": "git",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git"
+      ],
+      "capabilities": [
+        "version-control",
+        "repo-operations",
+        "commit-history"
+      ]
+    },
+    "docker": {
+      "name": "docker",
+      "command": "npx",
+      "args": [
+        "-y",
+        "docker-mcp-server"
+      ],
+      "capabilities": [
+        "container-management",
+        "compose-operations",
+        "image-building"
+      ]
+    },
+    "stripe": {
+      "name": "stripe",
+      "command": "npx",
+      "args": [
+        "-y",
+        "stripe-mcp-server"
+      ],
+      "capabilities": [
+        "payment-processing",
+        "subscription-management",
+        "invoice-handling"
+      ],
+      "requiredAuth": {
+        "type": "api_key",
+        "envVar": "STRIPE_API_KEY"
+      }
+    },
+    "paypal": {
+      "name": "paypal",
+      "command": "npx",
+      "args": [
+        "-y",
+        "paypal-mcp-server"
+      ],
+      "capabilities": [
+        "payment-processing",
+        "merchant-services"
+      ],
+      "requiredAuth": {
+        "type": "oauth",
+        "envVar": "PAYPAL_CLIENT_ID"
+      }
+    },
+    "twilio": {
+      "name": "twilio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "twilio-mcp-server"
+      ],
+      "capabilities": [
+        "sms-messaging",
+        "voice-calls",
+        "notifications"
+      ],
+      "requiredAuth": {
+        "type": "token",
+        "envVar": "TWILIO_AUTH_TOKEN"
+      }
+    },
+    "apollo-graphql": {
+      "name": "apollo-graphql",
+      "command": "npx",
+      "args": [
+        "-y",
+        "apollo-mcp-server"
+      ],
+      "capabilities": [
+        "graphql-schema",
+        "api-orchestration",
+        "query-optimization"
+      ]
+    },
+    "aws": {
+      "name": "aws",
+      "command": "npx",
+      "args": [
+        "-y",
+        "aws-mcp-server"
+      ],
+      "capabilities": [
+        "aws-services",
+        "infrastructure-management",
+        "cost-analysis"
+      ],
+      "requiredAuth": {
+        "type": "api_key",
+        "envVar": "AWS_ACCESS_KEY_ID"
+      }
+    },
+    "azure": {
+      "name": "azure",
+      "command": "npx",
+      "args": [
+        "-y",
+        "azure-mcp-server"
+      ],
+      "capabilities": [
+        "azure-services",
+        "storage-operations",
+        "cosmos-db"
+      ],
+      "requiredAuth": {
+        "type": "token",
+        "envVar": "AZURE_SUBSCRIPTION_ID"
+      }
+    },
+    "terraform": {
+      "name": "terraform",
+      "command": "npx",
+      "args": [
+        "-y",
+        "terraform-mcp-server"
+      ],
+      "capabilities": [
+        "infrastructure-as-code",
+        "state-management",
+        "provider-access"
+      ]
+    },
+    "playwright": {
+      "name": "playwright",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-playwright"
+      ],
+      "capabilities": [
+        "browser-automation",
+        "e2e-testing",
+        "cross-browser-testing"
+      ]
+    },
+    "cypress": {
+      "name": "cypress",
+      "command": "npx",
+      "args": [
+        "-y",
+        "cypress-mcp-server"
+      ],
+      "capabilities": [
+        "e2e-testing",
+        "component-testing",
+        "visual-testing"
+      ]
+    },
+    "jest": {
+      "name": "jest",
+      "command": "npx",
+      "args": [
+        "-y",
+        "jest-mcp-server"
+      ],
+      "capabilities": [
+        "unit-testing",
+        "integration-testing",
+        "coverage-analysis"
+      ]
+    },
+    "confluence": {
+      "name": "confluence",
+      "command": "npx",
+      "args": [
+        "-y",
+        "confluence-mcp-server"
+      ],
+      "capabilities": [
+        "documentation-management",
+        "page-creation",
+        "search"
+      ],
+      "requiredAuth": {
+        "type": "token",
+        "envVar": "CONFLUENCE_TOKEN"
+      }
+    },
+    "notion": {
+      "name": "notion",
+      "command": "npx",
+      "args": [
+        "-y",
+        "notion-mcp-server"
+      ],
+      "capabilities": [
+        "workspace-management",
+        "database-operations",
+        "content-creation"
+      ],
+      "requiredAuth": {
+        "type": "token",
+        "envVar": "NOTION_TOKEN"
+      }
+    },
+    "memory": {
+      "name": "memory",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "capabilities": [
+        "persistent-memory",
+        "knowledge-graph",
+        "context-retention"
+      ]
+    },
+    "brave-search": {
+      "name": "brave-search",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "capabilities": [
+        "web-search",
+        "private-search",
+        "local-search"
+      ],
+      "requiredAuth": {
+        "type": "api_key",
+        "envVar": "BRAVE_API_KEY"
+      }
+    },
+    "sequential-thinking": {
+      "name": "sequential-thinking",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "capabilities": [
+        "problem-solving",
+        "multi-step-reasoning",
+        "planning"
+      ]
+    }
+  },
+  "agentMappings": [
+    {
+      "agentName": "frontend-specialist",
+      "mcpServers": [
+        {
+          "name": "figma",
+          "command": "npx",
+          "args": [
+            "-y",
+            "figma-mcp-server"
+          ],
+          "capabilities": [
+            "design-access",
+            "component-export",
+            "design-tokens"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "FIGMA_TOKEN"
+          },
+          "setupInstructions": "Requires Figma paid plan with Dev Mode access"
+        },
+        {
+          "name": "shadcn-ui",
+          "command": "npx",
+          "args": [
+            "-y",
+            "shadcn-ui-mcp-server"
+          ],
+          "capabilities": [
+            "component-library",
+            "react-components",
+            "vue-components",
+            "svelte-components"
+          ]
+        },
+        {
+          "name": "github",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-github"
+          ],
+          "capabilities": [
+            "repo-management",
+            "issue-tracking",
+            "pr-management"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "GITHUB_TOKEN"
+          }
+        },
+        {
+          "name": "playwright",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-playwright"
+          ],
+          "capabilities": [
+            "browser-automation",
+            "e2e-testing",
+            "cross-browser-testing"
+          ]
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 1
+    },
+    {
+      "agentName": "backend-specialist",
+      "mcpServers": [
+        {
+          "name": "postgresql",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-postgres"
+          ],
+          "capabilities": [
+            "database-query",
+            "schema-inspection",
+            "read-only"
+          ],
+          "env": {
+            "DATABASE_URL": "${POSTGRES_URL}"
+          }
+        },
+        {
+          "name": "mongodb",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mongodb-mcp-server"
+          ],
+          "capabilities": [
+            "nosql-query",
+            "collection-management",
+            "aggregation"
+          ],
+          "env": {
+            "MONGODB_URI": "${MONGODB_URI}"
+          }
+        },
+        {
+          "name": "github",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-github"
+          ],
+          "capabilities": [
+            "repo-management",
+            "issue-tracking",
+            "pr-management"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "GITHUB_TOKEN"
+          }
+        },
+        {
+          "name": "docker",
+          "command": "npx",
+          "args": [
+            "-y",
+            "docker-mcp-server"
+          ],
+          "capabilities": [
+            "container-management",
+            "compose-operations",
+            "image-building"
+          ]
+        },
+        {
+          "name": "jest",
+          "command": "npx",
+          "args": [
+            "-y",
+            "jest-mcp-server"
+          ],
+          "capabilities": [
+            "unit-testing",
+            "integration-testing",
+            "coverage-analysis"
+          ]
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 1
+    },
+    {
+      "agentName": "database-specialist",
+      "mcpServers": [
+        {
+          "name": "postgresql",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-postgres"
+          ],
+          "capabilities": [
+            "database-query",
+            "schema-inspection",
+            "read-only"
+          ],
+          "env": {
+            "DATABASE_URL": "${POSTGRES_URL}"
+          }
+        },
+        {
+          "name": "mongodb",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mongodb-mcp-server"
+          ],
+          "capabilities": [
+            "nosql-query",
+            "collection-management",
+            "aggregation"
+          ],
+          "env": {
+            "MONGODB_URI": "${MONGODB_URI}"
+          }
+        },
+        {
+          "name": "mysql",
+          "command": "npx",
+          "args": [
+            "-y",
+            "mysql-mcp-server"
+          ],
+          "capabilities": [
+            "database-query",
+            "schema-inspection"
+          ],
+          "env": {
+            "MYSQL_CONNECTION": "${MYSQL_URL}"
+          }
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 1
+    },
+    {
+      "agentName": "devops-specialist",
+      "mcpServers": [
+        {
+          "name": "docker",
+          "command": "npx",
+          "args": [
+            "-y",
+            "docker-mcp-server"
+          ],
+          "capabilities": [
+            "container-management",
+            "compose-operations",
+            "image-building"
+          ]
+        },
+        {
+          "name": "aws",
+          "command": "npx",
+          "args": [
+            "-y",
+            "aws-mcp-server"
+          ],
+          "capabilities": [
+            "aws-services",
+            "infrastructure-management",
+            "cost-analysis"
+          ],
+          "requiredAuth": {
+            "type": "api_key",
+            "envVar": "AWS_ACCESS_KEY_ID"
+          }
+        },
+        {
+          "name": "terraform",
+          "command": "npx",
+          "args": [
+            "-y",
+            "terraform-mcp-server"
+          ],
+          "capabilities": [
+            "infrastructure-as-code",
+            "state-management",
+            "provider-access"
+          ]
+        },
+        {
+          "name": "github",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-github"
+          ],
+          "capabilities": [
+            "repo-management",
+            "issue-tracking",
+            "pr-management"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "GITHUB_TOKEN"
+          }
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 1
+    },
+    {
+      "agentName": "testing-specialist",
+      "mcpServers": [
+        {
+          "name": "jest",
+          "command": "npx",
+          "args": [
+            "-y",
+            "jest-mcp-server"
+          ],
+          "capabilities": [
+            "unit-testing",
+            "integration-testing",
+            "coverage-analysis"
+          ]
+        },
+        {
+          "name": "playwright",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-playwright"
+          ],
+          "capabilities": [
+            "browser-automation",
+            "e2e-testing",
+            "cross-browser-testing"
+          ]
+        },
+        {
+          "name": "cypress",
+          "command": "npx",
+          "args": [
+            "-y",
+            "cypress-mcp-server"
+          ],
+          "capabilities": [
+            "e2e-testing",
+            "component-testing",
+            "visual-testing"
+          ]
+        },
+        {
+          "name": "github",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-github"
+          ],
+          "capabilities": [
+            "repo-management",
+            "issue-tracking",
+            "pr-management"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "GITHUB_TOKEN"
+          }
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 1
+    },
+    {
+      "agentName": "designer-specialist",
+      "mcpServers": [
+        {
+          "name": "figma",
+          "command": "npx",
+          "args": [
+            "-y",
+            "figma-mcp-server"
+          ],
+          "capabilities": [
+            "design-access",
+            "component-export",
+            "design-tokens"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "FIGMA_TOKEN"
+          },
+          "setupInstructions": "Requires Figma paid plan with Dev Mode access"
+        },
+        {
+          "name": "canva",
+          "command": "npx",
+          "args": [
+            "-y",
+            "canva-mcp-server"
+          ],
+          "capabilities": [
+            "design-creation",
+            "template-access"
+          ],
+          "requiredAuth": {
+            "type": "api_key",
+            "envVar": "CANVA_API_KEY"
+          }
+        },
+        {
+          "name": "shadcn-ui",
+          "command": "npx",
+          "args": [
+            "-y",
+            "shadcn-ui-mcp-server"
+          ],
+          "capabilities": [
+            "component-library",
+            "react-components",
+            "vue-components",
+            "svelte-components"
+          ]
+        },
+        {
+          "name": "brave-search",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-brave-search"
+          ],
+          "capabilities": [
+            "web-search",
+            "private-search",
+            "local-search"
+          ],
+          "requiredAuth": {
+            "type": "api_key",
+            "envVar": "BRAVE_API_KEY"
+          }
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 1
+    },
+    {
+      "agentName": "ai-integration-specialist",
+      "mcpServers": [
+        {
+          "name": "sequential-thinking",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-sequential-thinking"
+          ],
+          "capabilities": [
+            "problem-solving",
+            "multi-step-reasoning",
+            "planning"
+          ]
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        },
+        {
+          "name": "github",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-github"
+          ],
+          "capabilities": [
+            "repo-management",
+            "issue-tracking",
+            "pr-management"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "GITHUB_TOKEN"
+          }
+        },
+        {
+          "name": "brave-search",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-brave-search"
+          ],
+          "capabilities": [
+            "web-search",
+            "private-search",
+            "local-search"
+          ],
+          "requiredAuth": {
+            "type": "api_key",
+            "envVar": "BRAVE_API_KEY"
+          }
+        }
+      ],
+      "autoInstall": true,
+      "priority": 2
+    },
+    {
+      "agentName": "ecommerce-specialist",
+      "mcpServers": [
+        {
+          "name": "stripe",
+          "command": "npx",
+          "args": [
+            "-y",
+            "stripe-mcp-server"
+          ],
+          "capabilities": [
+            "payment-processing",
+            "subscription-management",
+            "invoice-handling"
+          ],
+          "requiredAuth": {
+            "type": "api_key",
+            "envVar": "STRIPE_API_KEY"
+          }
+        },
+        {
+          "name": "paypal",
+          "command": "npx",
+          "args": [
+            "-y",
+            "paypal-mcp-server"
+          ],
+          "capabilities": [
+            "payment-processing",
+            "merchant-services"
+          ],
+          "requiredAuth": {
+            "type": "oauth",
+            "envVar": "PAYPAL_CLIENT_ID"
+          }
+        },
+        {
+          "name": "postgresql",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-postgres"
+          ],
+          "capabilities": [
+            "database-query",
+            "schema-inspection",
+            "read-only"
+          ],
+          "env": {
+            "DATABASE_URL": "${POSTGRES_URL}"
+          }
+        },
+        {
+          "name": "github",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-github"
+          ],
+          "capabilities": [
+            "repo-management",
+            "issue-tracking",
+            "pr-management"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "GITHUB_TOKEN"
+          }
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 2
+    },
+    {
+      "agentName": "infrastructure-specialist",
+      "mcpServers": [
+        {
+          "name": "terraform",
+          "command": "npx",
+          "args": [
+            "-y",
+            "terraform-mcp-server"
+          ],
+          "capabilities": [
+            "infrastructure-as-code",
+            "state-management",
+            "provider-access"
+          ]
+        },
+        {
+          "name": "aws",
+          "command": "npx",
+          "args": [
+            "-y",
+            "aws-mcp-server"
+          ],
+          "capabilities": [
+            "aws-services",
+            "infrastructure-management",
+            "cost-analysis"
+          ],
+          "requiredAuth": {
+            "type": "api_key",
+            "envVar": "AWS_ACCESS_KEY_ID"
+          }
+        },
+        {
+          "name": "azure",
+          "command": "npx",
+          "args": [
+            "-y",
+            "azure-mcp-server"
+          ],
+          "capabilities": [
+            "azure-services",
+            "storage-operations",
+            "cosmos-db"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "AZURE_SUBSCRIPTION_ID"
+          }
+        },
+        {
+          "name": "docker",
+          "command": "npx",
+          "args": [
+            "-y",
+            "docker-mcp-server"
+          ],
+          "capabilities": [
+            "container-management",
+            "compose-operations",
+            "image-building"
+          ]
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 2
+    },
+    {
+      "agentName": "documentation-specialist",
+      "mcpServers": [
+        {
+          "name": "confluence",
+          "command": "npx",
+          "args": [
+            "-y",
+            "confluence-mcp-server"
+          ],
+          "capabilities": [
+            "documentation-management",
+            "page-creation",
+            "search"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "CONFLUENCE_TOKEN"
+          }
+        },
+        {
+          "name": "notion",
+          "command": "npx",
+          "args": [
+            "-y",
+            "notion-mcp-server"
+          ],
+          "capabilities": [
+            "workspace-management",
+            "database-operations",
+            "content-creation"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "NOTION_TOKEN"
+          }
+        },
+        {
+          "name": "github",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-github"
+          ],
+          "capabilities": [
+            "repo-management",
+            "issue-tracking",
+            "pr-management"
+          ],
+          "requiredAuth": {
+            "type": "token",
+            "envVar": "GITHUB_TOKEN"
+          }
+        },
+        {
+          "name": "memory",
+          "command": "npx",
+          "args": [
+            "-y",
+            "@modelcontextprotocol/server-memory"
+          ],
+          "capabilities": [
+            "persistent-memory",
+            "knowledge-graph",
+            "context-retention"
+          ]
+        }
+      ],
+      "autoInstall": true,
+      "priority": 3
+    }
+  ],
+  "globalSettings": {
+    "autoInstall": true,
+    "securityMode": "standard",
+    "cacheDuration": 3600000
+  }
+}

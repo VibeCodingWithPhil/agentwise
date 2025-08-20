@@ -1,9 +1,11 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { AgentManager } from './AgentManager';
+import { DynamicAgentManager } from './DynamicAgentManager';
 import { PhaseController } from './PhaseController';
 import { SpecGenerator } from './SpecGenerator';
-import { TaskDistributor } from './TaskDistributor';
+import { DynamicTaskDistributor } from './DynamicTaskDistributor';
+import { DynamicAgentGenerator } from '../agents/DynamicAgentGenerator';
+import { MCPIntegrationManager } from '../mcp/MCPIntegrationManager';
 
 /**
  * Main orchestrator entry point
@@ -48,12 +50,24 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   
   // Initialize components
   const specGenerator = new SpecGenerator();
-  const agentManager = new AgentManager();
+  const agentManager = new DynamicAgentManager();
   const phaseController = new PhaseController();
-  const taskDistributor = new TaskDistributor();
+  const taskDistributor = new DynamicTaskDistributor();
+  const agentGenerator = new DynamicAgentGenerator();
+  const mcpManager = new MCPIntegrationManager();
   
-  // Generate enhanced specs
+  // Generate enhanced specs with validation
   const specs = await specGenerator.generate(projectIdea, 'create');
+  
+  // Check if new agents need to be generated based on project needs
+  console.log('🔍 Analyzing if new specialist agents are needed...');
+  const generationResults = await agentGenerator.generateRequiredAgents(specs);
+  
+  if (generationResults.length > 0) {
+    console.log(`✨ Generated ${generationResults.filter(r => r.success).length} new specialist agents`);
+    // Refresh agent manager to include new agents
+    await agentManager.scanForAgents();
+  }
   
   // Save specs
   await fs.writeFile(
@@ -75,13 +89,25 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   const phases = phaseController.analyzeComplexity(specs);
   console.log(`📊 Project complexity: ${phases.length} phases`);
   
-  // Distribute tasks to agents
-  const agentTasks = await taskDistributor.distribute(specs, phases);
+  // Distribute tasks to agents (this will create agent-todo folders for required agents only)
+  const agentTasks = await taskDistributor.distribute(specs, phases, projectPath);
   
-  // Create agent todo folders
-  for (const agent of agentManager.getAgents()) {
+  // Get only the agents that have tasks
+  const agentsWithTasks = Object.keys(agentTasks);
+  const availableAgents = await agentManager.getAgents();
+  const selectedAgents = availableAgents.filter(a => agentsWithTasks.includes(a.name));
+  
+  // Setup MCP integrations for selected agents
+  console.log('🔌 Setting up MCP integrations for agents...');
+  await mcpManager.optimizeMCPsForProject(specs, agentsWithTasks);
+  
+  for (const agentName of agentsWithTasks) {
+    await mcpManager.setupAgentMCPs(agentName);
+  }
+  
+  // Create phase files for agents with tasks
+  for (const agent of selectedAgents) {
     const agentPath = path.join(projectPath, 'agent-todo', agent.name);
-    await fs.ensureDir(agentPath);
     
     // Create phase files
     for (let i = 0; i < phases.length; i++) {
@@ -105,8 +131,8 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   
   console.log('🚀 Launching agent terminals...');
   
-  // Launch agents
-  await agentManager.launchAgents(projectPath);
+  // Launch only selected agents
+  await agentManager.launchAgentsOptimized(projectPath, agentsWithTasks);
   
   console.log('✅ Orchestration complete! Agents are now working on your project.');
 }

@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { PromptEnhancer } from '../ai/PromptEnhancer';
+// import { PromptEnhancer } from '../ai/PromptEnhancer';
 
 export interface AgentCapability {
   id: string;
@@ -21,13 +21,13 @@ export interface SelectionResult {
 export class AgentSelector {
   private agents: Map<string, AgentCapability> = new Map();
   private agentsDir: string;
-  private promptEnhancer: PromptEnhancer;
+  // private promptEnhancer: PromptEnhancer;
   private lastScanTime: number = 0;
   private scanInterval: number = 5000; // Re-scan every 5 seconds
 
   constructor(agentsDir: string = path.join(process.cwd(), '.claude', 'agents')) {
     this.agentsDir = agentsDir;
-    this.promptEnhancer = new PromptEnhancer();
+    // this.promptEnhancer = new PromptEnhancer();
     this.scanForAgents();
   }
 
@@ -317,7 +317,7 @@ export class AgentSelector {
    * Generate human-readable reasoning for agent selection
    */
   private generateSelectionReasoning(
-    task: string,
+    _task: string,
     selectedAgents: string[],
     scores: Map<string, number>,
     isFullStack: boolean,
