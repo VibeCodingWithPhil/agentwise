@@ -6,9 +6,8 @@ import { SpecGenerator } from './SpecGenerator';
 import { DynamicTaskDistributor } from './DynamicTaskDistributor';
 import { DynamicAgentGenerator } from '../agents/DynamicAgentGenerator';
 import { MCPIntegrationManager } from '../mcp/MCPIntegrationManager';
-import { UltimateTokenOptimizer } from '../optimization/UltimateTokenOptimizer';
-import { PerformanceAnalytics } from '../analytics/PerformanceAnalytics';
-import { SelfImprovingAgent } from '../learning/SelfImprovingAgent';
+import { SmartModelRouter } from '../models/SmartModelRouter';
+import { ModelCommands } from '../commands/ModelCommands';
 
 /**
  * Main orchestrator entry point
@@ -23,6 +22,28 @@ async function main() {
   console.log(`Idea: ${projectIdea}`);
 
   try {
+    // Handle model-related commands
+    if (command === 'setup-ollama' || command === 'setup-lmstudio' || 
+        command === 'local-models' || command === 'configure-routing') {
+      const modelCommands = new ModelCommands();
+      
+      switch (command) {
+        case 'setup-ollama':
+          await modelCommands.handleSetupOllama();
+          break;
+        case 'setup-lmstudio':
+          await modelCommands.handleSetupLMStudio();
+          break;
+        case 'local-models':
+          await modelCommands.handleLocalModels();
+          break;
+        case 'configure-routing':
+          await modelCommands.handleConfigureRouting(args);
+          break;
+      }
+      return;
+    }
+    
     switch (command) {
       case 'create':
         await handleCreate(projectId, projectIdea);
@@ -58,8 +79,7 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   const taskDistributor = new DynamicTaskDistributor();
   const agentGenerator = new DynamicAgentGenerator();
   const mcpManager = new MCPIntegrationManager();
-  const tokenOptimizer = new UltimateTokenOptimizer();
-  const analytics = new PerformanceAnalytics();
+  const modelRouter = new SmartModelRouter();
   
   // Generate enhanced specs with validation
   const specs = await specGenerator.generate(projectIdea, 'create');
@@ -108,6 +128,17 @@ async function handleCreate(_projectId: string, projectIdea: string) {
   
   for (const agentName of agentsWithTasks) {
     await mcpManager.setupAgentMCPs(agentName);
+  }
+  
+  // Setup smart model routing
+  console.log('🧠 Configuring smart model routing...');
+  await modelRouter.discoverModels();
+  const availableModels = modelRouter.getAvailableModels();
+  const localModelsCount = (availableModels.get('ollama')?.length || 0) + 
+                           (availableModels.get('lmstudio')?.length || 0);
+  
+  if (localModelsCount > 0) {
+    console.log(`  ✅ Found ${localModelsCount} local models for cost optimization`);
   }
   
   // Create phase files for agents with tasks

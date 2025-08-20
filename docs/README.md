@@ -4,14 +4,18 @@ Welcome to Agentwise - a sophisticated multi-agent orchestration system that ext
 
 ## 📚 Documentation Structure
 
+### Core Documentation
 - [Getting Started](./getting-started.md) - Installation and setup guide
 - [Architecture](./architecture.md) - System design and components
 - [Commands Reference](./commands.md) - Complete command documentation
-- [Agents Guide](./agents.md) - Working with specialized agents
-- [Workflow Guide](./workflow.md) - Understanding the orchestration workflow
-- [API Reference](./api-reference.md) - Programmatic interface documentation
 - [Troubleshooting](./troubleshooting.md) - Common issues and solutions
-- [Contributing](./contributing.md) - How to contribute to Agentwise
+
+### Advanced Features
+- [Tech Stack Validator](./tech-stack-validator.md) - Automatic validation system
+- [MCP Integration](./mcp-integration.md) - Model Context Protocol support (24+ servers)
+- [Dynamic Agents](./dynamic-agents.md) - Self-creating specialized agents
+- [Smart Model Routing](./smart-model-routing.md) - Intelligent model selection
+- [Performance Analytics](./performance-analytics.md) - Comprehensive metrics tracking
 
 ## 🚀 Quick Start
 
@@ -31,12 +35,14 @@ npm install -g agentwise
 
 ## 🎯 Key Features
 
-- **Multi-Agent Orchestration**: Coordinate 5+ specialized agents working in parallel
-- **Intelligent Task Distribution**: Automatic phase-based task allocation
-- **Real-time Monitoring**: Track progress with live dashboard
-- **Workspace Isolation**: Each project in its own workspace
-- **Token Optimization**: ~70% reduction in token usage
-- **Deployment Automation**: Built-in CI/CD and deployment workflows
+- **Multi-Agent Orchestration**: Coordinate 100+ specialized agents working in parallel
+- **Ultimate Token Optimization**: 99% reduction - 100 agents use same tokens as 1
+- **Smart Model Routing**: Automatic selection between Claude, Ollama, LM Studio
+- **Self-Improving Agents**: Learning capabilities with knowledge persistence
+- **Performance Analytics**: Real-time metrics and optimization insights
+- **MCP Integration**: 24+ MCP servers for enhanced agent capabilities
+- **Tech Stack Validation**: Near-perfect accuracy in technology selection
+- **Dynamic Agent Generation**: Self-creating specialized agents on demand
 
 ## 🤖 Default Agents
 

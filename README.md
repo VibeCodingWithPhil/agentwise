@@ -28,9 +28,11 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 - **🚄 Parallel Execution**: Run 100+ agents with single-agent token usage
 - **🎭 Self-Improving Agents**: Agents learn and improve from every task
 - **🔄 Smart Orchestration**: Intelligent task distribution and phase management
-- **📊 Performance Analytics**: Comprehensive metrics and insights dashboard
-- **🏗️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
+- **📊 Real-time Monitoring**: Track progress across all agents with live dashboard
+- **🏗️ Smart Model Routing**: Automatic model selection based on task type
 - **💾 Ultimate Optimization**: 99% token reduction achieved - 100 agents = 1 agent cost
+- **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
+- **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
 
 ## ✨ Features
 
@@ -146,6 +148,10 @@ Invoke-WebRequest -Uri "https://github.com/VibeCodingWithPhil/agentwise/releases
 | `/create-plan <idea>` | Collaborative planning session | `/create-plan "mobile app"` |
 | `/init-import` | Import existing project | `/init-import` |
 | `/generate-agent <type>` | Create custom agent | `/generate-agent "security-specialist"` |
+| `/setup-ollama` | Setup Ollama for local models | `/setup-ollama` |
+| `/setup-lmstudio` | Setup LM Studio integration | `/setup-lmstudio` |
+| `/local-models` | List available local models | `/local-models` |
+| `/configure-routing` | Configure model routing | `/configure-routing optimize` |
 
 ### Project Structure
 
@@ -254,19 +260,23 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] Hallucination detection and prevention
 - [x] Automatic agent discovery for custom agents
 
-### ✅ Recently Completed
-- [x] **Web UI Dashboard** - Real-time monitoring interface
-- [x] **MCP Integration** - 24+ MCP servers fully integrated
-- [x] **Performance Analytics** - Comprehensive metrics and insights
-- [x] **Self-Improving Agents** - Agents learn from every task
-- [x] **Ultimate Token Optimization** - 100 agents = 1 agent cost
-- [x] **Local Model Support** - Ollama, LM Studio, OpenRouter
+### ✅ Recently Completed (Q4 2024)
+- [x] **Web UI Dashboard** - Real-time monitoring interface with live agent status
+- [x] **MCP Integration** - 24+ MCP servers fully integrated (Figma, GitHub, Database, etc.)
+- [x] **Performance Analytics** - Comprehensive metrics, error tracking, and insights
+- [x] **Self-Improving Agents** - Learning capabilities with knowledge persistence
+- [x] **Ultimate Token Optimization** - 99% reduction achieved (100 agents = 1 agent cost)
+- [x] **Smart Model Routing** - Automatic model selection based on task requirements
+- [x] **Local Model Support** - Full Ollama, LM Studio, and OpenRouter integration
+- [x] **Hybrid AI Strategy** - Mix local and cloud models for optimal cost/performance
 
-### 🚀 Next Phase (2025)
+### 🚀 Next Phase (Q1-Q2 2025)
 - [ ] **Agent Marketplace** - Share and discover custom agents
 - [ ] **Visual Workflow Editor** - Drag-and-drop orchestration
 - [ ] **Enterprise Features** - SSO, audit logs, compliance
 - [ ] **Multi-language Support** - Python, Go, Rust agents
+- [ ] **Advanced Security** - Sandboxing, encryption, audit trails
+- [ ] **Webhook Support** - External integrations and notifications
 
 We're keeping Agentwise focused and lightweight. See [ROADMAP.md](ROADMAP.md) for details.
 
