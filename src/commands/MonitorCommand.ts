@@ -39,6 +39,7 @@ export class MonitorCommand {
       
       switch (subcommand) {
         case 'install':
+        case 'global':  // Support both 'install' and 'global'
           await this.installGlobalCommand();
           return;
         case 'uninstall':
@@ -103,15 +104,33 @@ export class MonitorCommand {
       // Make sure start.sh is executable
       await fs.chmod(startScript, '755');
       
+      // Check if dependencies are installed
+      const depsPath = path.join(this.monitorPath, 'node_modules');
+      if (!await fs.pathExists(depsPath)) {
+        console.log('📦 Installing monitor dependencies (first time setup)...');
+        try {
+          await execAsync('npm install', { cwd: this.monitorPath });
+          console.log('✅ Dependencies installed');
+        } catch (error) {
+          console.error('❌ Failed to install dependencies:', error);
+        }
+      }
+      
       // Start the monitor
       const monitorProcess = spawn('bash', [startScript], {
         stdio: 'inherit',
-        cwd: this.monitorPath
+        cwd: this.monitorPath,
+        detached: false  // Keep attached to parent process
       });
+      
+      // Keep the parent process alive
+      process.stdin.resume();
 
       // Handle process events
       monitorProcess.on('error', (error) => {
         console.error('❌ Failed to start monitor:', error.message);
+        console.log('\n💡 Try running: cd src/monitor && npm install && npm start');
+        process.exit(1);
       });
 
       monitorProcess.on('exit', (code) => {
@@ -120,6 +139,14 @@ export class MonitorCommand {
         } else {
           console.log('\n✅ Monitor stopped successfully');
         }
+        process.exit(code || 0);
+      });
+      
+      // Handle graceful shutdown
+      process.on('SIGINT', () => {
+        console.log('\n🛑 Stopping monitor...');
+        monitorProcess.kill('SIGTERM');
+        setTimeout(() => process.exit(0), 1000);
       });
 
       // Handle graceful shutdown

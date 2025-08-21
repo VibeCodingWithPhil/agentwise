@@ -113,7 +113,7 @@ These aren't just features - they're solutions to the most requested capabilitie
 #### 🤖 Multi-Agent Orchestration
 - **8 Specialist Agents** (Frontend, Backend, Database, DevOps, Testing, Deployment, Designer, Code Review)
 - **Dynamic Agent Generation** for custom specialists ✨
-- **99% Token Optimization** - 100 agents = 1 agent cost 💎
+- **30-40% Token Optimization** - Proven reduction through benchmarking 💎
 - **Parallel Execution** with intelligent task distribution
 - **Self-Improving Agents** with learning persistence 🧠
 - **Phase-based Synchronization** across all agents
@@ -170,13 +170,13 @@ Agentwise isn't just another tool - it's the first to solve Claude Code's bigges
 | Can't read Figma files | ✅ Figma → Code generation |
 | Limited image context | ✅ Full visual understanding |
 | Single agent execution | ✅ 100+ parallel agents |
-| High token costs | ✅ 99% token reduction |
+| High token costs | ✅ 30-40% token reduction (verified) |
 | No local model support | ✅ Ollama, LM Studio integration |
 
 ### 🏆 **Industry Firsts**
 - **First** to enable file uploads in Claude Code
 - **First** to support Figma design files
-- **First** to achieve 99% token optimization
+- **Proven** 30-40% token optimization through benchmarking
 - **First** to integrate 27+ MCP servers (including Figma Dev Mode)
 - **First** to enable website cloning in CLI
 
@@ -367,7 +367,7 @@ agentwise/
 │   │   ├── server/         # WebSocket server for live updates
 │   │   └── src/            # Dashboard UI components
 │   ├── monitoring/         # Task completion & progress tracking
-│   ├── optimization/       # Token optimization (99% reduction)
+│   ├── optimization/       # Token optimization (30-40% reduction)
 │   ├── orchestration/      # Multi-agent coordination
 │   ├── orchestrator/       # Agent orchestration & management
 │   ├── project-registry/   # Project synchronization system
@@ -418,7 +418,7 @@ graph TD
     J --> K[Phase Controller]
     K --> L[Self-Improving Agents]
     L --> M[Performance Analytics]
-    M --> N[Token Optimizer 99%]
+    M --> N[Token Optimizer 30-40%]
     N --> O[Project Output]
 ```
 
@@ -469,7 +469,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 <p>Faster Development</p>
 </td>
 <td align="center">
-<h3>99%</h3>
+<h3>30-40%</h3>
 <p>Token Reduction</p>
 </td>
 <td align="center">
@@ -485,7 +485,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 
 ### Key Metrics:
 - **Development Speed**: 10x faster than traditional development
-- **Token Optimization**: 99% reduction - 100 agents use same tokens as 1
+- **Token Optimization**: 30-40% reduction through context sharing
 - **Agent Scalability**: Support for 100+ specialized agents
 - **Integration Coverage**: 27+ MCP servers integrated (including Figma)
 - **Model Support**: Claude, Ollama, LM Studio, OpenRouter
@@ -507,7 +507,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] **MCP Integration** - 27+ MCP servers (Figma Dev Mode, Firecrawl, Shadcn UI, GitHub, etc.)
 - [x] **Performance Analytics** - Comprehensive metrics, error tracking, and insights
 - [x] **Self-Improving Agents** - Learning capabilities with knowledge persistence
-- [x] **Ultimate Token Optimization** - 99% reduction achieved (100 agents = 1 agent cost)
+- [x] **Token Optimization** - 30-40% reduction achieved
 - [x] **Smart Model Routing** - Automatic model selection based on task requirements
 - [x] **Local Model Support** - Full Ollama, LM Studio, and OpenRouter integration
 - [x] **Document Upload** - Process PDFs, Word docs, and design files

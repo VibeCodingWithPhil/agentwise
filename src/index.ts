@@ -91,6 +91,22 @@ Status: ✅ System Ready
       return;
     }
     
+    // Handle /init-import command
+    if (args[0] === '/init-import') {
+      const { ImportHandler } = await import('./commands/ImportHandler');
+      const importHandler = new ImportHandler();
+      await importHandler.initImport();
+      return;
+    }
+    
+    // Handle /task-import command
+    if (args[0] === '/task-import') {
+      const { ImportHandler } = await import('./commands/ImportHandler');
+      const importHandler = new ImportHandler();
+      await importHandler.executeImport();
+      return;
+    }
+    
     // Handle /github command (LOCAL ONLY - not in repository)
     if (args[0] === '/github') {
       try {

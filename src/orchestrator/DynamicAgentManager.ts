@@ -243,36 +243,42 @@ export class DynamicAgentManager {
         console.log(`✅ Launched ${agent.name} in Terminal tab`);
         
       } else if (platform === 'win32') {
-        // Windows: Use Windows Terminal with proper escaping
-        const escAgentName = agent.name.replace(/"/g, '\"');
-        const escProjectPath = projectPath.replace(/"/g, '\"');
-        const escClaudePath = claudePath.replace(/"/g, '\"');
+        // Windows: Use Windows Terminal with execFile for security
+        const { execFile } = require('child_process');
+        const { promisify } = require('util');
+        const execFileAsync = promisify(execFile);
         
-        await execAsync(
-          `wt new-tab --title "${escAgentName}" cmd /k "cd /d \"${escProjectPath}\" && \"${escClaudePath}\" --dangerously-skip-permissions"`
-        );
+        // Use execFile with arguments array to prevent injection
+        await execFileAsync('wt', [
+          'new-tab',
+          '--title', agent.name,
+          'cmd', '/k',
+          `cd /d "${projectPath}" && "${claudePath}" --dangerously-skip-permissions`
+        ]);
         console.log(`✅ Launched ${agent.name} in Windows Terminal tab`);
         
       } else {
-        // Linux: Use gnome-terminal or fallback with proper escaping
+        // Linux: Use execFile for security
+        const { execFile } = require('child_process');
+        const { promisify } = require('util');
+        const execFileAsync = promisify(execFile);
+        
         try {
-          // Escape for shell: single quotes are safest for Linux
-          const escAgentName = agent.name.replace(/'/g, "'\\'''");
-          const escProjectPath = projectPath.replace(/'/g, "'\\'''");
-          const escClaudePath = claudePath.replace(/'/g, "'\\'''");
-          
-          await execAsync(
-            `gnome-terminal --tab --title='${escAgentName}' -- bash -c 'cd "${escProjectPath}" && "${escClaudePath}" --dangerously-skip-permissions; exec bash'`
-          );
+          // Use gnome-terminal with execFile
+          await execFileAsync('gnome-terminal', [
+            '--tab',
+            `--title=${agent.name}`,
+            '--',
+            'bash', '-c',
+            `cd "${projectPath}" && "${claudePath}" --dangerously-skip-permissions; exec bash`
+          ]);
         } catch {
-          // Try xterm as fallback with proper escaping
-          const escAgentName = agent.name.replace(/"/g, '\\"');
-          const escProjectPath = projectPath.replace(/"/g, '\\"');
-          const escClaudePath = claudePath.replace(/"/g, '\\"');
-          
-          await execAsync(
-            `xterm -T "${escAgentName}" -e "cd \\"${escProjectPath}\\" && \\"${escClaudePath}\\" --dangerously-skip-permissions; bash"`
-          );
+          // Try xterm as fallback with execFile
+          await execFileAsync('xterm', [
+            '-T', agent.name,
+            '-e', 'bash', '-c',
+            `cd "${projectPath}" && "${claudePath}" --dangerously-skip-permissions; bash`
+          ]);
         }
         console.log(`✅ Launched ${agent.name} in terminal tab`);
       }

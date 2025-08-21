@@ -36,7 +36,7 @@ npm install -g agentwise
 ## 🎯 Key Features
 
 - **Multi-Agent Orchestration**: Coordinate 100+ specialized agents working in parallel
-- **Ultimate Token Optimization**: 99% reduction - 100 agents use same tokens as 1
+- **Token Optimization**: 30-40% reduction through context sharing and caching
 - **Smart Model Routing**: Automatic selection between Claude, Ollama, LM Studio
 - **Self-Improving Agents**: Learning capabilities with knowledge persistence
 - **Performance Analytics**: Real-time metrics and optimization insights
