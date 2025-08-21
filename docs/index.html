@@ -625,29 +625,42 @@
 
                 <h2>Installation</h2>
 
-                <h3>macOS / Linux</h3>
+                <h3>Quick Install (Recommended)</h3>
+                
+                <h4>macOS / Linux</h4>
                 <div class="command-example">
-                    <span class="comment"># Clone the repository</span><br>
+                    <span class="comment"># Download and run installer</span><br>
+                    <span class="command">curl -fsSL https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.sh | bash</span>
+                </div>
+
+                <h4>Windows (PowerShell as Administrator)</h4>
+                <div class="command-example">
+                    <span class="comment"># Download and run installer</span><br>
+                    <span class="command">Invoke-WebRequest -Uri "https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.ps1" -OutFile "install.ps1"</span><br>
+                    <span class="command">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</span><br>
+                    <span class="command">.\install.ps1</span>
+                </div>
+
+                <h3>Manual Installation</h3>
+                <p>If the installers don't work, use manual installation:</p>
+                <div class="command-example">
+                    <span class="comment"># 1. Clone the repository</span><br>
                     <span class="command">git clone https://github.com/VibeCodingWithPhil/agentwise.git</span><br>
                     <span class="command">cd agentwise</span><br><br>
                     
-                    <span class="comment"># Install dependencies</span><br>
+                    <span class="comment"># 2. Install dependencies</span><br>
                     <span class="command">npm install</span><br><br>
                     
-                    <span class="comment"># Start Agentwise</span><br>
-                    <span class="command">npm start</span>
-                </div>
-
-                <h3>Windows (WSL Required)</h3>
-                <div class="command-example">
-                    <span class="comment"># Install WSL if not already installed</span><br>
-                    <span class="command">wsl --install</span><br><br>
+                    <span class="comment"># 3. Build the project (ignore TypeScript errors)</span><br>
+                    <span class="command">npm run build 2>/dev/null || true</span><br><br>
                     
-                    <span class="comment"># In WSL, clone and setup</span><br>
-                    <span class="command">git clone https://github.com/VibeCodingWithPhil/agentwise.git</span><br>
-                    <span class="command">cd agentwise</span><br>
+                    <span class="comment"># 4. Install monitor dependencies</span><br>
+                    <span class="command">cd src/monitor</span><br>
                     <span class="command">npm install</span><br>
-                    <span class="command">npm start</span>
+                    <span class="command">cd ../..</span><br><br>
+                    
+                    <span class="comment"># 5. Start Claude Code with required flag</span><br>
+                    <span class="command">claude --dangerously-skip-permissions</span>
                 </div>
 
                 <h2>First Project</h2>
