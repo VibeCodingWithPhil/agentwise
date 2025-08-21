@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { 
   withErrorHandler, 
   createSuccessResponse,
@@ -19,7 +19,7 @@ interface RouteParams {
   }
 }
 
-async function GET(request: NextRequest, { params }: RouteParams) {
+async function handler(request: NextRequest, { params }: RouteParams) {
   // Handle CORS
   const corsResponse = handleCors(request)
   if (corsResponse) return corsResponse
@@ -104,7 +104,7 @@ async function GET(request: NextRequest, { params }: RouteParams) {
   )
 
   // Create response with caching headers
-  let response = createSuccessResponse(result)
+  let response: any = createSuccessResponse(result)
   response = addCacheHeaders(response, 3600, 300) // 1 hour cache, 5 min stale-while-revalidate
   response = addSecurityHeaders(response)
 
@@ -123,4 +123,20 @@ async function GET(request: NextRequest, { params }: RouteParams) {
   return response
 }
 
-export { withErrorHandler(GET) as GET }
+export async function GET(
+  request: NextRequest,
+  context: RouteParams
+): Promise<NextResponse> {
+  try {
+    return await handler(request, context)
+  } catch (error) {
+    if (error instanceof ApiException) {
+      return createErrorResponse(error.message, error.statusCode)
+    }
+    
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred'
+    console.error('API Error:', error)
+    
+    return createErrorResponse(errorMessage, 500)
+  }
+}

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { TableOfContentsItem } from '@/types/api'
+import { TableOfContentsItem, Command } from '@/types/api'
 
 export interface DocMatter {
   title?: string
@@ -134,21 +134,6 @@ ${code.trim()}
   return content
 }
 
-// Command data structure
-export interface Command {
-  name: string
-  syntax: string
-  description: string
-  examples: Array<{
-    command: string
-    description: string
-  }>
-  options?: Array<{
-    flag: string
-    description: string
-  }>
-  category: string
-}
 
 // Mock command data - in a real implementation, this would come from the actual command definitions
 export const commands: Command[] = [
@@ -157,6 +142,9 @@ export const commands: Command[] = [
     syntax: "/create \"<project description>\"",
     description: "Creates a new project with AI agent orchestration. The system analyzes your description and assigns appropriate specialized agents to handle different aspects of development.",
     category: "Core Commands",
+    tags: ["core", "project", "creation"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: '/create "a todo app with React and Firebase"',
@@ -177,6 +165,9 @@ export const commands: Command[] = [
     syntax: "/task \"<feature description>\"",
     description: "Adds a new feature or task to your active project. Agents will analyze the current codebase and implement the requested functionality.",
     category: "Core Commands",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: '/task "add user authentication with OAuth"',
@@ -197,6 +188,9 @@ export const commands: Command[] = [
     syntax: "/monitor",
     description: "Opens the real-time monitoring dashboard where you can track agent progress, view performance metrics, and monitor task completion status.",
     category: "Monitoring",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: "/monitor",
@@ -209,6 +203,9 @@ export const commands: Command[] = [
     syntax: "/projects",
     description: "Lists all your projects and allows you to switch between them. Shows project status, creation date, and agent activity.",
     category: "Project Management",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: "/projects",
@@ -221,6 +218,9 @@ export const commands: Command[] = [
     syntax: "/figma <figma-url>",
     description: "Integrates with Figma designs by processing design files and generating corresponding code with high fidelity to the original design.",
     category: "Integrations",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: "/figma https://figma.com/file/abc123/My-Design",
@@ -233,6 +233,9 @@ export const commands: Command[] = [
     syntax: "/upload",
     description: "Upload and process documents (PDFs, Word docs, images) to incorporate their content into your project context.",
     category: "Content Processing",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: "/upload",
@@ -245,6 +248,9 @@ export const commands: Command[] = [
     syntax: "/init-import",
     description: "Initializes the import process for existing projects. Analyzes the current directory and prepares it for agent-based development.",
     category: "Import/Export",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: "/init-import",
@@ -257,6 +263,9 @@ export const commands: Command[] = [
     syntax: "/task-import",
     description: "Executes the import process with specialized agents. Should be run after /init-import to actually import and process the existing project.",
     category: "Import/Export",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: "/task-import",
@@ -269,6 +278,9 @@ export const commands: Command[] = [
     syntax: "/generate-agent \"<agent specification>\"",
     description: "Creates a custom specialized agent based on your requirements. The new agent can be reused across projects.",
     category: "Advanced",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: '/generate-agent "SEO optimization specialist"',
@@ -285,6 +297,9 @@ export const commands: Command[] = [
     syntax: "/resume",
     description: "Resumes agent work after a system restart or interruption. Agents will continue from where they left off.",
     category: "Utilities",
+    tags: ["command"],
+    version: "2.0.0",
+    deprecated: false,
     examples: [
       {
         command: "/resume",

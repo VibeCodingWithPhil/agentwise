@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { 
   withErrorHandler, 
   createSuccessResponse,
@@ -21,7 +21,7 @@ import { Feedback } from '@/types/api'
 const feedbackStorage: Feedback[] = []
 let nextFeedbackId = 1
 
-async function POST(request: NextRequest) {
+async function postHandler(request: NextRequest): Promise<NextResponse<any>> {
   // Handle CORS
   const corsResponse = handleCors(request)
   if (corsResponse) return corsResponse
@@ -126,7 +126,7 @@ async function POST(request: NextRequest) {
     }
 
     // Create response
-    let response = createSuccessResponse(responseData, 'Feedback submitted successfully. Thank you!')
+    let response: any = createSuccessResponse(responseData, 'Feedback submitted successfully. Thank you!')
     response = addSecurityHeaders(response)
 
     // Add rate limit headers
@@ -154,7 +154,7 @@ async function POST(request: NextRequest) {
   }
 }
 
-async function GET(request: NextRequest) {
+async function getHandler(request: NextRequest): Promise<NextResponse<any>> {
   // Handle CORS
   const corsResponse = handleCors(request)
   if (corsResponse) return corsResponse
@@ -208,7 +208,7 @@ async function GET(request: NextRequest) {
       }))
   }
 
-  let response = createSuccessResponse(stats)
+  let response: any = createSuccessResponse(stats)
   response = addSecurityHeaders(response)
 
   if (rateLimitInfo) {
@@ -235,7 +235,5 @@ function getEstimatedResponseTime(severity: Feedback['severity'], type: Feedback
   }
 }
 
-export { 
-  withErrorHandler(POST) as POST,
-  withErrorHandler(GET) as GET
-}
+export const POST = withErrorHandler(postHandler)
+export const GET = withErrorHandler(getHandler)

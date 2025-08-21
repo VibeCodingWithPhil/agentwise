@@ -349,6 +349,144 @@ export class MCPIntegrationManager {
         command: 'npx',
         args: ['-y', 'astro-mcp-server'],
         capabilities: ['islands-architecture', 'partial-hydration', 'content-sites']
+      },
+
+      // Backend Development MCPs
+      {
+        name: 'rest-api',
+        command: 'npx',
+        args: ['-y', '@smithery/cli', 'install', 'dkmaker-mcp-rest-api', '--client', 'claude'],
+        capabilities: ['api-testing', 'rest-methods', 'authentication', 'headers'],
+        setupInstructions: 'Supports GET/POST/PUT/DELETE with auth (Basic, Bearer, API Key)'
+      },
+      {
+        name: 'testsprite',
+        command: 'npm',
+        args: ['install', '-g', '@testsprite/testsprite-mcp@latest'],
+        capabilities: ['api-testing', 'functional-testing', 'security-testing', 'boundary-testing'],
+        setupInstructions: 'Automated API testing with comprehensive coverage'
+      },
+      {
+        name: 'fetch',
+        command: 'npx',
+        args: ['-y', '@modelcontextprotocol/server-fetch'],
+        capabilities: ['http-requests', 'web-scraping', 'api-calls'],
+      },
+
+      // Advanced Database MCPs
+      {
+        name: 'postgres-advanced',
+        command: 'npm',
+        args: ['install', '-g', '@henkey/postgres-mcp-server'],
+        capabilities: ['database-management', 'query-optimization', 'schema-design', '18-tools'],
+        env: { DATABASE_URL: '${POSTGRES_URL}' },
+        setupInstructions: 'Advanced PostgreSQL with 18 intelligent tools'
+      },
+      {
+        name: 'database-multi',
+        command: 'npx',
+        args: ['-y', '@executeautomation/database-server'],
+        capabilities: ['sqlite', 'sql-server', 'postgresql', 'mysql', 'multi-database'],
+        setupInstructions: 'Supports multiple database types in one server'
+      },
+      {
+        name: 'mongodb-atlas',
+        command: 'npx',
+        args: ['-y', 'mongodb-mcp-server'],
+        capabilities: ['atlas-management', 'cluster-creation', 'access-control', 'organization-management'],
+        requiredAuth: { type: 'api_key', envVar: 'MONGODB_ATLAS_KEY' }
+      },
+
+      // DevOps & Infrastructure MCPs
+      {
+        name: 'kubernetes',
+        command: 'npx',
+        args: ['kubernetes-mcp-server@latest'],
+        capabilities: ['k8s-api', 'cluster-management', 'no-kubectl', 'cross-platform'],
+        env: { KUBECONFIG: '${KUBECONFIG_PATH}' },
+        setupInstructions: 'Native K8s API integration without kubectl dependency'
+      },
+      {
+        name: 'azure-devops',
+        command: 'npx',
+        args: ['-y', '@azure-devops/mcp'],
+        capabilities: ['ci-cd', 'repository-management', 'work-items', 'builds', 'releases'],
+        requiredAuth: { type: 'token', envVar: 'AZURE_DEVOPS_TOKEN' }
+      },
+      {
+        name: 'buildkite',
+        command: 'npx',
+        args: ['-y', 'buildkite-mcp-server'],
+        capabilities: ['pipeline-monitoring', 'build-status', 'job-management'],
+        requiredAuth: { type: 'api_key', envVar: 'BUILDKITE_API_KEY' }
+      },
+
+      // Testing & Quality MCPs
+      {
+        name: 'mcp-inspector',
+        command: 'npx',
+        args: ['@modelcontextprotocol/inspector'],
+        capabilities: ['server-testing', 'protocol-verification', 'debugging', 'interactive'],
+        setupInstructions: 'Official MCP testing tool for server development'
+      },
+      {
+        name: 'mcp-tester',
+        command: 'npx',
+        args: ['-y', 'mcp-server-tester'],
+        capabilities: ['automated-testing', 'claude-integration', 'schema-validation', 'config-driven'],
+        setupInstructions: 'Configuration-driven testing framework'
+      },
+      {
+        name: 'puppeteer',
+        command: 'npx',
+        args: ['-y', '@modelcontextprotocol/server-puppeteer'],
+        capabilities: ['browser-automation', 'web-scraping', 'screenshot', 'e2e-testing']
+      },
+      {
+        name: 'a11y',
+        command: 'npx',
+        args: ['-y', 'a11y-mcp-server'],
+        capabilities: ['accessibility-audit', 'wcag-compliance', 'axe-core'],
+        setupInstructions: 'Accessibility testing with axe-core engine'
+      },
+
+      // Messaging & Communication MCPs
+      {
+        name: 'slack',
+        command: 'npx',
+        args: ['-y', 'slack-mcp-server'],
+        capabilities: ['messaging', 'channel-management', 'file-sharing', 'webhooks'],
+        requiredAuth: { type: 'oauth', envVar: 'SLACK_TOKEN' }
+      },
+      {
+        name: 'discord',
+        command: 'npx',
+        args: ['-y', 'discord-mcp-server'],
+        capabilities: ['bot-creation', 'channel-management', 'messaging', 'voice'],
+        requiredAuth: { type: 'token', envVar: 'DISCORD_BOT_TOKEN' }
+      },
+
+      // Monitoring & Analytics MCPs
+      {
+        name: 'browserstack',
+        command: 'npx',
+        args: ['-y', 'browserstack-mcp-server'],
+        capabilities: ['cross-browser-testing', 'real-device-testing', 'automation'],
+        requiredAuth: { type: 'api_key', envVar: 'BROWSERSTACK_KEY' }
+      },
+      {
+        name: 'sentry',
+        command: 'npx',
+        args: ['-y', 'sentry-mcp-server'],
+        capabilities: ['error-tracking', 'performance-monitoring', 'release-tracking'],
+        requiredAuth: { type: 'token', envVar: 'SENTRY_DSN' }
+      },
+      {
+        name: 'cloudflare',
+        command: 'npx',
+        args: ['-y', 'cloudflare-mcp-server'],
+        capabilities: ['workers', 'kv-storage', 'r2', 'd1-database'],
+        requiredAuth: { type: 'api_key', envVar: 'CLOUDFLARE_API_KEY' }
       }
     ];
 
@@ -409,7 +547,12 @@ export class MCPIntegrationManager {
           this.serverRegistry.get('github')!,
           this.serverRegistry.get('docker')!,
           this.serverRegistry.get('jest')!,
-          this.serverRegistry.get('memory')!
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('rest-api')!,
+          this.serverRegistry.get('testsprite')!,
+          this.serverRegistry.get('fetch')!,
+          this.serverRegistry.get('slack')!,
+          this.serverRegistry.get('sentry')!
         ],
         autoInstall: true,
         priority: 1
@@ -421,7 +564,10 @@ export class MCPIntegrationManager {
           this.serverRegistry.get('postgresql')!,
           this.serverRegistry.get('mongodb')!,
           this.serverRegistry.get('mysql')!,
-          this.serverRegistry.get('memory')!
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('postgres-advanced')!,
+          this.serverRegistry.get('database-multi')!,
+          this.serverRegistry.get('mongodb-atlas')!
         ],
         autoInstall: true,
         priority: 1
@@ -434,7 +580,12 @@ export class MCPIntegrationManager {
           this.serverRegistry.get('aws')!,
           this.serverRegistry.get('terraform')!,
           this.serverRegistry.get('github')!,
-          this.serverRegistry.get('memory')!
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('kubernetes')!,
+          this.serverRegistry.get('azure-devops')!,
+          this.serverRegistry.get('buildkite')!,
+          this.serverRegistry.get('cloudflare')!,
+          this.serverRegistry.get('azure')!
         ],
         autoInstall: true,
         priority: 1
@@ -447,7 +598,13 @@ export class MCPIntegrationManager {
           this.serverRegistry.get('playwright')!,
           this.serverRegistry.get('cypress')!,
           this.serverRegistry.get('github')!,
-          this.serverRegistry.get('memory')!
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('mcp-inspector')!,
+          this.serverRegistry.get('mcp-tester')!,
+          this.serverRegistry.get('puppeteer')!,
+          this.serverRegistry.get('a11y')!,
+          this.serverRegistry.get('browserstack')!,
+          this.serverRegistry.get('testsprite')!
         ],
         autoInstall: true,
         priority: 1
@@ -515,6 +672,20 @@ export class MCPIntegrationManager {
         ],
         autoInstall: true,
         priority: 3
+      },
+      // Research Specialist (NEW)
+      {
+        agentName: 'research-specialist',
+        mcpServers: [
+          this.serverRegistry.get('brave-search')!,
+          this.serverRegistry.get('sequential-thinking')!,
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('github')!,
+          this.serverRegistry.get('claude-desktop')!,
+          this.serverRegistry.get('fetch')!
+        ],
+        autoInstall: true,
+        priority: 1
       }
     ];
   }

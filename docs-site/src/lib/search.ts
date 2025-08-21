@@ -193,7 +193,7 @@ class SearchEngine {
           highlights
         }
       })
-      .filter((result): result is SearchResult => result !== null)
+      .filter((result) => result !== null) as SearchResult[]
   }
 
   private searchCommands(query: string): SearchResult[] {
@@ -214,7 +214,7 @@ class SearchEngine {
           highlights
         }
       })
-      .filter((result): result is SearchResult => result !== null)
+      .filter((result) => result !== null) as SearchResult[]
   }
 
   private searchAgents(query: string): SearchResult[] {
@@ -235,7 +235,7 @@ class SearchEngine {
           highlights
         }
       })
-      .filter((result): result is SearchResult => result !== null)
+      .filter((result) => result !== null) as SearchResult[]
   }
 
   private calculateScore(query: string, searchableText: string, title: string): number {
@@ -390,7 +390,7 @@ class SearchEngine {
     const suggestions: string[] = []
     
     // Common typo corrections (simple implementation)
-    const corrections = {
+    const corrections: Record<string, string> = {
       'creat': 'create',
       'instalation': 'installation',
       'comand': 'command',

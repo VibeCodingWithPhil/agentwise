@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { 
   withErrorHandler, 
   createSuccessResponse, 
@@ -15,7 +15,7 @@ import { generateMockMetrics, enhanceMetrics } from '@/lib/data'
 import { getCachedOrFetch, CacheKeys, CacheTTLs, CacheTags, getCache } from '@/lib/cache'
 import { PerformanceMetrics } from '@/types/api'
 
-async function GET(request: NextRequest) {
+async function handler(request: NextRequest): Promise<NextResponse<any>> {
   // Handle CORS
   const corsResponse = handleCors(request)
   if (corsResponse) return corsResponse
@@ -102,7 +102,7 @@ async function GET(request: NextRequest) {
       }
 
       // Add historical data simulation for different time ranges
-      const historicalData = generateHistoricalData(timeRange, metrics)
+      const historicalData = generateHistoricalData(timeRange || '1h', metrics)
 
       return {
         metrics,
@@ -121,7 +121,7 @@ async function GET(request: NextRequest) {
   )
 
   // Create response with caching headers
-  let response = createSuccessResponse(result)
+  let response: any = createSuccessResponse(result)
   response = addCacheHeaders(response, 30, 15) // 30 sec cache, 15 sec stale-while-revalidate
   response = addSecurityHeaders(response)
 
@@ -197,4 +197,4 @@ function generateHistoricalData(timeRange: string, currentMetrics: PerformanceMe
   return dataPoints
 }
 
-export { withErrorHandler(GET) as GET }
+export const GET = withErrorHandler(handler)

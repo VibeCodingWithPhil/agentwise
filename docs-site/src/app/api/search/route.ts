@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { 
   withErrorHandler, 
   createSuccessResponse, 
@@ -32,7 +32,7 @@ async function initializeSearchIfNeeded() {
   }
 }
 
-async function GET(request: NextRequest) {
+async function handler(request: NextRequest): Promise<NextResponse<any>> {
   // Handle CORS
   const corsResponse = handleCors(request)
   if (corsResponse) return corsResponse
@@ -118,7 +118,7 @@ async function GET(request: NextRequest) {
   )
 
   // Create response with caching headers
-  let response = createSuccessResponse(result)
+  let response: any = createSuccessResponse(result)
   response = addCacheHeaders(response, 120, 30) // 2 min cache, 30 sec stale-while-revalidate
   response = addSecurityHeaders(response)
 
@@ -137,4 +137,4 @@ async function GET(request: NextRequest) {
   return response
 }
 
-export { withErrorHandler(GET) as GET }
+export const GET = withErrorHandler(handler)

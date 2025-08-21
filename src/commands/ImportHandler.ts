@@ -98,6 +98,10 @@ export class ImportHandler {
     console.log(`✅ Selected ${selectedAgents.length} agents:`);
     selectedAgents.forEach(agent => console.log(`   • ${agent}`));
 
+    // Generate project specifications based on existing code
+    console.log('\n🔧 Generating project specifications...');
+    await this.generateProjectSpecs(projectName, targetPath, importProject.analysis);
+
     // Create agent-todo folders and phase files
     console.log('\n📁 Creating agent-todo folders...');
     await this.createAgentTodoFolders(projectName, selectedAgents);
@@ -408,6 +412,153 @@ export class ImportHandler {
     }
 
     console.log(`✅ Generated import tasks for ${agents.length} agents`);
+  }
+
+  /**
+   * Generate project specifications from existing code
+   */
+  private async generateProjectSpecs(projectName: string, projectPath: string, analysis: any): Promise<void> {
+    const specsPath = path.join(projectPath, 'specs');
+    await fs.ensureDir(specsPath);
+
+    // Generate main spec
+    const mainSpec = this.generateMainSpecFromAnalysis(projectName, analysis);
+    await fs.writeFile(path.join(specsPath, `${projectName}-main-spec.md`), mainSpec);
+
+    // Generate project spec
+    const projectSpec = this.generateProjectSpecFromAnalysis(projectName, analysis, projectPath);
+    await fs.writeFile(path.join(specsPath, `${projectName}-project-spec.md`), projectSpec);
+
+    // Generate todo spec
+    const todoSpec = this.generateTodoSpecFromAnalysis(projectName, analysis);
+    await fs.writeFile(path.join(specsPath, `${projectName}-todo-spec.md`), todoSpec);
+
+    console.log('✅ Generated 3 specification files based on existing codebase');
+  }
+
+  private generateMainSpecFromAnalysis(projectName: string, analysis: any): string {
+    const spec = [];
+    spec.push(`# ${projectName} - Main Specification\n`);
+    spec.push(`## Project Overview`);
+    spec.push(`Imported existing ${analysis.projectType} project with established codebase.\n`);
+    
+    spec.push(`## Technology Stack`);
+    spec.push(`- **Languages**: ${analysis.technologies.join(', ')}`);
+    spec.push(`- **Frameworks**: ${analysis.frameworks.join(', ') || 'None detected'}`);
+    spec.push(`- **Build Tools**: ${analysis.buildTools.join(', ') || 'Standard'}`);
+    spec.push(`- **Testing**: ${analysis.testFrameworks.join(', ') || 'None detected'}\n`);
+    
+    spec.push(`## Architecture`);
+    if (analysis.hasFrontend) spec.push(`- Frontend application layer`);
+    if (analysis.hasBackend) spec.push(`- Backend API/service layer`);
+    if (analysis.hasDatabase) spec.push(`- Database persistence layer`);
+    if (analysis.hasDocker) spec.push(`- Containerized deployment`);
+    if (analysis.hasCI) spec.push(`- CI/CD pipeline configured`);
+    spec.push('');
+    
+    spec.push(`## Import Analysis Required`);
+    spec.push(`1. Code structure and organization review`);
+    spec.push(`2. Dependency audit and updates`);
+    spec.push(`3. Security vulnerability assessment`);
+    spec.push(`4. Performance optimization opportunities`);
+    spec.push(`5. Documentation completeness check`);
+    
+    return spec.join('\n');
+  }
+
+  private generateProjectSpecFromAnalysis(projectName: string, analysis: any, projectPath: string): string {
+    const spec = [];
+    spec.push(`# ${projectName} - Project Specification\n`);
+    
+    spec.push(`## Current State Analysis`);
+    spec.push(`- **Type**: ${analysis.projectType}`);
+    spec.push(`- **Location**: ${projectPath}`);
+    spec.push(`- **Import Date**: ${new Date().toISOString()}\n`);
+    
+    spec.push(`## Detected Components`);
+    if (analysis.hasFrontend) {
+      spec.push(`### Frontend`);
+      spec.push(`- Frameworks: ${analysis.frameworks.filter((f: string) => 
+        ['React', 'Vue', 'Angular', 'Next.js'].includes(f)).join(', ') || 'Unknown'}`);
+      spec.push(`- UI Components: To be analyzed`);
+      spec.push(`- State Management: To be analyzed\n`);
+    }
+    
+    if (analysis.hasBackend) {
+      spec.push(`### Backend`);
+      spec.push(`- Frameworks: ${analysis.frameworks.filter((f: string) => 
+        ['Express', 'Fastify', 'Django', 'Flask'].includes(f)).join(', ') || 'Unknown'}`);
+      spec.push(`- API Structure: To be analyzed`);
+      spec.push(`- Authentication: To be analyzed\n`);
+    }
+    
+    if (analysis.hasDatabase) {
+      spec.push(`### Database`);
+      spec.push(`- Type: To be determined`);
+      spec.push(`- Schema: To be analyzed`);
+      spec.push(`- Migrations: To be checked\n`);
+    }
+    
+    spec.push(`## Enhancement Opportunities`);
+    spec.push(`Based on initial analysis, consider:`);
+    spec.push(`1. Modernizing dependencies to latest stable versions`);
+    spec.push(`2. Implementing missing test coverage`);
+    spec.push(`3. Adding comprehensive documentation`);
+    spec.push(`4. Optimizing build and deployment processes`);
+    spec.push(`5. Enhancing security measures`);
+    
+    return spec.join('\n');
+  }
+
+  private generateTodoSpecFromAnalysis(projectName: string, analysis: any): string {
+    const spec = [];
+    spec.push(`# ${projectName} - Todo Specification\n`);
+    
+    spec.push(`## Phase 1: Analysis & Assessment`);
+    spec.push(`- [ ] Complete codebase analysis`);
+    spec.push(`- [ ] Document existing architecture`);
+    spec.push(`- [ ] Identify technical debt`);
+    spec.push(`- [ ] Create dependency inventory`);
+    spec.push(`- [ ] Assess code quality metrics\n`);
+    
+    spec.push(`## Phase 2: Planning & Design`);
+    spec.push(`- [ ] Define improvement roadmap`);
+    spec.push(`- [ ] Plan refactoring strategy`);
+    spec.push(`- [ ] Design missing components`);
+    spec.push(`- [ ] Create testing strategy`);
+    spec.push(`- [ ] Plan documentation structure\n`);
+    
+    spec.push(`## Phase 3: Implementation`);
+    spec.push(`- [ ] Implement priority improvements`);
+    spec.push(`- [ ] Add missing tests`);
+    spec.push(`- [ ] Update documentation`);
+    spec.push(`- [ ] Optimize performance`);
+    spec.push(`- [ ] Enhance security\n`);
+    
+    spec.push(`## Technology-Specific Tasks`);
+    
+    if (analysis.technologies.includes('Node.js')) {
+      spec.push(`### Node.js`);
+      spec.push(`- [ ] Audit npm packages for vulnerabilities`);
+      spec.push(`- [ ] Update to latest LTS version if needed`);
+      spec.push(`- [ ] Optimize package.json scripts\n`);
+    }
+    
+    if (analysis.frameworks.includes('React')) {
+      spec.push(`### React`);
+      spec.push(`- [ ] Check for React best practices`);
+      spec.push(`- [ ] Optimize component structure`);
+      spec.push(`- [ ] Implement proper error boundaries\n`);
+    }
+    
+    if (analysis.hasDatabase) {
+      spec.push(`### Database`);
+      spec.push(`- [ ] Review database schema`);
+      spec.push(`- [ ] Optimize queries`);
+      spec.push(`- [ ] Implement proper indexing\n`);
+    }
+    
+    return spec.join('\n');
   }
 
   /**

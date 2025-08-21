@@ -4,10 +4,11 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react']
   },
   images: {
-    domains: ['images.unsplash.com', 'github.com', 'raw.githubusercontent.com']
+    domains: ['images.unsplash.com', 'github.com', 'raw.githubusercontent.com'],
+    unoptimized: true
   },
   // Enable static optimization
-  trailingSlash: false,
+  trailingSlash: true,
   // Improve performance
   swcMinify: true,
   // Enable compression
