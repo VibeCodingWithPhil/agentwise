@@ -100,6 +100,14 @@ src/commands/GitHubManagement*.ts
 DISCORD.md
 TWITTER.md
 
+# Benchmark results (local only)
+benchmark-results/
+benchmark-results/*
+
+# Scripts folder (security sensitive)
+scripts/
+scripts/*
+
 # Keep .claude folder and its contents
 !.claude/
 !.claude/**/*
