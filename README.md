@@ -177,8 +177,9 @@ Agentwise isn't just another tool - it's the first to solve Claude Code's bigges
 - **First** to enable file uploads in Claude Code
 - **First** to support Figma design files
 - **Proven** 30-40% token optimization through benchmarking
-- **First** to integrate 27+ MCP servers (including Figma Dev Mode)
+- **First** to integrate 46+ MCP servers (including Claude Desktop MCP)
 - **First** to enable website cloning in CLI
+- **First** with modern documentation site with dark/light themes
 
 ## 🚀 Quick Start
 
@@ -537,7 +538,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 <p>Agents Supported</p>
 </td>
 <td align="center">
-<h3>26+</h3>
+<h3>46+</h3>
 <p>MCP Integrations</p>
 </td>
 </tr>
@@ -547,7 +548,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - **Development Speed**: 10x faster than traditional development
 - **Token Optimization**: 30-40% reduction through context sharing
 - **Agent Scalability**: Support for 100+ specialized agents
-- **Integration Coverage**: 27+ MCP servers integrated (including Figma)
+- **Integration Coverage**: 46+ MCP servers integrated (including Claude Desktop, Figma, all major UI libraries)
 - **Model Support**: Claude, Ollama, LM Studio, OpenRouter
 - **File Processing**: PDF, Word, Figma, websites
 - **Learning Capability**: Self-improving agents with persistence

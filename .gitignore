@@ -54,6 +54,9 @@ Thumbs.db
 # Build outputs
 dist/
 build/
+.next/
+docs-site/.next/
+docs-site/docs-site/.next/
 *.log
 npm-debug.log*
 yarn-debug.log*

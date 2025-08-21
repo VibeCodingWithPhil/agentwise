@@ -235,6 +235,120 @@ export class MCPIntegrationManager {
         command: 'npx',
         args: ['-y', '@modelcontextprotocol/server-sequential-thinking'],
         capabilities: ['problem-solving', 'multi-step-reasoning', 'planning']
+      },
+
+      // New Design & Development MCPs
+      {
+        name: 'claude-desktop',
+        command: 'npx',
+        args: ['-y', '@anthropic/mcp-server-claude-desktop'],
+        capabilities: ['desktop-integration', 'local-file-access', 'system-commands'],
+        setupInstructions: 'Requires Claude Desktop app installed and running'
+      },
+      {
+        name: 'tailwindcss',
+        command: 'npx',
+        args: ['-y', 'tailwindcss-mcp-server'],
+        capabilities: ['utility-classes', 'design-tokens', 'responsive-design']
+      },
+      {
+        name: 'storybook',
+        command: 'npx',
+        args: ['-y', 'storybook-mcp-server'],
+        capabilities: ['component-documentation', 'visual-testing', 'interaction-testing']
+      },
+      {
+        name: 'framer',
+        command: 'npx',
+        args: ['-y', 'framer-mcp-server'],
+        capabilities: ['motion-design', 'animations', 'interactions'],
+        requiredAuth: { type: 'token', envVar: 'FRAMER_TOKEN' }
+      },
+      {
+        name: 'sketch',
+        command: 'npx',
+        args: ['-y', 'sketch-mcp-server'],
+        capabilities: ['design-import', 'asset-export', 'symbol-management'],
+        requiredAuth: { type: 'token', envVar: 'SKETCH_TOKEN' }
+      },
+      {
+        name: 'adobe-xd',
+        command: 'npx',
+        args: ['-y', 'adobe-xd-mcp-server'],
+        capabilities: ['design-import', 'prototyping', 'asset-generation'],
+        requiredAuth: { type: 'api_key', envVar: 'ADOBE_API_KEY' }
+      },
+      {
+        name: 'material-ui',
+        command: 'npx',
+        args: ['-y', 'material-ui-mcp-server'],
+        capabilities: ['component-library', 'theming', 'material-design']
+      },
+      {
+        name: 'ant-design',
+        command: 'npx',
+        args: ['-y', 'ant-design-mcp-server'],
+        capabilities: ['component-library', 'enterprise-ui', 'form-builder']
+      },
+      {
+        name: 'chakra-ui',
+        command: 'npx',
+        args: ['-y', 'chakra-ui-mcp-server'],
+        capabilities: ['component-library', 'modular-design', 'accessibility']
+      },
+      {
+        name: 'radix-ui',
+        command: 'npx',
+        args: ['-y', 'radix-ui-mcp-server'],
+        capabilities: ['headless-components', 'accessibility', 'primitives']
+      },
+      {
+        name: 'mantine',
+        command: 'npx',
+        args: ['-y', 'mantine-mcp-server'],
+        capabilities: ['component-library', 'hooks', 'form-management']
+      },
+      {
+        name: 'web-vitals',
+        command: 'npx',
+        args: ['-y', 'web-vitals-mcp-server'],
+        capabilities: ['performance-metrics', 'core-web-vitals', 'optimization']
+      },
+      {
+        name: 'lighthouse',
+        command: 'npx',
+        args: ['-y', 'lighthouse-mcp-server'],
+        capabilities: ['performance-audit', 'accessibility-audit', 'seo-audit']
+      },
+      {
+        name: 'webpack',
+        command: 'npx',
+        args: ['-y', 'webpack-mcp-server'],
+        capabilities: ['bundling', 'optimization', 'module-federation']
+      },
+      {
+        name: 'vite',
+        command: 'npx',
+        args: ['-y', 'vite-mcp-server'],
+        capabilities: ['fast-bundling', 'hmr', 'dev-server']
+      },
+      {
+        name: 'next',
+        command: 'npx',
+        args: ['-y', 'next-mcp-server'],
+        capabilities: ['ssr', 'ssg', 'api-routes', 'app-router']
+      },
+      {
+        name: 'remix',
+        command: 'npx',
+        args: ['-y', 'remix-mcp-server'],
+        capabilities: ['nested-routing', 'data-loading', 'progressive-enhancement']
+      },
+      {
+        name: 'astro',
+        command: 'npx',
+        args: ['-y', 'astro-mcp-server'],
+        capabilities: ['islands-architecture', 'partial-hydration', 'content-sites']
       }
     ];
 
