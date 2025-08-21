@@ -25,12 +25,12 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 
 ### Why Agentwise?
 
-- **🚄 Parallel Execution**: Run 100+ agents with single-agent token usage
+- **🚄 Parallel Execution**: Run multiple agents with 30-40% token reduction
 - **🎭 Self-Improving Agents**: Agents learn and improve from every task
 - **🔄 Smart Orchestration**: Intelligent task distribution and phase management
 - **📊 Real-time Monitoring**: Track progress across all agents with live dashboard
 - **🏗️ Smart Model Routing**: Automatic model selection based on task type
-- **💾 Ultimate Optimization**: 99% token reduction achieved - 100 agents = 1 agent cost
+- **💾 Token Optimization**: 30-40% token reduction through context sharing and caching
 - **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
 - **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
 

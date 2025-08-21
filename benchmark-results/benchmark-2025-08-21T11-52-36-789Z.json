@@ -1,0 +1,188 @@
+[
+  {
+    "testName": "1_agents_simple",
+    "timestamp": "2025-08-21T11:52:36.781Z",
+    "configuration": {
+      "numberOfAgents": 1,
+      "taskComplexity": "simple",
+      "contextSize": 1000,
+      "optimizationEnabled": true
+    },
+    "tokenUsage": {
+      "withoutOptimization": {
+        "promptTokens": 1500,
+        "completionTokens": 200,
+        "totalTokens": 1700
+      },
+      "withOptimization": {
+        "promptTokens": 1068,
+        "completionTokens": 138,
+        "totalTokens": 1207
+      }
+    },
+    "savings": {
+      "absolute": 494,
+      "percentage": 29.1
+    },
+    "performance": {
+      "executionTime": 1,
+      "parallelAgents": 1,
+      "tasksCompleted": 1
+    }
+  },
+  {
+    "testName": "5_agents_simple",
+    "timestamp": "2025-08-21T11:52:36.789Z",
+    "configuration": {
+      "numberOfAgents": 5,
+      "taskComplexity": "simple",
+      "contextSize": 2000,
+      "optimizationEnabled": true
+    },
+    "tokenUsage": {
+      "withoutOptimization": {
+        "promptTokens": 12500,
+        "completionTokens": 1000,
+        "totalTokens": 13500
+      },
+      "withOptimization": {
+        "promptTokens": 7876,
+        "completionTokens": 626,
+        "totalTokens": 8503
+      }
+    },
+    "savings": {
+      "absolute": 4998,
+      "percentage": 37
+    },
+    "performance": {
+      "executionTime": 0,
+      "parallelAgents": 5,
+      "tasksCompleted": 5
+    }
+  },
+  {
+    "testName": "10_agents_medium",
+    "timestamp": "2025-08-21T11:52:36.789Z",
+    "configuration": {
+      "numberOfAgents": 10,
+      "taskComplexity": "medium",
+      "contextSize": 5000,
+      "optimizationEnabled": true
+    },
+    "tokenUsage": {
+      "withoutOptimization": {
+        "promptTokens": 65000,
+        "completionTokens": 5000,
+        "totalTokens": 70000
+      },
+      "withOptimization": {
+        "promptTokens": 41136,
+        "completionTokens": 3086,
+        "totalTokens": 44223
+      }
+    },
+    "savings": {
+      "absolute": 25778,
+      "percentage": 36.8
+    },
+    "performance": {
+      "executionTime": 0,
+      "parallelAgents": 5,
+      "tasksCompleted": 10
+    }
+  },
+  {
+    "testName": "20_agents_medium",
+    "timestamp": "2025-08-21T11:52:36.789Z",
+    "configuration": {
+      "numberOfAgents": 20,
+      "taskComplexity": "medium",
+      "contextSize": 10000,
+      "optimizationEnabled": true
+    },
+    "tokenUsage": {
+      "withoutOptimization": {
+        "promptTokens": 230000,
+        "completionTokens": 10000,
+        "totalTokens": 240000
+      },
+      "withOptimization": {
+        "promptTokens": 140480,
+        "completionTokens": 4680,
+        "totalTokens": 145160
+      }
+    },
+    "savings": {
+      "absolute": 94840,
+      "percentage": 39.5
+    },
+    "performance": {
+      "executionTime": 0,
+      "parallelAgents": 5,
+      "tasksCompleted": 20
+    }
+  },
+  {
+    "testName": "50_agents_complex",
+    "timestamp": "2025-08-21T11:52:36.789Z",
+    "configuration": {
+      "numberOfAgents": 50,
+      "taskComplexity": "complex",
+      "contextSize": 20000,
+      "optimizationEnabled": true
+    },
+    "tokenUsage": {
+      "withoutOptimization": {
+        "promptTokens": 1150000,
+        "completionTokens": 50000,
+        "totalTokens": 1200000
+      },
+      "withOptimization": {
+        "promptTokens": 701523,
+        "completionTokens": 23423,
+        "totalTokens": 724945
+      }
+    },
+    "savings": {
+      "absolute": 475054,
+      "percentage": 39.6
+    },
+    "performance": {
+      "executionTime": 0,
+      "parallelAgents": 5,
+      "tasksCompleted": 50
+    }
+  },
+  {
+    "testName": "100_agents_complex",
+    "timestamp": "2025-08-21T11:52:36.789Z",
+    "configuration": {
+      "numberOfAgents": 100,
+      "taskComplexity": "complex",
+      "contextSize": 50000,
+      "optimizationEnabled": true
+    },
+    "tokenUsage": {
+      "withoutOptimization": {
+        "promptTokens": 5300000,
+        "completionTokens": 100000,
+        "totalTokens": 5400000
+      },
+      "withOptimization": {
+        "promptTokens": 3157460,
+        "completionTokens": 1860,
+        "totalTokens": 3159320
+      }
+    },
+    "savings": {
+      "absolute": 2240680,
+      "percentage": 41.5
+    },
+    "performance": {
+      "executionTime": 0,
+      "parallelAgents": 5,
+      "tasksCompleted": 100
+    }
+  }
+]
