@@ -15,7 +15,7 @@
 
 [Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Contributing](#-contributing) • [License](#-license)
 
-📚 **[View Full Documentation](https://agentwise-docs.vercel.app)** | 🎥 **[Watch Demo](https://youtu.be/demo)** | 💬 **[Join Discord](https://discord.gg/agentwise)**
+📚 **[View Full Documentation](https://agentwise-docs.vercel.app)**
 
 </div>
 
@@ -36,12 +36,12 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 - **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
 - **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
 
-## 🌟 Groundbreaking Features - First in Claude Code!
+## 🌟 Key Features
 
-### Revolutionary Capabilities That Users Have Been Waiting For
+### Enhanced Claude Code Capabilities
 
-#### 📄 **Document Upload Support** - *Heavily Requested!*
-Finally, upload and process documents directly in Claude Code:
+#### 📄 **Document Upload Support**
+Upload and process documents directly in Claude Code:
 ```bash
 /upload requirements.pdf spec        # Convert PDF to project specs
 /upload design-brief.docx context   # Use Word docs as project context
@@ -51,7 +51,7 @@ Finally, upload and process documents directly in Claude Code:
 - **Auto-extraction**: Content, requirements, specifications
 - **Smart conversion**: Documents → Project specs → Working code
 
-#### 🎨 **Figma Dev Mode Integration** - *Game Changer!*
+#### 🎨 **Figma Dev Mode Integration**
 Direct integration with Figma Dev Mode MCP Server for seamless design-to-code:
 ```bash
 /figma connect                      # Connect to Figma desktop
@@ -66,8 +66,8 @@ Direct integration with Figma Dev Mode MCP Server for seamless design-to-code:
 - **Code Connect**: Links Figma components to actual code
 - **Live sync**: Changes in Figma instantly available
 
-#### 🖼️ **Image Context Understanding** - *Finally Here!*
-Claude Code can now SEE and understand images with full context:
+#### 🖼️ **Image Context Understanding**
+Enhanced image processing and visual context understanding:
 ```bash
 /image                              # Visual file browser
 /upload screenshot.png              # Process UI screenshots
@@ -78,8 +78,8 @@ Claude Code can now SEE and understand images with full context:
 - **Mockup conversion**: Turn designs into working apps
 - **Context awareness**: Understands what's in the image
 
-#### 🌐 **Website Cloning** - *Incredible!*
-Clone any website and make it your own:
+#### 🌐 **Website Cloning**
+Clone and customize websites with AI assistance:
 ```bash
 /clone-website https://example.com exact     # 1:1 replica
 /clone-website https://site.com similar      # Keep style, change brand
@@ -102,7 +102,7 @@ Clone any website and make it your own:
 - ✅ Full visual context understanding
 - ✅ Website replication and customization
 
-These aren't just features - they're solutions to the most requested capabilities in the Claude Code community!
+These features extend Claude Code's capabilities for more comprehensive development workflows.
 
 ## ✨ Features
 
@@ -127,7 +127,7 @@ These aren't just features - they're solutions to the most requested capabilitie
 - **Cross-Platform Global Commands** (Windows/WSL/Linux/macOS) 🌍
 - **Real-Time Monitor Dashboard** with live WebSocket updates 📊
 - **Tech Stack Validator** with compatibility checking ✅
-- **MCP Integration (26+ servers)** - Figma, GitHub, Firecrawl, etc. 🔌
+- **MCP Integration (61 servers)** - Figma, GitHub, Firecrawl, etc. 🔌
 - **Smart Model Routing** (Claude, Ollama, LM Studio, OpenRouter) 🎯
 - **Performance Analytics** with comprehensive metrics 📈
 
@@ -161,7 +161,7 @@ These aren't just features - they're solutions to the most requested capabilitie
 
 ## 💎 What Makes Agentwise Special
 
-Agentwise isn't just another tool - it's the first to solve Claude Code's biggest limitations:
+Agentwise addresses Claude Code limitations and extends its capabilities:
 
 ### 🎯 **Problems We Solve**
 
@@ -175,13 +175,13 @@ Agentwise isn't just another tool - it's the first to solve Claude Code's bigges
 | High token costs | ✅ 30-40% token reduction (verified) |
 | No local model support | ✅ Ollama, LM Studio integration |
 
-### 🏆 **Industry Firsts**
-- **First** to enable file uploads in Claude Code
-- **First** to support Figma design files
-- **Proven** 30-40% token optimization through benchmarking
-- **First** to integrate 61 MCP servers (comprehensive coverage across all development needs)
-- **First** to enable website cloning in CLI
-- **First** with modern documentation site with dark/light themes
+### 🎯 **Key Achievements**
+- File upload support for Claude Code workflows
+- Figma design file integration and processing
+- 30-40% token optimization through intelligent context sharing
+- Comprehensive MCP integration with 61 servers
+- Website cloning and customization capabilities
+- Modern documentation with responsive design
 
 ## 🚀 Quick Start
 
@@ -424,7 +424,7 @@ agentwise/
 │   │   └── UploadHandler.ts            # Document & design file processing
 │   ├── context/            # Project context & persistence
 │   ├── learning/           # Self-improving agent capabilities
-│   ├── mcp/                # MCP server integration (26+ servers)
+│   ├── mcp/                # MCP server integration (61 servers)
 │   ├── models/             # Smart model routing & local model support
 │   ├── monitor/            # Real-time dashboard (Next.js app)
 │   │   ├── server/         # WebSocket server for live updates
@@ -663,7 +663,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 <p>Agents Supported</p>
 </td>
 <td align="center">
-<h3>46+</h3>
+<h3>61</h3>
 <p>MCP Integrations</p>
 </td>
 </tr>
