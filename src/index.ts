@@ -90,6 +90,20 @@ Status: ✅ System Ready
       await figmaCommand.handle(args.slice(1));
       return;
     }
+    
+    // Handle /github command (LOCAL ONLY - not in repository)
+    if (args[0] === '/github') {
+      try {
+        // Try to load the local-only GitHub management command
+        const { GitHubManagementCommand } = await import('./commands/GitHubManagementCommand');
+        const githubCommand = new GitHubManagementCommand();
+        await githubCommand.handle(args.slice(1));
+      } catch (error) {
+        // Silently fail if the command doesn't exist (it's local-only)
+        console.log('GitHub management command not available');
+      }
+      return;
+    }
   }
 }
 

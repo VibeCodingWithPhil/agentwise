@@ -511,10 +511,13 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] **Smart Model Routing** - Automatic model selection based on task requirements
 - [x] **Local Model Support** - Full Ollama, LM Studio, and OpenRouter integration
 - [x] **Document Upload** - Process PDFs, Word docs, and design files
-- [x] **Figma Integration** - Extract and convert Figma designs to code
+- [x] **Figma Dev Mode Integration** - Direct connection to Figma desktop for design-to-code
 - [x] **Website Cloning** - Clone and customize existing websites with Firecrawl
+- [x] **GitHub Pages** - Beautiful landing page at https://vibecodingwithphil.github.io/agentwise/
+- [x] **Repository Protection** - Branch protection, rulesets, and security automation
+- [x] **Automated PR Management** - Dependabot integration with auto-merge capabilities
 
-### 🚀 Next Phase (2026)
+### 🚀 Next Phase (Q2 2025)
 - [ ] **Agent Marketplace** - Share and discover custom agents
 - [ ] **Visual Workflow Editor** - Drag-and-drop orchestration
 - [ ] **Enterprise Features** - SSO, audit logs, compliance
