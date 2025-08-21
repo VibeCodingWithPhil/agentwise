@@ -62,6 +62,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Documentation site (deployed separately to Vercel)
+docs-site/
+
 # Test coverage
 coverage/
 .nyc_output/
