@@ -78,7 +78,12 @@ export class AgentManager {
           end tell
         `;
         
-        await execAsync(`osascript -e "${script.replace(/"/g, '\\"')}"`);
+        // Properly escape the script: first backslashes, then quotes
+        const escapedScript = script
+          .replace(/\\/g, '\\\\')  // Escape backslashes first
+          .replace(/"/g, '\\"');   // Then escape quotes
+        
+        await execAsync(`osascript -e "${escapedScript}"`);
         console.log(`✅ Launched ${agent.name} in Terminal tab`);
         
       } else if (platform === 'win32') {

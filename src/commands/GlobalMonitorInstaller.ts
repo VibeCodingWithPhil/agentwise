@@ -114,7 +114,10 @@ export class GlobalMonitorInstaller {
     await fs.ensureDir(binPath);
 
     // Create batch file for Windows
-    const escapedPath = this.agentWisePath.replace(/"/g, '""'); // Escape quotes for batch files
+    // Properly escape for batch files: backslashes and quotes
+    const escapedPath = this.agentWisePath
+      .replace(/\\/g, '\\\\')  // Escape backslashes (doubles in batch)
+      .replace(/"/g, '""');       // Escape quotes for batch files
     const batContent = `@echo off
 cd /d "${escapedPath}"
 cd src\\monitor
