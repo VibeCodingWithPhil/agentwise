@@ -99,8 +99,8 @@ export default function DocsHomePage() {
             <ul className="space-y-2">
               {prerequisites.map((prereq, index) => (
                 <li key={index} className="flex items-center gap-2">
-                  <div className="h-4 w-4 rounded-full bg-success-500/20 flex items-center justify-center">
-                    <div className="h-1.5 w-1.5 rounded-full bg-success-500" />
+                  <div className="h-4 w-4 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
                   </div>
                   <span className="text-foreground">{prereq}</span>
                 </li>
@@ -113,7 +113,7 @@ export default function DocsHomePage() {
       {/* Critical Requirement */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold text-foreground">⚠️ Critical Requirement</h2>
-        <Card className="border-warning-200 bg-warning-50 dark:bg-warning-900/20">
+        <Card className="border-yellow-200 bg-yellow-50 dark:bg-yellow-900/20">
           <CardContent className="pt-6">
             <p className="text-foreground font-medium mb-3">
               Agentwise REQUIRES Claude Code to be started with a special flag:

@@ -1,10 +1,11 @@
 import Link from "next/link"
-import { Terminal, Copy, ExternalLink } from "lucide-react"
+import { Terminal, ExternalLink } from "lucide-react"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { CodeBlock } from "@/components/ui/code-block"
+import { CopyLinkButton } from "@/components/copy-link-button"
 import { commands } from "@/lib/markdown"
 
 // Group commands by category
@@ -84,17 +85,7 @@ export default function CommandsPage() {
                         {command.description}
                       </CardDescription>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        const url = `${window.location.origin}${window.location.pathname}#${command.name.replace('/', '')}`
-                        navigator.clipboard.writeText(url)
-                      }}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
+                    <CopyLinkButton commandName={command.name} />
                   </div>
                 </CardHeader>
                 

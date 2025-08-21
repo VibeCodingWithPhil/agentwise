@@ -179,7 +179,7 @@ Agentwise isn't just another tool - it's the first to solve Claude Code's bigges
 - **First** to enable file uploads in Claude Code
 - **First** to support Figma design files
 - **Proven** 30-40% token optimization through benchmarking
-- **First** to integrate 46+ MCP servers (including Claude Desktop MCP)
+- **First** to integrate 61 MCP servers (comprehensive coverage across all development needs)
 - **First** to enable website cloning in CLI
 - **First** with modern documentation site with dark/light themes
 
@@ -453,6 +453,65 @@ agentwise/
         └── agent-todos/    # Agent task management per project
 ```
 
+## 🤖 Specialized AI Agents
+
+Agentwise includes 8 specialized agents, each with unique capabilities and MCP integrations:
+
+### Core Development Agents
+
+#### Frontend Specialist
+- **Focus**: UI/UX, React, Vue, Angular, styling, responsive design
+- **MCPs**: Figma, Shadcn UI, Material UI, Ant Design, Chakra UI, Tailwind CSS
+- **Capabilities**: Component creation, state management, animations, accessibility
+
+#### Backend Specialist  
+- **Focus**: APIs, server logic, authentication, middleware, microservices
+- **MCPs**: REST API, GraphQL, TestSprite, Fetch, database connectors
+- **Capabilities**: RESTful APIs, GraphQL, WebSockets, authentication, caching
+
+#### Database Specialist
+- **Focus**: Schema design, queries, migrations, optimization, NoSQL/SQL
+- **MCPs**: PostgreSQL, MongoDB, MySQL, Multi-Database, MongoDB Atlas
+- **Capabilities**: Schema design, query optimization, migrations, indexing
+
+#### DevOps Specialist
+- **Focus**: CI/CD, deployment, containers, cloud infrastructure
+- **MCPs**: Kubernetes, Terraform, Azure DevOps, AWS, Buildkite, Cloudflare
+- **Capabilities**: Pipeline setup, containerization, auto-scaling, monitoring
+
+#### Testing Specialist
+- **Focus**: Unit tests, integration tests, E2E, performance testing
+- **MCPs**: Jest, Playwright, Cypress, Storybook, Puppeteer, BrowserStack
+- **Capabilities**: Test automation, coverage reports, performance testing
+
+### Advanced Agents
+
+#### Designer Specialist
+- **Focus**: UI design, component libraries, design systems, branding
+- **MCPs**: Figma, Canva, Framer, Sketch, Adobe XD, design token tools
+- **Capabilities**: Design-to-code, component extraction, style guide creation
+
+#### Research Agent (NEW!)
+- **Focus**: Requirements analysis, technology research, best practices, documentation
+- **Capabilities**: 
+  - Real-time web search with date awareness
+  - Technology stack recommendations
+  - Security vulnerability research
+  - Library compatibility analysis
+  - Best practices documentation
+  - Market research and competitor analysis
+- **Special Features**:
+  - Dynamic date/time awareness for current information
+  - Cross-references multiple sources for accuracy
+  - Generates comprehensive research reports
+  - Integrates findings directly into project specs
+
+#### Custom Agents
+- Create specialized agents for your specific needs
+- Use `/generate-agent "specialization"` command
+- Automatically integrated with orchestration system
+- Full MCP support for custom tools
+
 ### Architecture
 
 ```mermaid
@@ -469,7 +528,8 @@ graph TD
     G --> H4[DevOps Specialist]
     G --> H5[Testing Specialist]
     G --> H6[Designer Specialist]
-    G --> H7[Custom Agents]
+    G --> H7[Research Agent]
+    G --> H8[Custom Agents]
     H1 --> I[MCP Integration]
     H2 --> I
     H3 --> I
@@ -477,12 +537,75 @@ graph TD
     H5 --> I
     H6 --> I
     H7 --> I
-    I --> J[27+ MCP Servers]
+    H8 --> I
+    I --> J[61 MCP Servers]
     J --> K[Phase Controller]
     K --> L[Self-Improving Agents]
     L --> M[Performance Analytics]
     M --> N[Token Optimizer 30-40%]
     N --> O[Project Output]
+```
+
+## 🔌 MCP Integration - 61 Servers
+
+Agentwise features the most comprehensive MCP (Model Context Protocol) integration available:
+
+### MCP Categories & Coverage
+
+#### Design & UI (12 MCPs)
+- **Design Tools**: Figma, Canva, Framer, Sketch, Adobe XD
+- **UI Libraries**: Shadcn UI, Material UI, Ant Design, Chakra UI, Radix UI, Mantine
+- **Styling**: Tailwind CSS
+
+#### Backend & APIs (6 MCPs)
+- **API Tools**: REST API, GraphQL, TestSprite, Fetch
+- **Payment**: Stripe, PayPal
+
+#### Databases (6 MCPs)
+- PostgreSQL, PostgreSQL Advanced, MongoDB, MongoDB Atlas, MySQL, Multi-Database
+
+#### DevOps & Cloud (9 MCPs)
+- **Orchestration**: Kubernetes, Terraform
+- **CI/CD**: Azure DevOps, Buildkite
+- **Cloud**: AWS, Azure, Cloudflare (x2 variants)
+- **Build Tools**: Vite
+
+#### Testing & Quality (13 MCPs)
+- **Testing Frameworks**: Jest, Playwright, Cypress, Puppeteer
+- **Visual Testing**: Storybook, BrowserStack
+- **Tools**: MCP Inspector, MCP Tester, Frontend Testing
+- **Accessibility**: A11y
+- **Performance**: Lighthouse, Web Vitals
+- **API Testing**: TestSprite
+
+#### Build & Framework Tools (5 MCPs)
+- Webpack, Vite, Next.js, Remix, Astro
+
+#### Communication & Docs (4 MCPs)
+- Slack, Discord, Confluence, Notion
+
+#### AI & Utilities (6 MCPs)
+- Memory, Sequential Thinking, Brave Search
+- Claude Desktop MCP, Firecrawl, GitHub
+
+### How MCP Integration Works
+
+1. **Automatic Assignment**: Each agent gets relevant MCPs based on their specialization
+2. **Dynamic Loading**: MCPs are loaded only when needed to optimize performance
+3. **Seamless Integration**: Agents can directly use MCP tools without additional configuration
+4. **Cross-Agent Sharing**: MCPs can be shared between agents for collaborative tasks
+
+### Example MCP Usage
+
+```bash
+# Frontend agent uses Figma MCP
+/figma generate Button      # Extracts button from Figma
+
+# Database agent uses PostgreSQL MCP
+# Automatically optimizes queries and suggests indexes
+
+# Testing agent uses Playwright MCP
+# Generates and runs E2E tests automatically
 ```
 
 ## 🤝 Contributing
@@ -550,7 +673,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - **Development Speed**: 10x faster than traditional development
 - **Token Optimization**: 30-40% reduction through context sharing
 - **Agent Scalability**: Support for 100+ specialized agents
-- **Integration Coverage**: 46+ MCP servers integrated (including Claude Desktop, Figma, all major UI libraries)
+- **Integration Coverage**: 61 MCP servers integrated (comprehensive design, backend, database, testing, and DevOps coverage)
 - **Model Support**: Claude, Ollama, LM Studio, OpenRouter
 - **File Processing**: PDF, Word, Figma, websites
 - **Learning Capability**: Self-improving agents with persistence
@@ -567,7 +690,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 
 ### ✅ Recently Completed (Q4 2024 - Q1 2025)
 - [x] **Web UI Dashboard** - Real-time monitoring interface with live agent status
-- [x] **MCP Integration** - 27+ MCP servers (Figma Dev Mode, Firecrawl, Shadcn UI, GitHub, etc.)
+- [x] **MCP Integration** - 61 MCP servers (complete development ecosystem coverage)
 - [x] **Performance Analytics** - Comprehensive metrics, error tracking, and insights
 - [x] **Self-Improving Agents** - Learning capabilities with knowledge persistence
 - [x] **Token Optimization** - 30-40% reduction achieved
