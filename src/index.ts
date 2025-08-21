@@ -10,7 +10,7 @@ import { FigmaCommand } from './commands/FigmaCommand';
 async function main() {
   console.log(`
 ╔══════════════════════════════════════╗
-║         🎭 AGENTWISE v1.0.0          ║
+║         🎭 AGENTWISE v2.0.0          ║
 ║   Multi-Agent Orchestration System   ║
 ║        for Claude Code               ║
 ╚══════════════════════════════════════╝
