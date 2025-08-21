@@ -6,6 +6,11 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  pull-requests: read
+  security-events: write
+
 jobs:
   security-scan:
     runs-on: ubuntu-latest
