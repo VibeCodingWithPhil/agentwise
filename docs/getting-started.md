@@ -227,8 +227,8 @@ workspace/
 
 - Read the [Architecture Guide](./architecture.md) to understand the system
 - Explore [Commands Reference](./commands.md) for all available commands
-- Learn about [Custom Agents](./agents.md#creating-custom-agents)
-- Set up [CI/CD Integration](./workflow.md#cicd-integration)
+- Learn about [Custom Agents](./custom-agents.md)
+- Set up [CI/CD Integration](./ci-cd-integration.md)
 
 ## Getting Help
 

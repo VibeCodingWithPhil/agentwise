@@ -18,6 +18,7 @@
             --warning: #f59e0b;
             --error: #ef4444;
             --info: #3b82f6;
+            --code-bg: #0d1117;
         }
 
         * {
@@ -31,214 +32,55 @@
             background: var(--background);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 2rem 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        /* Layout */
+        .layout {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
+            height: 100vh;
         }
 
-        .header .subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Quick Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
             background: var(--surface);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
             padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
-        }
-
-        .stat-card .value {
-            font-size: 2rem;
-            font-weight: bold;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-card .label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Documentation Grid */
-        .docs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .doc-card {
-            background: var(--surface);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .doc-card::before {
-            content: '';
-            position: absolute;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            transform: scaleX(0);
-            transition: transform 0.3s;
+            z-index: 10;
         }
 
-        .doc-card:hover {
-            background: var(--surface-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.1);
-        }
-
-        .doc-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .doc-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .doc-card .description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .doc-card .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-
-        /* Categories */
-        .category-section {
-            margin-bottom: 3rem;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .category-header h2 {
-            font-size: 1.8rem;
-        }
-
-        .category-icon {
+        .sidebar-header h1 {
             font-size: 1.5rem;
-        }
-
-        /* Quick Links */
-        .quick-links {
-            background: var(--surface);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .quick-links h3 {
-            margin-bottom: 1rem;
-        }
-
-        .quick-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .quick-link {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background 0.2s;
         }
 
-        .quick-link:hover {
-            background: var(--surface-hover);
-        }
-
-        /* Search Bar */
         .search-container {
-            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--surface);
+            position: sticky;
+            top: 72px;
+            z-index: 9;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .search-bar {
             width: 100%;
-            padding: 1rem;
-            background: var(--surface);
+            padding: 0.75rem;
+            background: var(--background);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .search-bar:focus {
@@ -247,27 +89,181 @@
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
 
-        /* External Links */
-        .external-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
+        .nav-section {
+            padding: 0.5rem 0;
         }
 
-        .external-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .nav-section-title {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
             color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s;
+            font-weight: 600;
+            letter-spacing: 0.05em;
         }
 
-        .external-link:hover {
+        .nav-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--surface-hover);
+            border-left-color: var(--primary-color);
+        }
+
+        .nav-item.active {
+            background: var(--surface-hover);
+            border-left-color: var(--primary-color);
             color: var(--primary-color);
+        }
+
+        .nav-item-icon {
+            display: inline-block;
+            width: 20px;
+            margin-right: 0.5rem;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 3rem;
+            max-width: 1200px;
+        }
+
+        .doc-section {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .doc-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Code */
+        code {
+            background: var(--code-bg);
+            color: #10b981;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #e6edf3;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th {
+            background: var(--surface);
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        td {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Links */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         /* Badges */
@@ -285,361 +281,1241 @@
             color: white;
         }
 
-        .badge-updated {
-            background: var(--info);
-            color: white;
-        }
-
         .badge-beta {
             background: var(--warning);
             color: white;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .docs-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* Quick Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        /* Code Examples */
-        .code-example {
-            background: #1a1a1a;
+        .stat-card {
+            background: var(--surface);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 1rem;
-            margin: 1rem 0;
-            overflow-x: auto;
+            text-align: center;
         }
 
-        .code-example code {
-            color: #10b981;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
         }
 
-        /* Notice Banner */
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                height: 100%;
+                z-index: 100;
+                transition: left 0.3s;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 101;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 0.5rem;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        /* Notice */
         .notice {
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
             border: 1px solid var(--primary-color);
             border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .notice h3 {
+        .notice-title {
+            color: var(--primary-color);
+            font-weight: bold;
             margin-bottom: 0.5rem;
+        }
+
+        /* Command Examples */
+        .command-example {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        .command-example .comment {
+            color: #6a737d;
+        }
+
+        .command-example .command {
+            color: #10b981;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .toc-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            padding: 0.25rem 0;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+        }
+
+        .toc a:hover {
             color: var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>
-            🚀 Agentwise Documentation Hub
-        </h1>
-        <p class="subtitle">Multi-Agent Orchestration System for Claude Code</p>
-    </header>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    
+    <div class="layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>🚀 Agentwise Docs</h1>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search docs... (Ctrl+K)" id="searchBar" onkeyup="searchDocs()">
+            </div>
 
-    <div class="container">
-        <!-- Quick Stats -->
-        <div class="stats">
-            <div class="stat-card">
-                <div class="value">8+</div>
-                <div class="label">Specialist Agents</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">26+</div>
-                <div class="label">MCP Integrations</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">99%</div>
-                <div class="label">Token Optimization</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">100+</div>
-                <div class="label">Parallel Agents</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">10x</div>
-                <div class="label">Faster Development</div>
-            </div>
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-section-title">Getting Started</div>
+                    <a class="nav-item active" onclick="showSection('overview')">
+                        <span class="nav-item-icon">📖</span>Overview
+                    </a>
+                    <a class="nav-item" onclick="showSection('quickstart')">
+                        <span class="nav-item-icon">⚡</span>Quick Start
+                    </a>
+                    <a class="nav-item" onclick="showSection('commands')">
+                        <span class="nav-item-icon">🎮</span>Commands
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Core Features</div>
+                    <a class="nav-item" onclick="showSection('architecture')">
+                        <span class="nav-item-icon">🏗️</span>Architecture
+                    </a>
+                    <a class="nav-item" onclick="showSection('custom-agents')">
+                        <span class="nav-item-icon">🤖</span>Custom Agents
+                    </a>
+                    <a class="nav-item" onclick="showSection('dynamic-agents')">
+                        <span class="nav-item-icon">⚡</span>Dynamic Agents
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Advanced</div>
+                    <a class="nav-item" onclick="showSection('mcp-integration')">
+                        <span class="nav-item-icon">🔌</span>MCP Integration
+                    </a>
+                    <a class="nav-item" onclick="showSection('model-routing')">
+                        <span class="nav-item-icon">🎯</span>Model Routing
+                    </a>
+                    <a class="nav-item" onclick="showSection('performance')">
+                        <span class="nav-item-icon">📊</span>Performance
+                    </a>
+                    <a class="nav-item" onclick="showSection('tech-validation')">
+                        <span class="nav-item-icon">✅</span>Tech Validation
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">DevOps</div>
+                    <a class="nav-item" onclick="showSection('cicd')">
+                        <span class="nav-item-icon">🔄</span>CI/CD Integration
+                    </a>
+                    <a class="nav-item" onclick="showSection('monitor')">
+                        <span class="nav-item-icon">📊</span>Monitor Dashboard
+                    </a>
+                    <a class="nav-item" onclick="showSection('docs-command')">
+                        <span class="nav-item-icon">📚</span>Docs Command
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Help</div>
+                    <a class="nav-item" onclick="showSection('troubleshooting')">
+                        <span class="nav-item-icon">🔧</span>Troubleshooting
+                    </a>
+                    <a class="nav-item" href="https://github.com/VibeCodingWithPhil/agentwise" target="_blank">
+                        <span class="nav-item-icon">🔗</span>GitHub
+                    </a>
+                </div>
+            </nav>
         </div>
 
-        <!-- Notice Banner -->
-        <div class="notice">
-            <h3>📢 Welcome to Agentwise Documentation</h3>
-            <p>Use the <code>/docs</code> command anytime to open this documentation hub</p>
-        </div>
+        <!-- Main Content -->
+        <div class="content" id="content">
+            <!-- Overview Section -->
+            <div class="doc-section active" id="overview">
+                <h1>🚀 Agentwise Documentation</h1>
+                
+                <div class="notice">
+                    <div class="notice-title">📢 Welcome to Agentwise!</div>
+                    <p>Multi-Agent Orchestration System for Claude Code - Transform your development workflow with parallel AI agent execution.</p>
+                </div>
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="🔍 Search documentation..." id="searchBar" onkeyup="filterDocs()">
-        </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">8+</div>
+                        <div class="stat-label">Specialist Agents</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">26+</div>
+                        <div class="stat-label">MCP Integrations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">99%</div>
+                        <div class="stat-label">Token Optimization</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">Parallel Agents</div>
+                    </div>
+                </div>
 
-        <!-- Getting Started -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🚀</span>
-                <h2>Getting Started</h2>
-            </div>
-            <div class="docs-grid">
-                <a href="README.md" class="doc-card">
-                    <h3>📖 Overview</h3>
-                    <p class="description">Complete overview of Agentwise capabilities, features, and architecture</p>
-                    <div class="tags">
-                        <span class="tag">Introduction</span>
-                        <span class="tag">Features</span>
-                    </div>
-                </a>
-                <a href="getting-started.md" class="doc-card">
-                    <h3>⚡ Quick Start</h3>
-                    <p class="description">Get up and running with Agentwise in minutes</p>
-                    <div class="tags">
-                        <span class="tag">Installation</span>
-                        <span class="tag">Setup</span>
-                    </div>
-                </a>
-                <a href="commands.md" class="doc-card">
-                    <h3>🎮 Commands Reference</h3>
-                    <p class="description">Complete list of all available commands and their usage</p>
-                    <div class="tags">
-                        <span class="tag">CLI</span>
-                        <span class="tag">Reference</span>
-                    </div>
-                </a>
-            </div>
-        </div>
+                <h2>What is Agentwise?</h2>
+                <p>Agentwise revolutionizes software development by orchestrating multiple specialized AI agents working in parallel. Built as an extension for Claude Code, it enables teams of AI agents to collaborate on complex projects with unprecedented efficiency.</p>
 
-        <!-- Core Features -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">💎</span>
-                <h2>Core Features</h2>
-            </div>
-            <div class="docs-grid">
-                <a href="architecture.md" class="doc-card">
-                    <h3>🏗️ Architecture</h3>
-                    <p class="description">Deep dive into Agentwise system architecture and design patterns</p>
-                    <div class="tags">
-                        <span class="tag">Technical</span>
-                        <span class="tag">Advanced</span>
+                <h3>Key Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🚄 Parallel Execution</h3>
+                        <p>Run 100+ agents with single-agent token usage through intelligent optimization.</p>
                     </div>
-                </a>
-                <a href="custom-agents.md" class="doc-card">
-                    <h3>🤖 Custom Agents <span class="badge badge-new">NEW</span></h3>
-                    <p class="description">Create and manage custom specialist agents for unique requirements</p>
-                    <div class="tags">
-                        <span class="tag">Agents</span>
-                        <span class="tag">Customization</span>
+                    <div class="feature-card">
+                        <h3>🎭 Self-Improving Agents</h3>
+                        <p>Agents learn and improve from every task with persistent knowledge.</p>
                     </div>
-                </a>
-                <a href="dynamic-agents.md" class="doc-card">
-                    <h3>⚡ Dynamic Agents</h3>
-                    <p class="description">Understanding the dynamic agent discovery and loading system</p>
-                    <div class="tags">
-                        <span class="tag">Automation</span>
-                        <span class="tag">Agents</span>
+                    <div class="feature-card">
+                        <h3>🔄 Smart Orchestration</h3>
+                        <p>Intelligent task distribution and phase management across all agents.</p>
                     </div>
-                </a>
-            </div>
-        </div>
+                    <div class="feature-card">
+                        <h3>📊 Real-time Monitoring</h3>
+                        <p>Track progress across all agents with live dashboard and WebSocket updates.</p>
+                    </div>
+                </div>
 
-        <!-- Advanced Features -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🔧</span>
-                <h2>Advanced Features</h2>
-            </div>
-            <div class="docs-grid">
-                <a href="mcp-integration.md" class="doc-card">
-                    <h3>🔌 MCP Integration</h3>
-                    <p class="description">Integrate with 26+ MCP servers for enhanced capabilities</p>
-                    <div class="tags">
-                        <span class="tag">Integration</span>
-                        <span class="tag">MCP</span>
-                    </div>
-                </a>
-                <a href="smart-model-routing.md" class="doc-card">
-                    <h3>🎯 Smart Model Routing</h3>
-                    <p class="description">Intelligent routing between Claude, Ollama, and local models</p>
-                    <div class="tags">
-                        <span class="tag">Models</span>
-                        <span class="tag">Optimization</span>
-                    </div>
-                </a>
-                <a href="performance-analytics.md" class="doc-card">
-                    <h3>📊 Performance Analytics</h3>
-                    <p class="description">Track and optimize agent performance with comprehensive metrics</p>
-                    <div class="tags">
-                        <span class="tag">Analytics</span>
-                        <span class="tag">Monitoring</span>
-                    </div>
-                </a>
-                <a href="tech-stack-validator.md" class="doc-card">
-                    <h3>✅ Tech Stack Validator</h3>
-                    <p class="description">Validate technology compatibility and best practices</p>
-                    <div class="tags">
-                        <span class="tag">Validation</span>
-                        <span class="tag">Quality</span>
-                    </div>
-                </a>
-            </div>
-        </div>
+                <h2>Why Agentwise?</h2>
+                <ul>
+                    <li><strong>10x Faster Development</strong> - Parallel agent execution dramatically speeds up project completion</li>
+                    <li><strong>99% Token Reduction</strong> - Revolutionary optimization makes 100 agents cost the same as 1</li>
+                    <li><strong>26+ MCP Integrations</strong> - Connect with GitHub, Figma, databases, and more</li>
+                    <li><strong>Enterprise Ready</strong> - Production-grade with security, monitoring, and CI/CD support</li>
+                </ul>
 
-        <!-- DevOps & Monitoring -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🚀</span>
-                <h2>DevOps & Monitoring</h2>
-            </div>
-            <div class="docs-grid">
-                <a href="ci-cd-integration.md" class="doc-card">
-                    <h3>🔄 CI/CD Integration <span class="badge badge-new">NEW</span></h3>
-                    <p class="description">Complete guide to integrating Agentwise with CI/CD pipelines</p>
-                    <div class="tags">
-                        <span class="tag">DevOps</span>
-                        <span class="tag">Automation</span>
-                    </div>
-                </a>
-                <a href="monitor-command.md" class="doc-card">
-                    <h3>📊 Monitor Dashboard</h3>
-                    <p class="description">Real-time monitoring dashboard with global command support</p>
-                    <div class="tags">
-                        <span class="tag">Monitoring</span>
-                        <span class="tag">Dashboard</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Help & Support -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">💡</span>
-                <h2>Help & Support</h2>
-            </div>
-            <div class="docs-grid">
-                <a href="troubleshooting.md" class="doc-card">
-                    <h3>🔧 Troubleshooting</h3>
-                    <p class="description">Common issues and their solutions</p>
-                    <div class="tags">
-                        <span class="tag">Help</span>
-                        <span class="tag">FAQ</span>
-                    </div>
-                </a>
-                <a href="../CONTRIBUTING.md" class="doc-card">
-                    <h3>🤝 Contributing</h3>
-                    <p class="description">Guidelines for contributing to Agentwise</p>
-                    <div class="tags">
-                        <span class="tag">Community</span>
-                        <span class="tag">Open Source</span>
-                    </div>
-                </a>
-                <a href="../ROADMAP.md" class="doc-card">
-                    <h3>🗺️ Roadmap</h3>
-                    <p class="description">Future plans and upcoming features</p>
-                    <div class="tags">
-                        <span class="tag">Future</span>
-                        <span class="tag">Planning</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="quick-links">
-            <h3>⚡ Quick Actions</h3>
-            <div class="quick-links-grid">
-                <a href="#" onclick="showCommand('/create')" class="quick-link">
-                    <span>🆕</span> Create Project
-                </a>
-                <a href="#" onclick="showCommand('/monitor')" class="quick-link">
-                    <span>📊</span> Open Monitor
-                </a>
-                <a href="#" onclick="showCommand('/projects')" class="quick-link">
-                    <span>📁</span> List Projects
-                </a>
-                <a href="#" onclick="showCommand('/generate-agent')" class="quick-link">
-                    <span>🤖</span> Generate Agent
-                </a>
-            </div>
-        </div>
-
-        <!-- Code Examples -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">💻</span>
-                <h2>Quick Examples</h2>
-            </div>
-            <div class="code-example">
-                <code>
-                    # Create a new project<br>
-                    /create "e-commerce platform with Next.js and Stripe"<br><br>
+                <h2>Quick Example</h2>
+                <div class="command-example">
+                    <span class="comment"># Create a new project with Agentwise</span><br>
+                    <span class="command">/create "e-commerce platform with Next.js and Stripe"</span><br><br>
                     
-                    # Add feature to active project<br>
-                    /task "add user authentication with OAuth"<br><br>
+                    <span class="comment"># Add features to your project</span><br>
+                    <span class="command">/task "add user authentication with OAuth"</span><br><br>
                     
-                    # Open monitoring dashboard<br>
-                    /monitor<br><br>
-                    
-                    # Generate custom agent<br>
-                    /generate-agent "security-specialist"
-                </code>
+                    <span class="comment"># Monitor agent progress</span><br>
+                    <span class="command">/monitor</span>
+                </div>
             </div>
-        </div>
 
-        <!-- External Links -->
-        <div class="external-links">
-            <a href="https://github.com/VibeCodingWithPhil/agentwise" target="_blank" class="external-link">
-                <span>🔗</span> GitHub Repository
-            </a>
-            <a href="https://github.com/VibeCodingWithPhil/agentwise/releases" target="_blank" class="external-link">
-                <span>📦</span> Releases
-            </a>
-            <a href="https://github.com/VibeCodingWithPhil/agentwise/issues" target="_blank" class="external-link">
-                <span>🐛</span> Report Issues
-            </a>
-            <a href="https://github.com/VibeCodingWithPhil/agentwise/discussions" target="_blank" class="external-link">
-                <span>💬</span> Discussions
-            </a>
+            <!-- Quick Start Section -->
+            <div class="doc-section" id="quickstart">
+                <h1>⚡ Quick Start Guide</h1>
+
+                <h2>Prerequisites</h2>
+                <ul>
+                    <li><strong>Node.js</strong> 18.0 or higher</li>
+                    <li><strong>Claude Code</strong> CLI installed with <code>--dangerously-skip-permissions</code> flag</li>
+                    <li><strong>Git</strong> for version control</li>
+                    <li><strong>macOS/Linux</strong> or <strong>Windows with WSL</strong></li>
+                </ul>
+
+                <div class="notice">
+                    <div class="notice-title">⚠️ Important: Claude Code Flag</div>
+                    <p>Always start Claude Code with: <code>claude --dangerously-skip-permissions</code></p>
+                    <p>This flag is required for global command installation, script execution, and agent file operations.</p>
+                </div>
+
+                <h2>Installation</h2>
+
+                <h3>macOS / Linux</h3>
+                <div class="command-example">
+                    <span class="comment"># Clone the repository</span><br>
+                    <span class="command">git clone https://github.com/VibeCodingWithPhil/agentwise.git</span><br>
+                    <span class="command">cd agentwise</span><br><br>
+                    
+                    <span class="comment"># Install dependencies</span><br>
+                    <span class="command">npm install</span><br><br>
+                    
+                    <span class="comment"># Start Agentwise</span><br>
+                    <span class="command">npm start</span>
+                </div>
+
+                <h3>Windows (WSL Required)</h3>
+                <div class="command-example">
+                    <span class="comment"># Install WSL if not already installed</span><br>
+                    <span class="command">wsl --install</span><br><br>
+                    
+                    <span class="comment"># In WSL, clone and setup</span><br>
+                    <span class="command">git clone https://github.com/VibeCodingWithPhil/agentwise.git</span><br>
+                    <span class="command">cd agentwise</span><br>
+                    <span class="command">npm install</span><br>
+                    <span class="command">npm start</span>
+                </div>
+
+                <h2>First Project</h2>
+                <ol>
+                    <li>Start Claude Code with the required flag:
+                        <div class="command-example">
+                            <span class="command">claude --dangerously-skip-permissions</span>
+                        </div>
+                    </li>
+                    <li>Create your first project:
+                        <div class="command-example">
+                            <span class="command">/create "a todo app with React and Node.js"</span>
+                        </div>
+                    </li>
+                    <li>Monitor progress:
+                        <div class="command-example">
+                            <span class="command">/monitor</span>
+                        </div>
+                    </li>
+                </ol>
+
+                <h2>Global Commands Setup</h2>
+                <p>Install the global monitor command for easy access:</p>
+                <div class="command-example">
+                    <span class="command">/monitor install</span><br><br>
+                    <span class="comment"># Now you can use from anywhere:</span><br>
+                    <span class="command">agentwise-monitor</span>
+                </div>
+            </div>
+
+            <!-- Commands Section -->
+            <div class="doc-section" id="commands">
+                <h1>🎮 Commands Reference</h1>
+
+                <h2>Project Management</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/create &lt;idea&gt;</code></td>
+                            <td>Create new project from scratch</td>
+                            <td><code>/create "social media dashboard"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/create-plan &lt;idea&gt;</code></td>
+                            <td>Collaborative planning session</td>
+                            <td><code>/create-plan "mobile app"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/projects</code></td>
+                            <td>List and select projects</td>
+                            <td><code>/projects</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/task &lt;feature&gt;</code></td>
+                            <td>Add feature to active project</td>
+                            <td><code>/task "add dark mode"</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Agent Management</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/generate-agent &lt;type&gt;</code></td>
+                            <td>Create custom specialist agent</td>
+                            <td><code>/generate-agent "security-specialist"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/monitor</code></td>
+                            <td>Open monitoring dashboard</td>
+                            <td><code>/monitor</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/docs</code></td>
+                            <td>Open documentation hub</td>
+                            <td><code>/docs</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Advanced Commands</h2>
+                <ul>
+                    <li><code>/init-import</code> - Import existing project</li>
+                    <li><code>/upload &lt;file&gt;</code> - Upload documents or Figma files</li>
+                    <li><code>/clone-website &lt;url&gt;</code> - Clone and customize websites</li>
+                    <li><code>/setup-ollama</code> - Setup local model support</li>
+                    <li><code>/security-review</code> - Run security analysis</li>
+                </ul>
+            </div>
+
+            <!-- Architecture Section -->
+            <div class="doc-section" id="architecture">
+                <h1>🏗️ System Architecture</h1>
+
+                <h2>Overview</h2>
+                <p>Agentwise employs a sophisticated multi-agent orchestration architecture that enables parallel execution, intelligent task distribution, and seamless integration with Claude Code.</p>
+
+                <h2>Core Components</h2>
+
+                <h3>1. Orchestrator</h3>
+                <p>The central brain that coordinates all agent activities:</p>
+                <ul>
+                    <li><strong>Dynamic Agent Manager</strong> - Discovers and loads agents automatically</li>
+                    <li><strong>Task Distributor</strong> - Intelligently assigns tasks to appropriate agents</li>
+                    <li><strong>Phase Controller</strong> - Manages multi-phase project execution</li>
+                    <li><strong>Token Optimizer</strong> - Achieves 99% token reduction</li>
+                </ul>
+
+                <h3>2. Agent System</h3>
+                <p>Specialized agents for different aspects of development:</p>
+                <ul>
+                    <li>Frontend Specialist - UI/UX implementation</li>
+                    <li>Backend Specialist - API and server logic</li>
+                    <li>Database Specialist - Data modeling and optimization</li>
+                    <li>DevOps Specialist - CI/CD and infrastructure</li>
+                    <li>Testing Specialist - Quality assurance</li>
+                    <li>Security Specialist - Security implementation</li>
+                    <li>Designer Specialist - UI/UX design</li>
+                    <li>Code Review Specialist - Code quality</li>
+                </ul>
+
+                <h3>3. Integration Layer</h3>
+                <ul>
+                    <li><strong>MCP Integration</strong> - 26+ MCP servers for enhanced capabilities</li>
+                    <li><strong>Model Router</strong> - Smart routing between Claude, Ollama, and local models</li>
+                    <li><strong>Context Manager</strong> - Persistent project context</li>
+                </ul>
+
+                <h2>Data Flow</h2>
+                <ol>
+                    <li>User issues command in Claude Code</li>
+                    <li>Orchestrator analyzes requirements</li>
+                    <li>Task Distributor creates agent-specific tasks</li>
+                    <li>Agents execute in parallel with shared context</li>
+                    <li>Phase Controller synchronizes progress</li>
+                    <li>Monitor dashboard provides real-time updates</li>
+                </ol>
+
+                <h2>Token Optimization Strategy</h2>
+                <p>Our revolutionary optimization achieves 99% token reduction through:</p>
+                <ul>
+                    <li>Context sharing between agents</li>
+                    <li>Incremental updates instead of full context</li>
+                    <li>Agent pooling (max 3 simultaneous)</li>
+                    <li>Smart context windowing</li>
+                    <li>Response caching</li>
+                </ul>
+            </div>
+
+            <!-- Custom Agents Section -->
+            <div class="doc-section" id="custom-agents">
+                <h1>🤖 Custom Agents</h1>
+
+                <h2>Overview</h2>
+                <p>Agentwise allows you to create specialized agents for unique project requirements. Custom agents are dynamically discovered and integrated into the orchestration system.</p>
+
+                <h2>Creating a Custom Agent</h2>
+
+                <h3>Agent File Structure</h3>
+                <p>Create a markdown file in <code>.claude/agents/</code> directory:</p>
+
+                <div class="command-example">
+                    <span class="comment"># security-specialist.md</span><br><br>
+                    
+                    # Security Specialist<br><br>
+                    
+                    ## Role<br>
+                    Specialized in application security and vulnerability assessment<br><br>
+                    
+                    ## Capabilities<br>
+                    - Security code reviews<br>
+                    - OWASP compliance<br>
+                    - Authentication implementation<br>
+                    - Encryption strategies<br><br>
+                    
+                    ## MCP Integrations<br>
+                    - GitHub security scanning<br>
+                    - Vulnerability databases<br><br>
+                    
+                    ## Best Practices<br>
+                    - Follow principle of least privilege<br>
+                    - Implement defense in depth
+                </div>
+
+                <h3>Using the Generator</h3>
+                <div class="command-example">
+                    <span class="command">/generate-agent "machine-learning-specialist"</span>
+                </div>
+
+                <h2>Dynamic Agent Discovery</h2>
+                <p>The system automatically:</p>
+                <ul>
+                    <li>Scans <code>.claude/agents/</code> directory every 5 seconds</li>
+                    <li>Parses agent metadata from Markdown files</li>
+                    <li>Registers new agents with orchestration system</li>
+                    <li>Makes agents available for project assignment</li>
+                </ul>
+
+                <h2>Agent Selection Logic</h2>
+                <p>Agents are selected based on project requirements:</p>
+                <ol>
+                    <li>Project specification analysis</li>
+                    <li>Technology stack identification</li>
+                    <li>Required capabilities matching</li>
+                    <li>Agent availability checking</li>
+                </ol>
+
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Single Responsibility</strong> - Each agent should have a clear, focused purpose</li>
+                    <li><strong>Composability</strong> - Agents should work well together</li>
+                    <li><strong>Documentation</strong> - Clearly document capabilities and limitations</li>
+                    <li><strong>Testing</strong> - Test agents with various project types</li>
+                </ul>
+            </div>
+
+            <!-- Dynamic Agents Section -->
+            <div class="doc-section" id="dynamic-agents">
+                <h1>⚡ Dynamic Agents</h1>
+
+                <h2>How It Works</h2>
+                <p>The Dynamic Agent System enables Agentwise to automatically discover, load, and manage agents without any hardcoded references.</p>
+
+                <h3>Key Components</h3>
+                <ul>
+                    <li><strong>DynamicAgentManager</strong> - Handles agent discovery and loading</li>
+                    <li><strong>DynamicTaskDistributor</strong> - Intelligently distributes tasks</li>
+                    <li><strong>AgentSelector</strong> - Chooses appropriate agents for projects</li>
+                </ul>
+
+                <h2>Agent Discovery Process</h2>
+                <ol>
+                    <li>System scans <code>.claude/agents/</code> folder</li>
+                    <li>Parses each <code>.md</code> file for agent metadata</li>
+                    <li>Registers agents with the orchestrator</li>
+                    <li>Updates agent pool every 5 seconds</li>
+                </ol>
+
+                <h2>Smart Task Distribution</h2>
+                <p>Tasks are distributed based on:</p>
+                <ul>
+                    <li>Agent expertise and capabilities</li>
+                    <li>Current workload and availability</li>
+                    <li>Project requirements and technology stack</li>
+                    <li>Inter-agent dependencies</li>
+                </ul>
+
+                <h2>Agent Lifecycle</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Discovery</h3>
+                        <p>Automatic detection of new agents</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Registration</h3>
+                        <p>Adding to available agent pool</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Assignment</h3>
+                        <p>Matching agents to project needs</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Execution</h3>
+                        <p>Running tasks in parallel</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCP Integration Section -->
+            <div class="doc-section" id="mcp-integration">
+                <h1>🔌 MCP Integration</h1>
+
+                <h2>Overview</h2>
+                <p>Agentwise integrates with 26+ Model Context Protocol (MCP) servers to provide enhanced capabilities for each agent.</p>
+
+                <h2>Available MCP Servers</h2>
+
+                <h3>Development Tools</h3>
+                <ul>
+                    <li><strong>GitHub</strong> - Version control and collaboration</li>
+                    <li><strong>GitLab</strong> - Alternative Git platform</li>
+                    <li><strong>Linear</strong> - Issue tracking</li>
+                    <li><strong>Sentry</strong> - Error monitoring</li>
+                </ul>
+
+                <h3>Design & UI</h3>
+                <ul>
+                    <li><strong>Figma</strong> - Design file processing</li>
+                    <li><strong>Shadcn UI</strong> - Component library</li>
+                    <li><strong>Tailwind</strong> - CSS framework</li>
+                </ul>
+
+                <h3>Databases</h3>
+                <ul>
+                    <li><strong>PostgreSQL</strong> - Relational database</li>
+                    <li><strong>MongoDB</strong> - NoSQL database</li>
+                    <li><strong>MySQL</strong> - Relational database</li>
+                    <li><strong>SQLite</strong> - Embedded database</li>
+                </ul>
+
+                <h3>Cloud & Infrastructure</h3>
+                <ul>
+                    <li><strong>AWS</strong> - Amazon Web Services</li>
+                    <li><strong>Cloudflare</strong> - CDN and security</li>
+                    <li><strong>Terraform</strong> - Infrastructure as Code</li>
+                </ul>
+
+                <h2>Agent-MCP Mapping</h2>
+                <p>Each agent automatically receives appropriate MCP tools:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>MCP Servers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frontend Specialist</td>
+                            <td>Figma, Shadcn UI, Tailwind</td>
+                        </tr>
+                        <tr>
+                            <td>Backend Specialist</td>
+                            <td>PostgreSQL, MongoDB, AWS</td>
+                        </tr>
+                        <tr>
+                            <td>DevOps Specialist</td>
+                            <td>Terraform, Cloudflare, GitHub</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Configuration</h2>
+                <p>Configure MCPs in <code>config/mcp-config.json</code>:</p>
+                <div class="command-example">
+                    {<br>
+                    &nbsp;&nbsp;"agents": {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"frontend-specialist": {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"mcps": ["figma", "shadcn-ui"],<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"priority": "high"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
+            </div>
+
+            <!-- Model Routing Section -->
+            <div class="doc-section" id="model-routing">
+                <h1>🎯 Smart Model Routing</h1>
+
+                <h2>Overview</h2>
+                <p>Intelligent routing between Claude, Ollama, LM Studio, and OpenRouter for optimal performance and cost.</p>
+
+                <h2>Supported Models</h2>
+
+                <h3>Cloud Models</h3>
+                <ul>
+                    <li><strong>Claude 3.5 Sonnet</strong> - Primary model for complex tasks</li>
+                    <li><strong>Claude 3 Haiku</strong> - Fast model for simple tasks</li>
+                    <li><strong>OpenRouter Models</strong> - Access to 100+ models</li>
+                </ul>
+
+                <h3>Local Models</h3>
+                <ul>
+                    <li><strong>Ollama</strong> - Llama, Mistral, CodeLlama, etc.</li>
+                    <li><strong>LM Studio</strong> - Any GGUF model</li>
+                    <li><strong>Custom Models</strong> - Your own fine-tuned models</li>
+                </ul>
+
+                <h2>Routing Strategy</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task Type</th>
+                            <th>Recommended Model</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Architecture Design</td>
+                            <td>Claude 3.5 Sonnet</td>
+                            <td>Complex reasoning required</td>
+                        </tr>
+                        <tr>
+                            <td>Code Generation</td>
+                            <td>CodeLlama (Local)</td>
+                            <td>Specialized for code</td>
+                        </tr>
+                        <tr>
+                            <td>Documentation</td>
+                            <td>Claude 3 Haiku</td>
+                            <td>Fast and efficient</td>
+                        </tr>
+                        <tr>
+                            <td>Testing</td>
+                            <td>Mistral (Local)</td>
+                            <td>Good balance of speed/quality</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Setup Local Models</h2>
+
+                <h3>Ollama Setup</h3>
+                <div class="command-example">
+                    <span class="command">/setup-ollama</span><br><br>
+                    <span class="comment"># Pull models</span><br>
+                    <span class="command">ollama pull llama2</span><br>
+                    <span class="command">ollama pull codellama</span>
+                </div>
+
+                <h3>LM Studio Setup</h3>
+                <div class="command-example">
+                    <span class="command">/setup-lmstudio</span><br><br>
+                    <span class="comment"># Configure in settings</span><br>
+                    <span class="command">/configure-routing optimize</span>
+                </div>
+            </div>
+
+            <!-- Performance Section -->
+            <div class="doc-section" id="performance">
+                <h1>📊 Performance Analytics</h1>
+
+                <h2>Metrics Tracked</h2>
+                <ul>
+                    <li><strong>Task Completion Rate</strong> - Success rate per agent</li>
+                    <li><strong>Token Usage</strong> - Optimization effectiveness</li>
+                    <li><strong>Execution Time</strong> - Task completion speed</li>
+                    <li><strong>Quality Score</strong> - Code quality metrics</li>
+                    <li><strong>Error Rate</strong> - Failure tracking</li>
+                </ul>
+
+                <h2>Performance Dashboard</h2>
+                <p>Access real-time metrics:</p>
+                <div class="command-example">
+                    <span class="command">/monitor</span><br><br>
+                    <span class="comment"># View specific agent performance</span><br>
+                    <span class="command">agentwise-monitor --agent frontend-specialist</span>
+                </div>
+
+                <h2>Optimization Results</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">99%</div>
+                        <div class="stat-label">Token Reduction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">10x</div>
+                        <div class="stat-label">Speed Increase</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">95%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">Parallel Agents</div>
+                    </div>
+                </div>
+
+                <h2>Self-Improving Agents</h2>
+                <p>Agents continuously improve through:</p>
+                <ul>
+                    <li>Learning from successful patterns</li>
+                    <li>Identifying and avoiding errors</li>
+                    <li>Optimizing task execution strategies</li>
+                    <li>Sharing knowledge between agents</li>
+                </ul>
+            </div>
+
+            <!-- Tech Validation Section -->
+            <div class="doc-section" id="tech-validation">
+                <h1>✅ Tech Stack Validator</h1>
+
+                <h2>What It Does</h2>
+                <p>Validates technology choices before project starts to prevent compatibility issues and ensure best practices.</p>
+
+                <h2>Validation Checks</h2>
+                <ul>
+                    <li><strong>Library Compatibility</strong> - Ensures libraries work together</li>
+                    <li><strong>Version Compatibility</strong> - Checks for version conflicts</li>
+                    <li><strong>Framework Validation</strong> - Confirms framework appropriateness</li>
+                    <li><strong>Dependency Analysis</strong> - Identifies conflicting dependencies</li>
+                    <li><strong>Best Practices</strong> - Recommends current best libraries</li>
+                </ul>
+
+                <h2>Example Validation</h2>
+                <div class="command-example">
+                    <span class="comment"># Project: React + TypeScript + Material-UI</span><br><br>
+                    ✅ React 18.2.0 - Compatible<br>
+                    ✅ TypeScript 5.0 - Compatible<br>
+                    ✅ Material-UI 5.14 - Compatible<br>
+                    ⚠️ Warning: Consider using Tailwind CSS for better performance<br>
+                    ✅ All dependencies resolved successfully
+                </div>
+
+                <h2>Common Issues Prevented</h2>
+                <ul>
+                    <li>React version conflicts with UI libraries</li>
+                    <li>TypeScript configuration mismatches</li>
+                    <li>Incompatible database drivers</li>
+                    <li>Conflicting CSS frameworks</li>
+                    <li>Deprecated package usage</li>
+                </ul>
+            </div>
+
+            <!-- CI/CD Section -->
+            <div class="doc-section" id="cicd">
+                <h1>🔄 CI/CD Integration</h1>
+
+                <h2>Supported Platforms</h2>
+                <ul>
+                    <li>GitHub Actions</li>
+                    <li>GitLab CI</li>
+                    <li>Jenkins</li>
+                    <li>Azure DevOps</li>
+                    <li>CircleCI</li>
+                    <li>Travis CI</li>
+                </ul>
+
+                <h2>GitHub Actions Example</h2>
+                <div class="command-example">
+                    name: Agentwise CI/CD<br><br>
+                    
+                    on: [push, pull_request]<br><br>
+                    
+                    jobs:<br>
+                    &nbsp;&nbsp;agentwise-validation:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;steps:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- uses: actions/checkout@v4<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- name: Setup Agentwise<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: |<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;npm install -g agentwise<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;claude --dangerously-skip-permissions<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- name: Run Validation<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: agentwise-monitor validate
+                </div>
+
+                <h2>Deployment Strategies</h2>
+
+                <h3>Blue-Green Deployment</h3>
+                <p>Zero-downtime deployments with instant rollback capability.</p>
+
+                <h3>Canary Deployment</h3>
+                <p>Progressive rollout with monitoring and automatic rollback.</p>
+
+                <h3>Progressive Deployment</h3>
+                <div class="command-example">
+                    <span class="command">/task-deployment "deploy canary with 10% traffic"</span><br>
+                    <span class="comment"># Monitor for 30 minutes</span><br>
+                    <span class="command">/task-deployment "promote canary to 50% traffic"</span><br>
+                    <span class="comment"># Monitor for 1 hour</span><br>
+                    <span class="command">/task-deployment "complete deployment to 100%"</span>
+                </div>
+
+                <h2>Quality Gates</h2>
+                <ul>
+                    <li>Code coverage must exceed 80%</li>
+                    <li>No critical security vulnerabilities</li>
+                    <li>Performance benchmarks must pass</li>
+                    <li>All agent tests must succeed</li>
+                </ul>
+            </div>
+
+            <!-- Monitor Section -->
+            <div class="doc-section" id="monitor">
+                <h1>📊 Monitor Dashboard</h1>
+
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Real-time Updates</strong> - WebSocket-based live data</li>
+                    <li><strong>Agent Status</strong> - Track all agent activities</li>
+                    <li><strong>Progress Visualization</strong> - Charts and progress bars</li>
+                    <li><strong>System Health</strong> - CPU, memory, network monitoring</li>
+                    <li><strong>Task Feed</strong> - Live stream of completions</li>
+                </ul>
+
+                <h2>Starting the Monitor</h2>
+                <div class="command-example">
+                    <span class="comment"># Open dashboard</span><br>
+                    <span class="command">/monitor</span><br><br>
+                    
+                    <span class="comment"># Install global command</span><br>
+                    <span class="command">/monitor install</span><br><br>
+                    
+                    <span class="comment"># Use from anywhere</span><br>
+                    <span class="command">agentwise-monitor</span>
+                </div>
+
+                <h2>Dashboard Sections</h2>
+
+                <h3>Agent Grid</h3>
+                <p>Visual cards showing each agent's:</p>
+                <ul>
+                    <li>Current status (idle, working, completed)</li>
+                    <li>Progress percentage</li>
+                    <li>Current task description</li>
+                    <li>Time elapsed</li>
+                </ul>
+
+                <h3>Task Feed</h3>
+                <p>Real-time activity log with:</p>
+                <ul>
+                    <li>Timestamp of each action</li>
+                    <li>Agent assignment</li>
+                    <li>Task description</li>
+                    <li>Success/failure status</li>
+                </ul>
+
+                <h3>System Health</h3>
+                <p>Resource monitoring:</p>
+                <ul>
+                    <li>CPU usage per agent</li>
+                    <li>Memory consumption</li>
+                    <li>Network activity</li>
+                    <li>Token usage rate</li>
+                </ul>
+
+                <h2>Emergency Controls</h2>
+                <ul>
+                    <li><strong>Pause All</strong> - Temporarily halt all agents</li>
+                    <li><strong>Resume</strong> - Continue execution</li>
+                    <li><strong>Emergency Stop</strong> - Immediate shutdown</li>
+                    <li><strong>Rollback</strong> - Revert to previous state</li>
+                </ul>
+            </div>
+
+            <!-- Docs Command Section -->
+            <div class="doc-section" id="docs-command">
+                <h1>📚 Documentation Command</h1>
+
+                <h2>Overview</h2>
+                <p>The <code>/docs</code> command provides instant access to this comprehensive documentation hub.</p>
+
+                <h2>Usage</h2>
+                <div class="command-example">
+                    <span class="comment"># Open documentation</span><br>
+                    <span class="command">/docs</span><br><br>
+                    
+                    <span class="comment"># Show help</span><br>
+                    <span class="command">/docs help</span>
+                </div>
+
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Interactive Interface</strong> - Beautiful, searchable web UI</li>
+                    <li><strong>Offline Access</strong> - No internet required</li>
+                    <li><strong>Cross-Platform</strong> - Works on Windows, macOS, Linux</li>
+                    <li><strong>Smart Search</strong> - Real-time filtering with Ctrl+K</li>
+                </ul>
+
+                <h2>Browser Detection</h2>
+                <p>Automatically opens documentation using:</p>
+                <ul>
+                    <li><strong>macOS</strong>: <code>open</code> command</li>
+                    <li><strong>Windows</strong>: <code>start</code> command</li>
+                    <li><strong>Linux</strong>: <code>xdg-open</code>, Firefox, Chrome</li>
+                </ul>
+
+                <h2>Keyboard Shortcuts</h2>
+                <ul>
+                    <li><strong>Ctrl/Cmd + K</strong> - Focus search bar</li>
+                    <li><strong>Click navigation</strong> - Jump to sections</li>
+                    <li><strong>Smooth scrolling</strong> - Better reading experience</li>
+                </ul>
+            </div>
+
+            <!-- Troubleshooting Section -->
+            <div class="doc-section" id="troubleshooting">
+                <h1>🔧 Troubleshooting</h1>
+
+                <h2>Common Issues</h2>
+
+                <h3>Claude Code Permission Error</h3>
+                <div class="notice">
+                    <div class="notice-title">Problem</div>
+                    <p>Commands fail with permission errors</p>
+                </div>
+                <p><strong>Solution:</strong> Start Claude Code with required flag:</p>
+                <div class="command-example">
+                    <span class="command">claude --dangerously-skip-permissions</span>
+                </div>
+
+                <h3>Monitor Won't Open</h3>
+                <div class="notice">
+                    <div class="notice-title">Problem</div>
+                    <p>Monitor dashboard doesn't open in browser</p>
+                </div>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Check if port 3001 is available</li>
+                    <li>Manually open: <code>http://localhost:3001</code></li>
+                    <li>Restart monitor: <code>/monitor</code></li>
+                </ul>
+
+                <h3>Agent Not Found</h3>
+                <div class="notice">
+                    <div class="notice-title">Problem</div>
+                    <p>Custom agent not being discovered</p>
+                </div>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Check file location: <code>.claude/agents/</code></li>
+                    <li>Verify file extension: <code>.md</code></li>
+                    <li>Check markdown format is correct</li>
+                    <li>Wait 5 seconds for discovery</li>
+                </ul>
+
+                <h3>Token Limit Exceeded</h3>
+                <div class="notice">
+                    <div class="notice-title">Problem</div>
+                    <p>API rate limits or token limits hit</p>
+                </div>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Enable local models: <code>/setup-ollama</code></li>
+                    <li>Configure routing: <code>/configure-routing optimize</code></li>
+                    <li>Reduce parallel agents in settings</li>
+                </ul>
+
+                <h2>Debug Mode</h2>
+                <p>Enable debug logging for detailed information:</p>
+                <div class="command-example">
+                    <span class="comment"># Set environment variable</span><br>
+                    <span class="command">export AGENTWISE_DEBUG=true</span><br><br>
+                    
+                    <span class="comment"># Run with debug output</span><br>
+                    <span class="command">npm start</span>
+                </div>
+
+                <h2>Getting Help</h2>
+                <ul>
+                    <li><strong>GitHub Issues</strong>: <a href="https://github.com/VibeCodingWithPhil/agentwise/issues" target="_blank">Report bugs</a></li>
+                    <li><strong>Discussions</strong>: <a href="https://github.com/VibeCodingWithPhil/agentwise/discussions" target="_blank">Ask questions</a></li>
+                    <li><strong>Documentation</strong>: This hub (<code>/docs</code>)</li>
+                </ul>
+
+                <h2>System Requirements</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Minimum</th>
+                            <th>Recommended</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Node.js</td>
+                            <td>18.0</td>
+                            <td>20.0+</td>
+                        </tr>
+                        <tr>
+                            <td>RAM</td>
+                            <td>4GB</td>
+                            <td>8GB+</td>
+                        </tr>
+                        <tr>
+                            <td>Disk Space</td>
+                            <td>2GB</td>
+                            <td>10GB+</td>
+                        </tr>
+                        <tr>
+                            <td>CPU</td>
+                            <td>2 cores</td>
+                            <td>4+ cores</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
-        // Search functionality
-        function filterDocs() {
-            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            const docCards = document.querySelectorAll('.doc-card');
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.doc-section').forEach(section => {
+                section.classList.remove('active');
+            });
             
-            docCards.forEach(card => {
-                const text = card.textContent.toLowerCase();
+            // Show selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+            
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            document.getElementById('content').scrollTop = 0;
+            
+            // Close mobile sidebar
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+        }
+
+        // Search functionality
+        function searchDocs() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const sections = document.querySelectorAll('.doc-section');
+            
+            if (searchTerm === '') {
+                // Show overview if search is empty
+                showSection('overview');
+                return;
+            }
+            
+            // Search through all sections
+            let found = false;
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
                 if (text.includes(searchTerm)) {
-                    card.style.display = 'block';
+                    if (!found) {
+                        section.classList.add('active');
+                        found = true;
+                    }
                 } else {
-                    card.style.display = 'none';
+                    section.classList.remove('active');
                 }
             });
         }
 
-        // Show command helper
-        function showCommand(command) {
-            alert(`To use this command, type:\n\n${command}\n\nIn your Claude Code terminal with Agentwise running.`);
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
         }
 
-        // Add smooth scrolling
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchBar').focus();
+            }
+            
+            // Escape to close mobile sidebar
+            if (e.key === 'Escape') {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+        });
+
+        // Set initial active section
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for hash in URL
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showSection(hash);
+            }
+        });
+
+        // Smooth scrolling for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -648,15 +1524,6 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Ctrl/Cmd + K to focus search
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                document.getElementById('searchBar').focus();
-            }
         });
     </script>
 </body>
