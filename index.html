@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agentwise - Multi-Agent Orchestration System for Claude Code. Transform your development workflow with parallel AI agent execution and intelligent task distribution.">
+    <meta name="keywords" content="AI, Claude Code, Multi-Agent, Development Tools, Automation, TypeScript">
+    <meta property="og:title" content="Agentwise - AI-Powered Development Orchestration">
+    <meta property="og:description" content="Transform your development workflow with parallel AI agent execution and 99% token optimization.">
+    <meta property="og:url" content="https://vibecodingwithphil.github.io/agentwise/">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Agentwise - Multi-Agent Orchestration for Claude Code</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚀</text></svg>">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-hover: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            text-align: center;
+            background: radial-gradient(ellipse at center top, rgba(99, 102, 241, 0.1), transparent 60%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%239C92AC" fill-opacity="0.05"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+            border-color: var(--primary-color);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--surface);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Documentation Section */
+        .documentation {
+            padding: 5rem 2rem;
+            background: var(--background);
+        }
+
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .doc-card {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .doc-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .doc-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .doc-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Commands Section */
+        .commands {
+            padding: 5rem 2rem;
+            background: var(--surface);
+        }
+
+        .commands-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .command-item {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .command-item:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .command-code {
+            font-family: 'Courier New', monospace;
+            background: var(--surface);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .command-description {
+            color: var(--text-secondary);
+        }
+
+        .command-badge {
+            background: var(--gradient);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            background: var(--background);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 2rem auto;
+            max-width: 200px;
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .command-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            background: var(--background);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+        }
+
+        pre {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        /* Badges */
+        .badges {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .badges img {
+            height: 28px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: all 0.3s ease;
+        }
+
+        .nav.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🚀 Agentwise</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#documentation">Docs</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="https://github.com/VibeCodingWithPhil/agentwise" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">🚀</div>
+            <h1>Agentwise</h1>
+            <p class="tagline">Multi-Agent Orchestration System for Claude Code</p>
+            
+            <div class="badges">
+                <img src="https://img.shields.io/badge/License-Custom%20Commercial-red.svg" alt="License">
+                <img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen" alt="Node Version">
+                <img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript">
+                <img src="https://img.shields.io/badge/Claude%20Code-Compatible-purple" alt="Claude Code">
+                <img src="https://img.shields.io/github/v/release/VibeCodingWithPhil/agentwise?include_prereleases" alt="Release">
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://github.com/VibeCodingWithPhil/agentwise" class="btn btn-primary">
+                    <span>⭐</span> Star on GitHub
+                </a>
+                <a href="docs/index.html" class="btn btn-secondary">
+                    <span>📖</span> Full Documentation
+                </a>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=KAVQY4M7RJJBA" class="btn btn-secondary">
+                    <span>💖</span> Support Project
+                </a>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">99%</div>
+                    <div class="stat-label">Token Reduction</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">27+</div>
+                    <div class="stat-label">MCP Integrations</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">Parallel Agents</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">10x</div>
+                    <div class="stat-label">Faster Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Features</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">Multi-Agent Orchestration</h3>
+                    <p class="feature-description">
+                        8+ specialized agents working in parallel - Frontend, Backend, Database, DevOps, Testing, and more. Dynamic agent generation for custom needs.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3 class="feature-title">99% Token Optimization</h3>
+                    <p class="feature-description">
+                        Revolutionary optimization allows 100 agents to use the same tokens as 1. Smart context sharing and incremental updates.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Figma Dev Mode Integration</h3>
+                    <p class="feature-description">
+                        Direct integration with Figma for design-to-code workflows. Generate components from designs with multi-framework support.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3 class="feature-title">27+ MCP Servers</h3>
+                    <p class="feature-description">
+                        Comprehensive integrations including GitHub, AWS, Stripe, MongoDB, and more. Each agent gets role-specific tools.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Real-time Monitoring</h3>
+                    <p class="feature-description">
+                        Live dashboard with WebSocket integration. Track agent progress, token usage, and system performance in real-time.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Self-Improving Agents</h3>
+                    <p class="feature-description">
+                        Agents learn from every task with persistent knowledge base. Continuous improvement and adaptation.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Website Cloning</h3>
+                    <p class="feature-description">
+                        Clone any website and customize it. Complete extraction of HTML, CSS, and interactions with smart customization.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3 class="feature-title">Document Upload</h3>
+                    <p class="feature-description">
+                        Upload PDFs, Word docs, and other formats directly. Auto-extraction of requirements and specifications.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Security First</h3>
+                    <p class="feature-description">
+                        Built-in security validation, hallucination detection, and code review. Protected against malicious contributions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="documentation" id="documentation">
+        <div class="container">
+            <h2 class="section-title">Documentation</h2>
+            
+            <div class="doc-grid">
+                <a href="https://github.com/VibeCodingWithPhil/agentwise#-quick-start" class="doc-card">
+                    <span class="doc-icon">🚀</span>
+                    <div class="doc-content">
+                        <h3>Quick Start</h3>
+                        <p>Get up and running in minutes</p>
+                    </div>
+                </a>
+
+                <a href="docs/index.html" class="doc-card">
+                    <span class="doc-icon">📚</span>
+                    <div class="doc-content">
+                        <h3>Full Documentation</h3>
+                        <p>Interactive documentation hub</p>
+                    </div>
+                </a>
+
+                <a href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/docs/custom-agents.md" class="doc-card">
+                    <span class="doc-icon">🤖</span>
+                    <div class="doc-content">
+                        <h3>Custom Agents</h3>
+                        <p>Create specialized agents</p>
+                    </div>
+                </a>
+
+                <a href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/docs/figma-integration.md" class="doc-card">
+                    <span class="doc-icon">🎨</span>
+                    <div class="doc-content">
+                        <h3>Figma Integration</h3>
+                        <p>Design-to-code workflow</p>
+                    </div>
+                </a>
+
+                <a href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/docs/ci-cd-integration.md" class="doc-card">
+                    <span class="doc-icon">🔄</span>
+                    <div class="doc-content">
+                        <h3>CI/CD Integration</h3>
+                        <p>Deployment pipelines</p>
+                    </div>
+                </a>
+
+                <a href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/docs/repository-protection-guide.md" class="doc-card">
+                    <span class="doc-icon">🔒</span>
+                    <div class="doc-content">
+                        <h3>Security Guide</h3>
+                        <p>Repository protection</p>
+                    </div>
+                </a>
+
+                <a href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/.github/CONTRIBUTING.md" class="doc-card">
+                    <span class="doc-icon">🤝</span>
+                    <div class="doc-content">
+                        <h3>Contributing</h3>
+                        <p>How to contribute</p>
+                    </div>
+                </a>
+
+                <a href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/CLAUDE.md" class="doc-card">
+                    <span class="doc-icon">🧠</span>
+                    <div class="doc-content">
+                        <h3>Architecture</h3>
+                        <p>System architecture details</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commands Section -->
+    <section class="commands" id="commands">
+        <div class="container">
+            <h2 class="section-title">Powerful Commands</h2>
+            
+            <div class="commands-grid">
+                <div class="command-item">
+                    <code class="command-code">/create</code>
+                    <span class="command-description">Start new project from scratch with AI agents</span>
+                    <span class="command-badge">Popular</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/figma</code>
+                    <span class="command-description">Connect to Figma and generate components</span>
+                    <span class="command-badge">New</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/monitor</code>
+                    <span class="command-description">Real-time monitoring dashboard</span>
+                    <span class="command-badge">Essential</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/task</code>
+                    <span class="command-description">Add features to active project</span>
+                    <span class="command-badge">Core</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/generate-agent</code>
+                    <span class="command-description">Create custom specialized agents</span>
+                    <span class="command-badge">Advanced</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/clone-website</code>
+                    <span class="command-description">Clone and customize any website</span>
+                    <span class="command-badge">Powerful</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/upload</code>
+                    <span class="command-description">Upload documents and design files</span>
+                    <span class="command-badge">Utility</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/docs</code>
+                    <span class="command-description">Open local documentation hub</span>
+                    <span class="command-badge">Help</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section class="documentation">
+        <div class="container">
+            <h2 class="section-title">Quick Installation</h2>
+            
+            <div class="code-block">
+                <pre><code># Clone the repository
+git clone https://github.com/VibeCodingWithPhil/agentwise.git
+cd agentwise
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Link globally
+npm link
+
+# Start using Agentwise
+agentwise</code></pre>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://github.com/VibeCodingWithPhil/agentwise#-quick-start" class="btn btn-primary">
+                    Full Installation Guide →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/VibeCodingWithPhil/agentwise">GitHub</a>
+            <a href="https://github.com/VibeCodingWithPhil/agentwise/issues">Issues</a>
+            <a href="https://github.com/VibeCodingWithPhil/agentwise/releases">Releases</a>
+            <a href="https://www.paypal.com/donate/?hosted_button_id=KAVQY4M7RJJBA">Donate</a>
+            <a href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/LICENSE">License</a>
+        </div>
+        
+        <div class="footer-divider"></div>
+        
+        <div class="footer-copyright">
+            © 2025 Agentwise. Created by VibeCodingWithPhil. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Show navigation on scroll
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and doc cards
+        document.querySelectorAll('.feature-card, .doc-card, .command-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add loading animation to buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.href && !this.href.includes('#')) {
+                    this.innerHTML += ' <span class="loading"></span>';
+                }
+            });
+        });
+
+        // Console Easter Egg
+        console.log('%c🚀 Welcome to Agentwise!', 'font-size: 24px; font-weight: bold; color: #6366f1;');
+        console.log('%cTransform your development with AI-powered orchestration', 'font-size: 14px; color: #8b5cf6;');
+        console.log('%cStar us on GitHub: https://github.com/VibeCodingWithPhil/agentwise', 'font-size: 12px; color: #cbd5e1;');
+    </script>
+</body>
+</html>
