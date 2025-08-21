@@ -14,8 +14,23 @@ export class DocsCommand {
   private indexPath: string;
 
   constructor() {
-    this.docsPath = path.resolve(path.join(process.cwd(), 'docs'));
-    this.indexPath = path.join(this.docsPath, 'index.html');
+    // First try docs-site for development, then fallback to docs folder
+    const docsSitePath = path.resolve(path.join(process.cwd(), 'docs-site'));
+    const docsPath = path.resolve(path.join(process.cwd(), 'docs'));
+    
+    // Check if we're in development mode with docs-site
+    if (fs.pathExistsSync(docsSitePath)) {
+      this.docsPath = docsSitePath;
+      this.indexPath = path.join(docsSitePath, 'out', 'index.html');
+      
+      // If out folder doesn't exist, try to serve dev version
+      if (!fs.pathExistsSync(this.indexPath)) {
+        this.indexPath = path.join(docsSitePath, 'src', 'app', 'page.tsx');
+      }
+    } else {
+      this.docsPath = docsPath;
+      this.indexPath = path.join(this.docsPath, 'index.html');
+    }
   }
 
   /**
@@ -43,15 +58,46 @@ export class DocsCommand {
         return;
       }
 
-      console.log('📚 Opening Agentwise Documentation Hub...');
-      console.log(`📁 Location: ${this.indexPath}`);
+      // If docs-site exists and has package.json, offer to run dev server
+      const docsSitePath = path.join(process.cwd(), 'docs-site');
+      const packageJsonPath = path.join(docsSitePath, 'package.json');
+      
+      if (await fs.pathExists(packageJsonPath)) {
+        console.log('📚 Starting Agentwise Documentation Development Server...');
+        console.log('🚀 Running: npm run dev in docs-site folder');
+        console.log('⏳ Please wait for the server to start...\n');
+        
+        // Start the Next.js dev server
+        const devProcess = exec('npm run dev', { cwd: docsSitePath });
+        
+        // Wait a bit for server to start
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        console.log('✅ Documentation server started at http://localhost:3000');
+        console.log('📝 Press Ctrl+C to stop the server\n');
+        
+        // Open browser
+        await execAsync('open http://localhost:3000').catch(() => {
+          console.log('Please open http://localhost:3000 in your browser');
+        });
+        
+        // Keep process alive
+        process.stdin.resume();
+        process.on('SIGINT', () => {
+          devProcess.kill();
+          process.exit();
+        });
+      } else {
+        console.log('📚 Opening Agentwise Documentation...');
+        console.log(`📁 Location: ${this.indexPath}`);
 
-      // Open the documentation in the default browser
-      await this.openInBrowser();
+        // Open the documentation in the default browser
+        await this.openInBrowser();
 
-      console.log('✅ Documentation opened in your default browser');
-      console.log('\n💡 Tip: Use Ctrl/Cmd + K in the documentation to search');
-      console.log('📝 Documentation is also available at: https://github.com/VibeCodingWithPhil/agentwise/docs');
+        console.log('✅ Documentation opened in your default browser');
+        console.log('\n💡 Tip: Use Ctrl/Cmd + K in the documentation to search');
+        console.log('📝 Documentation is also available at: https://vibecodingwithphil.github.io/agentwise/');
+      }
       
     } catch (error) {
       console.error('❌ Error opening documentation:', error instanceof Error ? error.message : error);

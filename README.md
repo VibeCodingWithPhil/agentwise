@@ -574,7 +574,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] **Document Upload** - Process PDFs, Word docs, and design files
 - [x] **Figma Dev Mode Integration** - Direct connection to Figma desktop for design-to-code
 - [x] **Website Cloning** - Clone and customize existing websites with Firecrawl
-- [x] **GitHub Pages** - Beautiful landing page at https://vibecodingwithphil.github.io/agentwise/
+- [x] **Documentation Site** - Beautiful documentation at https://agentwise.vercel.app
 - [x] **Repository Protection** - Branch protection, rulesets, and security automation
 - [x] **Automated PR Management** - Dependabot integration with auto-merge capabilities
 

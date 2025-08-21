@@ -177,7 +177,7 @@ export class UsageAnalytics {
       );
       
       const commandCounts: Record<string, number> = {};
-      const successRate: Record<string, number> = {};
+      const successRate: Record<string, { success: number; total: number }> = {};
       
       data.sessions.forEach((session: any) => {
         session.usage.forEach((usage: UsageData) => {
