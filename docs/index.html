@@ -500,6 +500,13 @@
                 </div>
 
                 <div class="nav-section">
+                    <div class="nav-section-title">Integrations</div>
+                    <a class="nav-item" onclick="showSection('figma')">
+                        <span class="nav-item-icon">🎨</span>Figma Dev Mode
+                    </a>
+                </div>
+
+                <div class="nav-section">
                     <div class="nav-section-title">DevOps</div>
                     <a class="nav-item" onclick="showSection('cicd')">
                         <span class="nav-item-icon">🔄</span>CI/CD Integration
@@ -1160,6 +1167,242 @@
                     <li>Incompatible database drivers</li>
                     <li>Conflicting CSS frameworks</li>
                     <li>Deprecated package usage</li>
+                </ul>
+            </div>
+
+            <!-- Figma Integration Section -->
+            <div class="doc-section" id="figma">
+                <h1>🎨 Figma Dev Mode Integration</h1>
+
+                <h2>Overview</h2>
+                <p>Agentwise includes seamless integration with Figma's Dev Mode MCP Server, enabling AI-powered design-to-code workflows directly from your Figma designs.</p>
+
+                <h2>Prerequisites</h2>
+                <ul>
+                    <li><strong>Figma Desktop App</strong>: Latest version installed and running</li>
+                    <li><strong>Figma Plan</strong>: Dev or Full seat on Professional/Organization/Enterprise plan</li>
+                    <li><strong>MCP Server Enabled</strong>: Enable Dev Mode MCP Server in Figma Preferences</li>
+                    <li><strong>Active Design File</strong>: Open a Figma design file with frames/components</li>
+                </ul>
+
+                <h2>Setup Instructions</h2>
+                <div class="code-block">
+                    <pre><code># 1. Enable Figma Dev Mode MCP Server
+Open Figma Desktop App → Menu → Preferences
+Enable "Enable Dev Mode MCP Server"
+Server runs at http://127.0.0.1:3845/mcp
+
+# 2. Connect Agentwise to Figma
+/figma connect</code></pre>
+                </div>
+
+                <h2>Available Commands</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/figma connect</code></td>
+                            <td>Connect to Figma MCP Server</td>
+                            <td><code>/figma connect</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/figma generate [name]</code></td>
+                            <td>Generate component from selection</td>
+                            <td><code>/figma generate Button</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/figma sync</code></td>
+                            <td>Sync design tokens & components</td>
+                            <td><code>/figma sync</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/figma tokens [path]</code></td>
+                            <td>Export design variables</td>
+                            <td><code>/figma tokens ./tokens.json</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/figma image [path]</code></td>
+                            <td>Capture design screenshot</td>
+                            <td><code>/figma image ./design.png</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/figma rules [dir]</code></td>
+                            <td>Generate design system rules</td>
+                            <td><code>/figma rules ./design-system</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/figma status</code></td>
+                            <td>Check connection status</td>
+                            <td><code>/figma status</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Supported Frameworks</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Frontend</h3>
+                        <ul>
+                            <li>React (TSX)</li>
+                            <li>Vue</li>
+                            <li>Angular</li>
+                            <li>HTML</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Mobile</h3>
+                        <ul>
+                            <li>Swift (iOS)</li>
+                            <li>Kotlin (Android)</li>
+                            <li>React Native</li>
+                            <li>Flutter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Workflow Examples</h2>
+
+                <h3>Component Generation</h3>
+                <div class="code-block">
+                    <pre><code># 1. Select a frame/component in Figma
+# 2. Generate React component
+/figma generate HeaderComponent
+
+# 3. Component created at:
+# src/components/HeaderComponent/HeaderComponent.tsx
+# src/components/HeaderComponent/index.ts</code></pre>
+                </div>
+
+                <h3>Design Token Export</h3>
+                <div class="code-block">
+                    <pre><code># 1. Define variables in Figma
+# 2. Export tokens to your project
+/figma tokens ./src/theme/tokens.json
+
+# 3. Use in your code:
+import tokens from './theme/tokens.json';</code></pre>
+                </div>
+
+                <h3>Full Design Sync</h3>
+                <div class="code-block">
+                    <pre><code># Connect and sync everything
+/figma connect
+/figma sync
+
+# Generated files:
+# - src/design-tokens.json
+# - Component mappings updated
+# - Design rules applied</code></pre>
+                </div>
+
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Code Connect Integration</strong>: Links Figma components to actual code</li>
+                    <li><strong>Design Variable Extraction</strong>: Auto-extracts and categorizes tokens</li>
+                    <li><strong>Multi-Framework Support</strong>: Generate for any framework</li>
+                    <li><strong>Real-time Synchronization</strong>: Live connection to Figma</li>
+                    <li><strong>Component Property Mapping</strong>: Maintains design properties</li>
+                </ul>
+
+                <h2>Best Practices</h2>
+
+                <h3>Semantic Naming</h3>
+                <div class="code-block">
+                    <pre><code>✅ Good: "PrimaryButton", "NavigationHeader"
+❌ Bad: "Frame 123", "Rectangle 2"</code></pre>
+                </div>
+
+                <h3>Component Structure</h3>
+                <div class="code-block">
+                    <pre><code>Components/
+├── Buttons/
+│   ├── PrimaryButton
+│   ├── SecondaryButton
+│   └── IconButton
+└── Forms/
+    ├── TextField
+    └── Checkbox</code></pre>
+                </div>
+
+                <h3>Design Variables</h3>
+                <ul>
+                    <li><strong>Colors</strong>: Primary, Secondary, Background, Text</li>
+                    <li><strong>Spacing</strong>: 4px, 8px, 16px, 24px, 32px</li>
+                    <li><strong>Typography</strong>: Heading, Body, Caption</li>
+                    <li><strong>Effects</strong>: Shadow-sm, Shadow-md, Shadow-lg</li>
+                </ul>
+
+                <h2>Troubleshooting</h2>
+
+                <h3>Connection Issues</h3>
+                <div class="alert">
+                    <strong>Problem:</strong> Cannot connect to Figma MCP Server<br>
+                    <strong>Solutions:</strong>
+                    <ul>
+                        <li>Ensure Figma desktop app is running</li>
+                        <li>Enable Dev Mode MCP Server in Preferences</li>
+                        <li>Check firewall settings for port 3845</li>
+                        <li>Restart Figma desktop app</li>
+                    </ul>
+                </div>
+
+                <h3>Generation Failures</h3>
+                <div class="alert">
+                    <strong>Problem:</strong> Code generation fails<br>
+                    <strong>Solutions:</strong>
+                    <ul>
+                        <li>Select a valid frame/component in Figma</li>
+                        <li>Ensure selection has proper structure</li>
+                        <li>Check component naming (avoid special characters)</li>
+                        <li>Verify you have proper Figma plan access</li>
+                    </ul>
+                </div>
+
+                <h2>API Reference</h2>
+                <div class="code-block">
+                    <pre><code>// Initialize connection
+await client.initialize();
+
+// Generate code from selection
+const code = await client.getCode({
+  framework: 'react',
+  includeStyles: true,
+  useCodeConnect: true
+});
+
+// Get design variables
+const variables = await client.getVariableDefinitions();
+
+// Export design tokens
+await client.exportDesignTokens('./tokens.json');
+
+// Capture screenshot
+await client.getImage('./screenshot.png');
+
+// Create design rules
+await client.createDesignSystemRules('./design-system');</code></pre>
+                </div>
+
+                <h2>Security Considerations</h2>
+                <ul>
+                    <li><strong>Local Server Only</strong>: MCP Server runs locally (127.0.0.1)</li>
+                    <li><strong>No External Access</strong>: Cannot be accessed from outside</li>
+                    <li><strong>Secure Communication</strong>: All data stays local</li>
+                    <li><strong>No Credentials Stored</strong>: Uses Figma desktop session</li>
+                </ul>
+
+                <h2>Limitations</h2>
+                <ul>
+                    <li><strong>Beta Feature</strong>: Some functionality may be unstable</li>
+                    <li><strong>Desktop Only</strong>: Requires Figma desktop app</li>
+                    <li><strong>Plan Requirements</strong>: Needs paid Figma plan with Dev Mode</li>
+                    <li><strong>Selection Based</strong>: Works on current selection only</li>
                 </ul>
             </div>
 

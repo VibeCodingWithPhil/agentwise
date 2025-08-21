@@ -5,6 +5,7 @@ import * as path from 'path';
 import { exec } from 'child_process';
 import { MonitorCommand } from './commands/MonitorCommand';
 import { DocsCommand } from './commands/DocsCommand';
+import { FigmaCommand } from './commands/FigmaCommand';
 
 async function main() {
   console.log(`
@@ -26,6 +27,7 @@ Available Commands:
   /generate-agent <spec>    - Create custom agent
   /monitor [subcommand]     - Monitor dashboard & global install
   /docs                     - Open documentation hub
+  /figma [subcommand]       - Figma Dev Mode integration
 
 Status: ✅ System Ready
 `);
@@ -79,6 +81,13 @@ Status: ✅ System Ready
     if (args[0] === '/docs') {
       const docsCommand = new DocsCommand();
       await docsCommand.handle(args.slice(1));
+      return;
+    }
+    
+    // Handle /figma command
+    if (args[0] === '/figma') {
+      const figmaCommand = new FigmaCommand();
+      await figmaCommand.handle(args.slice(1));
       return;
     }
   }

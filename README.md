@@ -49,17 +49,20 @@ Finally, upload and process documents directly in Claude Code:
 - **Auto-extraction**: Content, requirements, specifications
 - **Smart conversion**: Documents → Project specs → Working code
 
-#### 🎨 **Figma Design File Support** - *Game Changer!*
-Transform Figma designs directly into code - no manual conversion needed:
+#### 🎨 **Figma Dev Mode Integration** - *Game Changer!*
+Direct integration with Figma Dev Mode MCP Server for seamless design-to-code:
 ```bash
-/upload design.fig components        # Extract all components
-/upload app-ui.figma full-app      # Build entire app from design
-/upload style-guide.fig styles     # Extract design tokens
+/figma connect                      # Connect to Figma desktop
+/figma generate Button              # Generate component from selection
+/figma sync                         # Sync design tokens & components
+/figma tokens ./tokens.json         # Export design variables
+/figma image ./screenshot.png       # Capture design screenshots
 ```
-- **1:1 Component extraction**: Figma → React/Vue components
-- **Design tokens**: Colors, typography, spacing
-- **Auto-generation**: Complete UI from Figma files
-- **Preserves**: Animations, interactions, responsive behavior
+- **Real-time connection**: Direct link to Figma desktop app
+- **Multi-framework**: React, Vue, Angular, Swift, Kotlin support
+- **Design tokens**: Auto-extract colors, typography, spacing
+- **Code Connect**: Links Figma components to actual code
+- **Live sync**: Changes in Figma instantly available
 
 #### 🖼️ **Image Context Understanding** - *Finally Here!*
 Claude Code can now SEE and understand images with full context:
@@ -174,7 +177,7 @@ Agentwise isn't just another tool - it's the first to solve Claude Code's bigges
 - **First** to enable file uploads in Claude Code
 - **First** to support Figma design files
 - **First** to achieve 99% token optimization
-- **First** to integrate 26+ MCP servers
+- **First** to integrate 27+ MCP servers (including Figma Dev Mode)
 - **First** to enable website cloning in CLI
 
 ## 🚀 Quick Start
@@ -309,6 +312,17 @@ The monitoring dashboard is designed for local development use only. It runs on 
 | `/monitor [subcommand]` | Monitor dashboard & global install | `/monitor install` |
 | `/docs` | Open local documentation hub | `/docs` |
 
+#### Design Integration
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/figma connect` | Connect to Figma Dev Mode | `/figma connect` |
+| `/figma generate [name]` | Generate component from Figma | `/figma generate Button` |
+| `/figma sync` | Sync design tokens & components | `/figma sync` |
+| `/figma tokens [path]` | Export design variables | `/figma tokens ./tokens.json` |
+| `/figma image [path]` | Capture design screenshot | `/figma image ./design.png` |
+| `/figma rules [dir]` | Generate design system rules | `/figma rules ./design-system` |
+| `/figma status` | Check Figma connection status | `/figma status` |
+
 #### Model Configuration
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -400,7 +414,7 @@ graph TD
     H5 --> I
     H6 --> I
     H7 --> I
-    I --> J[26+ MCP Servers]
+    I --> J[27+ MCP Servers]
     J --> K[Phase Controller]
     K --> L[Self-Improving Agents]
     L --> M[Performance Analytics]
@@ -473,7 +487,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - **Development Speed**: 10x faster than traditional development
 - **Token Optimization**: 99% reduction - 100 agents use same tokens as 1
 - **Agent Scalability**: Support for 100+ specialized agents
-- **Integration Coverage**: 26+ MCP servers integrated
+- **Integration Coverage**: 27+ MCP servers integrated (including Figma)
 - **Model Support**: Claude, Ollama, LM Studio, OpenRouter
 - **File Processing**: PDF, Word, Figma, websites
 - **Learning Capability**: Self-improving agents with persistence
@@ -490,7 +504,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 
 ### ✅ Recently Completed (Q4 2024 - Q1 2025)
 - [x] **Web UI Dashboard** - Real-time monitoring interface with live agent status
-- [x] **MCP Integration** - 26+ MCP servers (Figma, Firecrawl, Shadcn UI, GitHub, etc.)
+- [x] **MCP Integration** - 27+ MCP servers (Figma Dev Mode, Firecrawl, Shadcn UI, GitHub, etc.)
 - [x] **Performance Analytics** - Comprehensive metrics, error tracking, and insights
 - [x] **Self-Improving Agents** - Learning capabilities with knowledge persistence
 - [x] **Ultimate Token Optimization** - 99% reduction achieved (100 agents = 1 agent cost)
