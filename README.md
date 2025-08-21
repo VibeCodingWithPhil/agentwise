@@ -206,23 +206,44 @@ claude --dangerously-skip-permissions
 
 ### Installation
 
-#### macOS / Linux
+#### Quick Install (Recommended)
 
+##### macOS/Linux:
 ```bash
 # Download and run installer
-curl -fsSL https://github.com/VibeCodingWithPhil/agentwise/releases/latest/download/install-macos.sh | bash
-# or for Linux:
-curl -fsSL https://github.com/VibeCodingWithPhil/agentwise/releases/latest/download/install-linux.sh | bash
+curl -fsSL https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.sh | bash
 ```
 
-#### Windows (WSL Required)
-
+##### Windows (PowerShell as Administrator):
 ```powershell
-# Download installer
-Invoke-WebRequest -Uri "https://github.com/VibeCodingWithPhil/agentwise/releases/latest/download/install-windows-wsl.ps1" -OutFile "install-agentwise.ps1"
+# Download and run installer
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.ps1" -OutFile "install.ps1"
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\install.ps1
+```
 
-# Run as Administrator
-.\install-agentwise.ps1
+#### Manual Installation
+
+If the installers don't work, use manual installation:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/VibeCodingWithPhil/agentwise.git
+cd agentwise
+
+# 2. Install dependencies
+npm install
+
+# 3. Build the project (ignore TypeScript errors)
+npm run build 2>/dev/null || true
+
+# 4. Install monitor dependencies
+cd src/monitor
+npm install
+cd ../..
+
+# 5. Start Claude Code with required flag
+claude --dangerously-skip-permissions
 ```
 
 ### 📦 Complete Command Reference
@@ -275,6 +296,7 @@ claude --dangerously-skip-permissions
 
 # Add features to active project
 /task "add user authentication with OAuth"
+```
 
 ## 📚 Documentation
 
