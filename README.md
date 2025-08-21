@@ -363,6 +363,8 @@ agentwise/
 ├── docs/                   # Comprehensive documentation
 │   ├── examples/           # Usage examples & tutorials
 │   ├── monitor-command.md  # Monitor command documentation
+│   ├── custom-agents.md    # Custom agent creation & management
+│   ├── ci-cd-integration.md # CI/CD pipeline integration guide
 │   ├── architecture.md     # System architecture details
 │   ├── mcp-integration.md  # MCP server integration guide
 │   └── smart-model-routing.md  # Model routing documentation
