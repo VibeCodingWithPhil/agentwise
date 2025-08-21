@@ -15,7 +15,7 @@
 
 [Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Contributing](#-contributing) • [License](#-license)
 
-📚 **[View Full Documentation](https://docs.agentwise.vercel.app)** | 🎥 **[Watch Demo](https://youtu.be/demo)** | 💬 **[Join Discord](https://discord.gg/agentwise)**
+📚 **[View Full Documentation](https://agentwise-docs.vercel.app)** | 🎥 **[Watch Demo](https://youtu.be/demo)** | 💬 **[Join Discord](https://discord.gg/agentwise)**
 
 </div>
 
@@ -699,7 +699,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 - [x] **Document Upload** - Process PDFs, Word docs, and design files
 - [x] **Figma Dev Mode Integration** - Direct connection to Figma desktop for design-to-code
 - [x] **Website Cloning** - Clone and customize existing websites with Firecrawl
-- [x] **Documentation Site** - Beautiful documentation at https://docs.agentwise.vercel.app
+- [x] **Documentation Site** - Beautiful documentation at https://agentwise-docs.vercel.app
 - [x] **Repository Protection** - Branch protection, rulesets, and security automation
 - [x] **Automated PR Management** - Dependabot integration with auto-merge capabilities
 
