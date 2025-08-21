@@ -108,6 +108,15 @@ benchmark-results/*
 scripts/
 scripts/*
 
+# Testing
+test-workspace/
+*.test.js
+*.test.ts.js
+
+# State files
+.agentwise-state.json
+.permission-test
+
 # Keep .claude folder and its contents
 !.claude/
 !.claude/**/*

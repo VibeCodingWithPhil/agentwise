@@ -6,6 +6,7 @@ import { exec } from 'child_process';
 import { MonitorCommand } from './commands/MonitorCommand';
 import { DocsCommand } from './commands/DocsCommand';
 import { FigmaCommand } from './commands/FigmaCommand';
+import { PermissionChecker } from './utils/PermissionChecker';
 
 async function main() {
   console.log(`
@@ -70,10 +71,18 @@ Status: ✅ System Ready
   // Handle command line arguments
   const args = process.argv.slice(2);
   if (args.length > 0) {
-    // Handle /monitor command
+    // Handle /resume command first (doesn't need permission check)
+    if (args[0] === '/resume') {
+      await PermissionChecker.resume();
+      return;
+    }
+    
+    // Handle /monitor command with permission check
     if (args[0] === '/monitor') {
-      const monitorCommand = new MonitorCommand();
-      await monitorCommand.handle(args.slice(1));
+      await PermissionChecker.withPermissionCheck('/monitor', async () => {
+        const monitorCommand = new MonitorCommand();
+        await monitorCommand.handle(args.slice(1));
+      });
       return;
     }
     

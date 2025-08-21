@@ -58,7 +58,7 @@ export class MonitorCommand {
       }
     }
 
-    // Default: Start monitor and install global command if not already installed
+    // Default: Start monitor and always ensure global command is installed
     await this.startMonitor();
   }
 

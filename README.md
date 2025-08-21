@@ -225,21 +225,56 @@ Invoke-WebRequest -Uri "https://github.com/VibeCodingWithPhil/agentwise/releases
 .\install-agentwise.ps1
 ```
 
+### 📦 Complete Command Reference
+
+#### Project Management
+```bash
+/create "project description"     # Create new project with AI agents
+/task "feature description"       # Add feature to active project
+/create-plan "feature"            # Collaborative planning mode
+/projects                         # List and switch between projects
+/task-[project] "feature"        # Add feature to specific project
+```
+
+#### Import Existing Projects
+```bash
+/init-import                      # Step 1: Select project folder to import
+/task-import                      # Step 2: Execute import with agent analysis
+```
+
+#### Monitoring & Tools
+```bash
+/monitor                          # Start dashboard (auto-installs global command)
+/monitor install                  # Manually install global command
+/monitor global                   # Alternative install command
+/monitor status                   # Check installation status
+/docs                            # Open local documentation hub
+```
+
+#### Advanced Features
+```bash
+/generate-agent "specialization"  # Create custom specialized agent
+/figma [subcommand]              # Figma Dev Mode integration
+/upload "file.pdf"               # Upload documents for processing
+/clone-website "url"             # Clone and customize websites
+/image                           # Visual file browser
+/resume                          # Resume after restart
+```
+
 ### First Project
 
 ```bash
+# IMPORTANT: Start Claude Code with required flag
+claude --dangerously-skip-permissions
+
 # Create a new project
 /create "an e-commerce platform with Next.js and Stripe"
 
-# List existing projects
-/projects
+# Monitor progress in real-time
+/monitor
 
 # Add features to active project
 /task "add user authentication with OAuth"
-
-# Collaborative planning
-/create-plan "real-time collaboration features"
-```
 
 ## 📚 Documentation
 
@@ -257,11 +292,14 @@ Agentwise includes a comprehensive web-based monitoring dashboard that provides 
 
 #### Starting the Monitor
 ```bash
-/monitor                    # Opens dashboard at http://localhost:3001
-/monitor install            # Install global agentwise-monitor command
+/monitor                    # Opens dashboard (auto-installs global command)
+/monitor install            # Manually install global command
+/monitor global             # Alternative install command  
 /monitor status             # Check installation status
 /monitor help               # Show monitor command help
 ```
+
+**Note**: Running `/monitor` without subcommands now automatically installs the global command if not present.
 
 **Global Command**: After installation, use `agentwise-monitor` from anywhere:
 ```bash

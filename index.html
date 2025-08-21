@@ -834,6 +834,24 @@
                     <span class="command-description">Open local documentation hub</span>
                     <span class="command-badge">Help</span>
                 </div>
+
+                <div class="command-item">
+                    <code class="command-code">/init-import</code>
+                    <span class="command-description">Import existing project - Step 1</span>
+                    <span class="command-badge">Import</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/task-import</code>
+                    <span class="command-description">Execute import with agents - Step 2</span>
+                    <span class="command-badge">Import</span>
+                </div>
+
+                <div class="command-item">
+                    <code class="command-code">/projects</code>
+                    <span class="command-description">List and switch between projects</span>
+                    <span class="command-badge">Utility</span>
+                </div>
             </div>
         </div>
     </section>
@@ -842,6 +860,10 @@
     <section class="documentation">
         <div class="container">
             <h2 class="section-title">Quick Installation</h2>
+            
+            <div style="background: rgba(255, 193, 7, 0.1); border: 2px solid #ffc107; padding: 1rem; margin-bottom: 1rem; border-radius: 8px;">
+                <strong style="color: #ffc107;">⚠️ CRITICAL:</strong> Agentwise requires Claude Code to be started with the <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">--dangerously-skip-permissions</code> flag!
+            </div>
             
             <div class="code-block">
                 <pre><code># Clone the repository
@@ -854,11 +876,14 @@ npm install
 # Build the project
 npm run build
 
-# Link globally
-npm link
+# Install monitor dependencies
+cd src/monitor && npm install && cd ../..
 
-# Start using Agentwise
-agentwise</code></pre>
+# IMPORTANT: Start Claude Code with required flag!
+claude --dangerously-skip-permissions
+
+# Create your first project
+/create "Build an e-commerce platform"</code></pre>
             </div>
 
             <div style="text-align: center; margin-top: 2rem;">
