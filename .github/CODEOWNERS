@@ -1,0 +1,38 @@
+# CODEOWNERS file defines who is responsible for code in this repository
+# These owners will be automatically requested for review when someone
+# opens a pull request that modifies code they own.
+
+# Default owner for everything in the repo
+* @VibeCodingWithPhil
+
+# Core system files - require owner review
+/.github/ @VibeCodingWithPhil
+/src/core/ @VibeCodingWithPhil
+/src/orchestrator/ @VibeCodingWithPhil
+/src/agents/ @VibeCodingWithPhil
+/.claude/ @VibeCodingWithPhil
+
+# Critical configuration files
+/package.json @VibeCodingWithPhil
+/package-lock.json @VibeCodingWithPhil
+/tsconfig.json @VibeCodingWithPhil
+/.env* @VibeCodingWithPhil
+/config/ @VibeCodingWithPhil
+
+# Security-sensitive files
+/src/auth/ @VibeCodingWithPhil
+/src/security/ @VibeCodingWithPhil
+/src/validation/ @VibeCodingWithPhil
+
+# Documentation
+/README.md @VibeCodingWithPhil
+/LICENSE @VibeCodingWithPhil
+/CLAUDE.md @VibeCodingWithPhil
+
+# CI/CD and deployment
+/.github/workflows/ @VibeCodingWithPhil
+/scripts/deploy/ @VibeCodingWithPhil
+
+# Database and migrations
+/src/database/ @VibeCodingWithPhil
+/migrations/ @VibeCodingWithPhil

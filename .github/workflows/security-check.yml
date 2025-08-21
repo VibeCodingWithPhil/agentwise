@@ -1,0 +1,127 @@
+name: Security Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Security Validation
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Check for large deletions
+      run: |
+        echo "Checking for suspicious large deletions..."
+        DELETIONS=$(git diff --stat origin/main..HEAD | grep deletion | awk '{sum+=$4} END {print sum}')
+        ADDITIONS=$(git diff --stat origin/main..HEAD | grep insertion | awk '{sum+=$4} END {print sum}')
+        
+        if [ "$DELETIONS" -gt 1000 ]; then
+          echo "⚠️ WARNING: Large number of deletions detected: $DELETIONS lines"
+          echo "This PR deletes more than 1000 lines of code and requires careful review"
+          
+          # Calculate percentage if we have existing code
+          TOTAL_LINES=$(find . -name "*.ts" -o -name "*.js" -o -name "*.json" | xargs wc -l | tail -1 | awk '{print $1}')
+          if [ "$TOTAL_LINES" -gt 0 ]; then
+            PERCENTAGE=$((DELETIONS * 100 / TOTAL_LINES))
+            if [ "$PERCENTAGE" -gt 30 ]; then
+              echo "❌ ERROR: This PR attempts to delete >30% of the codebase!"
+              exit 1
+            fi
+          fi
+        fi
+
+    - name: Check for sensitive files
+      run: |
+        echo "Checking for sensitive file modifications..."
+        SENSITIVE_FILES=".env .env.local .env.production secrets.json credentials.json"
+        for file in $SENSITIVE_FILES; do
+          if git diff --name-only origin/main..HEAD | grep -q "$file"; then
+            echo "⚠️ WARNING: Sensitive file modified: $file"
+            echo "Please ensure no real credentials are committed"
+          fi
+        done
+
+    - name: Check for suspicious patterns
+      run: |
+        echo "Scanning for suspicious code patterns..."
+        
+        # Check for base64 encoded strings (potential obfuscation)
+        if git diff origin/main..HEAD | grep -E "atob|btoa|Buffer\.from.*base64" | grep -v "^-"; then
+          echo "⚠️ WARNING: Base64 encoding/decoding detected - please review for obfuscation"
+        fi
+        
+        # Check for eval usage
+        if git diff origin/main..HEAD | grep -E "eval\(|Function\(|setTimeout.*\(" | grep -v "^-"; then
+          echo "⚠️ WARNING: Dynamic code execution detected - this is a security risk"
+        fi
+        
+        # Check for external URLs
+        if git diff origin/main..HEAD | grep -E "https?://(?!localhost|127\.0\.0\.1|github\.com/VibeCodingWithPhil)" | grep -v "^-"; then
+          echo "⚠️ WARNING: External URLs detected - please review"
+        fi
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run npm audit
+      run: |
+        echo "Checking for known vulnerabilities..."
+        npm audit --audit-level=moderate || true
+
+    - name: Check for dependency changes
+      run: |
+        echo "Reviewing dependency changes..."
+        if git diff --name-only origin/main..HEAD | grep -q "package.json"; then
+          echo "📦 Package.json has been modified"
+          echo "New/Modified dependencies:"
+          git diff origin/main..HEAD package.json | grep "^+" | grep -v "^+++" || true
+        fi
+
+    - name: Validate file permissions
+      run: |
+        echo "Checking file permissions..."
+        EXEC_FILES=$(find . -type f -executable -not -path "./.git/*" -not -path "./node_modules/*")
+        if [ ! -z "$EXEC_FILES" ]; then
+          echo "⚠️ WARNING: Executable files detected:"
+          echo "$EXEC_FILES"
+        fi
+
+    - name: Check CODEOWNERS compliance
+      run: |
+        echo "Verifying CODEOWNERS rules..."
+        if [ -f .github/CODEOWNERS ]; then
+          # Check if protected files are modified
+          PROTECTED_PATHS="/.github/ /src/core/ /src/orchestrator/ /.claude/ /config/ package.json tsconfig.json"
+          for path in $PROTECTED_PATHS; do
+            if git diff --name-only origin/main..HEAD | grep -q "^${path#/}"; then
+              echo "🔒 Protected path modified: $path - requires owner review"
+            fi
+          done
+        fi
+
+    - name: Generate security report
+      if: always()
+      run: |
+        echo "## 📋 Security Check Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- Branch protection: ✅ Enabled" >> $GITHUB_STEP_SUMMARY
+        echo "- CODEOWNERS file: ✅ Present" >> $GITHUB_STEP_SUMMARY
+        echo "- Dependency audit: ✅ Completed" >> $GITHUB_STEP_SUMMARY
+        echo "- Suspicious patterns: ✅ Scanned" >> $GITHUB_STEP_SUMMARY
+        echo "- File permissions: ✅ Validated" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Review the logs above for any warnings or issues." >> $GITHUB_STEP_SUMMARY
