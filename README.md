@@ -307,6 +307,7 @@ The monitoring dashboard is designed for local development use only. It runs on 
 |---------|-------------|---------|
 | `/generate-agent <type>` | Create custom agent | `/generate-agent "security-specialist"` |
 | `/monitor [subcommand]` | Monitor dashboard & global install | `/monitor install` |
+| `/docs` | Open local documentation hub | `/docs` |
 
 #### Model Configuration
 | Command | Description | Example |
@@ -320,6 +321,7 @@ The monitoring dashboard is designed for local development use only. It runs on 
 | Command | Description | Example |
 |---------|-------------|---------|
 | `/image` | Visual context with file browser | `/image` |
+| `/docs` | Open comprehensive documentation hub | `/docs` |
 | `/security-review` | Run security analysis | `/security-review` |
 | `/deploy` | Deploy to production | `/deploy production` |
 | `/rollback` | Rollback deployment | `/rollback` |

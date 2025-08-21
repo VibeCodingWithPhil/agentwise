@@ -3,123 +3,661 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agentwise Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
+    <title>Agentwise Documentation Hub</title>
     <style>
-        body {
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-hover: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border-color: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
         }
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 250px;
-            height: 100vh;
-            background: #f6f8fa;
-            border-right: 1px solid #d1d5da;
-            overflow-y: auto;
-            padding: 20px;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .content {
-            margin-left: 250px;
-            padding: 20px 40px;
-            max-width: 900px;
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .sidebar h3 {
-            margin-top: 0;
-            color: #24292e;
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
         }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
+
+        .header .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
         }
-        .sidebar li {
-            margin: 8px 0;
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
         }
-        .sidebar a {
-            color: #0366d6;
+
+        /* Quick Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Documentation Grid */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .doc-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
             text-decoration: none;
-            display: block;
-            padding: 5px 10px;
-            border-radius: 6px;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .doc-card:hover {
+            background: var(--surface-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.1);
+        }
+
+        .doc-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .doc-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .doc-card .description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .doc-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Categories */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .category-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-links h3 {
+            margin-bottom: 1rem;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
             transition: background 0.2s;
         }
-        .sidebar a:hover {
-            background: #e1e4e8;
+
+        .quick-link:hover {
+            background: var(--surface-hover);
         }
-        .sidebar a.active {
-            background: #0366d6;
+
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* External Links */
+        .external-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .external-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .external-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        .badge-new {
+            background: var(--success);
             color: white;
         }
-        .markdown-body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
+
+        .badge-updated {
+            background: var(--info);
+            color: white;
         }
-        @media (max-width: 767px) {
-            .sidebar {
-                display: none;
+
+        .badge-beta {
+            background: var(--warning);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
             }
-            .content {
-                margin-left: 0;
+
+            .container {
+                padding: 1rem;
             }
-            .markdown-body {
-                padding: 15px;
+
+            .docs-grid {
+                grid-template-columns: 1fr;
             }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Code Examples */
+        .code-example {
+            background: #1a1a1a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-example code {
+            color: #10b981;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        /* Notice Banner */
+        .notice {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .notice h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h3>📚 Documentation</h3>
-        <ul>
-            <li><a href="#" onclick="loadDoc('README.md')" class="active">Overview</a></li>
-            <li><a href="#" onclick="loadDoc('getting-started.md')">Getting Started</a></li>
-            <li><a href="#" onclick="loadDoc('commands.md')">Commands</a></li>
-            <li><a href="#" onclick="loadDoc('architecture.md')">Architecture</a></li>
-            <li><a href="#" onclick="loadDoc('troubleshooting.md')">Troubleshooting</a></li>
-            <li><a href="#" onclick="loadDoc('../CONTRIBUTING.md')">Contributing</a></li>
-        </ul>
-        
-        <h3>🔗 Links</h3>
-        <ul>
-            <li><a href="https://github.com/VibeCodingWithPhil/agentwise" target="_blank">GitHub</a></li>
-            <li><a href="https://github.com/VibeCodingWithPhil/agentwise/releases" target="_blank">Releases</a></li>
-            <li><a href="https://github.com/VibeCodingWithPhil/agentwise/issues" target="_blank">Issues</a></li>
-        </ul>
-    </div>
-    
-    <div class="content markdown-body" id="content">
-        <h1>Loading...</h1>
+    <header class="header">
+        <h1>
+            🚀 Agentwise Documentation Hub
+        </h1>
+        <p class="subtitle">Multi-Agent Orchestration System for Claude Code</p>
+    </header>
+
+    <div class="container">
+        <!-- Quick Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="value">8+</div>
+                <div class="label">Specialist Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">26+</div>
+                <div class="label">MCP Integrations</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">99%</div>
+                <div class="label">Token Optimization</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">100+</div>
+                <div class="label">Parallel Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">10x</div>
+                <div class="label">Faster Development</div>
+            </div>
+        </div>
+
+        <!-- Notice Banner -->
+        <div class="notice">
+            <h3>📢 Welcome to Agentwise Documentation</h3>
+            <p>Use the <code>/docs</code> command anytime to open this documentation hub</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="🔍 Search documentation..." id="searchBar" onkeyup="filterDocs()">
+        </div>
+
+        <!-- Getting Started -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🚀</span>
+                <h2>Getting Started</h2>
+            </div>
+            <div class="docs-grid">
+                <a href="README.md" class="doc-card">
+                    <h3>📖 Overview</h3>
+                    <p class="description">Complete overview of Agentwise capabilities, features, and architecture</p>
+                    <div class="tags">
+                        <span class="tag">Introduction</span>
+                        <span class="tag">Features</span>
+                    </div>
+                </a>
+                <a href="getting-started.md" class="doc-card">
+                    <h3>⚡ Quick Start</h3>
+                    <p class="description">Get up and running with Agentwise in minutes</p>
+                    <div class="tags">
+                        <span class="tag">Installation</span>
+                        <span class="tag">Setup</span>
+                    </div>
+                </a>
+                <a href="commands.md" class="doc-card">
+                    <h3>🎮 Commands Reference</h3>
+                    <p class="description">Complete list of all available commands and their usage</p>
+                    <div class="tags">
+                        <span class="tag">CLI</span>
+                        <span class="tag">Reference</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Core Features -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">💎</span>
+                <h2>Core Features</h2>
+            </div>
+            <div class="docs-grid">
+                <a href="architecture.md" class="doc-card">
+                    <h3>🏗️ Architecture</h3>
+                    <p class="description">Deep dive into Agentwise system architecture and design patterns</p>
+                    <div class="tags">
+                        <span class="tag">Technical</span>
+                        <span class="tag">Advanced</span>
+                    </div>
+                </a>
+                <a href="custom-agents.md" class="doc-card">
+                    <h3>🤖 Custom Agents <span class="badge badge-new">NEW</span></h3>
+                    <p class="description">Create and manage custom specialist agents for unique requirements</p>
+                    <div class="tags">
+                        <span class="tag">Agents</span>
+                        <span class="tag">Customization</span>
+                    </div>
+                </a>
+                <a href="dynamic-agents.md" class="doc-card">
+                    <h3>⚡ Dynamic Agents</h3>
+                    <p class="description">Understanding the dynamic agent discovery and loading system</p>
+                    <div class="tags">
+                        <span class="tag">Automation</span>
+                        <span class="tag">Agents</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🔧</span>
+                <h2>Advanced Features</h2>
+            </div>
+            <div class="docs-grid">
+                <a href="mcp-integration.md" class="doc-card">
+                    <h3>🔌 MCP Integration</h3>
+                    <p class="description">Integrate with 26+ MCP servers for enhanced capabilities</p>
+                    <div class="tags">
+                        <span class="tag">Integration</span>
+                        <span class="tag">MCP</span>
+                    </div>
+                </a>
+                <a href="smart-model-routing.md" class="doc-card">
+                    <h3>🎯 Smart Model Routing</h3>
+                    <p class="description">Intelligent routing between Claude, Ollama, and local models</p>
+                    <div class="tags">
+                        <span class="tag">Models</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                </a>
+                <a href="performance-analytics.md" class="doc-card">
+                    <h3>📊 Performance Analytics</h3>
+                    <p class="description">Track and optimize agent performance with comprehensive metrics</p>
+                    <div class="tags">
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Monitoring</span>
+                    </div>
+                </a>
+                <a href="tech-stack-validator.md" class="doc-card">
+                    <h3>✅ Tech Stack Validator</h3>
+                    <p class="description">Validate technology compatibility and best practices</p>
+                    <div class="tags">
+                        <span class="tag">Validation</span>
+                        <span class="tag">Quality</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- DevOps & Monitoring -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🚀</span>
+                <h2>DevOps & Monitoring</h2>
+            </div>
+            <div class="docs-grid">
+                <a href="ci-cd-integration.md" class="doc-card">
+                    <h3>🔄 CI/CD Integration <span class="badge badge-new">NEW</span></h3>
+                    <p class="description">Complete guide to integrating Agentwise with CI/CD pipelines</p>
+                    <div class="tags">
+                        <span class="tag">DevOps</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                </a>
+                <a href="monitor-command.md" class="doc-card">
+                    <h3>📊 Monitor Dashboard</h3>
+                    <p class="description">Real-time monitoring dashboard with global command support</p>
+                    <div class="tags">
+                        <span class="tag">Monitoring</span>
+                        <span class="tag">Dashboard</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Help & Support -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">💡</span>
+                <h2>Help & Support</h2>
+            </div>
+            <div class="docs-grid">
+                <a href="troubleshooting.md" class="doc-card">
+                    <h3>🔧 Troubleshooting</h3>
+                    <p class="description">Common issues and their solutions</p>
+                    <div class="tags">
+                        <span class="tag">Help</span>
+                        <span class="tag">FAQ</span>
+                    </div>
+                </a>
+                <a href="../CONTRIBUTING.md" class="doc-card">
+                    <h3>🤝 Contributing</h3>
+                    <p class="description">Guidelines for contributing to Agentwise</p>
+                    <div class="tags">
+                        <span class="tag">Community</span>
+                        <span class="tag">Open Source</span>
+                    </div>
+                </a>
+                <a href="../ROADMAP.md" class="doc-card">
+                    <h3>🗺️ Roadmap</h3>
+                    <p class="description">Future plans and upcoming features</p>
+                    <div class="tags">
+                        <span class="tag">Future</span>
+                        <span class="tag">Planning</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <h3>⚡ Quick Actions</h3>
+            <div class="quick-links-grid">
+                <a href="#" onclick="showCommand('/create')" class="quick-link">
+                    <span>🆕</span> Create Project
+                </a>
+                <a href="#" onclick="showCommand('/monitor')" class="quick-link">
+                    <span>📊</span> Open Monitor
+                </a>
+                <a href="#" onclick="showCommand('/projects')" class="quick-link">
+                    <span>📁</span> List Projects
+                </a>
+                <a href="#" onclick="showCommand('/generate-agent')" class="quick-link">
+                    <span>🤖</span> Generate Agent
+                </a>
+            </div>
+        </div>
+
+        <!-- Code Examples -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">💻</span>
+                <h2>Quick Examples</h2>
+            </div>
+            <div class="code-example">
+                <code>
+                    # Create a new project<br>
+                    /create "e-commerce platform with Next.js and Stripe"<br><br>
+                    
+                    # Add feature to active project<br>
+                    /task "add user authentication with OAuth"<br><br>
+                    
+                    # Open monitoring dashboard<br>
+                    /monitor<br><br>
+                    
+                    # Generate custom agent<br>
+                    /generate-agent "security-specialist"
+                </code>
+            </div>
+        </div>
+
+        <!-- External Links -->
+        <div class="external-links">
+            <a href="https://github.com/VibeCodingWithPhil/agentwise" target="_blank" class="external-link">
+                <span>🔗</span> GitHub Repository
+            </a>
+            <a href="https://github.com/VibeCodingWithPhil/agentwise/releases" target="_blank" class="external-link">
+                <span>📦</span> Releases
+            </a>
+            <a href="https://github.com/VibeCodingWithPhil/agentwise/issues" target="_blank" class="external-link">
+                <span>🐛</span> Report Issues
+            </a>
+            <a href="https://github.com/VibeCodingWithPhil/agentwise/discussions" target="_blank" class="external-link">
+                <span>💬</span> Discussions
+            </a>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        async function loadDoc(file) {
-            // Update active link
-            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-            event.target.classList.add('active');
+        // Search functionality
+        function filterDocs() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const docCards = document.querySelectorAll('.doc-card');
             
-            try {
-                const response = await fetch(file);
-                const text = await response.text();
-                document.getElementById('content').innerHTML = marked.parse(text);
-                
-                // Add syntax highlighting
-                document.querySelectorAll('pre code').forEach((block) => {
-                    block.className = 'language-' + (block.className || 'plaintext');
-                });
-            } catch (error) {
-                document.getElementById('content').innerHTML = '<h1>Error loading documentation</h1><p>Please check the file path.</p>';
-            }
+            docCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
-        
-        // Load README by default
-        loadDoc('README.md');
+
+        // Show command helper
+        function showCommand(command) {
+            alert(`To use this command, type:\n\n${command}\n\nIn your Claude Code terminal with Agentwise running.`);
+        }
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchBar').focus();
+            }
+        });
     </script>
 </body>
 </html>
