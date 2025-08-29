@@ -113,13 +113,22 @@ export class GlobalMonitorInstaller {
     const binPath = await this.getGlobalBinPath();
     await fs.ensureDir(binPath);
 
-    // Create batch file for Windows
-    // Properly escape for batch files: backslashes and quotes
-    const escapedPath = this.agentWisePath
-      .replace(/\\/g, '\\\\')  // Escape backslashes (doubles in batch)
-      .replace(/"/g, '""');       // Escape quotes for batch files
+    // SECURITY: Validate path before creating batch file
+    if (!this.validateAgentWisePath(this.agentWisePath)) {
+      throw new Error('Security validation failed: Invalid Agentwise path');
+    }
+    
+    // Create batch file for Windows with secure path handling
+    // Use absolute path and validate it's within expected boundaries
+    const resolvedPath = path.resolve(this.agentWisePath);
     const batContent = `@echo off
-cd /d "${escapedPath}"
+rem Agentwise Monitor Launcher - Security Enhanced
+set "AGENTWISE_PATH=${resolvedPath}"
+if not exist "%AGENTWISE_PATH%" (
+  echo Error: Agentwise path not found
+  exit /b 1
+)
+cd /d "%AGENTWISE_PATH%"
 cd src\\monitor
 start "" cmd /c "start.sh"
 `;
@@ -145,12 +154,22 @@ start "" cmd /c "start.sh"
     const binPath = await this.getGlobalBinPath();
     await fs.ensureDir(binPath);
 
-    // Create script that works in WSL environment
-    const escapedPath = this.agentWisePath.replace(/'/g, "'\"'\"'"); // Escape single quotes for bash
+    // SECURITY: Validate path before creating script
+    if (!this.validateAgentWisePath(this.agentWisePath)) {
+      throw new Error('Security validation failed: Invalid Agentwise path');
+    }
+    
+    // Create script that works in WSL environment with secure path handling
+    const resolvedPath = path.resolve(this.agentWisePath);
     const scriptContent = `#!/bin/bash
-# Agentwise Monitor - WSL Compatible
+# Agentwise Monitor - WSL Compatible - Security Enhanced
 
-AGENTWISE_PATH='${escapedPath}'
+# Validate path exists and is safe
+AGENTWISE_PATH="${resolvedPath}"
+if [ ! -d "$AGENTWISE_PATH" ]; then
+  echo "Error: Agentwise path not found"
+  exit 1
+fi
 cd "$AGENTWISE_PATH"
 
 # Check if we're in WSL
@@ -375,5 +394,56 @@ cd src/monitor || {
     }
 
     return status;
+  }
+
+  /**
+   * SECURITY: Validate Agentwise path to prevent path injection
+   */
+  private validateAgentWisePath(inputPath: string): boolean {
+    try {
+      // Basic validation
+      if (!inputPath || typeof inputPath !== 'string') {
+        return false;
+      }
+
+      // Resolve to absolute path
+      const resolvedPath = path.resolve(inputPath);
+      
+      // Check for dangerous patterns
+      const dangerousPatterns = ['..', '~', '${', '`', '|', ';', '&', '>', '<'];
+      for (const pattern of dangerousPatterns) {
+        if (inputPath.includes(pattern)) {
+          console.log('⚠️  Path contains dangerous patterns');
+          return false;
+        }
+      }
+
+      // Ensure path exists and is a directory
+      if (!fs.existsSync(resolvedPath)) {
+        console.log('⚠️  Agentwise path does not exist');
+        return false;
+      }
+
+      const stats = fs.statSync(resolvedPath);
+      if (!stats.isDirectory()) {
+        console.log('⚠️  Agentwise path is not a directory');
+        return false;
+      }
+
+      // Ensure it looks like an Agentwise installation
+      const expectedFiles = ['package.json', 'src'];
+      for (const file of expectedFiles) {
+        const filePath = path.join(resolvedPath, file);
+        if (!fs.existsSync(filePath)) {
+          console.log(`⚠️  Missing expected Agentwise file/directory: ${file}`);
+          return false;
+        }
+      }
+
+      return true;
+    } catch (error) {
+      console.log('⚠️  Path validation failed:', error);
+      return false;
+    }
   }
 }

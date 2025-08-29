@@ -111,6 +111,11 @@ export class ImportHandler {
     console.log(`📂 From: ${sourcePath}`);
     console.log(`📂 To: ${targetPath}`);
 
+    // SECURITY: Validate paths before file operations
+    if (!this.validateCopyOperation(sourcePath, targetPath)) {
+      throw new Error('Security validation failed: Invalid file copy operation');
+    }
+
     // Copy project to workspace
     await fs.copy(sourcePath, targetPath);
     console.log('✅ Project copied to workspace');
@@ -193,33 +198,131 @@ export class ImportHandler {
   }
 
   /**
-   * Select folder using system dialog
+   * Select folder using secure input prompt
+   * SECURITY FIX: Replaced command injection-prone shell commands with secure user input
    */
   private async selectFolder(): Promise<string | null> {
-    const platform = process.platform;
-
+    console.log(chalk.cyan('\n📁 Project Folder Selection'));
+    console.log('Please enter the full path to the project folder you want to import:');
+    console.log(chalk.gray('Example: /Users/username/my-project or C:\\Users\\username\\my-project'));
+    
     try {
-      if (platform === 'darwin') {
-        // macOS: Use osascript
-        const { stdout } = await execAsync(`osascript -e 'POSIX path of (choose folder with prompt "Select project folder to import")'`);
-        return stdout.trim();
-      } else if (platform === 'win32') {
-        // Windows: Use PowerShell
-        const { stdout } = await execAsync(`powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $dialog = New-Object System.Windows.Forms.FolderBrowserDialog; $dialog.Description = 'Select project folder to import'; if($dialog.ShowDialog() -eq 'OK'){$dialog.SelectedPath}"`);
-        return stdout.trim();
-      } else {
-        // Linux: Try zenity or kdialog
-        try {
-          const { stdout } = await execAsync(`zenity --file-selection --directory --title="Select project folder to import"`);
-          return stdout.trim();
-        } catch {
-          const { stdout } = await execAsync(`kdialog --getexistingdirectory . "Select project folder to import"`);
-          return stdout.trim();
+      // Use readline for secure user input instead of executing shell commands
+      const readline = require('readline');
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      return new Promise((resolve) => {
+        rl.question(chalk.yellow('Project folder path: '), (answer: string) => {
+          rl.close();
+          
+          // Validate the input path securely
+          const sanitizedPath = this.validateAndSanitizePath(answer.trim());
+          if (sanitizedPath && fs.existsSync(sanitizedPath) && fs.statSync(sanitizedPath).isDirectory()) {
+            console.log(chalk.green(`✅ Valid project folder: ${sanitizedPath}`));
+            resolve(sanitizedPath);
+          } else {
+            console.log(chalk.red('❌ Invalid path or directory does not exist'));
+            console.log(chalk.gray('Please ensure the path exists and is a directory'));
+            resolve(null);
+          }
+        });
+      });
+    } catch (error) {
+      console.error('Failed to get user input:', error);
+      return null;
+    }
+  }
+
+  /**
+   * SECURITY: Validate and sanitize file paths to prevent path traversal attacks
+   */
+  private validateAndSanitizePath(inputPath: string): string | null {
+    try {
+      // Basic input validation
+      if (!inputPath || typeof inputPath !== 'string' || inputPath.length === 0) {
+        return null;
+      }
+
+      // Remove leading/trailing whitespace and quotes
+      let cleanPath = inputPath.trim().replace(/^["']|["']$/g, '');
+
+      // Check for obvious path traversal attempts
+      const dangerousPatterns = ['../', '..\\', '../', '~/', '${', '`'];
+      for (const pattern of dangerousPatterns) {
+        if (cleanPath.includes(pattern)) {
+          console.log(chalk.red('⚠️  Path contains dangerous patterns - rejected for security'));
+          return null;
         }
       }
+
+      // Resolve to absolute path
+      const resolvedPath = path.resolve(cleanPath);
+      
+      // Additional security check - ensure path is reasonable
+      const rootPath = path.parse(resolvedPath).root;
+      if (resolvedPath === rootPath || resolvedPath.length < rootPath.length + 2) {
+        console.log(chalk.red('⚠️  Path too close to system root - rejected for security'));
+        return null;
+      }
+
+      return resolvedPath;
     } catch (error) {
-      console.error('Failed to open folder dialog:', error);
+      console.log(chalk.red('⚠️  Path validation failed'));
       return null;
+    }
+  }
+
+  /**
+   * SECURITY: Validate file copy operations to prevent dangerous operations
+   */
+  private validateCopyOperation(sourcePath: string, targetPath: string): boolean {
+    try {
+      // Resolve both paths to absolute paths
+      const resolvedSource = path.resolve(sourcePath);
+      const resolvedTarget = path.resolve(targetPath);
+      
+      // Ensure source exists and is readable
+      if (!fs.existsSync(resolvedSource)) {
+        console.log(chalk.red('⚠️  Source path does not exist'));
+        return false;
+      }
+
+      // Get workspace path for validation
+      const workspacePath = path.resolve(process.cwd(), 'workspace');
+      
+      // Ensure target is within workspace directory
+      if (!resolvedTarget.startsWith(workspacePath)) {
+        console.log(chalk.red('⚠️  Target path must be within workspace directory'));
+        return false;
+      }
+
+      // Prevent copying system directories or sensitive locations
+      const sensitivePatterns = [
+        '/etc', '/sys', '/proc', '/dev', '/var', '/usr/bin', '/usr/sbin',
+        'C:\\Windows', 'C:\\Program Files', 'C:\\System', '/System',
+        '/Library/System', '/Applications', '/.ssh', '/.aws'
+      ];
+
+      for (const pattern of sensitivePatterns) {
+        if (resolvedSource.toLowerCase().includes(pattern.toLowerCase())) {
+          console.log(chalk.red('⚠️  Cannot copy from sensitive system directory'));
+          return false;
+        }
+      }
+
+      // Ensure target directory doesn't already exist to prevent overwriting
+      if (fs.existsSync(resolvedTarget)) {
+        console.log(chalk.red('⚠️  Target directory already exists'));
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.log(chalk.red('⚠️  Copy operation validation failed'));
+      return false;
     }
   }
 

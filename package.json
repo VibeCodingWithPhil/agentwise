@@ -10,7 +10,11 @@
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "typecheck": "tsc --noEmit",
-    "monitor": "ts-node src/monitoring/index.ts"
+    "monitor": "ts-node src/monitoring/index.ts",
+    "optimization:example": "ts-node examples/production-optimization-example.ts",
+    "optimization:health": "ts-node -e \"require('./dist/optimization/ProductionOptimizationSystem').default.getInstance({environment: 'development'}).then(s => console.log(JSON.stringify(s.getHealthStatus(), null, 2)))\"",
+    "optimization:report": "ts-node -e \"require('./dist/optimization/ProductionOptimizationSystem').default.getInstance({environment: 'development'}).then(s => s.generateSystemReport().then(p => console.log('Report:', p)))\"",
+    "optimization:status": "ts-node -e \"require('./dist/optimization/ProductionOptimizationSystem').default.getInstance({environment: 'development'}).then(s => console.log(JSON.stringify(s.getStatus(), null, 2)))\""
   },
   "keywords": [
     "claude",
@@ -30,6 +34,7 @@
     "commander": "^11.1.0",
     "fs-extra": "^11.2.0",
     "inquirer": "^12.9.4",
+    "lru-cache": "^11.1.0",
     "node-pty": "^1.0.0",
     "open": "^10.0.3",
     "ws": "^8.18.3"
@@ -39,7 +44,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.9",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.19.11",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
     "@typescript-eslint/parser": "^6.13.0",
     "eslint": "^8.55.0",

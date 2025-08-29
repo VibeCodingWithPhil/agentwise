@@ -10,9 +10,13 @@ import * as WebSocket from 'ws';
 export class WebSocketIntegration extends EventEmitter {
   private progressTracker: ProgressTracker;
   private wsClient: WebSocket | null = null;
+  private sharedContextClient: WebSocket | null = null;
   private reconnectInterval: NodeJS.Timeout | null = null;
+  private contextReconnectInterval: NodeJS.Timeout | null = null;
   private monitorUrl: string = 'ws://localhost:3002';
+  private sharedContextUrl: string = 'ws://localhost:3003/context/stream';
   private connected: boolean = false;
+  private contextConnected: boolean = false;
 
   constructor(progressTracker: ProgressTracker) {
     super();
@@ -24,6 +28,16 @@ export class WebSocketIntegration extends EventEmitter {
    * Connect to the monitor WebSocket server
    */
   async connect(): Promise<void> {
+    await Promise.all([
+      this.connectToMonitor(),
+      this.connectToSharedContext()
+    ]);
+  }
+
+  /**
+   * Connect to monitor dashboard
+   */
+  private async connectToMonitor(): Promise<void> {
     try {
       this.wsClient = new WebSocket(this.monitorUrl);
 
@@ -52,9 +66,67 @@ export class WebSocketIntegration extends EventEmitter {
         this.scheduleReconnect();
       });
 
+      // Handle incoming messages from monitor
+      this.wsClient.on('message', (data) => {
+        try {
+          const message = JSON.parse(data.toString());
+          this.handleMonitorMessage(message);
+        } catch (error) {
+          console.error('Error parsing monitor message:', error);
+        }
+      });
+
     } catch (error) {
       console.error('Failed to connect to monitor:', error);
       this.scheduleReconnect();
+    }
+  }
+
+  /**
+   * Connect to SharedContextServer for real-time task pool data
+   */
+  private async connectToSharedContext(): Promise<void> {
+    try {
+      this.sharedContextClient = new WebSocket(this.sharedContextUrl);
+
+      this.sharedContextClient.on('open', () => {
+        console.log('✅ Connected to SharedContextServer');
+        this.contextConnected = true;
+        
+        if (this.contextReconnectInterval) {
+          clearInterval(this.contextReconnectInterval);
+          this.contextReconnectInterval = null;
+        }
+
+        // Subscribe to task pool updates
+        this.subscribeToContextUpdates();
+      });
+
+      this.sharedContextClient.on('close', () => {
+        console.log('❌ Disconnected from SharedContextServer');
+        this.contextConnected = false;
+        this.scheduleContextReconnect();
+      });
+
+      this.sharedContextClient.on('error', (error) => {
+        console.error('SharedContext WebSocket error:', error.message);
+        this.contextConnected = false;
+        this.scheduleContextReconnect();
+      });
+
+      // Handle context sharing messages
+      this.sharedContextClient.on('message', (data) => {
+        try {
+          const message = JSON.parse(data.toString());
+          this.handleContextMessage(message);
+        } catch (error) {
+          console.error('Error parsing context message:', error);
+        }
+      });
+
+    } catch (error) {
+      console.error('Failed to connect to SharedContextServer:', error);
+      this.scheduleContextReconnect();
     }
   }
 
@@ -66,8 +138,103 @@ export class WebSocketIntegration extends EventEmitter {
 
     this.reconnectInterval = setInterval(() => {
       console.log('🔄 Attempting to reconnect to monitor...');
-      this.connect();
+      this.connectToMonitor();
     }, 5000);
+  }
+
+  /**
+   * Schedule SharedContext reconnection
+   */
+  private scheduleContextReconnect(): void {
+    if (this.contextReconnectInterval) return;
+    
+    this.contextReconnectInterval = setInterval(() => {
+      console.log('🔄 Attempting to reconnect to SharedContextServer...');
+      this.connectToSharedContext();
+    }, 5000);
+  }
+
+  /**
+   * Subscribe to context updates
+   */
+  private subscribeToContextUpdates(): void {
+    if (this.sharedContextClient?.readyState === WebSocket.OPEN) {
+      // Subscribe to task pool updates
+      this.sharedContextClient.send(JSON.stringify({
+        type: 'subscribe',
+        topics: ['task_pool', 'token_optimization', 'agent_coordination', 'context_sharing']
+      }));
+    }
+  }
+
+  /**
+   * Handle messages from monitor dashboard
+   */
+  private handleMonitorMessage(message: any): void {
+    switch (message.type) {
+      case 'rebalance_tasks':
+        console.log('📋 Rebalancing tasks requested from dashboard');
+        // Forward to task pool manager if available
+        this.emit('rebalance_tasks');
+        break;
+        
+      case 'reassign_tasks':
+        console.log(`🔄 Reassigning tasks from ${message.fromAgent} to ${message.toAgent}`);
+        this.emit('reassign_tasks', message.fromAgent, message.toAgent);
+        break;
+        
+      case 'pause_agent':
+      case 'resume_agent':
+        // Forward agent control messages
+        this.emit(message.type, message.agentId);
+        break;
+    }
+  }
+
+  /**
+   * Handle messages from SharedContextServer
+   */
+  private handleContextMessage(message: any): void {
+    switch (message.type) {
+      case 'task_pool_update':
+        this.sendToMonitor({
+          type: 'task_pool_update',
+          data: message.data
+        });
+        break;
+        
+      case 'context_sharing_update':
+        this.sendToMonitor({
+          type: 'context_sharing_update',
+          data: {
+            contextShares: message.data.contextShares,
+            tokenMetrics: {
+              totalTokensSaved: message.data.totalTokensSaved,
+              averageSavingsPerTask: message.data.averageSavingsPerTask,
+              contextShareRate: message.data.contextShareRate,
+              cachingEfficiency: message.data.cachingEfficiency,
+              compressionRatio: message.data.compressionRatio,
+              realTimeOptimization: message.data.realTimeOptimization
+            }
+          }
+        });
+        break;
+        
+      case 'agent_coordination_update':
+        this.sendToMonitor({
+          type: 'agent_coordination_update',
+          data: message.data
+        });
+        break;
+        
+      case 'metrics_update':
+        // Forward real-time metrics to dashboard
+        this.sendToMonitor({
+          type: 'shared_context_metrics',
+          data: message.data
+        });
+        break;
+    }
   }
 
   /**
@@ -147,8 +314,15 @@ export class WebSocketIntegration extends EventEmitter {
               memory: 45,
               disk: 35,
               network: 2
-            }
+            },
+            sharedContextConnected: this.contextConnected
           }
+        });
+        
+        // Also send SharedContext connection status
+        this.sendToMonitor({
+          type: 'shared_context_connected',
+          connected: this.contextConnected
         });
       }
     } catch (error) {
@@ -302,19 +476,33 @@ export class WebSocketIntegration extends EventEmitter {
   }
 
   /**
-   * Disconnect from monitor
+   * Disconnect from monitor and SharedContextServer
    */
   disconnect(): void {
+    // Clear reconnection timers
     if (this.reconnectInterval) {
       clearInterval(this.reconnectInterval);
       this.reconnectInterval = null;
     }
     
+    if (this.contextReconnectInterval) {
+      clearInterval(this.contextReconnectInterval);
+      this.contextReconnectInterval = null;
+    }
+    
+    // Close monitor connection
     if (this.wsClient) {
       this.wsClient.close();
       this.wsClient = null;
     }
     
+    // Close SharedContext connection
+    if (this.sharedContextClient) {
+      this.sharedContextClient.close();
+      this.sharedContextClient = null;
+    }
+    
     this.connected = false;
+    this.contextConnected = false;
   }
 }

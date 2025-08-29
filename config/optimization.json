@@ -1,0 +1,54 @@
+{
+  "environment": "production",
+  "enableMemoryManagement": true,
+  "enableAdvancedCaching": true,
+  "enableContextFiltering": true,
+  "enableProductionMonitoring": true,
+  "autoTuning": true,
+  "memory": {
+    "maxMemoryUsage": 2048,
+    "alertThreshold": 80,
+    "gcInterval": 60000,
+    "contextRetentionTime": 1800000,
+    "agentMemoryLimit": 256,
+    "enableDetailedLogging": false,
+    "environment": "production"
+  },
+  "cache": {
+    "l1MaxSize": 1000,
+    "l2MaxSizeMB": 500,
+    "l3MaxSizeMB": 1000,
+    "ttlSeconds": 3600,
+    "compressionThreshold": 1024,
+    "similarityThreshold": 0.8,
+    "enableCompression": true,
+    "enableSimilarityDetection": true,
+    "persistToDisk": true,
+    "cacheDir": ".cache",
+    "environment": "production"
+  },
+  "contextFilter": {
+    "maxContextPerAgent": 50,
+    "globalMaxContext": 500,
+    "adaptiveReduction": true,
+    "contextImportanceThreshold": 0.3,
+    "enableSpecializationFiltering": true,
+    "memoryAwareFiltering": true
+  },
+  "monitoring": {
+    "alertsEnabled": true,
+    "alertThresholds": {
+      "memoryWarning": 80,
+      "memoryCritical": 95,
+      "cacheHitRateWarning": 60,
+      "cpuWarning": 80,
+      "cpuCritical": 95,
+      "diskUsageWarning": 85
+    },
+    "healthCheckInterval": 30000,
+    "metricsRetention": 7,
+    "enableSlackAlerts": false,
+    "enableEmailAlerts": false,
+    "environment": "production"
+  }
+}

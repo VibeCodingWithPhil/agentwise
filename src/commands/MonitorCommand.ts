@@ -89,38 +89,51 @@ export class MonitorCommand {
       console.log('\n🔄 The monitor will auto-open in your browser');
       console.log('Press Ctrl+C to stop the monitor\n');
 
-      // Validate monitor path before changing directory
-      if (!this.monitorPath.includes(process.cwd())) {
-        throw new Error('Monitor path validation failed - path traversal detected');
+      // SECURITY: Proper path validation to prevent path traversal
+      if (!this.validateMonitorPath(this.monitorPath)) {
+        throw new Error('Monitor path validation failed - security check rejected');
       }
       
-      // Change to monitor directory and start
-      process.chdir(this.monitorPath);
+      // SECURITY: Don't change working directory - use absolute paths instead
+      // Removed dangerous process.chdir() call
       
       // Use spawn instead of exec for better process control
       const { spawn } = require('child_process');
       const startScript = path.join(this.monitorPath, 'start.sh');
       
-      // Make sure start.sh is executable
-      await fs.chmod(startScript, '755');
+      // SECURITY: Validate script path and existence before execution
+      if (!this.validateScriptExecution(startScript)) {
+        throw new Error('Script validation failed - refusing to execute');
+      }
       
-      // Check if dependencies are installed
+      // SECURITY: Only make executable if we own the file and it's in our project
+      if (await this.canSafelyMakeExecutable(startScript)) {
+        await fs.chmod(startScript, '755');
+      }
+      
+      // Check if dependencies are installed (using absolute paths)
       const depsPath = path.join(this.monitorPath, 'node_modules');
       if (!await fs.pathExists(depsPath)) {
         console.log('📦 Installing monitor dependencies (first time setup)...');
         try {
-          await execAsync('npm install', { cwd: this.monitorPath });
+          // SECURITY: Use absolute path and validate working directory
+          await execAsync('npm install', { 
+            cwd: this.monitorPath,
+            timeout: 120000  // 2 minute timeout
+          });
           console.log('✅ Dependencies installed');
         } catch (error) {
           console.error('❌ Failed to install dependencies:', error);
+          throw new Error('Failed to install required dependencies');
         }
       }
       
-      // Start the monitor
+      // SECURITY: Start the monitor with proper path validation
       const monitorProcess = spawn('bash', [startScript], {
         stdio: 'inherit',
         cwd: this.monitorPath,
-        detached: false  // Keep attached to parent process
+        detached: false,  // Keep attached to parent process
+        timeout: 300000   // 5 minute timeout
       });
       
       // Keep the parent process alive
@@ -288,5 +301,106 @@ export class MonitorCommand {
     console.log('   • Node.js 18+ installed');
     console.log('   • Monitor dependencies: cd src/monitor && npm install');
     console.log('   • Claude Code with --dangerously-skip-permissions flag');
+  }
+
+  /**
+   * SECURITY: Validate monitor path to prevent path traversal attacks
+   */
+  private validateMonitorPath(monitorPath: string): boolean {
+    try {
+      const resolvedPath = path.resolve(monitorPath);
+      const projectRoot = path.resolve(process.cwd());
+      
+      // Ensure monitor path is within project directory
+      if (!resolvedPath.startsWith(projectRoot)) {
+        console.log('⚠️  Monitor path is outside project directory');
+        return false;
+      }
+      
+      // Ensure monitor path exists and is a directory
+      if (!fs.existsSync(resolvedPath)) {
+        console.log('⚠️  Monitor path does not exist');
+        return false;
+      }
+      
+      const stats = fs.statSync(resolvedPath);
+      if (!stats.isDirectory()) {
+        console.log('⚠️  Monitor path is not a directory');
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.log('⚠️  Monitor path validation failed:', error);
+      return false;
+    }
+  }
+
+  /**
+   * SECURITY: Validate script execution to prevent malicious script execution
+   */
+  private validateScriptExecution(scriptPath: string): boolean {
+    try {
+      const resolvedPath = path.resolve(scriptPath);
+      const projectRoot = path.resolve(process.cwd());
+      
+      // Ensure script is within project directory
+      if (!resolvedPath.startsWith(projectRoot)) {
+        console.log('⚠️  Script is outside project directory');
+        return false;
+      }
+      
+      // Ensure script exists
+      if (!fs.existsSync(resolvedPath)) {
+        console.log('⚠️  Script does not exist');
+        return false;
+      }
+      
+      // Ensure it's a file and has expected extension
+      const stats = fs.statSync(resolvedPath);
+      if (!stats.isFile()) {
+        console.log('⚠️  Script path is not a file');
+        return false;
+      }
+      
+      if (!scriptPath.endsWith('.sh')) {
+        console.log('⚠️  Script does not have expected .sh extension');
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.log('⚠️  Script validation failed:', error);
+      return false;
+    }
+  }
+
+  /**
+   * SECURITY: Check if it's safe to make a file executable
+   */
+  private async canSafelyMakeExecutable(filePath: string): Promise<boolean> {
+    try {
+      const resolvedPath = path.resolve(filePath);
+      const projectRoot = path.resolve(process.cwd());
+      
+      // Ensure file is within project directory
+      if (!resolvedPath.startsWith(projectRoot)) {
+        return false;
+      }
+      
+      // Check if file exists and we can access it
+      if (!fs.existsSync(resolvedPath)) {
+        return false;
+      }
+      
+      // Additional check: ensure it's our start.sh script
+      if (!resolvedPath.includes('monitor') || !resolvedPath.endsWith('start.sh')) {
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

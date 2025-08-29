@@ -9,6 +9,100 @@ import { FigmaCommand } from './commands/FigmaCommand';
 import { FigmaCreateCommand } from './commands/FigmaCreateCommand';
 import { PermissionChecker } from './utils/PermissionChecker';
 
+/**
+ * SECURITY: Securely start SharedContextServer with proper validation and error handling
+ */
+async function startSharedContextServerSecurely(): Promise<void> {
+  try {
+    // Check if port is already in use (safer than lsof command)
+    const net = require('net');
+    const server = net.createServer();
+    
+    await new Promise<void>((resolve, reject) => {
+      server.listen(3003, () => {
+        server.close();
+        // Port is available, start the context server
+        startContextServerProcess();
+        resolve();
+      });
+      
+      server.on('error', (err: any) => {
+        if (err.code === 'EADDRINUSE') {
+          console.log('\n🔗 SharedContextServer already running at: http://localhost:3003');
+          console.log('💡 Token optimization active');
+          resolve();
+        } else {
+          reject(err);
+        }
+      });
+    });
+  } catch (error) {
+    console.log('⚠️  Could not start SharedContextServer:', error);
+  }
+}
+
+/**
+ * SECURITY: Safely spawn the context server process with proper validation
+ */
+function startContextServerProcess(): void {
+  console.log('\n🔗 Starting SharedContextServer for token optimization...');
+  
+  // Validate the script path exists and is safe
+  const contextServerScript = path.join(__dirname, 'context/startContextServer.js');
+  const resolvedPath = path.resolve(contextServerScript);
+  
+  // Security check: ensure the script is within our project directory
+  const projectRoot = path.resolve(__dirname, '..');
+  if (!resolvedPath.startsWith(projectRoot)) {
+    console.error('⚠️  Security: Context server script path is outside project directory');
+    return;
+  }
+
+  // Check if the script file exists
+  if (!fs.existsSync(resolvedPath)) {
+    console.log('⚠️  Context server script not found, skipping shared context optimization');
+    return;
+  }
+
+  try {
+    const { spawn } = require('child_process');
+    const contextServer = spawn('node', [resolvedPath], {
+      detached: true,
+      stdio: ['ignore', 'ignore', 'pipe'], // Capture stderr for error handling
+      cwd: projectRoot // Set safe working directory
+    });
+
+    // Handle process errors
+    contextServer.on('error', (error: Error) => {
+      console.error('⚠️  Failed to start SharedContextServer:', error.message);
+    });
+
+    contextServer.stderr?.on('data', (data: Buffer) => {
+      const error = data.toString().trim();
+      if (error) {
+        console.error('SharedContextServer error:', error);
+      }
+    });
+
+    // Handle process exit
+    contextServer.on('exit', (code: number | null, signal: string | null) => {
+      if (code && code !== 0) {
+        console.log(`⚠️  SharedContextServer exited with code ${code}`);
+      }
+    });
+
+    contextServer.unref();
+    
+    // Give it a moment to start
+    setTimeout(() => {
+      console.log('SharedContextServer available at: http://localhost:3003');
+      console.log('💡 Token optimization active for all agents');
+    }, 2000);
+  } catch (error) {
+    console.error('⚠️  Error spawning SharedContextServer:', error);
+  }
+}
+
 async function main() {
   console.log(`
 ╔══════════════════════════════════════╗
@@ -28,6 +122,7 @@ Available Commands:
   /task-import              - Execute import with planning
   /generate-agent <spec>    - Create custom agent
   /monitor [subcommand]     - Monitor dashboard & global install
+  /context [subcommand]     - Shared context server management
   /docs                     - Open documentation hub
   /figma [subcommand]       - Figma Dev Mode integration
   /figma-create <project>   - Create app from Figma design
@@ -68,6 +163,9 @@ Status: ✅ System Ready
     });
   }
 
+  // Auto-start SharedContextServer if not running (SECURITY: Improved process spawning)
+  await startSharedContextServerSecurely();
+
   console.log('\nTo use Agentwise, run any command from within Claude Code.');
   console.log('Example: /create a todo app with React and Node.js\n');
   
@@ -86,6 +184,14 @@ Status: ✅ System Ready
         const monitorCommand = new MonitorCommand();
         await monitorCommand.handle(args.slice(1));
       });
+      return;
+    }
+    
+    // Handle /context command
+    if (args[0] === '/context') {
+      const { ContextCommand } = await import('./commands/ContextCommand');
+      const contextCommand = new ContextCommand();
+      await contextCommand.handle(args.slice(1));
       return;
     }
     
