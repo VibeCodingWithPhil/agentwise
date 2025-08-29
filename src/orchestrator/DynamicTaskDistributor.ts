@@ -143,7 +143,7 @@ export class DynamicTaskDistributor {
     
     console.log(`✅ Using agents: ${agentsToUse.join(', ')}`);
     
-    // Create agent-todo folders only for required agents
+    // Create agent-todos folders only for required agents
     await this.createAgentTodoFolders(projectPath, agentsToUse, phases.length);
     
     // Initialize task distribution
@@ -173,16 +173,16 @@ export class DynamicTaskDistributor {
   }
 
   /**
-   * Create agent-todo folders only for required agents
+   * Create agent-todos folders only for required agents
    */
   private async createAgentTodoFolders(
     projectPath: string, 
     agents: string[], 
     phaseCount: number
   ): Promise<void> {
-    const agentTodoPath = path.join(projectPath, 'agent-todo');
+    const agentTodoPath = path.join(projectPath, 'agent-todos');
     
-    // Create main agent-todo directory
+    // Create main agent-todos directory
     await fs.ensureDir(agentTodoPath);
     
     // Create folders only for required agents
@@ -199,7 +199,7 @@ export class DynamicTaskDistributor {
       }
     }
     
-    console.log(`📁 Created agent-todo folders for: ${agents.join(', ')}`);
+    console.log(`📁 Created agent-todos folders for: ${agents.join(', ')}`);
   }
 
   // Check methods for different requirements

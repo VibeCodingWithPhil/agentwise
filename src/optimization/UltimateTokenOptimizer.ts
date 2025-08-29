@@ -36,7 +36,7 @@ export class UltimateTokenOptimizer {
   private metricsHistory: TokenMetrics[];
   
   // Constants for optimization
-  private readonly TARGET_RATIO = 0.01; // 1% of original (100 agents = 1 agent tokens)
+  private readonly TARGET_RATIO = 0.01; // Target 99% reduction through aggressive optimization
   private readonly CHUNK_SIZE = 4096; // Optimal chunk for processing
   
   constructor() {

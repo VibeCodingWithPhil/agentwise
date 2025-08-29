@@ -2,7 +2,7 @@
  * Research Agent - Advanced research capabilities with time awareness
  */
 
-import { WebSearch } from 'next/font/google';
+// Note: WebSearch functionality will be implemented with proper search tools
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { exec } from 'child_process';

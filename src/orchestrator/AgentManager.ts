@@ -62,7 +62,7 @@ export class AgentManager {
     platform: NodeJS.Platform
   ): Promise<void> {
     const agentCommand = `/agent "${agent.name}"`;
-    const todoPath = path.join(projectPath, 'agent-todo', agent.name, 'phase1-todo.md');
+    const todoPath = path.join(projectPath, 'agent-todos', agent.name, 'phase1-todo.md');
     
     try {
       if (platform === 'darwin') {

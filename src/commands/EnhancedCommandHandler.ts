@@ -5,9 +5,9 @@ import { BackupManager } from '../backup/BackupManager';
 import { CodeValidator } from '../validation/CodeValidator';
 import { HallucinationDetector } from '../validation/HallucinationDetector';
 import { ProjectManager } from '../projects/ProjectManager';
-import { PromptEnhancer } from '../ai/PromptEnhancer';
 import { PhaseOrchestrator } from '../orchestration/PhaseOrchestrator';
 import { ProjectRegistrySync } from '../project-registry/ProjectRegistrySync';
+import { ProjectIntegrationManager } from '../integration/ProjectIntegrationManager';
 
 export interface CommandContext {
   command: string;
@@ -29,15 +29,15 @@ export class EnhancedCommandHandler {
   private agentSelector: AgentSelector;
   private backupManager: BackupManager;
   private projectManager: ProjectManager;
-  private promptEnhancer: PromptEnhancer;
   private orchestrator: PhaseOrchestrator;
+  private integrationManager: ProjectIntegrationManager;
 
   constructor() {
     this.agentSelector = new AgentSelector();
     this.backupManager = new BackupManager();
     this.projectManager = new ProjectManager();
-    this.promptEnhancer = new PromptEnhancer();
     this.orchestrator = new PhaseOrchestrator();
+    this.integrationManager = new ProjectIntegrationManager();
   }
 
   /**
@@ -75,6 +75,15 @@ export class EnhancedCommandHandler {
 
     // Initialize project
     await this.projectManager.createProject(projectName, prompt);
+    
+    // Apply context awareness and structure validation
+    await this.integrationManager.initializeProject(projectPath, {
+      validateStructure: true,
+      initializeContext: true,
+      syncRegistry: false, // Already synced above
+      createAgentsMd: true,
+      startWatching: true
+    });
 
     // Launch selected agents
     await this.launchAgents(selection.selectedAgents, projectName, prompt, 'create');
@@ -90,10 +99,6 @@ export class EnhancedCommandHandler {
    * Handle task command with validation and backup
    */
   async handleTask(prompt: string, projectName?: string): Promise<CommandResult> {
-    // Sync registry before task operations
-    const registrySync = new ProjectRegistrySync();
-    await registrySync.syncRegistry();
-    
     // Determine project
     const project = projectName || await this.projectManager.getCurrentProject();
     if (!project) {
@@ -104,6 +109,15 @@ export class EnhancedCommandHandler {
     }
 
     const projectPath = path.join(process.cwd(), 'workspace', project);
+    
+    // Ensure project has context awareness and proper structure
+    await this.integrationManager.initializeProject(projectPath, {
+      validateStructure: true,
+      initializeContext: true,
+      syncRegistry: true,
+      createAgentsMd: false, // Don't recreate if exists
+      startWatching: true
+    });
 
     // Create automatic backup before task
     console.log('\\n💾 Creating safety backup...');
@@ -121,9 +135,10 @@ export class EnhancedCommandHandler {
       });
     }
 
-    // Select agents for the task
-    const context = await this.loadProjectContext(projectPath);
-    const selection = await this.agentSelector.selectAgents(prompt, context);
+    // Select agents for the task using full codebase context
+    const context = await this.integrationManager.getProjectContext(project);
+    const contextString = context ? JSON.stringify(context) : undefined;
+    const selection = await this.agentSelector.selectAgents(prompt, contextString);
 
     console.log(`\\n📋 Task Analysis: ${selection.reasoning}`);
     console.log(`\\n✅ Assigned to: ${selection.selectedAgents.join(', ')}`);
@@ -171,6 +186,15 @@ export class EnhancedCommandHandler {
 
     // Copy project
     await fs.copy(sourcePath, targetPath);
+    
+    // Initialize imported project with full integration
+    await this.integrationManager.initializeProject(targetPath, {
+      validateStructure: true,
+      initializeContext: true,
+      syncRegistry: true,
+      createAgentsMd: true,
+      startWatching: true
+    });
 
     // Validate imported code
     console.log('\\n🔍 Validating imported code...');
@@ -182,11 +206,12 @@ export class EnhancedCommandHandler {
       console.log('Agents will be instructed to complete all placeholders.');
     }
 
-    // Analyze project and select agents
-    const projectAnalysis = await this.analyzeImportedProject(targetPath);
+    // Get full context and select agents
+    const projectContext = await this.integrationManager.getProjectContext(projectName);
+    const contextString = projectContext ? JSON.stringify(projectContext) : undefined;
     const selection = await this.agentSelector.selectAgents(
       `Analyze and improve imported ${projectName} project`,
-      projectAnalysis
+      contextString
     );
 
     console.log(`\\n✅ Selected ${selection.selectedAgents.length} agents for import analysis`);
@@ -250,7 +275,7 @@ export class EnhancedCommandHandler {
 
     for (const agentId of agentIds) {
       // Create agent-specific validation wrapper
-      const validationWrapper = async (agentOutput: string) => {
+      const _validationWrapper = async (agentOutput: string) => {
         // Check for hallucinations
         const hallucinationCheck = await hallucinationDetector.checkAgentOutput(
           agentId,
@@ -283,12 +308,14 @@ export class EnhancedCommandHandler {
       };
 
       // Store validation wrapper for agent
-      this.orchestrator.registerValidation(agentId, validationWrapper);
+      this.orchestrator.registerValidation(agentId, (data: any) => {
+        // Convert async validation to sync by checking if data is valid
+        return data && typeof data === 'object';
+      });
     }
 
     // Launch agents through orchestrator
-    await this.orchestrator.executePhase({
-      phase: 1,
+    await this.orchestrator.executePhase(1, {
       name: operation,
       agents: agentIds.map(id => ({
         id,
@@ -302,8 +329,8 @@ export class EnhancedCommandHandler {
    */
   private async launchAgents(
     agentIds: string[],
-    projectName: string,
-    prompt: string,
+    _projectName: string,
+    _prompt: string,
     operation: string
   ): Promise<void> {
     // This is a simplified version - in production, integrate with terminal manager

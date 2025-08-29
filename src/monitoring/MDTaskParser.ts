@@ -27,7 +27,7 @@ export interface ParsedPhase {
 export interface ParsedDocument {
   filePath: string;
   projectId: string;
-  documentType: 'todo-spec' | 'phase-implementation' | 'agent-todo' | 'unknown';
+  documentType: 'todo-spec' | 'phase-implementation' | 'agent-todos' | 'unknown';
   phases: ParsedPhase[];
   totalTasks: number;
   completedTasks: number;
@@ -80,7 +80,7 @@ export class MDTaskParser {
       document.phases = this.parseTodoSpec(content);
     } else if (documentType === 'phase-implementation') {
       document.phases = this.parsePhaseImplementation(content, filePath);
-    } else if (documentType === 'agent-todo') {
+    } else if (documentType === 'agent-todos') {
       document.phases = this.parseAgentTodo(content, filePath);
     } else {
       document.phases = this.parseGenericMD(content);
@@ -382,7 +382,7 @@ export class MDTaskParser {
     
     if (filename.includes('todo-spec')) return 'todo-spec';
     if (filename.includes('phase') && filename.includes('implementation')) return 'phase-implementation';
-    if (filePath.includes('agent-todo')) return 'agent-todo';
+    if (filePath.includes('agent-todos')) return 'agent-todos';
     
     return 'unknown';
   }
@@ -406,7 +406,7 @@ export class MDTaskParser {
 
   private extractAgentFromPath(filePath: string): string {
     const parts = filePath.split(path.sep);
-    const agentTodoIndex = parts.indexOf('agent-todo');
+    const agentTodoIndex = parts.indexOf('agent-todos');
     
     if (agentTodoIndex !== -1 && parts[agentTodoIndex + 1]) {
       return parts[agentTodoIndex + 1];

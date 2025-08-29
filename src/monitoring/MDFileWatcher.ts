@@ -27,7 +27,7 @@ export class MDFileWatcher extends EventEmitter {
       '*/todo-spec.md',
       '*/phase-*.md',
       '*/*-implementation.md',
-      '*/agent-todo/**/*.md'
+      '*/agent-todos/**/*.md'
     ];
   }
 
@@ -212,10 +212,10 @@ export class MDFileWatcher extends EventEmitter {
   }
 
   private extractAgent(filePath: string): string | undefined {
-    // Extract agent from path: agent-todo/frontend-specialist/...
-    if (filePath.includes('agent-todo')) {
+    // Extract agent from path: agent-todos/frontend-specialist/...
+    if (filePath.includes('agent-todos')) {
       const parts = filePath.split(path.sep);
-      const agentIndex = parts.indexOf('agent-todo');
+      const agentIndex = parts.indexOf('agent-todos');
       if (agentIndex !== -1 && parts[agentIndex + 1]) {
         return parts[agentIndex + 1];
       }
@@ -247,6 +247,30 @@ export class MDFileWatcher extends EventEmitter {
     return `${fileId}_L${lineNumber}_${descId}`;
   }
 
+  async watchProject(projectPath: string): Promise<void> {
+    // Stop existing watcher if running
+    await this.stop();
+    
+    // Start watching the specific project
+    console.log(`🔍 Starting to watch project: ${projectPath}`);
+    
+    const watchPatterns = this.watchPatterns.map(pattern => 
+      path.join(projectPath, pattern)
+    );
+    
+    this.watcher = chokidar.watch(watchPatterns, {
+      ignored: /node_modules/,
+      persistent: true,
+      ignoreInitial: false
+    });
+
+    this.watcher
+      .on('change', (filePath) => this.handleFileChanged(filePath))
+      .on('add', (filePath) => this.handleFileChanged(filePath))
+      .on('error', (error) => console.error('Watcher error:', error))
+      .on('ready', () => console.log('✅ Project watcher ready'));
+  }
+
   async stop(): Promise<void> {
     if (this.watcher) {
       await this.watcher.close();
@@ -270,7 +294,7 @@ export class MDFileWatcher extends EventEmitter {
       'todo-spec.md',
       'phase-*.md',
       '*-implementation.md',
-      'agent-todo/**/*.md'
+      'agent-todos/**/*.md'
     ];
     
     for (const pattern of patterns) {
@@ -312,8 +336,8 @@ export class MDFileWatcher extends EventEmitter {
         
         if (stat.isFile() && item.endsWith('.md')) {
           files.push(fullPath);
-        } else if (stat.isDirectory() && item === 'agent-todo') {
-          // Recursively search agent-todo directory
+        } else if (stat.isDirectory() && item === 'agent-todos') {
+          // Recursively search agent-todos directory
           const agentFiles = await this.findFilesRecursive(fullPath, '.md');
           files.push(...agentFiles);
         }

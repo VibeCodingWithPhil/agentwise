@@ -34,7 +34,10 @@ export class ProjectRegistry {
   private registry: Registry;
 
   constructor() {
-    this.registryPath = path.join(__dirname, 'projects.json');
+    // Store registry in workspace/.registry folder
+    const workspaceRegistryPath = path.join(process.cwd(), 'workspace', '.registry');
+    fs.ensureDirSync(workspaceRegistryPath);
+    this.registryPath = path.join(workspaceRegistryPath, 'projects.json');
     this.registry = { projects: [], lastUpdated: new Date().toISOString() };
   }
 

@@ -22,18 +22,23 @@
   "license": "PROPRIETARY - See LICENSE file",
   "private": true,
   "dependencies": {
+    "@types/ws": "^8.18.1",
+    "axios": "^1.11.0",
     "blessed": "^0.1.81",
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.2",
     "chokidar": "^4.0.3",
     "commander": "^11.1.0",
     "fs-extra": "^11.2.0",
+    "inquirer": "^12.9.4",
     "node-pty": "^1.0.0",
-    "open": "^10.0.3"
+    "open": "^10.0.3",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/blessed": "^0.1.25",
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.9",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
     "@typescript-eslint/parser": "^6.13.0",

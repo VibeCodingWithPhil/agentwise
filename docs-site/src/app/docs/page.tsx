@@ -184,7 +184,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
                 </div>
                 <div>
                   <p className="font-medium">Start Claude Code correctly</p>
-                  <CodeBlock language="bash">claude --dangerously-skip-permissions</CodeBlock>
+                  <CodeBlock language="bash">{`claude --dangerously-skip-permissions`}</CodeBlock>
                 </div>
               </div>
               
@@ -194,7 +194,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
                 </div>
                 <div>
                   <p className="font-medium">Verify installation</p>
-                  <CodeBlock language="bash">/help</CodeBlock>
+                  <CodeBlock language="bash">{`/help`}</CodeBlock>
                   <p className="text-sm text-muted-foreground">You should see Agentwise commands listed.</p>
                 </div>
               </div>
@@ -205,7 +205,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
                 </div>
                 <div>
                   <p className="font-medium">Create your first project</p>
-                  <CodeBlock language="bash">/create "a todo app with React and Firebase"</CodeBlock>
+                  <CodeBlock language="bash">{`/create "a todo app with React and Firebase"`}</CodeBlock>
                 </div>
               </div>
               
@@ -215,7 +215,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
                 </div>
                 <div>
                   <p className="font-medium">Monitor progress</p>
-                  <CodeBlock language="bash">/monitor</CodeBlock>
+                  <CodeBlock language="bash">{`/monitor`}</CodeBlock>
                   <p className="text-sm text-muted-foreground">Opens the dashboard at http://localhost:3001</p>
                 </div>
               </div>

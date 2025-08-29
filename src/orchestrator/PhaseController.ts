@@ -96,7 +96,7 @@ export class PhaseController {
     let allComplete = true;
     
     for (const agent of agents) {
-      const statusPath = path.join(projectPath, 'agent-todo', agent, 'phase-status.json');
+      const statusPath = path.join(projectPath, 'agent-todos', agent, 'phase-status.json');
       
       try {
         const status: PhaseStatus = await fs.readJson(statusPath);
@@ -119,7 +119,7 @@ export class PhaseController {
     const agents = ['frontend', 'backend', 'database', 'devops', 'testing'];
     
     for (const agent of agents) {
-      const statusPath = path.join(projectPath, 'agent-todo', agent, 'phase-status.json');
+      const statusPath = path.join(projectPath, 'agent-todos', agent, 'phase-status.json');
       
       try {
         const status: PhaseStatus = await fs.readJson(statusPath);
@@ -134,7 +134,7 @@ export class PhaseController {
           // Load tasks for new phase
           const phasePath = path.join(
             projectPath, 
-            'agent-todo', 
+            'agent-todos', 
             agent, 
             `phase${status.current_phase}-todo.md`
           );

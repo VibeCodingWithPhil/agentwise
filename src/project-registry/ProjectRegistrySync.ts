@@ -141,7 +141,7 @@ export class ProjectRegistrySync {
     ];
 
     const optionalIndicators = [
-      'agent-todo',
+      'agent-todos',
       'specs',
       'src',
       'package.json'
@@ -389,7 +389,7 @@ ${project.technologies?.join(', ') || 'Not specified'}
         }
         
         // Update phases if phase files exist
-        const agentTodoPath = path.join(projectPath, 'agent-todo');
+        const agentTodoPath = path.join(projectPath, 'agent-todos');
         if (await fs.pathExists(agentTodoPath)) {
           const phases = await this.detectProjectPhases(agentTodoPath);
           if (phases) {
@@ -401,7 +401,7 @@ ${project.technologies?.join(', ') || 'Not specified'}
   }
 
   /**
-   * Detect project phases from agent-todo folder
+   * Detect project phases from agent-todos folder
    */
   private async detectProjectPhases(agentTodoPath: string): Promise<Project['phases'] | null> {
     try {

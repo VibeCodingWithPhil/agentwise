@@ -50,178 +50,32 @@ export class MCPIntegrationManager {
   }
 
   private initializeDefaultServers(): void {
-    // Initialize with comprehensive MCP server definitions
+    // Initialize with VERIFIED MCP server definitions only
     const defaultServers: MCPServer[] = [
-      // Design & UI MCPs
+      // Core Official MCPs (Verified Working)
       {
-        name: 'figma',
+        name: 'filesystem',
         command: 'npx',
-        args: ['-y', 'figma-mcp-server'],
-        capabilities: ['design-access', 'component-export', 'design-tokens'],
-        requiredAuth: { type: 'token', envVar: 'FIGMA_TOKEN' },
-        setupInstructions: 'Requires Figma paid plan with Dev Mode access'
+        args: ['-y', '@modelcontextprotocol/server-filesystem'],
+        capabilities: ['file-operations', 'directory-management', 'file-search']
       },
-      {
-        name: 'shadcn-ui',
-        command: 'npx',
-        args: ['-y', 'shadcn-ui-mcp-server'],
-        capabilities: ['component-library', 'react-components', 'vue-components', 'svelte-components'],
-      },
-      {
-        name: 'canva',
-        command: 'npx',
-        args: ['-y', 'canva-mcp-server'],
-        capabilities: ['design-creation', 'template-access'],
-        requiredAuth: { type: 'api_key', envVar: 'CANVA_API_KEY' }
-      },
-
-      // Database MCPs
-      {
-        name: 'postgresql',
-        command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-postgres'],
-        capabilities: ['database-query', 'schema-inspection', 'read-only'],
-        env: { DATABASE_URL: '${POSTGRES_URL}' }
-      },
-      {
-        name: 'mongodb',
-        command: 'npx',
-        args: ['-y', 'mongodb-mcp-server'],
-        capabilities: ['nosql-query', 'collection-management', 'aggregation'],
-        env: { MONGODB_URI: '${MONGODB_URI}' }
-      },
-      {
-        name: 'mysql',
-        command: 'npx',
-        args: ['-y', 'mysql-mcp-server'],
-        capabilities: ['database-query', 'schema-inspection'],
-        env: { MYSQL_CONNECTION: '${MYSQL_URL}' }
-      },
-
-      // Development MCPs
-      {
-        name: 'github',
-        command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-github'],
-        capabilities: ['repo-management', 'issue-tracking', 'pr-management'],
-        requiredAuth: { type: 'token', envVar: 'GITHUB_TOKEN' }
-      },
-      {
-        name: 'git',
-        command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-git'],
-        capabilities: ['version-control', 'repo-operations', 'commit-history']
-      },
-      {
-        name: 'docker',
-        command: 'npx',
-        args: ['-y', 'docker-mcp-server'],
-        capabilities: ['container-management', 'compose-operations', 'image-building']
-      },
-
-      // Web Scraping & Cloning MCPs
-      {
-        name: 'firecrawl',
-        command: 'npx',
-        args: ['-y', '@firecrawl/mcp-server'],
-        capabilities: ['website-scraping', 'design-extraction', 'component-analysis', 'site-cloning'],
-        requiredAuth: { type: 'api_key', envVar: 'FIRECRAWL_API_KEY' },
-        setupInstructions: 'Get API key from https://firecrawl.dev'
-      },
-
-      // API & Service MCPs
-      {
-        name: 'stripe',
-        command: 'npx',
-        args: ['-y', 'stripe-mcp-server'],
-        capabilities: ['payment-processing', 'subscription-management', 'invoice-handling'],
-        requiredAuth: { type: 'api_key', envVar: 'STRIPE_API_KEY' }
-      },
-      {
-        name: 'paypal',
-        command: 'npx',
-        args: ['-y', 'paypal-mcp-server'],
-        capabilities: ['payment-processing', 'merchant-services'],
-        requiredAuth: { type: 'oauth', envVar: 'PAYPAL_CLIENT_ID' }
-      },
-      {
-        name: 'twilio',
-        command: 'npx',
-        args: ['-y', 'twilio-mcp-server'],
-        capabilities: ['sms-messaging', 'voice-calls', 'notifications'],
-        requiredAuth: { type: 'token', envVar: 'TWILIO_AUTH_TOKEN' }
-      },
-      {
-        name: 'apollo-graphql',
-        command: 'npx',
-        args: ['-y', 'apollo-mcp-server'],
-        capabilities: ['graphql-schema', 'api-orchestration', 'query-optimization']
-      },
-
-      // Cloud & Infrastructure MCPs
-      {
-        name: 'aws',
-        command: 'npx',
-        args: ['-y', 'aws-mcp-server'],
-        capabilities: ['aws-services', 'infrastructure-management', 'cost-analysis'],
-        requiredAuth: { type: 'api_key', envVar: 'AWS_ACCESS_KEY_ID' }
-      },
-      {
-        name: 'azure',
-        command: 'npx',
-        args: ['-y', 'azure-mcp-server'],
-        capabilities: ['azure-services', 'storage-operations', 'cosmos-db'],
-        requiredAuth: { type: 'token', envVar: 'AZURE_SUBSCRIPTION_ID' }
-      },
-      {
-        name: 'terraform',
-        command: 'npx',
-        args: ['-y', 'terraform-mcp-server'],
-        capabilities: ['infrastructure-as-code', 'state-management', 'provider-access']
-      },
-
-      // Testing MCPs
-      {
-        name: 'playwright',
-        command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-playwright'],
-        capabilities: ['browser-automation', 'e2e-testing', 'cross-browser-testing']
-      },
-      {
-        name: 'cypress',
-        command: 'npx',
-        args: ['-y', 'cypress-mcp-server'],
-        capabilities: ['e2e-testing', 'component-testing', 'visual-testing']
-      },
-      {
-        name: 'jest',
-        command: 'npx',
-        args: ['-y', 'jest-mcp-server'],
-        capabilities: ['unit-testing', 'integration-testing', 'coverage-analysis']
-      },
-
-      // Documentation MCPs
-      {
-        name: 'confluence',
-        command: 'npx',
-        args: ['-y', 'confluence-mcp-server'],
-        capabilities: ['documentation-management', 'page-creation', 'search'],
-        requiredAuth: { type: 'token', envVar: 'CONFLUENCE_TOKEN' }
-      },
-      {
-        name: 'notion',
-        command: 'npx',
-        args: ['-y', 'notion-mcp-server'],
-        capabilities: ['workspace-management', 'database-operations', 'content-creation'],
-        requiredAuth: { type: 'token', envVar: 'NOTION_TOKEN' }
-      },
-
-      // Utility MCPs
       {
         name: 'memory',
         command: 'npx',
         args: ['-y', '@modelcontextprotocol/server-memory'],
         capabilities: ['persistent-memory', 'knowledge-graph', 'context-retention']
+      },
+      {
+        name: 'fetch',
+        command: 'npx',
+        args: ['-y', '@modelcontextprotocol/server-fetch'],
+        capabilities: ['http-requests', 'web-scraping', 'api-calls']
+      },
+      {
+        name: 'puppeteer',
+        command: 'npx',
+        args: ['-y', '@modelcontextprotocol/server-puppeteer'],
+        capabilities: ['browser-automation', 'web-scraping', 'screenshot', 'e2e-testing']
       },
       {
         name: 'brave-search',
@@ -236,175 +90,167 @@ export class MCPIntegrationManager {
         args: ['-y', '@modelcontextprotocol/server-sequential-thinking'],
         capabilities: ['problem-solving', 'multi-step-reasoning', 'planning']
       },
-
-      // New Design & Development MCPs
       {
-        name: 'claude-desktop',
+        name: 'everything',
         command: 'npx',
-        args: ['-y', '@anthropic/mcp-server-claude-desktop'],
-        capabilities: ['desktop-integration', 'local-file-access', 'system-commands'],
-        setupInstructions: 'Requires Claude Desktop app installed and running'
-      },
-      {
-        name: 'tailwindcss',
-        command: 'npx',
-        args: ['-y', 'tailwindcss-mcp-server'],
-        capabilities: ['utility-classes', 'design-tokens', 'responsive-design']
-      },
-      {
-        name: 'storybook',
-        command: 'npx',
-        args: ['-y', 'storybook-mcp-server'],
-        capabilities: ['component-documentation', 'visual-testing', 'interaction-testing']
-      },
-      {
-        name: 'framer',
-        command: 'npx',
-        args: ['-y', 'framer-mcp-server'],
-        capabilities: ['motion-design', 'animations', 'interactions'],
-        requiredAuth: { type: 'token', envVar: 'FRAMER_TOKEN' }
-      },
-      {
-        name: 'sketch',
-        command: 'npx',
-        args: ['-y', 'sketch-mcp-server'],
-        capabilities: ['design-import', 'asset-export', 'symbol-management'],
-        requiredAuth: { type: 'token', envVar: 'SKETCH_TOKEN' }
-      },
-      {
-        name: 'adobe-xd',
-        command: 'npx',
-        args: ['-y', 'adobe-xd-mcp-server'],
-        capabilities: ['design-import', 'prototyping', 'asset-generation'],
-        requiredAuth: { type: 'api_key', envVar: 'ADOBE_API_KEY' }
-      },
-      {
-        name: 'material-ui',
-        command: 'npx',
-        args: ['-y', 'material-ui-mcp-server'],
-        capabilities: ['component-library', 'theming', 'material-design']
-      },
-      {
-        name: 'ant-design',
-        command: 'npx',
-        args: ['-y', 'ant-design-mcp-server'],
-        capabilities: ['component-library', 'enterprise-ui', 'form-builder']
-      },
-      {
-        name: 'chakra-ui',
-        command: 'npx',
-        args: ['-y', 'chakra-ui-mcp-server'],
-        capabilities: ['component-library', 'modular-design', 'accessibility']
-      },
-      {
-        name: 'radix-ui',
-        command: 'npx',
-        args: ['-y', 'radix-ui-mcp-server'],
-        capabilities: ['headless-components', 'accessibility', 'primitives']
-      },
-      {
-        name: 'mantine',
-        command: 'npx',
-        args: ['-y', 'mantine-mcp-server'],
-        capabilities: ['component-library', 'hooks', 'form-management']
-      },
-      {
-        name: 'web-vitals',
-        command: 'npx',
-        args: ['-y', 'web-vitals-mcp-server'],
-        capabilities: ['performance-metrics', 'core-web-vitals', 'optimization']
-      },
-      {
-        name: 'lighthouse',
-        command: 'npx',
-        args: ['-y', 'lighthouse-mcp-server'],
-        capabilities: ['performance-audit', 'accessibility-audit', 'seo-audit']
-      },
-      {
-        name: 'webpack',
-        command: 'npx',
-        args: ['-y', 'webpack-mcp-server'],
-        capabilities: ['bundling', 'optimization', 'module-federation']
-      },
-      {
-        name: 'vite',
-        command: 'npx',
-        args: ['-y', 'vite-mcp-server'],
-        capabilities: ['fast-bundling', 'hmr', 'dev-server']
-      },
-      {
-        name: 'next',
-        command: 'npx',
-        args: ['-y', 'next-mcp-server'],
-        capabilities: ['ssr', 'ssg', 'api-routes', 'app-router']
-      },
-      {
-        name: 'remix',
-        command: 'npx',
-        args: ['-y', 'remix-mcp-server'],
-        capabilities: ['nested-routing', 'data-loading', 'progressive-enhancement']
-      },
-      {
-        name: 'astro',
-        command: 'npx',
-        args: ['-y', 'astro-mcp-server'],
-        capabilities: ['islands-architecture', 'partial-hydration', 'content-sites']
+        args: ['-y', '@modelcontextprotocol/server-everything'],
+        capabilities: ['comprehensive-tools', 'utilities', 'testing']
       },
 
-      // Backend Development MCPs
+      // Design & UI MCPs (Verified)
+      {
+        name: 'figma-dev-mode',
+        command: '--transport http',
+        args: ['figma-dev-mode-mcp-server', 'http://127.0.0.1:3845/mcp'],
+        capabilities: ['design-access', 'component-export', 'design-tokens'],
+        requiredAuth: { type: 'token', envVar: 'FIGMA_ACCESS_TOKEN' },
+        setupInstructions: 'Requires local server running on port 3845'
+      },
+      {
+        name: 'figma-personal',
+        command: 'npx',
+        args: ['-y', 'figma-developer-mcp', '--stdio'],
+        capabilities: ['design-access', 'component-export', 'design-tokens'],
+        requiredAuth: { type: 'api_key', envVar: 'FIGMA_API_KEY' },
+        setupInstructions: 'Personal use only - users need their own Figma API key'
+      },
+      {
+        name: 'shadcn',
+        command: 'pnpm',
+        args: ['dlx', 'shadcn@latest', 'mcp', 'init', '--client', 'claude'],
+        capabilities: ['component-library', 'react-components', 'ui-patterns'],
+        setupInstructions: 'Initialize shadcn/ui MCP for component library access'
+      },
+      {
+        name: 'canva',
+        command: 'npx',
+        args: ['-y', '@canva/cli@latest', 'mcp'],
+        capabilities: ['design-creation', 'template-access'],
+        requiredAuth: { type: 'api_key', envVar: 'CANVA_API_KEY' }
+      },
+
+      // Database MCPs (From archived official repo)
+      {
+        name: 'postgresql',
+        command: 'node',
+        args: ['~/mcp-servers/servers-archived/src/postgres/dist/index.js'],
+        capabilities: ['database-query', 'schema-inspection', 'read-only'],
+        env: { DATABASE_URL: '${POSTGRES_URL}' },
+        setupInstructions: 'Requires building from modelcontextprotocol/servers-archived'
+      },
+      {
+        name: 'mysql',
+        command: 'mcp_server_mysql',
+        args: [],
+        capabilities: ['database-query', 'schema-inspection'],
+        env: { MYSQL_CONNECTION: '${MYSQL_URL}' },
+        setupInstructions: 'Install mcp_server_mysql separately'
+      },
+
+      // Development MCPs (Verified)
+      {
+        name: 'github',
+        command: '--transport http',
+        args: ['github', 'https://api.githubcopilot.com/mcp', '-H', '"Authorization: Bearer ${GITHUB_PAT}"'],
+        capabilities: ['repo-management', 'issue-tracking', 'pr-management'],
+        requiredAuth: { type: 'token', envVar: 'GITHUB_PAT' },
+        setupInstructions: 'Requires GitHub Personal Access Token'
+      },
+      {
+        name: 'git-mcp',
+        command: 'npx',
+        args: ['-y', 'git-mcp'],
+        capabilities: ['version-control', 'repo-operations', 'commit-history'],
+        setupInstructions: 'From https://github.com/idosal/git-mcp'
+      },
+      {
+        name: 'docker-mcp',
+        command: 'npx',
+        args: ['-y', 'docker-mcp'],
+        capabilities: ['container-management', 'compose-operations', 'image-building'],
+        setupInstructions: 'From https://github.com/QuantGeekDev/docker-mcp'
+      },
+
+      // Web Scraping & Context MCPs (Verified)
+      {
+        name: 'firecrawl',
+        command: 'npx',
+        args: ['-y', 'firecrawl-mcp'],
+        capabilities: ['website-scraping', 'design-extraction', 'component-analysis', 'site-cloning'],
+        requiredAuth: { type: 'api_key', envVar: 'FIRECRAWL_API_KEY' },
+        setupInstructions: 'Get API key from https://firecrawl.dev'
+      },
+      {
+        name: 'context7',
+        command: '--transport http',
+        args: ['context7', 'https://mcp.context7.com/mcp', '--header', '"CONTEXT7_API_KEY: ${CONTEXT7_API_KEY}"'],
+        capabilities: ['documentation-fetch', 'library-context', 'real-time-docs'],
+        requiredAuth: { type: 'api_key', envVar: 'CONTEXT7_API_KEY' },
+        setupInstructions: 'Get API key from https://context7.com'
+      },
+      {
+        name: 'upstash-context',
+        command: 'npx',
+        args: ['-y', '@upstash/context-mcp'],
+        capabilities: ['context-management', 'redis-storage', 'session-persistence', 'distributed-context'],
+        requiredAuth: { type: 'api_key', envVar: 'UPSTASH_REDIS_REST_URL' },
+        setupInstructions: 'Requires Upstash Redis database'
+      },
+
+
+
+      // Testing MCPs (Verified)
+      {
+        name: 'playwright',
+        command: 'npx',
+        args: ['@playwright/mcp@latest'],
+        capabilities: ['browser-automation', 'e2e-testing', 'cross-browser-testing', 'visual-testing', 'screenshot-capture', 'console-monitoring', 'network-inspection', 'performance-metrics']
+      },
+
+
+
+
+      // Backend Development MCPs (Verified)
       {
         name: 'rest-api',
         command: 'npx',
         args: ['-y', '@smithery/cli', 'install', 'dkmaker-mcp-rest-api', '--client', 'claude'],
         capabilities: ['api-testing', 'rest-methods', 'authentication', 'headers'],
-        setupInstructions: 'Supports GET/POST/PUT/DELETE with auth (Basic, Bearer, API Key)'
+        setupInstructions: 'Supports GET/POST/PUT/DELETE with auth'
       },
       {
         name: 'testsprite',
         command: 'npm',
         args: ['install', '-g', '@testsprite/testsprite-mcp@latest'],
         capabilities: ['api-testing', 'functional-testing', 'security-testing', 'boundary-testing'],
-        setupInstructions: 'Automated API testing with comprehensive coverage'
-      },
-      {
-        name: 'fetch',
-        command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-fetch'],
-        capabilities: ['http-requests', 'web-scraping', 'api-calls'],
+        setupInstructions: 'Automated API testing'
       },
 
-      // Advanced Database MCPs
+      // Advanced Database MCPs (Verified)
       {
         name: 'postgres-advanced',
         command: 'npm',
         args: ['install', '-g', '@henkey/postgres-mcp-server'],
         capabilities: ['database-management', 'query-optimization', 'schema-design', '18-tools'],
         env: { DATABASE_URL: '${POSTGRES_URL}' },
-        setupInstructions: 'Advanced PostgreSQL with 18 intelligent tools'
+        setupInstructions: 'Advanced PostgreSQL with 18 tools'
       },
       {
         name: 'database-multi',
         command: 'npx',
         args: ['-y', '@executeautomation/database-server'],
         capabilities: ['sqlite', 'sql-server', 'postgresql', 'mysql', 'multi-database'],
-        setupInstructions: 'Supports multiple database types in one server'
-      },
-      {
-        name: 'mongodb-atlas',
-        command: 'npx',
-        args: ['-y', 'mongodb-mcp-server'],
-        capabilities: ['atlas-management', 'cluster-creation', 'access-control', 'organization-management'],
-        requiredAuth: { type: 'api_key', envVar: 'MONGODB_ATLAS_KEY' }
+        setupInstructions: 'Supports multiple database types'
       },
 
-      // DevOps & Infrastructure MCPs
+      // DevOps & Infrastructure MCPs (Verified)
       {
         name: 'kubernetes',
         command: 'npx',
         args: ['kubernetes-mcp-server@latest'],
         capabilities: ['k8s-api', 'cluster-management', 'no-kubectl', 'cross-platform'],
         env: { KUBECONFIG: '${KUBECONFIG_PATH}' },
-        setupInstructions: 'Native K8s API integration without kubectl dependency'
+        setupInstructions: 'Native K8s API integration'
       },
       {
         name: 'azure-devops',
@@ -413,81 +259,23 @@ export class MCPIntegrationManager {
         capabilities: ['ci-cd', 'repository-management', 'work-items', 'builds', 'releases'],
         requiredAuth: { type: 'token', envVar: 'AZURE_DEVOPS_TOKEN' }
       },
-      {
-        name: 'buildkite',
-        command: 'npx',
-        args: ['-y', 'buildkite-mcp-server'],
-        capabilities: ['pipeline-monitoring', 'build-status', 'job-management'],
-        requiredAuth: { type: 'api_key', envVar: 'BUILDKITE_API_KEY' }
-      },
 
-      // Testing & Quality MCPs
+      // Testing & Quality MCPs (Verified)
       {
         name: 'mcp-inspector',
         command: 'npx',
         args: ['@modelcontextprotocol/inspector'],
         capabilities: ['server-testing', 'protocol-verification', 'debugging', 'interactive'],
-        setupInstructions: 'Official MCP testing tool for server development'
+        setupInstructions: 'Official MCP testing tool'
       },
       {
         name: 'mcp-tester',
         command: 'npx',
         args: ['-y', 'mcp-server-tester'],
         capabilities: ['automated-testing', 'claude-integration', 'schema-validation', 'config-driven'],
-        setupInstructions: 'Configuration-driven testing framework'
-      },
-      {
-        name: 'puppeteer',
-        command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-puppeteer'],
-        capabilities: ['browser-automation', 'web-scraping', 'screenshot', 'e2e-testing']
-      },
-      {
-        name: 'a11y',
-        command: 'npx',
-        args: ['-y', 'a11y-mcp-server'],
-        capabilities: ['accessibility-audit', 'wcag-compliance', 'axe-core'],
-        setupInstructions: 'Accessibility testing with axe-core engine'
+        setupInstructions: 'Testing framework'
       },
 
-      // Messaging & Communication MCPs
-      {
-        name: 'slack',
-        command: 'npx',
-        args: ['-y', 'slack-mcp-server'],
-        capabilities: ['messaging', 'channel-management', 'file-sharing', 'webhooks'],
-        requiredAuth: { type: 'oauth', envVar: 'SLACK_TOKEN' }
-      },
-      {
-        name: 'discord',
-        command: 'npx',
-        args: ['-y', 'discord-mcp-server'],
-        capabilities: ['bot-creation', 'channel-management', 'messaging', 'voice'],
-        requiredAuth: { type: 'token', envVar: 'DISCORD_BOT_TOKEN' }
-      },
-
-      // Monitoring & Analytics MCPs
-      {
-        name: 'browserstack',
-        command: 'npx',
-        args: ['-y', 'browserstack-mcp-server'],
-        capabilities: ['cross-browser-testing', 'real-device-testing', 'automation'],
-        requiredAuth: { type: 'api_key', envVar: 'BROWSERSTACK_KEY' }
-      },
-      {
-        name: 'sentry',
-        command: 'npx',
-        args: ['-y', 'sentry-mcp-server'],
-        capabilities: ['error-tracking', 'performance-monitoring', 'release-tracking'],
-        requiredAuth: { type: 'token', envVar: 'SENTRY_DSN' }
-      },
-      {
-        name: 'cloudflare',
-        command: 'npx',
-        args: ['-y', 'cloudflare-mcp-server'],
-        capabilities: ['workers', 'kv-storage', 'r2', 'd1-database'],
-        requiredAuth: { type: 'api_key', envVar: 'CLOUDFLARE_API_KEY' }
-      }
     ];
 
     // Populate server registry
@@ -528,13 +316,15 @@ export class MCPIntegrationManager {
       {
         agentName: 'frontend-specialist',
         mcpServers: [
-          this.serverRegistry.get('figma')!,
-          this.serverRegistry.get('shadcn-ui')!,
+          this.serverRegistry.get('figma-dev-mode')!,
+          this.serverRegistry.get('shadcn')!,
           this.serverRegistry.get('firecrawl')!,
           this.serverRegistry.get('github')!,
           this.serverRegistry.get('playwright')!,
-          this.serverRegistry.get('memory')!
-        ],
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('upstash-context')!,
+          this.serverRegistry.get('puppeteer')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 1
       },
@@ -543,17 +333,15 @@ export class MCPIntegrationManager {
         agentName: 'backend-specialist',
         mcpServers: [
           this.serverRegistry.get('postgresql')!,
-          this.serverRegistry.get('mongodb')!,
+          this.serverRegistry.get('mysql')!,
           this.serverRegistry.get('github')!,
-          this.serverRegistry.get('docker')!,
-          this.serverRegistry.get('jest')!,
+          this.serverRegistry.get('docker-mcp')!,
           this.serverRegistry.get('memory')!,
           this.serverRegistry.get('rest-api')!,
           this.serverRegistry.get('testsprite')!,
           this.serverRegistry.get('fetch')!,
-          this.serverRegistry.get('slack')!,
-          this.serverRegistry.get('sentry')!
-        ],
+          this.serverRegistry.get('git-mcp')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 1
       },
@@ -562,13 +350,11 @@ export class MCPIntegrationManager {
         agentName: 'database-specialist',
         mcpServers: [
           this.serverRegistry.get('postgresql')!,
-          this.serverRegistry.get('mongodb')!,
           this.serverRegistry.get('mysql')!,
           this.serverRegistry.get('memory')!,
           this.serverRegistry.get('postgres-advanced')!,
-          this.serverRegistry.get('database-multi')!,
-          this.serverRegistry.get('mongodb-atlas')!
-        ],
+          this.serverRegistry.get('database-multi')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 1
       },
@@ -576,17 +362,13 @@ export class MCPIntegrationManager {
       {
         agentName: 'devops-specialist',
         mcpServers: [
-          this.serverRegistry.get('docker')!,
-          this.serverRegistry.get('aws')!,
-          this.serverRegistry.get('terraform')!,
+          this.serverRegistry.get('docker-mcp')!,
           this.serverRegistry.get('github')!,
           this.serverRegistry.get('memory')!,
           this.serverRegistry.get('kubernetes')!,
           this.serverRegistry.get('azure-devops')!,
-          this.serverRegistry.get('buildkite')!,
-          this.serverRegistry.get('cloudflare')!,
-          this.serverRegistry.get('azure')!
-        ],
+          this.serverRegistry.get('git-mcp')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 1
       },
@@ -594,32 +376,43 @@ export class MCPIntegrationManager {
       {
         agentName: 'testing-specialist',
         mcpServers: [
-          this.serverRegistry.get('jest')!,
           this.serverRegistry.get('playwright')!,
-          this.serverRegistry.get('cypress')!,
           this.serverRegistry.get('github')!,
           this.serverRegistry.get('memory')!,
           this.serverRegistry.get('mcp-inspector')!,
           this.serverRegistry.get('mcp-tester')!,
           this.serverRegistry.get('puppeteer')!,
-          this.serverRegistry.get('a11y')!,
-          this.serverRegistry.get('browserstack')!,
           this.serverRegistry.get('testsprite')!
-        ],
+        ].filter(Boolean),
         autoInstall: true,
         priority: 1
       },
-      // Designer Specialist (NEW)
+      // Designer Specialist
       {
         agentName: 'designer-specialist',
         mcpServers: [
-          this.serverRegistry.get('figma')!,
+          this.serverRegistry.get('figma-dev-mode')!,
           this.serverRegistry.get('firecrawl')!,
           this.serverRegistry.get('canva')!,
-          this.serverRegistry.get('shadcn-ui')!,
+          this.serverRegistry.get('shadcn')!,
           this.serverRegistry.get('brave-search')!,
-          this.serverRegistry.get('memory')!
-        ],
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('upstash-context')!,
+          this.serverRegistry.get('playwright')!
+        ].filter(Boolean),
+        autoInstall: true,
+        priority: 1
+      },
+      // Design Review Specialist
+      {
+        agentName: 'design-review-specialist',
+        mcpServers: [
+          this.serverRegistry.get('playwright')!,
+          this.serverRegistry.get('figma-dev-mode')!,
+          this.serverRegistry.get('puppeteer')!,
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('fetch')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 1
       },
@@ -630,21 +423,10 @@ export class MCPIntegrationManager {
           this.serverRegistry.get('sequential-thinking')!,
           this.serverRegistry.get('memory')!,
           this.serverRegistry.get('github')!,
-          this.serverRegistry.get('brave-search')!
-        ],
-        autoInstall: true,
-        priority: 2
-      },
-      // E-commerce Specialist
-      {
-        agentName: 'ecommerce-specialist',
-        mcpServers: [
-          this.serverRegistry.get('stripe')!,
-          this.serverRegistry.get('paypal')!,
-          this.serverRegistry.get('postgresql')!,
-          this.serverRegistry.get('github')!,
-          this.serverRegistry.get('memory')!
-        ],
+          this.serverRegistry.get('brave-search')!,
+          this.serverRegistry.get('upstash-context')!,
+          this.serverRegistry.get('context7')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 2
       },
@@ -652,12 +434,11 @@ export class MCPIntegrationManager {
       {
         agentName: 'infrastructure-specialist',
         mcpServers: [
-          this.serverRegistry.get('terraform')!,
-          this.serverRegistry.get('aws')!,
-          this.serverRegistry.get('azure')!,
-          this.serverRegistry.get('docker')!,
-          this.serverRegistry.get('memory')!
-        ],
+          this.serverRegistry.get('docker-mcp')!,
+          this.serverRegistry.get('kubernetes')!,
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('github')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 2
       },
@@ -665,15 +446,14 @@ export class MCPIntegrationManager {
       {
         agentName: 'documentation-specialist',
         mcpServers: [
-          this.serverRegistry.get('confluence')!,
-          this.serverRegistry.get('notion')!,
           this.serverRegistry.get('github')!,
-          this.serverRegistry.get('memory')!
-        ],
+          this.serverRegistry.get('memory')!,
+          this.serverRegistry.get('fetch')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 3
       },
-      // Research Specialist (NEW)
+      // Research Specialist
       {
         agentName: 'research-specialist',
         mcpServers: [
@@ -681,15 +461,44 @@ export class MCPIntegrationManager {
           this.serverRegistry.get('sequential-thinking')!,
           this.serverRegistry.get('memory')!,
           this.serverRegistry.get('github')!,
-          this.serverRegistry.get('claude-desktop')!,
-          this.serverRegistry.get('fetch')!
-        ],
+          this.serverRegistry.get('fetch')!,
+          this.serverRegistry.get('context7')!
+        ].filter(Boolean),
         autoInstall: true,
         priority: 1
       }
     ];
   }
 
+  async getAgentMCPs(agentName: string): Promise<string[]> {
+    const mapping = this.mcpConfig.agentMappings.find(
+      m => m.agentName === agentName
+    );
+    
+    if (!mapping) {
+      return [];
+    }
+    
+    return mapping.mcpServers
+      .filter(server => server !== undefined)
+      .map(server => server.name);
+  }
+  
+  async getProjectMCPs(projectName: string): Promise<string[]> {
+    // Get all unique MCPs configured for the project
+    const projectMCPs = new Set<string>();
+    
+    for (const mapping of this.mcpConfig.agentMappings) {
+      for (const server of mapping.mcpServers) {
+        if (server) {
+          projectMCPs.add(server.name);
+        }
+      }
+    }
+    
+    return Array.from(projectMCPs);
+  }
+  
   async getMCPsForAgent(agentName: string): Promise<MCPServer[]> {
     const mapping = this.mcpConfig.agentMappings.find(
       m => m.agentName === agentName

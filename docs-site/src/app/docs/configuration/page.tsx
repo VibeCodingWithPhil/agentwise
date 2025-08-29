@@ -256,7 +256,7 @@ export default function ConfigurationPage() {
                   <div>
                     <p className="text-xs font-medium mb-1">Example:</p>
                     <CodeBlock language="bash" copy={false}>
-                      export {env.name}="{env.example}"
+{`export ${env.name}="${env.example}"`}
                     </CodeBlock>
                   </div>
                   <div className="pt-2 border-t">

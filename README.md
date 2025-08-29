@@ -27,12 +27,12 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 
 ### Why Agentwise?
 
-- **🚄 Parallel Execution**: Run multiple agents with 30-40% token reduction
+- **🚄 Parallel Execution**: Run multiple agents that use 30-40% fewer tokens than single-user work
 - **🎭 Self-Improving Agents**: Agents learn and improve from every task
 - **🔄 Smart Orchestration**: Intelligent task distribution and phase management
 - **📊 Real-time Monitoring**: Track progress across all agents with live dashboard
 - **🏗️ Smart Model Routing**: Automatic model selection based on task type
-- **💾 Token Optimization**: 30-40% token reduction through context sharing and caching
+- **💾 Token Optimization**: Agents collaborate to use 30-40% fewer tokens than manual development
 - **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
 - **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
 
@@ -104,6 +104,34 @@ Clone and customize websites with AI assistance:
 
 These features extend Claude Code's capabilities for more comprehensive development workflows.
 
+## 🆕 Context 3.0: Revolutionary AI Context Awareness
+
+Agentwise implements a groundbreaking dual-context system that goes beyond traditional approaches:
+
+### 📋 AGENTS.md (Context 2.0)
+Based on [OpenAI's AGENTS.md specification](https://github.com/openai/openai-cookbook/blob/main/examples/AGENTS.md), this provides a universal interface for AI tools:
+- **Universal Compatibility**: Any AI CLI can understand your project
+- **Human-Readable**: Clear guidance for both humans and AI
+- **Standardized Format**: Following OpenAI's open specification
+- **Project Guidelines**: Setup, testing, architecture, conventions
+
+### 🧠 CodebaseContextManager (Context 3.0)
+Our proprietary real-time context awareness system:
+- **Living Context Graph**: Dynamic understanding of your entire codebase
+- **Real-Time Updates**: File changes tracked automatically
+- **Deep Analysis**: Extracts imports, exports, classes, functions
+- **Modular Updates**: Only refreshes changed portions (token optimization)
+- **Hierarchical Understanding**: Maintains project structure relationships
+
+### How They Work Together
+```
+AGENTS.md → Universal AI Interface (any tool can read)
+     +
+CodebaseContextManager → Deep, Real-Time Understanding (Agentwise exclusive)
+     =
+Context 3.0: The most advanced AI context system available
+```
+
 ## ✨ Features
 
 ### Core Capabilities
@@ -115,7 +143,7 @@ These features extend Claude Code's capabilities for more comprehensive developm
 #### 🤖 Multi-Agent Orchestration
 - **8 Specialist Agents** (Frontend, Backend, Database, DevOps, Testing, Deployment, Designer, Code Review)
 - **Dynamic Agent Generation** for custom specialists ✨
-- **30-40% Token Optimization** - Proven reduction through benchmarking 💎
+- **30-40% Token Optimization** - Agents use 30-40% fewer tokens than single-user development 💎
 - **Parallel Execution** with intelligent task distribution
 - **Self-Improving Agents** with learning persistence 🧠
 - **Phase-based Synchronization** across all agents
@@ -127,7 +155,7 @@ These features extend Claude Code's capabilities for more comprehensive developm
 - **Cross-Platform Global Commands** (Windows/WSL/Linux/macOS) 🌍
 - **Real-Time Monitor Dashboard** with live WebSocket updates 📊
 - **Tech Stack Validator** with compatibility checking ✅
-- **MCP Integration (61 servers)** - Figma, GitHub, Firecrawl, etc. 🔌
+- **MCP Integration (25 verified servers)** - Figma, GitHub, Playwright, etc. 🔌
 - **Smart Model Routing** (Claude, Ollama, LM Studio, OpenRouter) 🎯
 - **Performance Analytics** with comprehensive metrics 📈
 
@@ -171,7 +199,7 @@ Agentwise addresses Claude Code limitations and extends its capabilities:
 | Can't process PDFs | ✅ PDF → Project specs conversion |
 | Can't read Figma files | ✅ Figma → Code generation |
 | Limited image context | ✅ Full visual understanding |
-| Single agent execution | ✅ 100+ parallel agents |
+| Single agent execution | ✅ Multiple parallel agents |
 | High token costs | ✅ 30-40% token reduction (verified) |
 | No local model support | ✅ Ollama, LM Studio integration |
 
@@ -179,7 +207,7 @@ Agentwise addresses Claude Code limitations and extends its capabilities:
 - File upload support for Claude Code workflows
 - Figma design file integration and processing
 - 30-40% token optimization through intelligent context sharing
-- Comprehensive MCP integration with 61 servers
+- Comprehensive MCP integration with 25 verified servers
 - Website cloning and customization capabilities
 - Modern documentation with responsive design
 
@@ -461,34 +489,34 @@ Agentwise includes 8 specialized agents, each with unique capabilities and MCP i
 
 #### Frontend Specialist
 - **Focus**: UI/UX, React, Vue, Angular, styling, responsive design
-- **MCPs**: Figma, Shadcn UI, Material UI, Ant Design, Chakra UI, Tailwind CSS
+- **MCPs**: Figma Dev Mode, Shadcn, Playwright, Puppeteer, Memory
 - **Capabilities**: Component creation, state management, animations, accessibility
 
 #### Backend Specialist  
 - **Focus**: APIs, server logic, authentication, middleware, microservices
-- **MCPs**: REST API, GraphQL, TestSprite, Fetch, database connectors
+- **MCPs**: REST API, TestSprite, Fetch, PostgreSQL, Docker-MCP
 - **Capabilities**: RESTful APIs, GraphQL, WebSockets, authentication, caching
 
 #### Database Specialist
 - **Focus**: Schema design, queries, migrations, optimization, NoSQL/SQL
-- **MCPs**: PostgreSQL, MongoDB, MySQL, Multi-Database, MongoDB Atlas
+- **MCPs**: PostgreSQL, MySQL, Postgres Advanced, Database Multi
 - **Capabilities**: Schema design, query optimization, migrations, indexing
 
 #### DevOps Specialist
 - **Focus**: CI/CD, deployment, containers, cloud infrastructure
-- **MCPs**: Kubernetes, Terraform, Azure DevOps, AWS, Buildkite, Cloudflare
+- **MCPs**: Kubernetes, Azure DevOps, Docker-MCP, Git-MCP
 - **Capabilities**: Pipeline setup, containerization, auto-scaling, monitoring
 
 #### Testing Specialist
 - **Focus**: Unit tests, integration tests, E2E, performance testing
-- **MCPs**: Jest, Playwright, Cypress, Storybook, Puppeteer, BrowserStack
+- **MCPs**: Playwright, TestSprite, MCP Inspector, MCP Tester, Puppeteer
 - **Capabilities**: Test automation, coverage reports, performance testing
 
 ### Advanced Agents
 
 #### Designer Specialist
 - **Focus**: UI design, component libraries, design systems, branding
-- **MCPs**: Figma, Canva, Framer, Sketch, Adobe XD, design token tools
+- **MCPs**: Figma Dev Mode, Figma Personal, Canva, Shadcn, Firecrawl
 - **Capabilities**: Design-to-code, component extraction, style guide creation
 
 #### Research Agent (NEW!)
@@ -538,7 +566,7 @@ graph TD
     H6 --> I
     H7 --> I
     H8 --> I
-    I --> J[61 MCP Servers]
+    I --> J[25 Verified MCP Servers]
     J --> K[Phase Controller]
     K --> L[Self-Improving Agents]
     L --> M[Performance Analytics]
@@ -546,47 +574,53 @@ graph TD
     N --> O[Project Output]
 ```
 
-## 🔌 MCP Integration - 61 Servers
+## 🔌 MCP Integration - 25 Verified Servers
 
-Agentwise features the most comprehensive MCP (Model Context Protocol) integration available:
+Agentwise features comprehensive MCP (Model Context Protocol) integration with actually existing, verified servers:
 
-### MCP Categories & Coverage
+### Verified MCP Categories
 
-#### Design & UI (12 MCPs)
-- **Design Tools**: Figma, Canva, Framer, Sketch, Adobe XD
-- **UI Libraries**: Shadcn UI, Material UI, Ant Design, Chakra UI, Radix UI, Mantine
-- **Styling**: Tailwind CSS
+#### Core Official (7 MCPs)
+- **Filesystem**: File and directory operations
+- **Memory**: Persistent context storage
+- **Fetch**: HTTP requests and web scraping
+- **Puppeteer**: Browser automation
+- **Brave Search**: Web search capabilities
+- **Sequential Thinking**: Multi-step reasoning
+- **Everything**: Comprehensive utility server
 
-#### Backend & APIs (6 MCPs)
-- **API Tools**: REST API, GraphQL, TestSprite, Fetch
-- **Payment**: Stripe, PayPal
+#### Design & UI (4 MCPs)
+- **Figma Dev Mode**: Local server for Figma integration (port 3845)
+- **Figma Personal**: Direct API access with personal tokens
+- **Shadcn**: Component library integration
+- **Canva**: Design creation and templates
 
-#### Databases (6 MCPs)
-- PostgreSQL, PostgreSQL Advanced, MongoDB, MongoDB Atlas, MySQL, Multi-Database
+#### Development (4 MCPs)
+- **GitHub**: Repository management via API
+- **Git-MCP**: Local git operations
+- **Docker-MCP**: Container management
+- **Context7**: Real-time documentation fetching
 
-#### DevOps & Cloud (9 MCPs)
-- **Orchestration**: Kubernetes, Terraform
-- **CI/CD**: Azure DevOps, Buildkite
-- **Cloud**: AWS, Azure, Cloudflare (x2 variants)
-- **Build Tools**: Vite
+#### Database (4 MCPs)
+- **PostgreSQL**: Built from archived official repo
+- **MySQL**: Database operations
+- **Postgres Advanced**: Enhanced PostgreSQL tools
+- **Database Multi**: Support for multiple database types
 
-#### Testing & Quality (13 MCPs)
-- **Testing Frameworks**: Jest, Playwright, Cypress, Puppeteer
-- **Visual Testing**: Storybook, BrowserStack
-- **Tools**: MCP Inspector, MCP Tester, Frontend Testing
-- **Accessibility**: A11y
-- **Performance**: Lighthouse, Web Vitals
-- **API Testing**: TestSprite
+#### Testing (4 MCPs)
+- **Playwright**: Browser automation and E2E testing
+- **TestSprite**: API testing framework
+- **MCP Inspector**: MCP debugging tools
+- **MCP Tester**: MCP validation framework
 
-#### Build & Framework Tools (5 MCPs)
-- Webpack, Vite, Next.js, Remix, Astro
+#### Infrastructure (2 MCPs)
+- **Kubernetes**: K8s cluster management
+- **Azure DevOps**: CI/CD pipeline integration
 
-#### Communication & Docs (4 MCPs)
-- Slack, Discord, Confluence, Notion
-
-#### AI & Utilities (6 MCPs)
-- Memory, Sequential Thinking, Brave Search
-- Claude Desktop MCP, Firecrawl, GitHub
+#### Additional (3 MCPs)
+- **Firecrawl**: Website scraping and cloning
+- **Upstash Context**: Redis-based context storage
+- **REST API**: API testing and interaction
 
 ### How MCP Integration Works
 
@@ -659,21 +693,21 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 <p>Token Reduction</p>
 </td>
 <td align="center">
-<h3>100+</h3>
-<p>Agents Supported</p>
+<h3>8+</h3>
+<p>Parallel Agents</p>
 </td>
 <td align="center">
-<h3>61</h3>
-<p>MCP Integrations</p>
+<h3>25</h3>
+<p>Verified MCPs</p>
 </td>
 </tr>
 </table>
 
 ### Key Metrics:
 - **Development Speed**: 10x faster than traditional development
-- **Token Optimization**: 30-40% reduction through context sharing
-- **Agent Scalability**: Support for 100+ specialized agents
-- **Integration Coverage**: 61 MCP servers integrated (comprehensive design, backend, database, testing, and DevOps coverage)
+- **Token Optimization**: 30-40% fewer tokens than single-user development through agent collaboration
+- **Agent Scalability**: Support for multiple specialized agents working in parallel
+- **Integration Coverage**: 25 verified MCP servers (actual working integrations for design, backend, database, testing, and DevOps)
 - **Model Support**: Claude, Ollama, LM Studio, OpenRouter
 - **File Processing**: PDF, Word, Figma, websites
 - **Learning Capability**: Self-improving agents with persistence
@@ -690,7 +724,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 
 ### ✅ Recently Completed (Q4 2024 - Q1 2025)
 - [x] **Web UI Dashboard** - Real-time monitoring interface with live agent status
-- [x] **MCP Integration** - 61 MCP servers (complete development ecosystem coverage)
+- [x] **MCP Integration** - 25 verified MCP servers (actual working integrations)
 - [x] **Performance Analytics** - Comprehensive metrics, error tracking, and insights
 - [x] **Self-Improving Agents** - Learning capabilities with knowledge persistence
 - [x] **Token Optimization** - 30-40% reduction achieved
@@ -766,11 +800,25 @@ For commercial licensing questions:
 - Discord: @vibecodingwithphil
 - GitHub: [@VibeCodingWithPhil](https://github.com/VibeCodingWithPhil)
 
-## 🙏 Acknowledgments
+## 🙏 Acknowledgments & Credits
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) by Anthropic
+### Open Source Projects
+- **[OpenAI AGENTS.md Specification](https://github.com/openai/openai-cookbook)**: Universal AI guidance format that allows any AI tool to understand project context
+- **[Model Context Protocol (MCP)](https://github.com/modelcontextprotocol)**: Standardized protocol for AI tool integration
+- **[Playwright](https://playwright.dev/)**: Browser automation and visual testing capabilities
+- **[Figma Dev Mode](https://www.figma.com/dev-mode/)**: Design-to-code integration
+- **[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** by Anthropic: The foundation platform
+
+### Key Technologies
+- **TypeScript**: Type-safe development
+- **Node.js**: Runtime environment
+- **Express & Socket.io**: Real-time monitoring dashboard
+- **Next.js & Vercel**: Documentation site and hosting
+- **Ollama, LM Studio**: Local model support
+
+### Community
 - All our amazing [contributors](https://github.com/VibeCodingWithPhil/agentwise/graphs/contributors)
-- The open-source community
+- The open-source community for continuous support and feedback
 
 ## 💬 Support
 

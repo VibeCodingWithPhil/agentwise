@@ -319,7 +319,7 @@ export class DynamicAgentManager {
    * Find all todo files for an agent across phases
    */
   private async findAgentTodoFiles(projectPath: string, agentName: string): Promise<string[]> {
-    const todoDir = path.join(projectPath, 'agent-todo', agentName);
+    const todoDir = path.join(projectPath, 'agent-todos', agentName);
     const todoFiles: string[] = [];
 
     try {
@@ -414,5 +414,35 @@ ${agent.tools.map(t => `- ${t}`).join('\n')}
    */
   hasAgent(name: string): boolean {
     return this.agents.some(a => a.name === name);
+  }
+
+  /**
+   * Launch a single agent - simplified interface for ImportHandler
+   */
+  async launchAgent(agentConfig: { name: string; role: string; tools: string[] }, projectPath: string): Promise<void> {
+    // Find agent by name or create a new one
+    let agent = this.getAgent(agentConfig.name);
+    
+    if (!agent) {
+      // Register the agent if it doesn't exist
+      await this.registerAgent({
+        name: agentConfig.name,
+        description: `${agentConfig.role} specialist`,
+        tools: agentConfig.tools.length > 0 ? agentConfig.tools : ['Read', 'Edit', 'Write', 'Bash'],
+        specialization: agentConfig.role
+      });
+      
+      agent = this.getAgent(agentConfig.name);
+    }
+
+    if (!agent) {
+      throw new Error(`Failed to create agent: ${agentConfig.name}`);
+    }
+
+    // Launch the agent using existing infrastructure
+    const claudePath = await this.findClaudePath();
+    const platform = process.platform;
+    
+    await this.launchAgentTerminal(agent, projectPath, claudePath, platform);
   }
 }

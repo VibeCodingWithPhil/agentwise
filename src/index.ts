@@ -6,6 +6,7 @@ import { exec } from 'child_process';
 import { MonitorCommand } from './commands/MonitorCommand';
 import { DocsCommand } from './commands/DocsCommand';
 import { FigmaCommand } from './commands/FigmaCommand';
+import { FigmaCreateCommand } from './commands/FigmaCreateCommand';
 import { PermissionChecker } from './utils/PermissionChecker';
 
 async function main() {
@@ -29,6 +30,8 @@ Available Commands:
   /monitor [subcommand]     - Monitor dashboard & global install
   /docs                     - Open documentation hub
   /figma [subcommand]       - Figma Dev Mode integration
+  /figma-create <project>   - Create app from Figma design
+  /setup-mcps [subcommand]  - Configure MCPs for Claude Code
 
 Status: ✅ System Ready
 `);
@@ -100,6 +103,13 @@ Status: ✅ System Ready
       return;
     }
     
+    // Handle /figma-create command
+    if (args[0] === '/figma-create') {
+      const figmaCreateCommand = new FigmaCreateCommand();
+      await figmaCreateCommand.handle(args.slice(1));
+      return;
+    }
+    
     // Handle /init-import command
     if (args[0] === '/init-import') {
       const { ImportHandler } = await import('./commands/ImportHandler');
@@ -113,6 +123,14 @@ Status: ✅ System Ready
       const { ImportHandler } = await import('./commands/ImportHandler');
       const importHandler = new ImportHandler();
       await importHandler.executeImport();
+      return;
+    }
+    
+    // Handle /setup-mcps command
+    if (args[0] === '/setup-mcps') {
+      const { MCPSetupCommand } = await import('./commands/MCPSetupCommand');
+      const mcpSetupCommand = new MCPSetupCommand();
+      await mcpSetupCommand.handle(args.slice(1));
       return;
     }
     

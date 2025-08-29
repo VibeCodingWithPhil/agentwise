@@ -1,0 +1,48 @@
+{
+  "providers": {
+    "ollama": {
+      "name": "ollama",
+      "baseUrl": "http://localhost:11434",
+      "models": [],
+      "status": "disconnected",
+      "capabilities": [
+        "text-generation",
+        "code-generation",
+        "embeddings",
+        "streaming",
+        "custom-models"
+      ]
+    },
+    "lm-studio": {
+      "name": "lm-studio",
+      "baseUrl": "http://localhost:1234/v1",
+      "models": [
+        "qwen3-coder-30b-a3b-instruct-mlx@5bit",
+        "qwen/qwen3-coder-30b",
+        "text-embedding-nomic-embed-text-v1.5"
+      ],
+      "status": "connected",
+      "capabilities": [
+        "text-generation",
+        "code-generation",
+        "openai-compatible",
+        "gpu-acceleration",
+        "model-management"
+      ]
+    },
+    "openrouter": {
+      "name": "openrouter",
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "models": [],
+      "status": "disconnected",
+      "capabilities": [
+        "text-generation",
+        "code-generation",
+        "multiple-providers",
+        "model-routing",
+        "usage-tracking"
+      ]
+    }
+  },
+  "lastUpdated": "2025-08-25T23:47:19.622Z"
+}

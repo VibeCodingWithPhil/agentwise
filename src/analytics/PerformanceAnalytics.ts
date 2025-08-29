@@ -14,9 +14,7 @@ export interface PerformanceMetric {
 export interface AgentPerformance {
   agentName: string;
   tasksCompleted: number;
-  tasksF
-
-: number;
+  tasksFailed: number;
   averageCompletionTime: number;
   tokenUsage: number;
   successRate: number;
@@ -94,7 +92,7 @@ export class PerformanceAnalytics extends EventEmitter {
   private systemMetrics: SystemPerformance;
   private metricsPath: string;
   private realTimeMetrics: Map<string, RealTimeMetric>;
-  private aggregationInterval: NodeJS.Timer | null;
+  private aggregationInterval: NodeJS.Timeout | null;
   private alertThresholds: Map<string, number>;
   
   constructor() {
@@ -321,46 +319,43 @@ export class PerformanceAnalytics extends EventEmitter {
       this.agentMetrics.set(agentName, agent);
     }
     
-    // Ensure agent is defined for TypeScript
-    const agentData = agent!;
-    
     // Update based on metric name
     switch (metric.name) {
       case 'task_completed':
-        agentData.tasksCompleted++;
+        agent.tasksCompleted++;
         break;
       case 'task_failed':
-        agentData.tasksFailed++;
+        agent.tasksFailed++;
         break;
       case 'completion_time':
-        agentData.averageCompletionTime = this.updateAverage(
-          agentData.averageCompletionTime,
+        agent.averageCompletionTime = this.updateAverage(
+          agent.averageCompletionTime,
           metric.value,
-          agentData.tasksCompleted
+          agent.tasksCompleted
         );
         break;
       case 'token_usage':
-        agentData.tokenUsage += metric.value;
+        agent.tokenUsage += metric.value;
         break;
     }
     
     // Update calculated metrics
-    const totalTasks = agentData.tasksCompleted + agentData.tasksFailed;
+    const totalTasks = agent.tasksCompleted + agent.tasksFailed;
     if (totalTasks > 0) {
-      agentData.successRate = agentData.tasksCompleted / totalTasks;
-      agentData.errorRate = agentData.tasksFailed / totalTasks;
-      agentData.efficiency = agentData.tasksCompleted / (agentData.tokenUsage / 1000);
+      agent.successRate = agent.tasksCompleted / totalTasks;
+      agent.errorRate = agent.tasksFailed / totalTasks;
+      agent.efficiency = agent.tasksCompleted / (agent.tokenUsage / 1000);
     }
     
     // Add to time series
-    agentData.timeSeriesData.push({
+    agent.timeSeriesData.push({
       timestamp: metric.timestamp,
       value: metric.value
     });
     
     // Keep only last 1000 data points
-    if (agentData.timeSeriesData.length > 1000) {
-      agentData.timeSeriesData = agentData.timeSeriesData.slice(-1000);
+    if (agent.timeSeriesData.length > 1000) {
+      agent.timeSeriesData = agent.timeSeriesData.slice(-1000);
     }
   }
 
@@ -502,7 +497,7 @@ export class PerformanceAnalytics extends EventEmitter {
 
   private checkAlerts(): void {
     // Check for alert conditions
-    for (const [key, metric] of this.realTimeMetrics) {
+    for (const [key, metric] of Array.from(this.realTimeMetrics.entries())) {
       if (metric.alert) {
         this.emit('alert', {
           metric: key,
@@ -581,7 +576,7 @@ export class PerformanceAnalytics extends EventEmitter {
     let totalSuccess = 0;
     let count = 0;
     
-    for (const agent of this.agentMetrics.values()) {
+    for (const agent of Array.from(this.agentMetrics.values())) {
       totalSuccess += agent.successRate;
       count++;
     }
@@ -589,7 +584,7 @@ export class PerformanceAnalytics extends EventEmitter {
     return count > 0 ? totalSuccess / count : 0;
   }
 
-  private generateInsights(metrics: PerformanceMetric[]): string[] {
+  private generateInsights(_metrics: PerformanceMetric[]): string[] {
     const insights: string[] = [];
     
     // Analyze agent performance
@@ -635,7 +630,7 @@ export class PerformanceAnalytics extends EventEmitter {
     const recommendations: string[] = [];
     
     // Check for underperforming agents
-    for (const agent of this.agentMetrics.values()) {
+    for (const agent of Array.from(this.agentMetrics.values())) {
       if (agent.errorRate > 0.2) {
         recommendations.push(`Consider retraining ${agent.agentName} (error rate: ${(agent.errorRate * 100).toFixed(1)}%)`);
       }
@@ -673,7 +668,7 @@ export class PerformanceAnalytics extends EventEmitter {
     let topAgent: AgentPerformance | undefined;
     let topScore = 0;
     
-    for (const agent of this.agentMetrics.values()) {
+    for (const agent of Array.from(this.agentMetrics.values())) {
       const score = agent.successRate * agent.efficiency;
       if (score > topScore) {
         topScore = score;
@@ -729,7 +724,7 @@ export class PerformanceAnalytics extends EventEmitter {
     }
   }
 
-  private convertToCSV(data: any): string {
+  private convertToCSV(_data: any): string {
     const lines: string[] = [];
     
     // Headers

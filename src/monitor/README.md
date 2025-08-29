@@ -39,7 +39,7 @@ The dashboard will be available at: http://localhost:3001
 
 1. **WebSocket Server** (port 3002): 
    - Monitors Agentwise workspace for active projects
-   - Watches agent-todo MD files for real-time updates
+   - Watches agent-todos MD files for real-time updates
    - Broadcasts changes to connected dashboard clients
 
 2. **Web Dashboard** (port 3001):
@@ -51,7 +51,7 @@ The dashboard will be available at: http://localhost:3001
 
 The monitor automatically detects active Agentwise projects by:
 1. Checking `.agentwise-context.json` for active project info
-2. Scanning workspace folders for agent-todo directories
+2. Scanning workspace folders for agent-todos directories
 3. Parsing phase MD files to track task completion
 
 ## Agent Controls

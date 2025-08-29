@@ -1,5 +1,5 @@
 /**
- * Import Handler - Properly handles project imports with agent-todo creation
+ * Import Handler - Properly handles project imports with agent-todos creation
  */
 
 import * as fs from 'fs-extra';
@@ -7,9 +7,8 @@ import * as path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { DynamicAgentManager } from '../orchestrator/DynamicAgentManager';
-import { DynamicTaskDistributor } from '../orchestrator/DynamicTaskDistributor';
-import { ProjectRegistrySync } from '../project-registry/ProjectRegistrySync';
 import { MDFileWatcher } from '../monitoring/MDFileWatcher';
+import { ProjectIntegrationManager } from '../integration/ProjectIntegrationManager';
 
 const execAsync = promisify(exec);
 
@@ -21,17 +20,38 @@ export interface ImportResult {
   message: string;
 }
 
+interface ProjectAnalysis {
+  technologies: string[];
+  projectType: string;
+  frameworks: string[];
+  buildTools: string[];
+  testFrameworks: string[];
+  hasBackend: boolean;
+  hasFrontend: boolean;
+  hasDatabase: boolean;
+  hasDocker: boolean;
+  hasCI: boolean;
+}
+
+interface RegistryProject {
+  name: string;
+  originalPath: string;
+  analysis: ProjectAnalysis;
+  status: string;
+  workspace?: string;
+  selectedAgents?: string[];
+  createdAt: string;
+}
+
 export class ImportHandler {
   private agentManager: DynamicAgentManager;
-  private taskDistributor: DynamicTaskDistributor;
-  private registrySync: ProjectRegistrySync;
   private mdWatcher: MDFileWatcher;
+  private integrationManager: ProjectIntegrationManager;
 
   constructor() {
     this.agentManager = new DynamicAgentManager();
-    this.taskDistributor = new DynamicTaskDistributor();
-    this.registrySync = new ProjectRegistrySync();
     this.mdWatcher = new MDFileWatcher();
+    this.integrationManager = new ProjectIntegrationManager();
   }
 
   /**
@@ -63,16 +83,16 @@ export class ImportHandler {
   }
 
   /**
-   * Execute import with proper agent-todo creation
+   * Execute import with proper agent-todos creation
    */
   async executeImport(): Promise<ImportResult> {
     // Get initialized project from registry
-    const projects = await fs.readJson(
+    const projects: Record<string, RegistryProject> = await fs.readJson(
       path.join(process.cwd(), 'src', 'project-registry', 'projects.json')
     );
 
     const importProject = Object.values(projects).find(
-      (p: any) => p.status === 'initialized'
+      (p: RegistryProject) => p.status === 'initialized'
     );
 
     if (!importProject) {
@@ -81,7 +101,11 @@ export class ImportHandler {
 
     const projectName = importProject.name;
     const sourcePath = importProject.originalPath;
-    const targetPath = path.join(process.cwd(), 'workspace', projectName);
+    const workspacePath = path.join(process.cwd(), 'workspace');
+    const targetPath = path.join(workspacePath, projectName);
+    
+    // Ensure workspace exists
+    await fs.ensureDir(workspacePath);
 
     console.log(`\n📦 Importing ${projectName}...`);
     console.log(`📂 From: ${sourcePath}`);
@@ -90,10 +114,37 @@ export class ImportHandler {
     // Copy project to workspace
     await fs.copy(sourcePath, targetPath);
     console.log('✅ Project copied to workspace');
+    
+    // Initialize project with full integration
+    await this.integrationManager.initializeProject(targetPath, {
+      validateStructure: true,
+      initializeContext: true,
+      syncRegistry: true,
+      createAgentsMd: true,
+      startWatching: true
+    });
+    
+    // Create analysis folder for codebase analysis
+    const analysisPath = path.join(targetPath, '.analysis');
+    console.log('🔬 Creating analysis workspace...');
+    await fs.ensureDir(analysisPath);
+    
+    // Save analysis results
+    await fs.writeFile(
+      path.join(analysisPath, 'import-analysis.json'),
+      JSON.stringify({
+        projectName,
+        sourcePath,
+        analysis: importProject.analysis,
+        importDate: new Date().toISOString(),
+        status: 'analyzing'
+      }, null, 2)
+    );
 
-    // Analyze and select agents
+    // Analyze and select agents using full codebase context
     console.log('\n🤖 Selecting specialized agents...');
-    const selectedAgents = await this.selectAgentsForProject(importProject.analysis);
+    const projectContext = await this.integrationManager.getProjectContext(projectName);
+    const selectedAgents = await this.selectAgentsForProject(importProject.analysis, projectContext);
     
     console.log(`✅ Selected ${selectedAgents.length} agents:`);
     selectedAgents.forEach(agent => console.log(`   • ${agent}`));
@@ -102,8 +153,8 @@ export class ImportHandler {
     console.log('\n🔧 Generating project specifications...');
     await this.generateProjectSpecs(projectName, targetPath, importProject.analysis);
 
-    // Create agent-todo folders and phase files
-    console.log('\n📁 Creating agent-todo folders...');
+    // Create agent-todos folders and phase files (note the 's' for consistency)
+    console.log('\n📁 Creating agent-todos folders...');
     await this.createAgentTodoFolders(projectName, selectedAgents);
 
     // Generate initial tasks for each agent
@@ -122,6 +173,11 @@ export class ImportHandler {
 
     // Initialize monitoring for the new project
     await this.initializeMonitoring(projectName);
+    
+    // Clean up analysis folder and other temporary folders after successful setup
+    console.log('🧹 Cleaning up analysis workspace...');
+    await fs.remove(analysisPath);
+    await this.integrationManager.cleanTemporaryFolders(projectName);
 
     // Launch agents in parallel
     console.log('\n🚀 Launching agents for parallel analysis...');
@@ -170,7 +226,7 @@ export class ImportHandler {
   /**
    * Analyze project structure and technologies
    */
-  private async analyzeProject(projectPath: string): Promise<any> {
+  private async analyzeProject(projectPath: string): Promise<ProjectAnalysis> {
     const analysis = {
       technologies: [] as string[],
       projectType: 'unknown',
@@ -252,11 +308,11 @@ export class ImportHandler {
   /**
    * Save initialized import to registry
    */
-  private async saveInitializedImport(sourcePath: string, analysis: any): Promise<void> {
+  private async saveInitializedImport(sourcePath: string, analysis: ProjectAnalysis): Promise<void> {
     const projectName = path.basename(sourcePath);
     const registryPath = path.join(process.cwd(), 'src', 'project-registry', 'projects.json');
     
-    let projects = {};
+    let projects: Record<string, RegistryProject> = {};
     if (await fs.pathExists(registryPath)) {
       projects = await fs.readJson(registryPath);
     }
@@ -275,7 +331,7 @@ export class ImportHandler {
   /**
    * Select appropriate agents based on project analysis
    */
-  private async selectAgentsForProject(analysis: any): Promise<string[]> {
+  private async selectAgentsForProject(analysis: ProjectAnalysis, projectContext?: any): Promise<string[]> {
     const agents = [];
 
     // Always include these core agents
@@ -311,34 +367,46 @@ export class ImportHandler {
   }
 
   /**
-   * Create agent-todo folders with proper structure
+   * Create agent-todos folders with proper structure
    */
   private async createAgentTodoFolders(projectName: string, agents: string[]): Promise<void> {
     const workspacePath = path.join(process.cwd(), 'workspace', projectName);
 
     for (const agent of agents) {
-      const agentTodoPath = path.join(workspacePath, 'agent-todo', agent);
+      // Use 'agent-todos' with 's' for consistency with other commands
+      const agentTodoPath = path.join(workspacePath, 'agent-todos', agent);
       await fs.ensureDir(agentTodoPath);
 
-      // Create phase files
+      // Create phase files with proper naming convention
       for (let phase = 1; phase <= 3; phase++) {
-        const phaseFile = path.join(agentTodoPath, `phase${phase}.md`);
+        const phaseFile = path.join(agentTodoPath, `phase${phase}-todo.md`);
         if (!await fs.pathExists(phaseFile)) {
           await fs.writeFile(phaseFile, `# Phase ${phase} - ${agent}\n\n## Tasks\n\n`);
         }
       }
+      
+      // Create phase status file
+      const statusFile = path.join(agentTodoPath, 'phase-status.json');
+      await fs.writeJson(statusFile, {
+        current_phase: 1,
+        total_phases: 3,
+        completed_phases: [],
+        status: 'ready',
+        tasks_completed: 0,
+        tasks_total: 0
+      }, { spaces: 2 });
     }
 
-    console.log(`✅ Created ${agents.length} agent-todo folders`);
+    console.log(`✅ Created ${agents.length} agent-todos folders`);
   }
 
   /**
    * Generate import analysis tasks for each agent
    */
-  private async generateImportTasks(projectName: string, agents: string[], analysis: any): Promise<void> {
+  private async generateImportTasks(projectName: string, agents: string[], analysis: ProjectAnalysis): Promise<void> {
     const workspacePath = path.join(process.cwd(), 'workspace', projectName);
 
-    const taskTemplates = {
+    const taskTemplates: Record<string, string[]> = {
       'orchestrator-specialist': [
         '🔍 Analyze overall project architecture',
         '📋 Document project structure and dependencies',
@@ -395,18 +463,34 @@ export class ImportHandler {
       ]
     };
 
+    // Import MCP manager for task enhancement
+    const { MCPIntegrationManager } = await import('../mcp/MCPIntegrationManager');
+    const mcpManager = new MCPIntegrationManager();
+    
     for (const agent of agents) {
-      const phase1File = path.join(workspacePath, 'agent-todo', agent, 'phase1.md');
+      const phase1File = path.join(workspacePath, 'agent-todos', agent, 'phase1-todo.md');
       const tasks = taskTemplates[agent] || ['📋 Analyze project for your specialization'];
+      
+      // Get MCPs for this agent
+      const agentMCPs = await mcpManager.getAgentMCPs(agent);
       
       let content = `# Phase 1 - ${agent}\n\n## Import Analysis Tasks\n\n`;
       content += `Project Type: ${analysis.projectType}\n`;
-      content += `Technologies: ${analysis.technologies.join(', ')}\n\n`;
+      content += `Technologies: ${analysis.technologies.join(', ')}\n`;
+      content += `Available MCPs: ${agentMCPs.join(', ') || 'Standard tools only'}\n\n`;
       content += `### Tasks\n\n`;
       
       tasks.forEach((task, index) => {
-        content += `${index + 1}. [ ] ${task}\n`;
+        // Check if task could benefit from MCPs
+        const relevantMCPs = this.identifyRelevantMCPs(task, agentMCPs);
+        const mcpNote = relevantMCPs.length > 0 ? ` [MCP: ${relevantMCPs.join(', ')}]` : '';
+        content += `${index + 1}. [ ] ${task}${mcpNote}\n`;
       });
+      
+      content += `\n## MCP Usage Guidelines\n`;
+      content += `- Use available MCP tools when relevant to tasks\n`;
+      content += `- Document MCP usage in task completion notes\n`;
+      content += `- Report any MCP integration issues encountered\n`;
 
       await fs.writeFile(phase1File, content);
     }
@@ -417,26 +501,49 @@ export class ImportHandler {
   /**
    * Generate project specifications from existing code
    */
-  private async generateProjectSpecs(projectName: string, projectPath: string, analysis: any): Promise<void> {
+  private async generateProjectSpecs(projectName: string, projectPath: string, analysis: ProjectAnalysis): Promise<void> {
     const specsPath = path.join(projectPath, 'specs');
     await fs.ensureDir(specsPath);
 
-    // Generate main spec
+    // Generate main spec (use standard naming without project prefix)
     const mainSpec = this.generateMainSpecFromAnalysis(projectName, analysis);
-    await fs.writeFile(path.join(specsPath, `${projectName}-main-spec.md`), mainSpec);
+    await fs.writeFile(path.join(specsPath, 'main-spec.md'), mainSpec);
 
     // Generate project spec
     const projectSpec = this.generateProjectSpecFromAnalysis(projectName, analysis, projectPath);
-    await fs.writeFile(path.join(specsPath, `${projectName}-project-spec.md`), projectSpec);
+    await fs.writeFile(path.join(specsPath, 'project-spec.md'), projectSpec);
 
     // Generate todo spec
     const todoSpec = this.generateTodoSpecFromAnalysis(projectName, analysis);
-    await fs.writeFile(path.join(specsPath, `${projectName}-todo-spec.md`), todoSpec);
+    await fs.writeFile(path.join(specsPath, 'todo-spec.md'), todoSpec);
 
     console.log('✅ Generated 3 specification files based on existing codebase');
   }
 
-  private generateMainSpecFromAnalysis(projectName: string, analysis: any): string {
+  private identifyRelevantMCPs(task: string, availableMCPs: string[]): string[] {
+    const taskLower = task.toLowerCase();
+    const relevant: string[] = [];
+    
+    const mcpKeywords: Record<string, string[]> = {
+      'github': ['repository', 'commit', 'code quality', 'version'],
+      'database': ['schema', 'query', 'data', 'database'],
+      'docker': ['container', 'deployment', 'docker'],
+      'jest': ['test', 'coverage', 'testing'],
+      'figma': ['design', 'ui', 'component', 'user experience']
+    };
+    
+    for (const [mcp, keywords] of Object.entries(mcpKeywords)) {
+      if (availableMCPs.includes(mcp)) {
+        if (keywords.some(keyword => taskLower.includes(keyword))) {
+          relevant.push(mcp);
+        }
+      }
+    }
+    
+    return relevant;
+  }
+  
+  private generateMainSpecFromAnalysis(projectName: string, analysis: ProjectAnalysis): string {
     const spec = [];
     spec.push(`# ${projectName} - Main Specification\n`);
     spec.push(`## Project Overview`);
@@ -466,7 +573,7 @@ export class ImportHandler {
     return spec.join('\n');
   }
 
-  private generateProjectSpecFromAnalysis(projectName: string, analysis: any, projectPath: string): string {
+  private generateProjectSpecFromAnalysis(projectName: string, analysis: ProjectAnalysis, projectPath: string): string {
     const spec = [];
     spec.push(`# ${projectName} - Project Specification\n`);
     
@@ -510,7 +617,7 @@ export class ImportHandler {
     return spec.join('\n');
   }
 
-  private generateTodoSpecFromAnalysis(projectName: string, analysis: any): string {
+  private generateTodoSpecFromAnalysis(projectName: string, analysis: ProjectAnalysis): string {
     const spec = [];
     spec.push(`# ${projectName} - Todo Specification\n`);
     
@@ -567,7 +674,7 @@ export class ImportHandler {
   private async initializeMonitoring(projectName: string): Promise<void> {
     const workspacePath = path.join(process.cwd(), 'workspace', projectName);
     
-    // Start watching the agent-todo folders
+    // Start watching the agent-todos folders
     await this.mdWatcher.watchProject(workspacePath);
     
     console.log('✅ Monitoring initialized for imported project');

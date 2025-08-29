@@ -38,6 +38,8 @@ node_modules/
 .env
 .env.*
 *.env
+.env.local
+.env.mcp.template
 
 # OS Files
 .DS_Store
@@ -74,6 +76,11 @@ coverage/
 *.temp
 .tmp/
 .temp/
+setup-*.sh
+check-*.sh
+mcp-*.md
+mcp-status.txt
+.agentwise-models.json
 
 # Lock files (optional - you might want to keep package-lock.json)
 # package-lock.json

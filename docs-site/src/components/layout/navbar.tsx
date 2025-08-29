@@ -15,6 +15,7 @@ const navItems = [
   { href: "/agent-showcase", label: "Agents" },
   { href: "/playground", label: "Playground" },
   { href: "/performance", label: "Performance" },
+  { href: "/discussions", label: "Discussions" },
 ]
 
 export function Navbar() {

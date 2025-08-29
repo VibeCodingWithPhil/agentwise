@@ -17,7 +17,7 @@ export class SpecGenerator {
     this.validator = new TechSpecValidator();
   }
   
-  async generate(projectIdea: string, mode: 'create' | 'task'): Promise<ProjectSpecs> {
+  async generate(projectIdea: string, mode: 'create' | 'task' | 'plan'): Promise<ProjectSpecs> {
     console.log('🤖 Enhancing project specifications...');
     
     // For now, we'll use templates and enhance them

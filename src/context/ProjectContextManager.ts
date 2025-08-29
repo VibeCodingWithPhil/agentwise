@@ -145,7 +145,7 @@ export class ProjectContextManager extends EventEmitter {
     }
 
     // Check for active agents
-    const agentTodoPath = path.join(projectPath, 'agent-todo');
+    const agentTodoPath = path.join(projectPath, 'agent-todos');
     if (await fs.pathExists(agentTodoPath)) {
       const agentDirs = await fs.readdir(agentTodoPath);
       metadata.agents = agentDirs.filter(d => !d.startsWith('.'));
