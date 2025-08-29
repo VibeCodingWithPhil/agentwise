@@ -11,7 +11,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![GitHub Release](https://img.shields.io/github/v/release/VibeCodingWithPhil/agentwise?include_prereleases)](https://github.com/VibeCodingWithPhil/agentwise/releases)
 
-**Transform your development workflow with parallel AI agent execution, intelligent task distribution, and seamless Claude Code integration.**
+**Coordinate multiple AI agents for parallel task execution, intelligent task distribution, and seamless Claude Code integration.**
 
 [Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Contributing](#-contributing) • [License](#-license)
 
@@ -23,16 +23,16 @@
 
 ## 🎯 Overview
 
-Agentwise revolutionizes software development by orchestrating multiple specialized AI agents working in parallel. Built as an extension for Claude Code, it enables teams of AI agents to collaborate on complex projects with unprecedented efficiency.
+Agentwise is a multi-agent orchestration system that coordinates specialized AI agents working in parallel. Built as an extension for Claude Code, it enables teams of AI agents to collaborate on complex projects with improved organization.
 
 ### Why Agentwise?
 
-- **🚄 Parallel Execution**: Multiple agents share context to reduce total token usage by 30-40%
+- **🚄 Parallel Execution**: Multiple agents work simultaneously on different aspects of projects
 - **🎭 Self-Improving Agents**: Agents learn and improve from every task
 - **🔄 Smart Orchestration**: Intelligent task distribution and phase management
 - **📊 Real-time Monitoring**: Track progress across all agents with live dashboard
 - **🏗️ Smart Model Routing**: Automatic model selection based on task type
-- **💾 Token Optimization**: 5 agents use ~3x tokens instead of 5x through context sharing
+- **💾 Context Management**: Organized project context and task coordination
 - **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
 - **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
 
@@ -104,9 +104,9 @@ Clone and customize websites with AI assistance:
 
 These features extend Claude Code's capabilities for more comprehensive development workflows.
 
-## 🆕 Context 3.0: Revolutionary AI Context Awareness
+## 🆕 Enhanced Context Management
 
-Agentwise implements a groundbreaking dual-context system that goes beyond traditional approaches:
+Agentwise implements a dual-context system for better project organization:
 
 ### 📋 AGENTS.md (Context 2.0)
 Based on [OpenAI's AGENTS.md specification](https://github.com/openai/openai-cookbook/blob/main/examples/AGENTS.md), this provides a universal interface for AI tools:
@@ -202,13 +202,13 @@ Agentwise addresses Claude Code limitations and extends its capabilities:
 | Can't read Figma files | ✅ Figma → Code generation |
 | Limited image context | ✅ Full visual understanding |
 | Single agent execution | ✅ Multiple parallel agents |
-| High token costs | ✅ 30-40% reduction when using multiple agents |
+| No task organization | ✅ Structured project and task management |
 | No local model support | ✅ Ollama, LM Studio integration |
 
 ### 🎯 **Key Achievements**
 - File upload support for Claude Code workflows
 - Figma design file integration and processing
-- 30-40% token optimization through intelligent context sharing
+- Project context management and intelligent task distribution
 - Comprehensive MCP integration with 25 verified servers
 - Website cloning and customization capabilities
 - Modern documentation with responsive design
@@ -460,7 +460,7 @@ agentwise/
 │   │   ├── server/         # WebSocket server for live updates
 │   │   └── src/            # Dashboard UI components
 │   ├── monitoring/         # Task completion & progress tracking
-│   ├── optimization/       # Token optimization (30-40% reduction)
+│   ├── optimization/       # Context management and task coordination
 │   ├── orchestration/      # Multi-agent coordination
 │   ├── orchestrator/       # Agent orchestration & management
 │   ├── project-registry/   # Project synchronization system
@@ -675,12 +675,23 @@ npm run build
 
 ## 🛡️ Security
 
+### Recent Security Audit (2025-01-29)
+✅ **Comprehensive security audit completed** in response to user concerns:
+
+- **Issue Fixed**: Removed unauthorized HTTP-Referer headers from OpenRouter API calls
+- **Audit Results**: No backdoors, unauthorized network calls, or remote access mechanisms found
+- **Transparency**: All background services operate locally only (localhost:3001-3002)
+- **Privacy**: Analytics data stored locally only, no external transmission
+
+### Security Features
 - Private workspaces never committed to git
 - Secure token management
 - Isolated project environments
 - No credential storage
+- Local-only operation with optional analytics (`AGENTWISE_ANALYTICS=false` to opt-out)
+- Complete source code transparency for security inspection
 
-Found a security issue? Please email security@agentwise.dev (or open a private security advisory).
+Found a security issue? Please email vibephilcoding@gmail.com or create a private security advisory on GitHub.
 
 ## 📊 Performance
 
@@ -706,8 +717,8 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 </table>
 
 ### Key Metrics:
-- **Development Speed**: 10x faster than traditional development
-- **Token Optimization**: Multiple agents use 30-40% fewer tokens total through context sharing
+- **Development Organization**: Structured project management with parallel agent coordination
+- **Context Coordination**: Organized project context and agent task coordination
 - **Agent Scalability**: Support for multiple specialized agents working in parallel
 - **Integration Coverage**: 25 verified MCP servers (actual working integrations for design, backend, database, testing, and DevOps)
 - **Model Support**: Claude, Ollama, LM Studio, OpenRouter

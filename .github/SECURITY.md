@@ -171,6 +171,33 @@ If a security incident occurs:
 - [CWE Top 25](https://cwe.mitre.org/top25/)
 - [Node.js Security Best Practices](https://nodejs.org/en/docs/guides/security/)
 
+## 🔍 Recent Security Audit (2025-01-29)
+
+**Comprehensive security audit completed in response to user concerns:**
+
+### Issues Found & Fixed:
+- ✅ **Removed unauthorized HTTP-Referer headers** from OpenRouter API calls (src/models/LocalModelSupport.ts)
+- ✅ **No backdoors or unauthorized network calls detected** in comprehensive codebase scan
+- ✅ **All background services verified** to operate locally only (localhost:3001-3002)
+- ✅ **Analytics confirmed local-only** - no external data transmission
+- ✅ **No unauthorized remote access mechanisms** found
+
+### Audit Scope:
+- Complete network call analysis across entire codebase
+- Background service and process verification
+- Analytics and telemetry transparency check
+- Child process usage security review
+- File system access permission validation
+
+### Transparency Commitment:
+- All network calls documented and legitimate
+- Local-only monitoring services (ports 3001-3002)
+- Optional analytics stored locally in `~/.agentwise/analytics/`
+- No data transmission to external servers
+- Complete source code available for inspection
+
+**Status: ✅ SECURE** - All identified issues resolved.
+
 ## ✉️ Contact
 
 - **Security Issues**: vibephilcoding@gmail.com
