@@ -8,6 +8,7 @@ import { ProjectManager } from '../projects/ProjectManager';
 import { PhaseOrchestrator } from '../orchestration/PhaseOrchestrator';
 import { ProjectRegistrySync } from '../project-registry/ProjectRegistrySync';
 import { ProjectIntegrationManager } from '../integration/ProjectIntegrationManager';
+import { TerminalIntegration, TerminalState, type IntegrationConfig } from '../terminal';
 
 export interface CommandContext {
   command: string;
@@ -31,6 +32,7 @@ export class EnhancedCommandHandler {
   private projectManager: ProjectManager;
   private orchestrator: PhaseOrchestrator;
   private integrationManager: ProjectIntegrationManager;
+  private terminalIntegration: TerminalIntegration;
 
   constructor() {
     this.agentSelector = new AgentSelector();
@@ -38,6 +40,12 @@ export class EnhancedCommandHandler {
     this.projectManager = new ProjectManager();
     this.orchestrator = new PhaseOrchestrator();
     this.integrationManager = new ProjectIntegrationManager();
+    this.terminalIntegration = new TerminalIntegration({
+      enableAutoPermissions: true,
+      enableAutoInput: true,
+      safetyMode: true,
+      maxConcurrentSessions: 3
+    });
   }
 
   /**
@@ -440,6 +448,193 @@ export class EnhancedCommandHandler {
       console.log(`    Date: ${date}`);
       console.log(`    Size: ${size} MB`);
       console.log(`    Description: ${backup.description}`);
+    });
+  }
+
+  /**
+   * Handle terminal monitoring and auto-continuation
+   */
+  async handleTerminalMonitor(command: string[], options: Partial<IntegrationConfig> = {}): Promise<CommandResult> {
+    try {
+      console.log('\\n🖥️  Starting terminal monitoring...');
+      console.log(`Command: ${command.join(' ')}`);
+
+      // Update terminal integration config if provided
+      if (Object.keys(options).length > 0) {
+        this.terminalIntegration.updateConfig(options);
+        console.log('Updated terminal integration configuration');
+      }
+
+      const sessionId = await this.terminalIntegration.startClaudeCodeSession(command);
+      
+      console.log(`\\n✅ Terminal monitoring session started: ${sessionId}`);
+      console.log('🤖 Auto-continuation is active');
+      console.log('📊 Monitoring for permission requests and input needs');
+
+      // Set up event listeners for this session
+      this.setupTerminalEventListeners(sessionId);
+
+      return {
+        success: true,
+        message: `Terminal monitoring started for session ${sessionId}`,
+        validationResults: {
+          sessionId,
+          config: this.terminalIntegration.getAllStats().config,
+          monitoring: true
+        }
+      };
+
+    } catch (error) {
+      console.error('\\n❌ Failed to start terminal monitoring:', error);
+      return {
+        success: false,
+        message: `Terminal monitoring failed: ${error instanceof Error ? error.message : String(error)}`
+      };
+    }
+  }
+
+  /**
+   * Monitor an existing Claude Code process
+   */
+  async handleMonitorExisting(processId: string): Promise<CommandResult> {
+    try {
+      console.log(`\\n🔍 Attempting to monitor existing process: ${processId}`);
+      
+      // This would require additional implementation to attach to existing processes
+      // For now, we'll provide guidance
+      console.log('📝 To monitor existing Claude Code processes:');
+      console.log('   1. Stop the current process');
+      console.log('   2. Use `/terminal-monitor` to start with monitoring');
+      console.log('   3. Or use the PermissionBypassSystem for direct integration');
+
+      return {
+        success: false,
+        message: 'Monitoring existing processes requires restarting with terminal monitoring enabled'
+      };
+
+    } catch (error) {
+      return {
+        success: false,
+        message: `Failed to monitor existing process: ${error instanceof Error ? error.message : String(error)}`
+      };
+    }
+  }
+
+  /**
+   * Get terminal monitoring status and statistics
+   */
+  async getTerminalStats(): Promise<{
+    success: boolean;
+    stats?: any;
+    sessions?: any[];
+  }> {
+    try {
+      const stats = this.terminalIntegration.getAllStats();
+      const sessions = this.terminalIntegration.getAllSessions().map(session => ({
+        id: session.id,
+        status: session.status,
+        startTime: session.startTime,
+        runtime: Date.now() - session.startTime.getTime(),
+        command: `${session.config.command} ${session.config.args.join(' ')}`
+      }));
+
+      return {
+        success: true,
+        stats,
+        sessions
+      };
+    } catch (error) {
+      return {
+        success: false
+      };
+    }
+  }
+
+  /**
+   * Stop terminal monitoring for a specific session
+   */
+  async stopTerminalMonitoring(sessionId: string): Promise<CommandResult> {
+    try {
+      this.terminalIntegration.stopSession(sessionId);
+      
+      return {
+        success: true,
+        message: `Terminal monitoring stopped for session ${sessionId}`
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: `Failed to stop monitoring: ${error instanceof Error ? error.message : String(error)}`
+      };
+    }
+  }
+
+  /**
+   * Send input to a monitored terminal session
+   */
+  async sendTerminalInput(sessionId: string, input: string): Promise<CommandResult> {
+    try {
+      this.terminalIntegration.sendInputToSession(sessionId, input);
+      
+      return {
+        success: true,
+        message: `Input sent to session ${sessionId}`
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: `Failed to send input: ${error instanceof Error ? error.message : String(error)}`
+      };
+    }
+  }
+
+  /**
+   * Set up event listeners for terminal monitoring
+   */
+  private setupTerminalEventListeners(sessionId: string): void {
+    // Listen for session events
+    this.terminalIntegration.on('session_output', (event) => {
+      if (event.sessionId === sessionId) {
+        // Log important output
+        if (event.stream === 'stderr' || (event.data && event.data.includes('error'))) {
+          console.log(`[${sessionId}] ⚠️  ${event.data.trim()}`);
+        }
+      }
+    });
+
+    this.terminalIntegration.on('session_continuation', (event) => {
+      if (event.sessionId === sessionId) {
+        console.log(`[${sessionId}] 🤖 Auto-response: "${event.response.trim()}" for prompt: "${event.prompt || 'Unknown'}"`);
+      }
+    });
+
+    this.terminalIntegration.on('session_state_change', (event) => {
+      if (event.sessionId === sessionId) {
+        const stateEmoji: Record<TerminalState, string> = {
+          [TerminalState.IDLE]: '⏸️',
+          [TerminalState.RUNNING]: '🏃',
+          [TerminalState.WAITING_PERMISSION]: '🔐',
+          [TerminalState.WAITING_INPUT]: '⌨️',
+          [TerminalState.ERROR]: '❌',
+          [TerminalState.COMPLETED]: '✅',
+          [TerminalState.INTERRUPTED]: '⏹️'
+        };
+        
+        console.log(`[${sessionId}] ${stateEmoji[event.newState as TerminalState]} State: ${event.oldState} → ${event.newState}`);
+      }
+    });
+
+    this.terminalIntegration.on('session_error', (event) => {
+      if (event.sessionId === sessionId) {
+        console.error(`[${sessionId}] ❌ Error: ${event.error}`);
+      }
+    });
+
+    this.terminalIntegration.on('session_exit', (event) => {
+      if (event.sessionId === sessionId) {
+        const status = event.success ? '✅ Success' : `❌ Failed (code: ${event.code})`;
+        console.log(`[${sessionId}] 🏁 Session ended: ${status}`);
+      }
     });
   }
 }

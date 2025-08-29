@@ -8,6 +8,11 @@ import { DocsCommand } from './commands/DocsCommand';
 import { FigmaCommand } from './commands/FigmaCommand';
 import { FigmaCreateCommand } from './commands/FigmaCreateCommand';
 import { PermissionChecker } from './utils/PermissionChecker';
+import { permissionIntegration } from './permissions/PermissionIntegrationService';
+import { configurationIntegration } from './config/ConfigurationIntegration.js';
+import { SandboxedExecutionSystem } from './sandbox/SandboxedExecutionSystem';
+import { AgentwiseConfiguration } from './config/AgentwiseConfiguration';
+import { ConfigureAgentwiseCommand } from './commands/ConfigureAgentwiseCommand';
 
 /**
  * SECURITY: Securely start SharedContextServer with proper validation and error handling
@@ -105,7 +110,26 @@ function startContextServerProcess(): void {
 }
 
 async function main() {
-  console.log(`
+  // Initialize Configuration System
+  const config = AgentwiseConfiguration.getInstance();
+  await config.load();
+  await configurationIntegration.initializeOnStartup();
+  
+  // Initialize Sandboxed Execution System if enabled
+  const sandboxSystem = new SandboxedExecutionSystem();
+  const configData = config.getAll();
+  
+  if (configData.permissions?.bypassEnabled) {
+    console.log('🔐 Sandboxed execution system enabled - no --dangerously-skip-permissions needed');
+  }
+  
+  // Initialize Permission Bypass System
+  try {
+    await permissionIntegration.initialize();
+    const status = permissionIntegration.getIntegrationStatus();
+    const permissionStatus = status.permissionBypassEnabled ? '🔒 Permission Bypass Active' : '⚠️  Manual Permissions Required';
+    
+    console.log(`
 ╔══════════════════════════════════════╗
 ║         🎭 AGENTWISE v2.0.0          ║
 ║   Multi-Agent Orchestration System   ║
@@ -128,9 +152,43 @@ Available Commands:
   /figma [subcommand]       - Figma Dev Mode integration
   /figma-create <project>   - Create app from Figma design
   /setup-mcps [subcommand]  - Configure MCPs for Claude Code
+  /configure-agentwise      - Configure Agentwise settings
+  /configure-agentwise      - Configure Agentwise system settings
+  /permissions [subcommand] - Manage Permission Bypass System
+  /configure-agentwise      - Configure Agentwise system settings
 
-Status: ✅ System Ready
+Status: ✅ System Ready | ${permissionStatus}
 `);
+  } catch (error) {
+    console.log(`
+╔══════════════════════════════════════╗
+║         🎭 AGENTWISE v2.0.0          ║
+║   Multi-Agent Orchestration System   ║
+║        for Claude Code               ║
+╚══════════════════════════════════════╝
+
+Available Commands:
+  /create <project idea>     - Create new project
+  /create-plan <idea>        - Collaborative planning
+  /projects                  - List existing projects
+  /task <feature>           - Add feature to active project
+  /task-[project] <feature> - Add feature to specific project
+  /task-plan <feature>      - Plan feature collaboratively
+  /init-import              - Import external project
+  /task-import              - Execute import with planning
+  /generate-agent <spec>    - Create custom agent
+  /monitor [subcommand]     - Monitor dashboard & global install
+  /context [subcommand]     - Shared context server management
+  /docs                     - Open documentation hub
+  /figma [subcommand]       - Figma Dev Mode integration
+  /figma-create <project>   - Create app from Figma design
+  /setup-mcps [subcommand]  - Configure MCPs for Claude Code
+  /configure-agentwise      - Configure Agentwise settings
+  /configure-agentwise      - Configure Agentwise system settings
+
+Status: ✅ System Ready | ⚠️  Permission System Error: ${error}
+`);
+  }
 
   // Check if .claude folder exists
   const claudePath = path.join(__dirname, '..', '.claude');
@@ -203,6 +261,14 @@ Status: ✅ System Ready
       return;
     }
     
+    // Handle /permissions command
+    if (args[0] === '/permissions') {
+      const { PermissionCommand } = await import('./commands/PermissionCommand');
+      const permissionCommand = new PermissionCommand();
+      await permissionCommand.handle(args.slice(1));
+      return;
+    }
+    
     // Handle /figma command
     if (args[0] === '/figma') {
       const figmaCommand = new FigmaCommand();
@@ -252,6 +318,14 @@ Status: ✅ System Ready
         // Silently fail if the command doesn't exist (it's local-only)
         console.log('GitHub management command not available');
       }
+      return;
+    }
+    
+    // Handle /configure-agentwise command
+    if (args[0] === '/configure-agentwise') {
+      const { ConfigureAgentwiseCommand } = await import('./commands/ConfigureAgentwiseCommand');
+      const configureCommand = new ConfigureAgentwiseCommand();
+      await configureCommand.execute(args.slice(1));
       return;
     }
   }

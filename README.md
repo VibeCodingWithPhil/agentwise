@@ -35,8 +35,35 @@ Agentwise is a multi-agent orchestration system that coordinates specialized AI 
 - **💾 Context Management**: Organized project context and task coordination
 - **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
 - **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
+- **🔐 No --dangerously-skip-permissions Required**: Sandboxed execution with automatic permission handling
 
 ## 🌟 Key Features
+
+### 🔐 Sandboxed Execution (No --dangerously-skip-permissions Needed!)
+
+Agentwise now operates **without requiring the dangerous permissions flag**:
+
+#### Automatic Permission Handling
+```bash
+# Before: Required dangerous flag
+claude --dangerously-skip-permissions /create my-app
+
+# Now: Works without the flag!
+claude /create my-app
+```
+
+#### How It Works
+- **Terminal Monitoring**: Detects permission prompts automatically
+- **Smart Responses**: Responds based on your configuration
+- **Workspace Sandboxing**: Restricts execution to safe directories
+- **Safety Modes**: Prevents dangerous operations in production
+
+#### Configuration
+```bash
+/configure-agentwise              # Interactive setup wizard
+/configure-agentwise permissions  # Configure permission handling
+/configure-agentwise workspace    # Set sandbox boundaries
+```
 
 ### Enhanced Claude Code Capabilities
 
