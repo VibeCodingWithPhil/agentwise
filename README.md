@@ -4,7 +4,7 @@
 
 ### Multi-Agent Orchestration System for Claude Code
 
-[![License: Custom](https://img.shields.io/badge/License-Custom%20Commercial-red.svg)](LICENSE)
+[![License: Apache 2.0 + Commercial](https://img.shields.io/badge/License-Apache%202.0%20%2B%20Commercial-blue.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-purple)](https://docs.anthropic.com/en/docs/claude-code)
@@ -27,12 +27,12 @@ Agentwise revolutionizes software development by orchestrating multiple speciali
 
 ### Why Agentwise?
 
-- **🚄 Parallel Execution**: Run multiple agents that use 30-40% fewer tokens than single-user work
+- **🚄 Parallel Execution**: Multiple agents share context to reduce total token usage by 30-40%
 - **🎭 Self-Improving Agents**: Agents learn and improve from every task
 - **🔄 Smart Orchestration**: Intelligent task distribution and phase management
 - **📊 Real-time Monitoring**: Track progress across all agents with live dashboard
 - **🏗️ Smart Model Routing**: Automatic model selection based on task type
-- **💾 Token Optimization**: Agents collaborate to use 30-40% fewer tokens than manual development
+- **💾 Token Optimization**: 5 agents use ~3x tokens instead of 5x through context sharing
 - **🖥️ Local Model Support**: Ollama, LM Studio, and OpenRouter integration
 - **🧠 Hybrid AI Strategy**: Mix Claude, local models, and cloud APIs for optimal cost/performance
 
@@ -129,8 +129,10 @@ AGENTS.md → Universal AI Interface (any tool can read)
      +
 CodebaseContextManager → Deep, Real-Time Understanding (Agentwise exclusive)
      =
-Context 3.0: The most advanced AI context system available
+Comprehensive Context System: Universal compatibility + deep awareness
 ```
+
+**Note**: While we call this "Context 3.0" internally, other tools like Cursor, GitHub Copilot Workspace, and Continue.dev also have advanced context systems. Our approach combines universal compatibility (AGENTS.md) with real-time codebase understanding, making it particularly well-suited for multi-agent workflows.
 
 ## ✨ Features
 
@@ -143,7 +145,7 @@ Context 3.0: The most advanced AI context system available
 #### 🤖 Multi-Agent Orchestration
 - **8 Specialist Agents** (Frontend, Backend, Database, DevOps, Testing, Deployment, Designer, Code Review)
 - **Dynamic Agent Generation** for custom specialists ✨
-- **30-40% Token Optimization** - Agents use 30-40% fewer tokens than single-user development 💎
+- **30-40% Token Optimization** - Multiple agents share context, reducing total usage by 30-40% 💎
 - **Parallel Execution** with intelligent task distribution
 - **Self-Improving Agents** with learning persistence 🧠
 - **Phase-based Synchronization** across all agents
@@ -200,7 +202,7 @@ Agentwise addresses Claude Code limitations and extends its capabilities:
 | Can't read Figma files | ✅ Figma → Code generation |
 | Limited image context | ✅ Full visual understanding |
 | Single agent execution | ✅ Multiple parallel agents |
-| High token costs | ✅ 30-40% token reduction (verified) |
+| High token costs | ✅ 30-40% reduction when using multiple agents |
 | No local model support | ✅ Ollama, LM Studio integration |
 
 ### 🎯 **Key Achievements**
@@ -705,7 +707,7 @@ Found a security issue? Please email security@agentwise.dev (or open a private s
 
 ### Key Metrics:
 - **Development Speed**: 10x faster than traditional development
-- **Token Optimization**: 30-40% fewer tokens than single-user development through agent collaboration
+- **Token Optimization**: Multiple agents use 30-40% fewer tokens total through context sharing
 - **Agent Scalability**: Support for multiple specialized agents working in parallel
 - **Integration Coverage**: 25 verified MCP servers (actual working integrations for design, backend, database, testing, and DevOps)
 - **Model Support**: Claude, Ollama, LM Studio, OpenRouter
@@ -770,35 +772,40 @@ We're planning to extend Agentwise to support additional AI CLI tools:
 
 ## 📄 License
 
-This project uses the **Agentwise Custom License** - see the [LICENSE](LICENSE) file for details.
+Agentwise uses a **dual license model** to balance open-source freedom with sustainable development.
 
-### ✅ **What You CAN Do (Free)**
-- Use Agentwise as a tool to build commercial websites, apps, and software
-- Use Agentwise in your company's internal development workflow
-- Create and sell products built WITH Agentwise (not embedding it)
-- Personal, educational, and research use
-- Build your own orchestration system from scratch (without using our code)
+### 🟢 **Apache 2.0 License (FREE) - Most Users**
 
-### ⚠️ **What Requires a Commercial License** ($25k one-time or $10k/year)
-- Using Agentwise source code to build competing products
-- Copying or referencing our code for similar systems
-- Embedding Agentwise into your product for end-users
-- Reselling or rebranding Agentwise
-- Offering Agentwise capabilities as a service (SaaS)
-- Using our code as a reference to build orchestration systems
+✅ **Use Agentwise for FREE for**:
+- Personal projects and learning
+- Internal company use (any company size)
+- Building and selling products using Agentwise as a tool
+- Client work and agency projects
+- Educational and research purposes
+- Contributing to the project
 
-### ❌ **What You CANNOT Do**
-- Use our source code to build competing products
-- Remove copyright notices
-- Use "Agentwise" name for your products
-- Claim you created Agentwise
-- Study our code to replicate functionality
+### 🔴 **Commercial License Required ($25k one-time or $10k/year)**
 
-**TL;DR**: Use Agentwise to BUILD projects = Free. Use our CODE to compete = License required.
+❌ **Only if you are**:
+- Reselling Agentwise itself
+- Offering Agentwise-as-a-Service
+- Building competing products using our code
+- White-labeling or rebranding Agentwise
 
-For commercial licensing questions:
-- Discord: @vibecodingwithphil
-- GitHub: [@VibeCodingWithPhil](https://github.com/VibeCodingWithPhil)
+### Examples
+
+**FREE (Apache 2.0)**:
+- A startup using Agentwise to build their app ✅
+- Google using Agentwise internally for 10,000 developers ✅  
+- A freelancer building client websites with Agentwise ✅
+
+**REQUIRES LICENSE**:
+- Creating "SuperAI" that is rebranded Agentwise ❌
+- Offering "AgentBuilder.com" where users pay to use Agentwise ❌
+
+**Simple Rule**: Using Agentwise as a TOOL = Free. Reselling Agentwise itself = License required.
+
+See the [LICENSE](LICENSE) file for complete details and FAQ.
 
 ## 🙏 Acknowledgments & Credits
 
