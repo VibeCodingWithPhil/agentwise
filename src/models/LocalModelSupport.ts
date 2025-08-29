@@ -256,7 +256,6 @@ export class LocalModelSupport {
       const response = await fetch(`${provider.baseUrl}/models`, {
         headers: {
           'Authorization': `Bearer ${provider.apiKey}`,
-          'HTTP-Referer': 'https://agentwise.ai',
           'X-Title': 'Agentwise'
         }
       });
@@ -357,7 +356,6 @@ export class LocalModelSupport {
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${provider.apiKey}`,
-              'HTTP-Referer': 'https://agentwise.ai',
               'X-Title': 'Agentwise'
             },
             body: JSON.stringify({
@@ -492,7 +490,6 @@ export class LocalModelSupport {
           const headers = config.provider === 'openrouter'
             ? {
                 'Authorization': `Bearer ${provider.apiKey}`,
-                'HTTP-Referer': 'https://agentwise.ai',
                 'X-Title': 'Agentwise'
               }
             : {};
