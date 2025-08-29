@@ -250,7 +250,7 @@ export class MemoryManager extends EventEmitter {
   private throttleAgents(): void {
     console.warn('🚦 Throttling all agents due to critical memory usage');
     
-    for (const agentId of this.agentMemoryMap.keys()) {
+    for (const [agentId] of Array.from(this.agentMemoryMap.entries())) {
       this.throttleAgent(agentId);
     }
   }
@@ -306,7 +306,7 @@ export class MemoryManager extends EventEmitter {
     const now = Date.now();
     let cleaned = 0;
 
-    for (const [key, lastAccess] of this.contextRetentionMap) {
+    for (const [key, lastAccess] of Array.from(this.contextRetentionMap.entries())) {
       if (now - lastAccess.getTime() > this.config.contextRetentionTime) {
         this.contextRetentionMap.delete(key);
         cleaned++;
@@ -326,7 +326,7 @@ export class MemoryManager extends EventEmitter {
     const inactiveThreshold = 10 * 60 * 1000; // 10 minutes
     let cleaned = 0;
 
-    for (const [agentId, stats] of this.agentMemoryMap) {
+    for (const [agentId, stats] of Array.from(this.agentMemoryMap.entries())) {
       if (now - stats.lastAccessed.getTime() > inactiveThreshold) {
         this.agentMemoryMap.delete(agentId);
         this.throttledAgents.delete(agentId);

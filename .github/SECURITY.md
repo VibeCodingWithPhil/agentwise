@@ -171,32 +171,65 @@ If a security incident occurs:
 - [CWE Top 25](https://cwe.mitre.org/top25/)
 - [Node.js Security Best Practices](https://nodejs.org/en/docs/guides/security/)
 
-## 🔍 Recent Security Audit (2025-01-29)
+## 🔍 Recent Security Audits
 
-**Comprehensive security audit completed in response to user concerns:**
+### January 29, 2025 - Comprehensive Security Hardening
 
-### Issues Found & Fixed:
+**Complete security audit and remediation completed:**
+
+#### Critical Issues Fixed:
+- ✅ **Command Injection Prevention** - Replaced all shell command executions with secure Node.js methods (ImportHandler.ts)
+- ✅ **Path Traversal Protection** - Added comprehensive path validation to prevent directory traversal attacks (MonitorCommand.ts, GlobalMonitorInstaller.ts)
+- ✅ **Process Spawning Security** - Secured all subprocess executions with proper validation and containment (index.ts)
+- ✅ **Network Security Hardening** - CORS configuration now restricted to local origins only (SharedContextServer.ts)
+- ✅ **Input Validation Framework** - Implemented comprehensive input sanitization system (InputValidator.ts)
+
+#### Previously Fixed (Earlier Audit):
 - ✅ **Removed unauthorized HTTP-Referer headers** from OpenRouter API calls (src/models/LocalModelSupport.ts)
 - ✅ **No backdoors or unauthorized network calls detected** in comprehensive codebase scan
-- ✅ **All background services verified** to operate locally only (localhost:3001-3002)
+- ✅ **All background services verified** to operate locally only (localhost:3001-3003)
 - ✅ **Analytics confirmed local-only** - no external data transmission
-- ✅ **No unauthorized remote access mechanisms** found
+
+### Security Improvements Implemented:
+
+#### Input Validation (NEW)
+- Comprehensive InputValidator class with pattern matching
+- SQL injection prevention
+- XSS attack prevention
+- Path injection blocking
+- Command injection prevention
+- Dangerous pattern detection
+
+#### Process Security (NEW)
+- All exec() calls replaced with secure alternatives
+- Process spawning now uses validation and timeouts
+- Working directory containment enforced
+- Script execution validation before running
+
+#### File System Security (NEW)
+- Path traversal prevention in all file operations
+- Symbolic link detection and blocking
+- Project boundary enforcement
+- Safe file permission management
 
 ### Audit Scope:
 - Complete network call analysis across entire codebase
 - Background service and process verification
-- Analytics and telemetry transparency check
-- Child process usage security review
+- Command execution security review
+- Path validation implementation
+- Input sanitization framework
+- CORS and network configuration
 - File system access permission validation
 
 ### Transparency Commitment:
 - All network calls documented and legitimate
-- Local-only monitoring services (ports 3001-3002)
+- Local-only monitoring services (ports 3001-3003)
 - Optional analytics stored locally in `~/.agentwise/analytics/`
 - No data transmission to external servers
 - Complete source code available for inspection
+- All security fixes documented in commits
 
-**Status: ✅ SECURE** - All identified issues resolved.
+**Status: ✅ SECURE** - All critical and high-severity issues resolved.
 
 ## ✉️ Contact
 

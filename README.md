@@ -781,6 +781,35 @@ We're planning to extend Agentwise to support additional AI CLI tools:
 - **Cursor CLI** - Researching integration
 - **More** - Suggest your favorite CLI!
 
+## 🔒 Security & Transparency
+
+### Recent Security Audit (January 2025)
+
+We take security seriously and have conducted comprehensive security audits with the following improvements:
+
+#### Security Fixes Implemented
+- **Path Traversal Protection**: Enhanced validation in all file operations
+- **Command Injection Prevention**: Replaced shell commands with secure Node.js methods  
+- **Input Validation Framework**: Comprehensive sanitization for all user inputs
+- **Process Spawning Security**: Secure subprocess execution with proper containment
+- **Network Security**: CORS configuration limited to local origins only
+- **Script Validation**: Enhanced checks for executable scripts and file permissions
+
+#### Security Features
+- All file operations are restricted to project boundaries
+- Input sanitization prevents injection attacks
+- Secure process management with timeout constraints
+- Local-only network access (no external data transmission)
+- Comprehensive validation framework for all user inputs
+
+#### Reporting Security Issues
+If you discover a security vulnerability, please:
+1. **DO NOT** create a public issue
+2. Email security details to: [Open a Security Advisory](https://github.com/VibeCodingWithPhil/agentwise/security/advisories/new)
+3. Allow us time to address the issue before public disclosure
+
+For more details, see our [Security Policy](.github/SECURITY.md).
+
 ## 📄 License
 
 Agentwise uses a **dual license model** to balance open-source freedom with sustainable development.
