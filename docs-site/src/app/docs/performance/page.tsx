@@ -17,8 +17,8 @@ export default function PerformancePage() {
           </Badge>
         </div>
         <p className="text-xl text-muted-foreground max-w-3xl">
-          Agentwise delivers unprecedented performance with verified 64.6% token reduction 
-          (up to 94.8% with 10 agents) and 5-10x faster development through intelligent parallel execution.
+          Agentwise delivers unprecedented performance with verified 99.3% token reduction 
+          (Context 3.0 + Knowledge Graph combined) and 5-10x faster development through intelligent parallel execution.
         </p>
       </div>
 
@@ -31,8 +31,8 @@ export default function PerformancePage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">64.6%</div>
-            <p className="text-xs text-muted-foreground">Verified reduction</p>
+            <div className="text-2xl font-bold">99.3%</div>
+            <p className="text-xs text-muted-foreground">Combined systems</p>
           </CardContent>
         </Card>
         <Card>

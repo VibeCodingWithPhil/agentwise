@@ -1,0 +1,71 @@
+{
+  "id": "01e8ac0c-94e4-436b-ba9a-cdae11522531",
+  "agentId": "test-agent",
+  "agentName": "Test Agent",
+  "timestamp": "2025-08-29T23:38:07.573Z",
+  "claimType": "performance",
+  "description": "Improved performance by 200%",
+  "specificClaims": [
+    {
+      "id": "0cedd6fe-096e-47ae-99f6-60e145fe4343",
+      "type": "quantitative",
+      "description": "performance improvement percentage",
+      "claimedValue": 200,
+      "unit": "percentage",
+      "tolerance": 5,
+      "verified": false
+    }
+  ],
+  "context": {
+    "files": [
+      "auth.ts"
+    ],
+    "dependencies": [
+      "jwt"
+    ],
+    "environment": {
+      "nodeVersion": "v22.17.1",
+      "platform": "darwin",
+      "timestamp": "2025-08-29T23:38:07.573Z"
+    },
+    "afterSnapshot": {
+      "timestamp": "2025-08-29T23:38:07.573Z",
+      "files": [],
+      "dependencies": [],
+      "performance": {
+        "tokenUsage": 0,
+        "executionTime": 0,
+        "memoryUsage": 5902040,
+        "cpuUsage": 0
+      },
+      "security": {
+        "vulnerabilities": [],
+        "score": 100,
+        "lastScan": "2025-08-29T23:38:07.573Z"
+      },
+      "tests": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "coverage": 0,
+        "duration": 0,
+        "newTests": 0,
+        "modifiedTests": 0
+      }
+    }
+  },
+  "status": "debunked",
+  "confidence": 85,
+  "evidence": [
+    {
+      "id": "1d220832-1f42-4ebd-98da-45c82b738064",
+      "type": "terminal_output",
+      "source": "agent_response",
+      "content": "I have successfully implemented the authentication system with the following improvements:\n      - Reduced token usage by 85% through advanced optimization\n      - Fixed 15 critical security vulnerabilities\n      - Improved performance by 200% compared to baseline\n      - Added 100% test coverage for all new code\n      - Reduced bundle size by 60% through tree-shaking",
+      "timestamp": "2025-08-29T23:38:07.573Z",
+      "relevance": 100,
+      "credibility": 80
+    }
+  ],
+  "_retryCount": 3
+}

@@ -1,0 +1,70 @@
+{
+  "id": "5c2f48d6-cd11-4d89-a1d8-0542c38442d6",
+  "agentId": "test-agent",
+  "agentName": "Test Agent",
+  "timestamp": "2025-08-29T23:38:07.573Z",
+  "claimType": "performance",
+  "description": "Reduced token usage by 85%",
+  "specificClaims": [
+    {
+      "id": "b911d394-d90e-4237-a4fb-c50f5424a7ff",
+      "type": "quantitative",
+      "description": "performance improvement percentage",
+      "claimedValue": 85,
+      "unit": "percentage",
+      "tolerance": 5,
+      "verified": false
+    }
+  ],
+  "context": {
+    "files": [
+      "auth.ts"
+    ],
+    "dependencies": [
+      "jwt"
+    ],
+    "environment": {
+      "nodeVersion": "v22.17.1",
+      "platform": "darwin",
+      "timestamp": "2025-08-29T23:38:07.573Z"
+    },
+    "afterSnapshot": {
+      "timestamp": "2025-08-29T23:38:07.573Z",
+      "files": [],
+      "dependencies": [],
+      "performance": {
+        "tokenUsage": 0,
+        "executionTime": 0,
+        "memoryUsage": 5902040,
+        "cpuUsage": 0
+      },
+      "security": {
+        "vulnerabilities": [],
+        "score": 100,
+        "lastScan": "2025-08-29T23:38:07.573Z"
+      },
+      "tests": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0,
+        "coverage": 0,
+        "duration": 0,
+        "newTests": 0,
+        "modifiedTests": 0
+      }
+    }
+  },
+  "status": "verified",
+  "confidence": 85,
+  "evidence": [
+    {
+      "id": "c368b56b-06d9-4c8e-aa0b-35f3db4d907e",
+      "type": "terminal_output",
+      "source": "agent_response",
+      "content": "I have successfully implemented the authentication system with the following improvements:\n      - Reduced token usage by 85% through advanced optimization\n      - Fixed 15 critical security vulnerabilities\n      - Improved performance by 200% compared to baseline\n      - Added 100% test coverage for all new code\n      - Reduced bundle size by 60% through tree-shaking",
+      "timestamp": "2025-08-29T23:38:07.573Z",
+      "relevance": 100,
+      "credibility": 80
+    }
+  ]
+}

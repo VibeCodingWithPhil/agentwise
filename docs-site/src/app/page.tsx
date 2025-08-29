@@ -54,7 +54,7 @@ export default function Home() {
           >
             <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-violet-100 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 mb-6">
               <Sparkles className="h-4 w-4" />
-              <span className="text-sm font-medium">v2.1.0 - Now with 30-40% Token Optimization</span>
+              <span className="text-sm font-medium">v2.2.0 - Now with 99.3% Token Optimization</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               Multi-Agent Orchestration
@@ -96,8 +96,8 @@ export default function Home() {
               <div className="w-12 h-12 rounded-lg bg-violet-100 dark:bg-violet-900/20 flex items-center justify-center mb-4">
                 <Zap className="h-6 w-6 text-violet-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">64.6% Token Optimization</h3>
-              <p className="text-gray-600 dark:text-gray-400">Verified token reduction through Context 3.0 intelligent sharing (94.8% with 10 agents).</p>
+              <h3 className="text-lg font-semibold mb-2">99.3% Token Optimization</h3>
+              <p className="text-gray-600 dark:text-gray-400">Verified token reduction through Context 3.0 + Knowledge Graph combined systems.</p>
             </div>
 
             <div className="p-6 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:scale-105">

@@ -1,0 +1,122 @@
+{
+  "test-agent": {
+    "agentId": "test-agent",
+    "agentName": "Test Agent",
+    "overallScore": 15.955555555555549,
+    "totalClaims": 9,
+    "verifiedClaims": 1,
+    "debunkedClaims": 8,
+    "accuracyRate": 11.11111111111111,
+    "consistency": 54.999999999999986,
+    "reliability": 69.5,
+    "history": [
+      {
+        "timestamp": "2025-08-29T23:38:08.723Z",
+        "score": 50,
+        "event": "claim_debunked",
+        "details": "Improved performance by 200%"
+      },
+      {
+        "timestamp": "2025-08-29T23:38:08.723Z",
+        "score": 68.9,
+        "event": "claim_verified",
+        "details": "Reduced token usage by 85%"
+      },
+      {
+        "timestamp": "2025-08-29T23:38:09.872Z",
+        "score": 60.56666666666666,
+        "event": "claim_debunked",
+        "details": "Improved performance by 200%"
+      },
+      {
+        "timestamp": "2025-08-29T23:38:12.019Z",
+        "score": 56.4,
+        "event": "claim_debunked",
+        "details": "Improved performance by 200%"
+      },
+      {
+        "timestamp": "2025-08-29T23:38:16.165Z",
+        "score": 53.9,
+        "event": "claim_debunked",
+        "details": "Improved performance by 200%"
+      },
+      {
+        "timestamp": "2025-08-29T23:38:25.348Z",
+        "score": 18.733333333333327,
+        "event": "claim_debunked",
+        "details": "successfully implemented the authentication system with the following improvements:"
+      },
+      {
+        "timestamp": "2025-08-29T23:38:41.647Z",
+        "score": 17.542857142857137,
+        "event": "claim_debunked",
+        "details": "successfully implemented the authentication system with the following improvements:"
+      },
+      {
+        "timestamp": "2025-08-29T23:38:58.838Z",
+        "score": 16.65,
+        "event": "claim_debunked",
+        "details": "successfully implemented the authentication system with the following improvements:"
+      },
+      {
+        "timestamp": "2025-08-29T23:39:18.014Z",
+        "score": 15.955555555555549,
+        "event": "claim_debunked",
+        "details": "successfully implemented the authentication system with the following improvements:"
+      }
+    ],
+    "penalties": [
+      {
+        "id": "755ae054-664e-473e-92d1-22aa912e119d",
+        "type": "false_claim",
+        "severity": "severe",
+        "points": 20,
+        "description": "Critical discrepancies in claim: successfully implemented the authentication system...",
+        "timestamp": "2025-08-29T23:38:25.348Z",
+        "duration": 30,
+        "active": true
+      },
+      {
+        "id": "f211f25e-28ac-448c-95ab-da42f0a9ac5f",
+        "type": "false_claim",
+        "severity": "severe",
+        "points": 20,
+        "description": "Critical discrepancies in claim: successfully implemented the authentication system...",
+        "timestamp": "2025-08-29T23:38:41.647Z",
+        "duration": 30,
+        "active": true
+      },
+      {
+        "id": "6b1671e1-8ad3-40a6-ad48-8abc1923b52e",
+        "type": "false_claim",
+        "severity": "severe",
+        "points": 20,
+        "description": "Critical discrepancies in claim: successfully implemented the authentication system...",
+        "timestamp": "2025-08-29T23:38:58.838Z",
+        "duration": 30,
+        "active": true
+      },
+      {
+        "id": "04c32f4a-db4a-4f55-b39d-167c4518b017",
+        "type": "false_claim",
+        "severity": "severe",
+        "points": 20,
+        "description": "Critical discrepancies in claim: successfully implemented the authentication system...",
+        "timestamp": "2025-08-29T23:39:18.014Z",
+        "duration": 30,
+        "active": true
+      }
+    ],
+    "badges": [
+      {
+        "id": "38f449b5-12b9-4990-b8f8-6630c11cd7be",
+        "name": "Reliable Reporter",
+        "description": "Consistent performance across claim types",
+        "criteria": "Consistency >= 90%",
+        "earnedDate": "2025-08-29T23:38:08.723Z",
+        "icon": "📊",
+        "color": "#silver"
+      }
+    ]
+  }
+}

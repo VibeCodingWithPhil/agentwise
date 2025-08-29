@@ -9,6 +9,8 @@ import { PhaseOrchestrator } from '../orchestration/PhaseOrchestrator';
 import { ProjectRegistrySync } from '../project-registry/ProjectRegistrySync';
 import { ProjectIntegrationManager } from '../integration/ProjectIntegrationManager';
 import { TerminalIntegration, TerminalState, type IntegrationConfig } from '../terminal';
+import { KnowledgeGraphCommand } from './KnowledgeGraphCommand';
+import { CodebaseContextManager } from '../context/CodebaseContextManager';
 
 export interface CommandContext {
   command: string;
@@ -33,6 +35,8 @@ export class EnhancedCommandHandler {
   private orchestrator: PhaseOrchestrator;
   private integrationManager: ProjectIntegrationManager;
   private terminalIntegration: TerminalIntegration;
+  private knowledgeGraphCommand: KnowledgeGraphCommand;
+  private contextManager: CodebaseContextManager;
 
   constructor() {
     this.agentSelector = new AgentSelector();
@@ -46,6 +50,8 @@ export class EnhancedCommandHandler {
       safetyMode: true,
       maxConcurrentSessions: 3
     });
+    this.contextManager = new CodebaseContextManager();
+    this.knowledgeGraphCommand = new KnowledgeGraphCommand(this.contextManager);
   }
 
   /**

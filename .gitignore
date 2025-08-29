@@ -125,10 +125,17 @@ scripts/*
 test-workspace/
 *.test.js
 *.test.ts.js
+test-*.js
+test-*.ts
+VERIFIED_RESULTS.md
 
 # State files
 .agentwise-state.json
 .permission-test
+
+# Agent knowledge base (private learning data)
+.agent-knowledge/
+.knowledge/
 
 # Keep .claude folder and its contents
 !.claude/

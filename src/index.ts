@@ -152,6 +152,7 @@ Available Commands:
   /figma [subcommand]       - Figma Dev Mode integration
   /figma-create <project>   - Create app from Figma design
   /setup-mcps [subcommand]  - Configure MCPs for Claude Code
+  /knowledge [subcommand]   - Knowledge graph analysis and queries
   /configure-agentwise      - Configure Agentwise settings
   /configure-agentwise      - Configure Agentwise system settings
   /permissions [subcommand] - Manage Permission Bypass System
@@ -183,6 +184,7 @@ Available Commands:
   /figma [subcommand]       - Figma Dev Mode integration
   /figma-create <project>   - Create app from Figma design
   /setup-mcps [subcommand]  - Configure MCPs for Claude Code
+  /knowledge [subcommand]   - Knowledge graph analysis and queries
   /configure-agentwise      - Configure Agentwise settings
   /configure-agentwise      - Configure Agentwise system settings
 
@@ -318,6 +320,20 @@ Status: ✅ System Ready | ⚠️  Permission System Error: ${error}
         // Silently fail if the command doesn't exist (it's local-only)
         console.log('GitHub management command not available');
       }
+      return;
+    }
+    
+    // Handle /knowledge command
+    if (args[0] === '/knowledge') {
+      const { KnowledgeGraphCommand } = await import('./commands/KnowledgeGraphCommand');
+      const { CodebaseContextManager } = await import('./context/CodebaseContextManager');
+      
+      const contextManager = new CodebaseContextManager();
+      const knowledgeCommand = new KnowledgeGraphCommand(contextManager);
+      
+      // Get current working directory as project path
+      const currentDir = process.cwd();
+      await knowledgeCommand.handleKnowledgeCommand(args.slice(1), currentDir);
       return;
     }
     
