@@ -196,13 +196,13 @@ export class SharedContextServer extends EventEmitter {
         if (method === 'GET' && pathParts.length === 2) {
           // GET /context/{projectId}
           await this.handleGetContext(projectId, res, url.searchParams);
-        } else if (method === 'POST' && pathParts[2] === 'diff') {
+        } else if (method === 'POST' && pathParts.length === 3 && pathParts[2] === 'diff') {
           // POST /context/{projectId}/diff
           await this.handleContextDiff(projectId, req, res);
-        } else if (method === 'PUT') {
+        } else if (method === 'PUT' && pathParts.length === 2) {
           // PUT /context/{projectId}
           await this.handleUpdateContext(projectId, req, res);
-        } else if (method === 'DELETE') {
+        } else if (method === 'DELETE' && pathParts.length === 2) {
           // DELETE /context/{projectId}
           await this.handleDeleteContext(projectId, res);
         } else {

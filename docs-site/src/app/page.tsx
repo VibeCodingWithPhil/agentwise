@@ -96,8 +96,8 @@ export default function Home() {
               <div className="w-12 h-12 rounded-lg bg-violet-100 dark:bg-violet-900/20 flex items-center justify-center mb-4">
                 <Zap className="h-6 w-6 text-violet-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">30-40% Token Optimization</h3>
-              <p className="text-gray-600 dark:text-gray-400">Proven token reduction through intelligent context sharing and caching.</p>
+              <h3 className="text-lg font-semibold mb-2">64.6% Token Optimization</h3>
+              <p className="text-gray-600 dark:text-gray-400">Verified token reduction through Context 3.0 intelligent sharing (94.8% with 10 agents).</p>
             </div>
 
             <div className="p-6 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:scale-105">

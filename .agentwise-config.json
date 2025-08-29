@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "enableBypass": true,
+    "workspaceRoot": "./workspace",
+    "allowedDirectories": [
+      "./.agentwise",
+      "./.claude",
+      "./projects.json",
+      "./node_modules",
+      "./package.json",
+      "./package-lock.json",
+      "./tsconfig.json"
+    ],
+    "systemAccessCommands": [
+      "/monitor",
+      "/setup-mcps",
+      "/setup-ollama",
+      "/setup-lmstudio",
+      "/github"
+    ],
+    "promptTimeout": 5000,
+    "verboseLogging": false,
+    "autoApproveCommon": true,
+    "fallbackToManual": true
+  },
+  "system": {
+    "maxConcurrentAgents": 3,
+    "tokenOptimization": "aggressive",
+    "enableMonitoring": true
+  }
+}

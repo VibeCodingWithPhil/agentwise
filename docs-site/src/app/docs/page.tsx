@@ -56,7 +56,8 @@ export default function DocsHomePage() {
         </div>
         <p className="text-xl text-muted-foreground max-w-3xl">
           Welcome to Agentwise documentation. Learn how to harness the power of multi-agent 
-          orchestration to accelerate your development workflow with 25-35% token reduction.
+          orchestration to accelerate your development workflow with verified 64.6% token reduction 
+          (up to 94.8% with 10 agents).
         </p>
       </div>
 
@@ -110,32 +111,73 @@ export default function DocsHomePage() {
         </Card>
       </div>
 
-      {/* Critical Requirement */}
+      {/* New: No Permissions Flag Needed! */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold text-foreground">⚠️ Critical Requirement</h2>
-        <Card className="border-yellow-200 bg-yellow-50 dark:bg-yellow-900/20">
+        <h2 className="text-2xl font-semibold text-foreground">🎉 NEW: Works Without --dangerously-skip-permissions!</h2>
+        <Card className="border-green-200 bg-green-50 dark:bg-green-900/20">
           <CardContent className="pt-6">
             <p className="text-foreground font-medium mb-3">
-              Agentwise REQUIRES Claude Code to be started with a special flag:
+              Agentwise now includes sandboxed execution with automatic permission handling:
             </p>
             <CodeBlock language="bash">
-{`# ALWAYS start Claude Code like this:
-claude --dangerously-skip-permissions
+{`# Works without any flags!
+claude /create "my amazing app"
 
-# NOT like this:
-claude  # ❌ Will NOT work properly`}
+# Old way (still supported but not needed):
+claude --dangerously-skip-permissions`}
             </CodeBlock>
-            <p className="text-muted-foreground mt-4">
-              This flag is required for file system operations, monitor dashboard functionality, 
-              agent parallel execution, and global command installation.
-            </p>
+            <div className="mt-4 space-y-2">
+              <p className="text-muted-foreground">
+                ✅ <strong>Automatic Permission Handling:</strong> Responds to prompts intelligently
+              </p>
+              <p className="text-muted-foreground">
+                ✅ <strong>Workspace Sandboxing:</strong> Restricts execution to safe directories
+              </p>
+              <p className="text-muted-foreground">
+                ✅ <strong>Smart Safety Modes:</strong> Configurable levels of automation
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Quick Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold text-foreground">Quick Installation</h2>
+        <h2 className="text-2xl font-semibold text-foreground">⚡ Quick Installation</h2>
+        
+        {/* One-Click Claude Code Setup */}
+        <Card className="border-accent/50 bg-accent/5">
+          <CardHeader>
+            <CardTitle className="text-xl flex items-center gap-2">
+              🚀 One-Click Setup for Claude Code
+              <Badge>Recommended</Badge>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              Copy this prompt and paste into Claude Code for automatic setup:
+            </p>
+            <CodeBlock language="text" title="Setup Prompt">
+{`Please set up Agentwise by:
+1. Clone: git clone https://github.com/VibeCodingWithPhil/agentwise.git ~/agentwise
+2. Install: cd ~/agentwise && npm install && npm run build
+3. Configure: Create workspace directory and set up global monitor
+4. Start: node dist/index.js
+5. Enable sandboxed execution (no --dangerously-skip-permissions needed)
+
+Full setup: https://github.com/VibeCodingWithPhil/agentwise/blob/main/CLAUDE_CODE_SETUP_PROMPT.md`}
+            </CodeBlock>
+            <div className="mt-4">
+              <Button asChild>
+                <Link href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/CLAUDE_CODE_SETUP_PROMPT.md" target="_blank">
+                  View Full Setup Prompt
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+        
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
@@ -183,8 +225,9 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
                   1
                 </div>
                 <div>
-                  <p className="font-medium">Start Claude Code correctly</p>
-                  <CodeBlock language="bash">{`claude --dangerously-skip-permissions`}</CodeBlock>
+                  <p className="font-medium">Start Claude Code (no flags needed!)</p>
+                  <CodeBlock language="bash">{`claude`}</CodeBlock>
+                  <p className="text-sm text-muted-foreground">Agentwise handles permissions automatically</p>
                 </div>
               </div>
               

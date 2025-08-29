@@ -40,8 +40,8 @@ const troubleshootingSteps = [
     solution: "Install monitor dependencies manually"
   },
   {
-    issue: "Permission denied errors",
-    solution: "Ensure Claude Code started with --dangerously-skip-permissions flag"
+    issue: "Permission prompts keep appearing",
+    solution: "Run 'claude /configure-agentwise' to enable automatic permission handling"
   },
   {
     issue: "No agent-todo folders created",
@@ -100,44 +100,87 @@ export default function InstallationPage() {
         </div>
       </div>
 
-      {/* Critical Requirement */}
-      <Card className="border-warning-200 bg-warning-50 dark:bg-warning-900/20">
+      {/* NEW: Sandboxed Execution */}
+      <Card className="border-green-200 bg-green-50 dark:bg-green-900/20">
         <CardHeader>
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-warning-600" />
-            <CardTitle className="text-warning-700 dark:text-warning-400">
-              Critical Requirement
+            <CheckCircle className="h-5 w-5 text-green-600" />
+            <CardTitle className="text-green-700 dark:text-green-400">
+              🎆 NEW: Works Without --dangerously-skip-permissions!
             </CardTitle>
           </div>
         </CardHeader>
         <CardContent>
           <p className="text-foreground font-medium mb-3">
-            Agentwise REQUIRES Claude Code to be started with a special flag:
+            Agentwise now includes automatic permission handling:
           </p>
-          <CodeBlock language="bash" title="Required startup command">
-{`# ALWAYS start Claude Code like this:
-claude --dangerously-skip-permissions
+          <CodeBlock language="bash" title="No flags needed!">
+{`# Just start Claude Code normally:
+claude
 
-# NOT like this:
-claude  # ❌ Will NOT work properly`}
+# Then use Agentwise commands:
+claude /create "my amazing app"`}
           </CodeBlock>
           <div className="mt-4">
-            <p className="text-sm font-medium text-foreground mb-2">This flag is required for:</p>
+            <p className="text-sm font-medium text-foreground mb-2">Features:</p>
             <ul className="text-sm text-muted-foreground space-y-1">
-              <li>• File system operations</li>
-              <li>• Monitor dashboard functionality</li>
-              <li>• Agent parallel execution</li>
-              <li>• Global command installation</li>
+              <li>✅ Automatic permission responses</li>
+              <li>✅ Workspace sandboxing for safety</li>
+              <li>✅ Terminal output monitoring</li>
+              <li>✅ Configurable safety modes</li>
             </ul>
+          </div>
+          <div className="mt-4 p-3 bg-background rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              <strong>Note:</strong> The old --dangerously-skip-permissions flag still works if you prefer it.
+            </p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Quick Install */}
+      {/* One-Click Claude Code Setup */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold text-foreground">Quick Install (Recommended)</h2>
+        <h2 className="text-2xl font-semibold text-foreground">⚡ One-Click Setup for Claude Code</h2>
+        <Card className="border-accent/50 bg-accent/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              🚀 Automated Setup Prompt
+              <Badge>Easiest Method</Badge>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              Copy this entire prompt and paste it into Claude Code:
+            </p>
+            <CodeBlock language="text" title="Setup Prompt">
+{`I need you to set up Agentwise, a multi-agent orchestration system.
+
+Please perform these steps:
+1. Clone: git clone https://github.com/VibeCodingWithPhil/agentwise.git ~/agentwise
+2. Install: cd ~/agentwise && npm install && npm run build
+3. Create workspace: mkdir -p workspace
+4. Install monitor: npm run monitor:install
+5. Start Agentwise: node dist/index.js
+6. Configure sandboxed execution (no --dangerously-skip-permissions needed)
+
+Full instructions: https://github.com/VibeCodingWithPhil/agentwise/blob/main/CLAUDE_CODE_SETUP_PROMPT.md`}
+            </CodeBlock>
+            <div className="mt-4 flex gap-3">
+              <Button asChild>
+                <Link href="https://github.com/VibeCodingWithPhil/agentwise/blob/main/CLAUDE_CODE_SETUP_PROMPT.md" target="_blank">
+                  View Full Setup Prompt
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Alternative Installation Methods */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold text-foreground">Alternative Installation Methods</h2>
         <p className="text-muted-foreground">
-          Use our automated installers for the fastest setup experience:
+          If you prefer manual control or the automated prompt doesn't work:
         </p>
         
         <div className="grid md:grid-cols-2 gap-6">

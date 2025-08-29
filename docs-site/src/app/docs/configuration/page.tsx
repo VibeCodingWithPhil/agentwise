@@ -8,6 +8,40 @@ import { CodeBlock } from "@/components/ui/code-block"
 
 const configFiles = [
   {
+    file: ".agentwise-config.json",
+    description: "Sandboxed execution and permission bypass configuration",
+    location: "~/.agentwise-config.json (User home)",
+    icon: Shield,
+    example: `{
+  "version": "1.0.0",
+  "permissions": {
+    "bypassEnabled": true,
+    "safetyMode": "moderate",
+    "autoResponse": true,
+    "restrictedCommands": []
+  },
+  "workspace": {
+    "enableSandbox": true,
+    "restrictPaths": true,
+    "maxFileSize": 104857600,
+    "allowedPaths": ["~/agentwise/workspace"],
+    "deniedPaths": ["/etc", "/usr", "/bin", "/sbin"]
+  },
+  "monitoring": {
+    "enableTerminalMonitoring": true,
+    "verbosity": "normal",
+    "logRetention": 7
+  },
+  "tokenOptimization": {
+    "enabled": true,
+    "maxAgents": 5,
+    "contextWindow": 8000,
+    "cacheEnabled": true
+  }
+}`,
+    required: false
+  },
+  {
     file: "projects.json",
     description: "Central project registry with metadata and tracking",
     location: "Root directory",
@@ -75,11 +109,18 @@ const envVariables = [
     usage: "Path customization"
   },
   {
+    name: "AGENTWISE_BYPASS_PERMISSIONS",
+    description: "Enable permission bypass system globally",
+    example: "true",
+    required: false,
+    usage: "No --dangerously-skip-permissions needed"
+  },
+  {
     name: "CLAUDE_FLAGS",
-    description: "Default flags for Claude Code startup",
+    description: "Default flags for Claude Code startup (deprecated - no longer needed)",
     example: "--dangerously-skip-permissions --debug",
     required: false,
-    usage: "Startup configuration"
+    usage: "Legacy startup configuration"
   },
   {
     name: "AGENTWISE_DEBUG",
