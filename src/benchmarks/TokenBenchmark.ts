@@ -231,7 +231,7 @@ Generated: ${new Date().toISOString()}
 
 ## Summary
 
-The Agentwise Token Optimizer achieves **60-70% token reduction** through:
+The Agentwise system provides organized project coordination through:
 - Context sharing between agents
 - Incremental updates
 - Response caching
@@ -247,9 +247,9 @@ ${results.map(r =>
 
 ## Key Findings
 
-1. **Actual Savings**: Consistently achieves 60-70% token reduction
-2. **Scalability**: Savings increase with more agents due to context sharing
-3. **Complexity Impact**: More complex tasks benefit more from optimization
+1. **Context Management**: Organizes project context across agents
+2. **Scalability**: System supports multiple agents working in coordination
+3. **Task Coordination**: Complex projects benefit from structured task management
 
 ## Methodology
 
@@ -260,7 +260,7 @@ ${results.map(r =>
 
 ## Conclusion
 
-The token optimization system delivers substantial savings of **60-70%**, making multi-agent orchestration significantly more cost-effective. While not the originally claimed 99%, this still represents a major improvement in token efficiency.
+The token optimization system provides context management and coordination capabilities. Actual token usage depends on implementation patterns, task complexity, and agent coordination strategies.
 `;
 
         const reportPath = path.join(this.resultsPath, 'BENCHMARK_REPORT.md');
