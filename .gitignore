@@ -132,4 +132,4 @@ test-workspace/
 
 # Keep .claude folder and its contents
 !.claude/
-!.claude/**/*
+!.claude/**/*.agentwise-config.json
