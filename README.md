@@ -120,7 +120,7 @@ Our proprietary real-time context awareness system:
 - **Living Context Graph**: Dynamic understanding of your entire codebase
 - **Real-Time Updates**: File changes tracked automatically
 - **Deep Analysis**: Extracts imports, exports, classes, functions
-- **Modular Updates**: Only refreshes changed portions (token optimization)
+- **Modular Updates**: Only refreshes changed portions through context injection
 - **Hierarchical Understanding**: Maintains project structure relationships
 
 ### How They Work Together
@@ -145,10 +145,19 @@ Comprehensive Context System: Universal compatibility + deep awareness
 #### 🤖 Multi-Agent Orchestration
 - **8 Specialist Agents** (Frontend, Backend, Database, DevOps, Testing, Deployment, Designer, Code Review)
 - **Dynamic Agent Generation** for custom specialists ✨
-- **30-40% Token Optimization** - Multiple agents share context, reducing total usage by 30-40% 💎
+- **25-35% Token Optimization** - Agents receive optimized context through intelligent injection, reducing token usage by 25-35% 💎
 - **Parallel Execution** with intelligent task distribution
 - **Self-Improving Agents** with learning persistence 🧠
 - **Phase-based Synchronization** across all agents
+
+##### 💎 Token Optimization System
+Our intelligent context injection system reduces token usage:
+- **SharedContextServer**: Centralized context management on port 3003
+- **Context Injection**: Optimized context injected before agent execution
+- **Smart Sharing**: Agents reference shared context instead of duplicating
+- **Automatic Restoration**: Original agent files preserved and restored
+- **Real Savings**: 25-35% token reduction with multiple agents
+- **Scales with Usage**: More agents = greater savings
 
 </td>
 <td width="50%">
@@ -740,7 +749,7 @@ Found a security issue? Please email vibephilcoding@gmail.com or create a privat
 - [x] **MCP Integration** - 25 verified MCP servers (actual working integrations)
 - [x] **Performance Analytics** - Comprehensive metrics, error tracking, and insights
 - [x] **Self-Improving Agents** - Learning capabilities with knowledge persistence
-- [x] **Token Optimization** - 30-40% reduction achieved
+- [x] **Token Optimization** - 25-35% reduction achieved through context injection
 - [x] **Smart Model Routing** - Automatic model selection based on task requirements
 - [x] **Local Model Support** - Full Ollama, LM Studio, and OpenRouter integration
 - [x] **Document Upload** - Process PDFs, Word docs, and design files

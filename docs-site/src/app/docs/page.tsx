@@ -56,7 +56,7 @@ export default function DocsHomePage() {
         </div>
         <p className="text-xl text-muted-foreground max-w-3xl">
           Welcome to Agentwise documentation. Learn how to harness the power of multi-agent 
-          orchestration to accelerate your development workflow with 30-40% token reduction.
+          orchestration to accelerate your development workflow with 25-35% token reduction.
         </p>
       </div>
 

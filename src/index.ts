@@ -48,7 +48,8 @@ function startContextServerProcess(): void {
   console.log('\n🔗 Starting SharedContextServer for token optimization...');
   
   // Validate the script path exists and is safe
-  const contextServerScript = path.join(__dirname, 'context/startContextServer.js');
+  // Use the working JavaScript version, not the TypeScript compiled one
+  const contextServerScript = path.join(__dirname, 'context/startContextServer-working.js');
   const resolvedPath = path.resolve(contextServerScript);
   
   // Security check: ensure the script is within our project directory

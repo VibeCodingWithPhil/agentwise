@@ -449,7 +449,7 @@ export class TechSpecValidator {
     
     // Check database compatibility
     if (stack.backend?.database && stack.backend?.orm) {
-      const validCombos = {
+      const validCombos: Record<string, string[]> = {
         'postgresql': ['prisma', 'typeorm', 'sequelize'],
         'mongodb': ['mongoose', 'prisma'],
         'mysql': ['prisma', 'typeorm', 'sequelize']

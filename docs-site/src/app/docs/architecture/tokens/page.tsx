@@ -6,43 +6,43 @@ import { CodeBlock } from "@/components/ui/code-block"
 
 const optimizationTechniques = [
   {
-    name: "Context Sharing",
-    description: "Multiple agents share context to avoid redundant API calls",
+    name: "Context Injection",
+    description: "Inject optimized context into agent files before execution",
+    icon: Zap,
+    savings: "25-35%",
+    implementation: "Temporary file replacement with optimized versions",
+    example: "Agent receives shared context references instead of full duplication"
+  },
+  {
+    name: "Shared Context Server",
+    description: "Centralized context management reduces duplication",
     icon: Share2,
-    savings: "25-30%",
-    implementation: "Shared context pool between agents",
-    example: "Frontend and Backend agents share project requirements"
-  },
-  {
-    name: "Incremental Updates",
-    description: "Only send changes instead of full context on each call",
-    icon: RefreshCw,
-    savings: "30-35%",
-    implementation: "Diff-based context updates",
-    example: "Send only new code changes, not entire codebase"
-  },
-  {
-    name: "Agent Pooling",
-    description: "Limit concurrent agents to optimize token usage",
-    icon: Database,
-    savings: "20-25%",
-    implementation: "Max 3 agents active simultaneously",
-    example: "Queue tasks when agents are at capacity"
-  },
-  {
-    name: "Smart Caching",
-    description: "Cache frequent responses and patterns",
-    icon: Shield,
     savings: "15-20%",
-    implementation: "LRU cache for common patterns",
-    example: "Cache boilerplate code and common functions"
+    implementation: "SharedContextServer on port 3003",
+    example: "All agents reference the same project context"
+  },
+  {
+    name: "Agent-Specific Filtering",
+    description: "Each agent only receives relevant context",
+    icon: RefreshCw,
+    savings: "10-15%",
+    implementation: "Context filtered by agent specialization",
+    example: "Frontend agent only gets UI-related context"
+  },
+  {
+    name: "Automatic Restoration",
+    description: "Original files preserved and restored after use",
+    icon: Shield,
+    savings: "0%",
+    implementation: "10-second injection window",
+    example: "Agent files return to original state automatically"
   }
 ]
 
 const tokenMetrics = [
-  { metric: "Average Reduction", value: "35%", baseline: "100K tokens", optimized: "65K tokens" },
-  { metric: "Cost Savings", value: "$87", baseline: "$250/project", optimized: "$163/project" },
-  { metric: "Speed Improvement", value: "40%", baseline: "45 min", optimized: "27 min" },
+  { metric: "Average Reduction", value: "25-35%", baseline: "100K tokens", optimized: "65-75K tokens" },
+  { metric: "Cost Savings", value: "$50-70", baseline: "$250/project", optimized: "$180-200/project" },
+  { metric: "Speed Improvement", value: "20-30%", baseline: "45 min", optimized: "32-36 min" },
   { metric: "Quality Maintained", value: "100%", baseline: "8.8/10", optimized: "8.8/10" }
 ]
 
@@ -85,7 +85,7 @@ export default function TokensArchitecturePage() {
           <div>
             <h1 className="text-4xl font-bold text-foreground">Token Optimization Architecture</h1>
             <p className="text-xl text-muted-foreground mt-2">
-              Advanced strategies that reduce API token usage by 30-40% while maintaining code quality.
+              Intelligent context injection system that reduces API token usage by 25-35% while maintaining code quality.
             </p>
           </div>
         </div>

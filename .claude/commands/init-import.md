@@ -6,12 +6,11 @@ allowed-tools: Bash, Read, Write, Glob
 Initialize the import of an existing external project into Agentwise.
 
 Steps:
-1. Use system file dialog to select project folder:
+1. Run the secured import initialization:
    ```bash
-   # macOS: Use osascript
-   # Windows: Use PowerShell
-   # Linux: Use zenity or kdialog
+   cd /Users/philipritmeester/Agentwise && node src/index.ts /init-import
    ```
+   This will prompt for the project folder path using secure readline input
 
 2. Analyze the selected project:
    - Detect programming languages

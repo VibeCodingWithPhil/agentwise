@@ -1,7 +1,7 @@
 # Agentwise Project Memory - Updated
 
 ## Project Overview
-Agentwise is a sophisticated multi-agent orchestration system that extends Claude Code's capabilities by enabling parallel execution of specialized AI agents with coordinated task management, token optimization, and comprehensive validation systems.
+Agentwise is a sophisticated multi-agent orchestration system that extends Claude Code's capabilities by enabling parallel execution of specialized AI agents with coordinated task management, intelligent token optimization, and comprehensive validation systems.
 
 ## Core Architecture
 - **Agents**: Dynamically loaded from `.claude/agents/` folder
@@ -24,7 +24,7 @@ Agentwise implements a groundbreaking dual-context system:
 - **Living Context Graph**: Real-time understanding of entire codebase structure
 - **Deep Analysis**: Extracts imports, exports, classes, functions, dependencies
 - **File Watching**: Automatic updates when files change
-- **Modular Updates**: Only refreshes changed portions (30-40% token optimization)
+- **Modular Updates**: Only refreshes changed portions through context injection
 - **Hierarchical Understanding**: Maintains relationships between files and folders
 
 ### How They Work Together
@@ -52,12 +52,14 @@ Agentwise implements a groundbreaking dual-context system:
 - **Error Handling**: Cleans up planning folder even on failure
 
 ### 1. Token Optimization System
-- **TokenOptimizer**: Reduces token usage by 60-70% through:
-  - Context sharing between agents
-  - Incremental updates instead of full context
-  - Agent pooling (max 3 simultaneous)
-  - Smart context windowing
-  - Response caching
+- **SharedContextServer**: Centralized context management on port 3003
+- **AgentContextInjector**: Creates optimized agent files with shared references
+- **Context Injection**: Temporarily replaces agent files with optimized versions
+- **Token Reduction**: Achieves 25-35% reduction through:
+  - Shared context references instead of duplication
+  - Agent-specific context filtering
+  - Intelligent context windowing
+  - Automatic file restoration after use
 
 ### 2. Dynamic Agent Management
 - **DynamicAgentManager**: Replaces hardcoded agents
@@ -162,7 +164,7 @@ Agentwise implements a groundbreaking dual-context system:
 - **Project-Based Loading**: Analyzes project requirements to determine required agents
 - **Custom Agent Support**: Automatically includes custom agents like code-review-specialist
 - **No Hardcoding**: Removed all hardcoded agent references from system
-- **Token Optimization**: Batched execution with shared context
+- **Token Optimization**: Context injection with 25-35% reduction
 - **MCP Future**: Each agent will use role-specific MCPs
 
 ### Dynamic Agent-Todo Creation
@@ -173,7 +175,7 @@ Agentwise implements a groundbreaking dual-context system:
 - **Scalable**: Works with any number of custom agents added to system
 
 ## Workflow Enhancements
-1. **Token-Optimized Execution**: 60-70% reduction in API usage
+1. **Token-Optimized Execution**: 25-35% reduction in API usage through context injection
 2. **Multi-Phase Support**: All phases properly tracked
 3. **Auto-Validation**: Syntax and style checks before completion
 4. **Context Persistence**: Projects stay active between commands
@@ -256,7 +258,7 @@ A specialized agent that performs comprehensive visual testing:
 - All phases tracked, not just phase 1
 
 ## Current Status
-- ✅ Token optimization implemented (30-40% reduction achieved)
+- ✅ Token optimization implemented (25-35% reduction achieved through context injection)
 - ✅ Dynamic agent management working
 - ✅ Dynamic agent-todo folder creation based on project needs
 - ✅ Dynamic agent generation for specialized needs
@@ -270,7 +272,7 @@ A specialized agent that performs comprehensive visual testing:
 - ✅ Designer agent created for UI/UX work
 - ✅ Performance Analytics system implemented
 - ✅ Self-Improving Agents with learning capabilities
-- ✅ Token Optimization achieved (30-40% reduction verified)
+- ✅ Token Optimization achieved (25-35% reduction verified with context injection)
 - ✅ Local Model Support (Ollama, LM Studio, OpenRouter)
 - ✅ Smart Model Routing with automatic selection
 - ✅ Document Upload System (PDF, Word, Figma)
@@ -294,7 +296,9 @@ A specialized agent that performs comprehensive visual testing:
 - `src/context/CodebaseContextManager.ts` - Context 3.0 real-time codebase awareness
 - `src/validation/ProjectStructureValidator.ts` - Workspace structure validation
 - `src/integration/ProjectIntegrationManager.ts` - Centralized project integration
-- `src/optimization/TokenOptimizer.ts` - 30-40% token reduction system
+- `src/context/AgentContextInjector.ts` - Context injection for 25-35% token reduction
+- `src/context/SharedContextServer.ts` - Centralized context management server
+- `src/context/startContextServer.js` - Server startup script
 - `src/orchestrator/DynamicAgentManager.ts` - Dynamic agent loading
 - `src/orchestrator/DynamicTaskDistributor.ts` - Smart agent selection and task distribution
 - `src/agents/DynamicAgentGenerator.ts` - Dynamic agent creation

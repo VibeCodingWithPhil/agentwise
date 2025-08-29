@@ -393,19 +393,25 @@ export class SyntaxValidator {
       lines.forEach((line, index) => {
         // Check for undefined variables (basic check)
         if (line.includes('undefined.') || line.includes('null.')) {
-          warnings.push({
+          errors.push({
             file: relPath,
+            line: index + 1,
+            column: 0,
             message: `Potential null/undefined access at line ${index + 1}`,
-            type: 'runtime'
+            type: 'runtime',
+            severity: 'error'
           });
         }
 
         // Check for missing await
         if (line.includes('.then(') && !line.includes('await') && !line.includes('return')) {
-          warnings.push({
+          errors.push({
             file: relPath,
+            line: index + 1,
+            column: 0,
             message: `Potential missing await at line ${index + 1}`,
-            type: 'async'
+            type: 'runtime',
+            severity: 'error'
           });
         }
       });

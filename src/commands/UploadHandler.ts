@@ -243,7 +243,7 @@ export class UploadHandler {
    * Extract Figma components
    */
   private async extractFigmaComponents(figmaData: any): Promise<any[]> {
-    const components = [];
+    const components: any[] = [];
     
     // Extract component definitions
     // This would parse the Figma node tree
@@ -283,7 +283,7 @@ export class UploadHandler {
     const typescript = this.config.figma?.typescript !== false;
     const cssFramework = this.config.figma?.cssFramework || 'tailwind';
     
-    const output = {
+    const output: any = {
       components: {},
       styles: {},
       assets: {},

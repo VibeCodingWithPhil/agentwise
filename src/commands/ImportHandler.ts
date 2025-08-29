@@ -202,9 +202,9 @@ export class ImportHandler {
    * SECURITY FIX: Replaced command injection-prone shell commands with secure user input
    */
   private async selectFolder(): Promise<string | null> {
-    console.log(chalk.cyan('\n📁 Project Folder Selection'));
+    console.log('\n📁 Project Folder Selection');
     console.log('Please enter the full path to the project folder you want to import:');
-    console.log(chalk.gray('Example: /Users/username/my-project or C:\\Users\\username\\my-project'));
+    console.log('Example: /Users/username/my-project or C:\\Users\\username\\my-project');
     
     try {
       // Use readline for secure user input instead of executing shell commands
@@ -215,17 +215,17 @@ export class ImportHandler {
       });
 
       return new Promise((resolve) => {
-        rl.question(chalk.yellow('Project folder path: '), (answer: string) => {
+        rl.question('Project folder path: ', (answer: string) => {
           rl.close();
           
           // Validate the input path securely
           const sanitizedPath = this.validateAndSanitizePath(answer.trim());
           if (sanitizedPath && fs.existsSync(sanitizedPath) && fs.statSync(sanitizedPath).isDirectory()) {
-            console.log(chalk.green(`✅ Valid project folder: ${sanitizedPath}`));
+            console.log(`✅ Valid project folder: ${sanitizedPath}`);
             resolve(sanitizedPath);
           } else {
-            console.log(chalk.red('❌ Invalid path or directory does not exist'));
-            console.log(chalk.gray('Please ensure the path exists and is a directory'));
+            console.log('❌ Invalid path or directory does not exist');
+            console.log('Please ensure the path exists and is a directory');
             resolve(null);
           }
         });
@@ -253,7 +253,7 @@ export class ImportHandler {
       const dangerousPatterns = ['../', '..\\', '../', '~/', '${', '`'];
       for (const pattern of dangerousPatterns) {
         if (cleanPath.includes(pattern)) {
-          console.log(chalk.red('⚠️  Path contains dangerous patterns - rejected for security'));
+          console.log('⚠️  Path contains dangerous patterns - rejected for security');
           return null;
         }
       }
@@ -264,13 +264,13 @@ export class ImportHandler {
       // Additional security check - ensure path is reasonable
       const rootPath = path.parse(resolvedPath).root;
       if (resolvedPath === rootPath || resolvedPath.length < rootPath.length + 2) {
-        console.log(chalk.red('⚠️  Path too close to system root - rejected for security'));
+        console.log('⚠️  Path too close to system root - rejected for security');
         return null;
       }
 
       return resolvedPath;
     } catch (error) {
-      console.log(chalk.red('⚠️  Path validation failed'));
+      console.log('⚠️  Path validation failed');
       return null;
     }
   }
@@ -286,7 +286,7 @@ export class ImportHandler {
       
       // Ensure source exists and is readable
       if (!fs.existsSync(resolvedSource)) {
-        console.log(chalk.red('⚠️  Source path does not exist'));
+        console.log('⚠️  Source path does not exist');
         return false;
       }
 
@@ -295,7 +295,7 @@ export class ImportHandler {
       
       // Ensure target is within workspace directory
       if (!resolvedTarget.startsWith(workspacePath)) {
-        console.log(chalk.red('⚠️  Target path must be within workspace directory'));
+        console.log('⚠️  Target path must be within workspace directory');
         return false;
       }
 
@@ -308,20 +308,20 @@ export class ImportHandler {
 
       for (const pattern of sensitivePatterns) {
         if (resolvedSource.toLowerCase().includes(pattern.toLowerCase())) {
-          console.log(chalk.red('⚠️  Cannot copy from sensitive system directory'));
+          console.log('⚠️  Cannot copy from sensitive system directory');
           return false;
         }
       }
 
       // Ensure target directory doesn't already exist to prevent overwriting
       if (fs.existsSync(resolvedTarget)) {
-        console.log(chalk.red('⚠️  Target directory already exists'));
+        console.log('⚠️  Target directory already exists');
         return false;
       }
 
       return true;
     } catch (error) {
-      console.log(chalk.red('⚠️  Copy operation validation failed'));
+      console.log('⚠️  Copy operation validation failed');
       return false;
     }
   }

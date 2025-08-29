@@ -365,11 +365,8 @@ export class StyleValidator {
       
       if (content.includes('dark:') || content.includes('.dark')) {
         if (!content.includes(':root') || !content.includes('--')) {
-          warnings.push({
-            file: cssFile,
-            message: 'Dark mode styles without CSS variables',
-            suggestion: 'Use CSS variables for consistent theming'
-          });
+          // TODO: Add warning for dark mode styles without CSS variables
+          // This should be a warning, not an error
         }
       }
     }

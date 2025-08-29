@@ -140,13 +140,13 @@ export class MonitorCommand {
       process.stdin.resume();
 
       // Handle process events
-      monitorProcess.on('error', (error) => {
+      monitorProcess.on('error', (error: Error) => {
         console.error('❌ Failed to start monitor:', error.message);
         console.log('\n💡 Try running: cd src/monitor && npm install && npm start');
         process.exit(1);
       });
 
-      monitorProcess.on('exit', (code) => {
+      monitorProcess.on('exit', (code: number | null) => {
         if (code !== 0) {
           console.log(`\n🛑 Monitor stopped with exit code: ${code}`);
         } else {
@@ -169,14 +169,14 @@ export class MonitorCommand {
         process.exit(0);
       });
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ Error starting monitor:', error.message);
       
       // Fallback: try manual start
       console.log('\n🔄 Attempting fallback startup...');
       try {
         await execAsync('./start.sh', { cwd: this.monitorPath });
-      } catch (fallbackError) {
+      } catch (fallbackError: any) {
         console.error('❌ Fallback startup also failed:', fallbackError.message);
         console.log('\n💡 Manual startup instructions:');
         console.log('   1. cd src/monitor');
