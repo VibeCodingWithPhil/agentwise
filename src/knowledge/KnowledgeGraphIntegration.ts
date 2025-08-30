@@ -1,6 +1,6 @@
 /**
  * Knowledge Graph Integration
- * Integrates the Knowledge Graph system with the existing Context 3.0 system
+ * Experimental: Integrates the Knowledge Graph system with the existing context system
  */
 
 import * as fs from 'fs-extra';

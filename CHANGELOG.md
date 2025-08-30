@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-01-29
 
 ### Added
-- Context 3.0: Dual-context system combining AGENTS.md (OpenAI spec) with CodebaseContextManager
+- Dual-context system combining AGENTS.md (OpenAI spec) with CodebaseContextManager
 - Real-time codebase analysis with file watching and automatic updates
 - Project structure validation and auto-fixing
 - Comprehensive MCP integration with 25+ verified servers
