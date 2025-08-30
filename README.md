@@ -571,7 +571,7 @@ claude /configure-agentwise
 
 ## 📚 Documentation
 
-### 📊 Real-Time Monitoring Dashboard
+### 📊 Real-Time Monitoring Dashboard with Observable Visualizations
 
 Agentwise includes a comprehensive web-based monitoring dashboard that provides real-time visibility into your agent orchestration:
 
@@ -582,6 +582,9 @@ Agentwise includes a comprehensive web-based monitoring dashboard that provides 
 - **Progress Visualization**: Progress bars, completion percentages, and timelines
 - **System Health**: CPU, memory, and network monitoring
 - **Multi-Project Support**: Automatic project detection and switching
+- **Observable Plot Charts**: Professional data visualizations with D3.js
+- **Knowledge Graph Visualization**: Interactive codebase structure exploration
+- **Token Optimization Metrics**: Real-time charts showing 99.3% reduction
 
 #### Starting the Monitor
 ```bash

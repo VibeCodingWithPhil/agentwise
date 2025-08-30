@@ -9,6 +9,7 @@ import { OverallProgress } from './OverallProgress'
 import { PauseModal } from './PauseModal'
 import { TaskPoolDashboard } from './TaskPoolDashboard'
 import { TokenOptimizationMetrics } from './TokenOptimizationMetrics'
+import { KnowledgeGraphVisualization } from './KnowledgeGraphVisualization'
 import { AgentCoordinationPanel } from './AgentCoordinationPanel'
 import { ContextSharingIndicator } from './ContextSharingIndicator'
 import { AppleButton } from './AppleButton'
@@ -89,7 +90,7 @@ export function Dashboard() {
   const [totalTokens, setTotalTokens] = useState(0)
 
   // New task pool state
-  const [activeView, setActiveView] = useState<'agents' | 'task-pool' | 'coordination' | 'optimization'>('agents')
+  const [activeView, setActiveView] = useState<'agents' | 'task-pool' | 'coordination' | 'optimization' | 'knowledge-graph'>('agents')
   const [pooledTasks, setPooledTasks] = useState<PooledTask[]>([])
   const [agentCoordination, setAgentCoordination] = useState<AgentCoordination[]>([])
   const [contextShares, setContextShares] = useState<ContextShare[]>([])
@@ -556,7 +557,8 @@ export function Dashboard() {
                 { id: 'agents', name: 'Agent Overview', icon: '🤖' },
                 { id: 'task-pool', name: 'Task Pool', icon: '📋' },
                 { id: 'coordination', name: 'Coordination', icon: '🔗' },
-                { id: 'optimization', name: 'Token Optimization', icon: '⚡' }
+                { id: 'optimization', name: 'Token Optimization', icon: '⚡' },
+                { id: 'knowledge-graph', name: 'Knowledge Graph', icon: '🧠' }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -647,6 +649,15 @@ export function Dashboard() {
                   activeShares={contextShares.filter(s => s.status === 'active').length}
                   cacheHitRate={tokenMetrics.cachingEfficiency}
                   isConnected={sharedContextConnected}
+                />
+              </div>
+            )}
+
+            {activeView === 'knowledge-graph' && (
+              <div className="space-y-6">
+                <KnowledgeGraphVisualization
+                  projectId={project?.name || 'current'}
+                  height={600}
                 />
               </div>
             )}

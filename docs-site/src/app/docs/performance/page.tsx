@@ -121,7 +121,7 @@ export default function PerformancePage() {
             <Zap className="h-5 w-5 text-accent-600" />
             <div className="text-left">
               <div className="font-medium">Token Optimization</div>
-              <div className="text-xs text-muted-foreground">30-40% reduction details</div>
+              <div className="text-xs text-muted-foreground">99.3% reduction details</div>
             </div>
           </Link>
         </Button>

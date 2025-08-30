@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { ObservableTokenChart } from './ObservableTokenChart'
 
 interface TokenMetrics {
   totalTokensSaved: number
@@ -236,27 +237,11 @@ export function TokenOptimizationMetrics({ metrics, isConnected }: TokenOptimiza
         </div>
       </div>
 
-      {/* Real-time Optimization Chart Placeholder */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          Real-time Optimization Trend
-        </h3>
-        
-        <div className="h-64 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 rounded-lg flex items-center justify-center">
-          <div className="text-center">
-            <div className="text-4xl mb-2">📈</div>
-            <div className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
-              Live Optimization Metrics
-            </div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Real-time chart showing token savings over time
-            </div>
-            <div className="mt-4 text-2xl font-bold text-blue-600 dark:text-blue-400">
-              +{displayMetrics.realTimeOptimization.toFixed(0)} tokens/min
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Real-time Optimization Chart with Observable Plot */}
+      <ObservableTokenChart 
+        realTimeOptimization={displayMetrics.realTimeOptimization} 
+        className=""
+      />
 
       {/* Optimization Tips */}
       <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 p-6 rounded-xl border border-indigo-200 dark:border-indigo-800">
