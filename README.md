@@ -23,7 +23,7 @@
 
 ## ⚡ Quick Install (30 Seconds)
 
-> **Created**: August 24, 2025  
+> **Created**: August 20, 2025  
 > **Lines of Code**: 335,998+ in src/ folder alone  
 > **Test Coverage**: 184 comprehensive tests
 
@@ -56,7 +56,7 @@ Full setup instructions: https://github.com/VibeCodingWithPhil/agentwise/blob/ma
 
 ### ✅ What Gets Installed
 
-- **11 Specialized Agents** (8 core + 3 local-only) working in parallel
+- **8 Specialized Agents** working in parallel
 - **Global `/monitor` command** accessible from anywhere
 - **Sandboxed execution** - no `--dangerously-skip-permissions` needed
 - **Token optimization** - Verified 99.3% reduction with Context 3.0 + Knowledge Graph
@@ -1147,7 +1147,7 @@ Found a security issue? Please email vibephilcoding@gmail.com or create a privat
 
 ## 🗺️ Roadmap
 
-> **Note**: Agentwise was created on August 24, 2025
+> **Note**: Agentwise was created on August 20, 2025
 
 ### ✅ Completed
 - [x] Core orchestration system with 5 specialist agents
@@ -1159,7 +1159,7 @@ Found a security issue? Please email vibephilcoding@gmail.com or create a privat
 
 ### ✅ Completed Features (August 2025)
 - [x] **Core System** - 335,998+ lines of code with 184 tests
-- [x] **11 Agents** - 8 core agents + 3 local-only specialists
+- [x] **8 Core Agents** - Specialized agents for all development tasks
 - [x] **Context 3.0** - Verified 64.6% token reduction
 - [x] **Knowledge Graph** - Verified 98.1% token reduction  
 - [x] **Combined Systems** - Verified 99.3% total token reduction
