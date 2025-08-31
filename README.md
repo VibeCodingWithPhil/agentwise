@@ -524,51 +524,92 @@ claude /configure-agentwise
 - Modify source code directly
 - Integrate with existing workflows
 
-### 📦 Complete Command Reference
+### 📦 Complete Command Reference (45 Commands)
 
-#### 🆕 New Project Creation Commands
+Agentwise provides **45 powerful commands** organized by category:
+
+#### 📦 Project Creation & Management (11 commands)
 ```bash
-/create-project "description"     # Complete project setup wizard (NEW!)
-/requirements "project idea"      # Generate comprehensive requirements
-/requirements-visualize           # Create visual HTML specifications
-/database-wizard                  # Interactive database setup
-/github-setup                      # Complete GitHub integration
-/enable-protection                # Enable automated protection
+/create <idea>                   # Create project with smart agent selection
+/create-plan <idea>              # Collaborative planning mode
+/create-project <idea>           # Complete setup wizard with all features
+/projects                        # List and select active projects
+/project-status                  # View current project status
+/task <feature>                  # Add features to active project
+/task-dynamic <feature>          # Dynamic task distribution
+/task-plan <feature>             # Plan tasks before execution
+/task-import <source>            # Import tasks from external sources
+/init-import                     # Import external project
+/clone-website <url>             # Clone and customize websites
 ```
 
-#### Project Management
+#### 📋 Requirements & Planning (4 commands)
 ```bash
-/create "project description"     # Create new project with AI agents
-/task "feature description"       # Add feature to active project
-/create-plan "feature"            # Collaborative planning mode
-/projects                         # List and switch between projects
-/task-[project] "feature"        # Add feature to specific project
+/requirements <idea>             # Generate project requirements
+/requirements-enhance            # Enhance existing requirements
+/requirements-visualize          # Create visual HTML specifications
+/requirements-to-tasks           # Convert requirements to tasks
 ```
 
-#### Import Existing Projects
+#### 🗄️ Database Integration (3 commands)
 ```bash
-/init-import                      # Step 1: Select project folder to import
-/task-import                      # Step 2: Execute import with agent analysis
+/database-wizard                 # Interactive database setup wizard
+/database-setup                  # Quick database configuration
+/database-connect                # Connect to existing database
 ```
 
-#### Monitoring & Tools
+#### 🔐 Security & Protection (5 commands)
 ```bash
-/monitor                          # Start dashboard (auto-installs global command)
-/monitor install                  # Manually install global command
-/monitor global                   # Alternative install command
-/monitor status                   # Check installation status
-/docs                            # Open local documentation hub
+/enable-protection               # Enable automated backup and security
+/protection-status               # View real-time protection status
+/security-review                 # Comprehensive security analysis
+/security-report                 # Generate detailed security report
+/rollback                        # Rollback to previous safe state
 ```
 
-#### Advanced Features
+#### 🎨 Figma Integration (8 commands)
 ```bash
-/generate-agent "specialization"  # Create custom specialized agent
-/figma [subcommand]              # Figma Dev Mode integration
-/upload "file.pdf"               # Upload documents for processing
-/clone-website "url"             # Clone and customize websites
-/image                           # Visual file browser
-/resume                          # Resume after restart
+/figma                          # Main Figma integration menu
+/figma-auth                     # Authenticate with Figma
+/figma-list                     # List available Figma files
+/figma-select                   # Select Figma file
+/figma-inspect                  # Inspect Figma components
+/figma-generate                 # Generate code from designs
+/figma-sync                     # Sync changes with Figma
+/figma-create                   # Create new Figma components
 ```
+
+#### 🤖 Model & Agent Management (6 commands)
+```bash
+/generate-agent <spec>          # Create custom specialized agents
+/setup-ollama                   # Install and configure Ollama
+/setup-lmstudio                 # Configure LM Studio
+/local-models                   # List available local models
+/configure-routing              # Configure smart model routing
+/setup-mcps                     # Configure 25 MCP servers
+```
+
+#### 📊 Monitoring & Analysis (3 commands)
+```bash
+/monitor                        # Launch real-time dashboard
+/visual-test                    # Run visual regression tests
+/docs                          # Open documentation hub
+```
+
+#### 🛠️ Configuration & Tools (3 commands)
+```bash
+/configure-agentwise           # Configure settings
+/upload <file>                 # Upload documents (PDF, Word, Figma)
+/image                         # Visual context file browser
+```
+
+#### 🚀 Deployment & Updates (2 commands)
+```bash
+/deploy                        # Deploy project to production
+/update-agentwise              # Update to latest version
+```
+
+📚 **[View Complete Commands Documentation](docs/commands-reference.md)** for detailed usage and examples
 
 ### First Project
 

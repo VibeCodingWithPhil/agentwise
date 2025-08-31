@@ -10,7 +10,7 @@ Agentwise is a comprehensive development platform that transforms project creati
 - **Created**: August 20, 2025
 - **Agents**: 8 core agents
 - **MCP Servers**: 25 verified and integrated
-- **Commands**: 30+ custom commands
+- **Commands**: 45 powerful commands
 - **Test Coverage**: 184 comprehensive tests
 
 ## Core Features
