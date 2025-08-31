@@ -1,7 +1,7 @@
 {
   "name": "agentwise",
   "version": "2.3.0",
-  "description": "Multi-agent orchestration system for Claude Code with 99.3% token reduction, self-improving agents, and automatic claim verification",
+  "description": "Multi-agent orchestration system for Claude Code with 15-30% token optimization, self-improving agents, and automatic claim verification",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",

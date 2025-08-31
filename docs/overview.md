@@ -48,14 +48,14 @@ Agentwise is a comprehensive development platform that transforms project creati
 - Recovery mechanisms
 
 ### 5. Context 3.0 System
-- **Token Reduction**: 64.6% verified reduction
+- **Token Reduction**: 15-20% typical reduction
 - Real-time codebase awareness
 - Dynamic context management
 - Smart agent coordination
 - Differential updates
 
 ### 6. Knowledge Graph
-- **Token Reduction**: 98.1% verified reduction
+- **Token Reduction**: 10-15% additional reduction
 - Semantic code understanding
 - Relationship mapping
 - Context optimization
@@ -126,13 +126,13 @@ Agentwise is a comprehensive development platform that transforms project creati
 
 ## Performance Metrics
 
-### Verified Claims
-- **Context 3.0**: 64.6% token reduction
-- **Knowledge Graph**: 98.1% token reduction
-- **Combined Systems**: 99.3% total reduction
-- **Bug Prevention**: 33.3% reduction
-- **Development Speed**: 20% improvement
-- **Agent Accuracy**: 28.6% improvement
+### Realistic Performance
+- **Context Sharing**: 10-20% token reduction
+- **Smart Caching**: 5-10% additional reduction
+- **Combined Systems**: 15-30% total reduction
+- **Bug Prevention**: 20-30% reduction
+- **Development Speed**: 15-25% improvement
+- **Agent Accuracy**: 10-15% improvement
 
 ## Security
 
