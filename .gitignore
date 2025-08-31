@@ -71,11 +71,7 @@ docs-site/
 coverage/
 .nyc_output/
 
-# Temporary files
-*.tmp
-*.temp
-.tmp/
-.temp/
+# Setup and configuration scripts (temporary)
 setup-*.sh
 check-*.sh
 mcp-*.md
@@ -121,16 +117,71 @@ benchmark-results/*
 scripts/
 scripts/*
 
-# Testing
+# Testing and Development Files
 test-workspace/
 *.test.js
 *.test.ts.js
 test-*.js
 test-*.ts
+*-test.js
+*-test.ts
 VERIFIED_RESULTS.md
 tests/
-validate-tests.js
-implementation_summary.md
+test/
+__tests__/
+validate-*.js
+validate-*.ts
+implementation_*.md
+*_summary.md
+*_plan.md
+*_notes.md
+*_todo.md
+*_draft.md
+*_scratch.md
+TODO.md
+NOTES.md
+SCRATCH.md
+
+# Temporary files generated during development
+*.tmp
+*.temp
+*.log
+*.cache
+.tmp/
+.temp/
+temp/
+tmp/
+cache/
+logs/
+
+# Development markdown files (keep only production docs)
+dev-*.md
+draft-*.md
+temp-*.md
+test-*.md
+scratch-*.md
+planning-*.md
+notes-*.md
+todo-*.md
+
+# Development scripts
+dev-*.js
+dev-*.ts
+debug-*.js
+debug-*.ts
+test-runner.js
+test-runner.ts
+*-runner.js
+*-runner.ts
+
+# Analysis and report files
+*-analysis.md
+*-report.md
+*-results.md
+*-output.md
+analysis/
+reports/
+results/
 
 # State files
 .agentwise-state.json
