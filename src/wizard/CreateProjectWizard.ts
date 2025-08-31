@@ -867,7 +867,9 @@ export class CreateProjectWizard extends EventEmitter {
    * Utility methods
    */
   private generateSessionId(): string {
-    return `wizard_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const crypto = require('crypto');
+    const randomBytes = crypto.randomBytes(6).toString('hex');
+    return `wizard_${Date.now()}_${randomBytes}`;
   }
 
   private validateOptions(options: WizardOptions): ValidationResult {

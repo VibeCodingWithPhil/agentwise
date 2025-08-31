@@ -781,16 +781,16 @@ jobs:
 
   private async connectLocalGitToRemote(repository: any, projectPath: string): Promise<void> {
     try {
-      const { execSync } = require('child_process');
+      const { execFileSync } = require('child_process');
       
-      // Add remote origin
-      execSync(`git remote add origin ${repository.cloneUrl}`, {
+      // Add remote origin - using execFileSync to prevent command injection
+      execFileSync('git', ['remote', 'add', 'origin', repository.cloneUrl], {
         cwd: projectPath,
         stdio: 'ignore'
       });
       
       // Set upstream branch
-      execSync('git branch -M main', { cwd: projectPath, stdio: 'ignore' });
+      execFileSync('git', ['branch', '-M', 'main'], { cwd: projectPath, stdio: 'ignore' });
       
     } catch (error) {
       console.warn('Failed to connect local git to remote:', error);

@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as chokidar from 'chokidar';
-import { exec } from 'child_process';
+import { exec, execFile } from 'child_process';
 import { promisify } from 'util';
 import { 
   AutoCommitConfig, 
@@ -14,6 +14,7 @@ import {
 } from './types';
 
 const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 export class AutoCommitManager {
   private config: AutoCommitConfig;
@@ -123,7 +124,7 @@ export class AutoCommitManager {
 
   private async validateGitRepository(): Promise<void> {
     try {
-      await execAsync('git rev-parse --is-inside-work-tree');
+      await execFileAsync('git', ['rev-parse', '--is-inside-work-tree']);
     } catch (error) {
       throw new ProtectionError(
         'Not a git repository',
@@ -488,21 +489,19 @@ export class AutoCommitManager {
   private async gitCommit(filePaths: string[], message: string): Promise<CommitInfo> {
     try {
       // Add files to staging
-      const addCommand = `git add ${filePaths.map(p => `"${p}"`).join(' ')}`;
-      await execAsync(addCommand);
+      await execFileAsync('git', ['add', ...filePaths]);
       
       // Commit with message
-      const commitCommand = `git commit -m "${message.replace(/"/g, '\\"')}"`;
-      const { stdout } = await execAsync(commitCommand);
+      const { stdout } = await execFileAsync('git', ['commit', '-m', message]);
       
       // Get commit info
-      const { stdout: hashOutput } = await execAsync('git rev-parse HEAD');
+      const { stdout: hashOutput } = await execFileAsync('git', ['rev-parse', 'HEAD']);
       const hash = hashOutput.trim();
       
-      const { stdout: authorOutput } = await execAsync('git config user.name');
+      const { stdout: authorOutput } = await execFileAsync('git', ['config', 'user.name']);
       const author = authorOutput.trim();
       
-      const { stdout: branchOutput } = await execAsync('git rev-parse --abbrev-ref HEAD');
+      const { stdout: branchOutput } = await execFileAsync('git', ['rev-parse', '--abbrev-ref', 'HEAD']);
       const branch = branchOutput.trim();
       
       const commitInfo: CommitInfo = {
@@ -591,8 +590,14 @@ export class AutoCommitManager {
 
   async getCommitHistory(limit: number = 10): Promise<CommitInfo[]> {
     try {
-      const command = `git log --oneline -n ${limit} --pretty=format:"%H|%s|%an|%ad" --date=iso`;
-      const { stdout } = await execAsync(command);
+      const { stdout } = await execFileAsync('git', [
+        'log',
+        '--oneline',
+        '-n',
+        String(limit),
+        '--pretty=format:%H|%s|%an|%ad',
+        '--date=iso'
+      ]);
       
       if (!stdout.trim()) {
         return [];

@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { exec } from 'child_process';
+import { exec, execFile } from 'child_process';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { promisify } from 'util';
@@ -15,6 +15,7 @@ import {
 } from './types';
 
 const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 export class GitHubRepoManager {
   private httpClient: AxiosInstance;
@@ -276,7 +277,7 @@ export class GitHubRepoManager {
       const repository = await this.getRepository(repo);
       const cloneUrl = useSsh ? repository.sshUrl : repository.cloneUrl;
 
-      await execAsync(`git clone ${cloneUrl} "${localPath}"`);
+      await execFileAsync('git', ['clone', cloneUrl, localPath]);
     } catch (error: any) {
       throw new Error(`Failed to clone repository: ${error.message}`);
     }
@@ -309,10 +310,10 @@ export class GitHubRepoManager {
       try {
         await execAsync('git remote get-url origin', { cwd: localPath });
         // If it exists, update it
-        await execAsync(`git remote set-url origin ${remoteUrl}`, { cwd: localPath });
+        await execFileAsync('git', ['remote', 'set-url', 'origin', remoteUrl], { cwd: localPath });
       } catch {
         // If it doesn't exist, add it
-        await execAsync(`git remote add origin ${remoteUrl}`, { cwd: localPath });
+        await execFileAsync('git', ['remote', 'add', 'origin', remoteUrl], { cwd: localPath });
       }
 
       // Push current branch

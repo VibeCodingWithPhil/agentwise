@@ -726,7 +726,7 @@ export class DatabaseWizard {
   private async askCredentialInput(input: WizardCredentialInput): Promise<string> {
     const prompt = `${input.label}${input.required ? ' (required)' : ' (optional)'}: `;
     
-    if (input.description) {
+    if (input.description && input.name !== 'password') {
       console.log(`  ${input.description}`);
     }
     
