@@ -7,7 +7,7 @@ Agentwise is a comprehensive development platform that transforms project creati
 ## Statistics
 
 - **Lines of Code**: 335,998+ lines in src/ folder alone
-- **Created**: August 24, 2024
+- **Created**: August 24, 2025
 - **Agents**: 11 total (8 core agents + 3 local-only agents)
 - **MCP Servers**: 25 verified and integrated
 - **Commands**: 30+ custom commands

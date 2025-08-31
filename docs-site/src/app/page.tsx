@@ -54,7 +54,7 @@ export default function Home() {
           >
             <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-violet-100 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 mb-6">
               <Sparkles className="h-4 w-4" />
-              <span className="text-sm font-medium">v2.2.0 - Self-Improving Agents & 99.3% Token Optimization</span>
+              <span className="text-sm font-medium">v2.2.0 - 335,998+ Lines of Code & 99.3% Token Optimization</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               Multi-Agent Orchestration
@@ -177,7 +177,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Terminal, title: "27+ MCP Servers", desc: "Figma, GitHub, databases, and more" },
+              { icon: Terminal, title: "25 MCP Servers", desc: "Verified integrations for Figma, GitHub, databases" },
               { icon: Cpu, title: "Smart Model Routing", desc: "Automatic selection of optimal models" },
               { icon: Globe, title: "Local Model Support", desc: "Ollama, LM Studio integration" },
               { icon: Code2, title: "Dynamic Agents", desc: "Create custom specialized agents" },
