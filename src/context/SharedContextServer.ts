@@ -174,14 +174,16 @@ export class SharedContextServer extends EventEmitter {
       
       if (allowedOrigins.includes(origin)) {
         res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
       } else if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
         // Allow any localhost port for development flexibility
         res.setHeader('Access-Control-Allow-Origin', origin);
+        // Don't allow credentials for dynamic origins
+        res.setHeader('Access-Control-Allow-Credentials', 'false');
       }
       
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-      res.setHeader('Access-Control-Allow-Credentials', 'true');
 
       if (method === 'OPTIONS') {
         res.writeHead(200);

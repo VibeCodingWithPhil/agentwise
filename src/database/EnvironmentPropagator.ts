@@ -724,8 +724,10 @@ export class EnvironmentPropagator {
    */
   private quoteValue(value: string): string {
     // Quote if contains spaces or special characters
-    if (value.includes(' ') || value.includes('\n') || value.includes('\t') || value.includes('"')) {
-      return `"${value.replace(/"/g, '\\"')}"`;
+    if (value.includes(' ') || value.includes('\n') || value.includes('\t') || value.includes('"') || value.includes('\\')) {
+      // Escape backslashes first, then quotes
+      const escaped = value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+      return `"${escaped}"`;
     }
     return value;
   }

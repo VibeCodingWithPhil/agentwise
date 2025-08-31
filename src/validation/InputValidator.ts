@@ -32,11 +32,14 @@ export class InputValidator {
 
   // XSS patterns
   private static readonly XSS_PATTERNS = [
-    /<script[^>]*>.*?<\/script>/gi,
-    /<iframe[^>]*>.*?<\/iframe>/gi,
+    /<script[^>]*>.*?<\/\s*script\s*>/gi,  // Matches </script> with optional spaces
+    /<iframe[^>]*>.*?<\/\s*iframe\s*>/gi,  // Matches </iframe> with optional spaces
     /javascript:/gi,
     /on\w+\s*=/gi,
     /<img[^>]*onerror[^>]*>/gi,
+    /<style[^>]*>.*?<\/\s*style\s*>/gi,  // Also check style tags
+    /<object[^>]*>.*?<\/\s*object\s*>/gi,  // Check object tags
+    /<embed[^>]*>/gi,  // Check embed tags
   ];
 
   /**

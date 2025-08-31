@@ -393,7 +393,7 @@ export class GitHubSecretManager {
     if (options.include && options.include.length > 0) {
       filtered = filtered.filter(entry => 
         options.include!.some(pattern => 
-          entry.key.match(new RegExp(pattern.replace('*', '.*')))
+          entry.key.match(new RegExp(pattern.replace(/\*/g, '.*')))
         )
       );
     }
@@ -402,7 +402,7 @@ export class GitHubSecretManager {
     if (options.exclude && options.exclude.length > 0) {
       filtered = filtered.filter(entry => 
         !options.exclude!.some(pattern => 
-          entry.key.match(new RegExp(pattern.replace('*', '.*')))
+          entry.key.match(new RegExp(pattern.replace(/\*/g, '.*')))
         )
       );
     }
@@ -419,7 +419,7 @@ export class GitHubSecretManager {
 
     filtered = filtered.filter(entry => 
       !commonNonSecrets.some(pattern => 
-        entry.key.match(new RegExp(pattern.replace('*', '.*')))
+        entry.key.match(new RegExp(pattern.replace(/\*/g, '.*')))
       )
     );
 

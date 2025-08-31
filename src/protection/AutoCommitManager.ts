@@ -204,11 +204,22 @@ export class AutoCommitManager {
   }
 
   private matchesPattern(filePath: string, pattern: string): boolean {
-    // Convert glob pattern to regex
+    // Convert glob pattern to regex - escape special characters properly
     const regexPattern = pattern
+      .replace(/\\/g, '\\\\')  // Escape backslashes first
       .replace(/\./g, '\\.')
       .replace(/\*/g, '.*')
-      .replace(/\?/g, '.');
+      .replace(/\?/g, '.')
+      .replace(/\[/g, '\\[')
+      .replace(/\]/g, '\\]')
+      .replace(/\(/g, '\\(')
+      .replace(/\)/g, '\\)')
+      .replace(/\^/g, '\\^')
+      .replace(/\$/g, '\\$')
+      .replace(/\+/g, '\\+')
+      .replace(/\{/g, '\\{')
+      .replace(/\}/g, '\\}')
+      .replace(/\|/g, '\\|');
     
     const regex = new RegExp(`^${regexPattern}$`);
     return regex.test(filePath) || regex.test(path.basename(filePath));
