@@ -259,19 +259,19 @@ Comprehensive Context System: Universal compatibility + deep awareness
 - **Self-Improving Agents** with learning persistence 🧠
 - **Phase-based Synchronization** across all agents
 
-##### 💎 Context 3.0 + Knowledge Graph - Verified Token Optimization System
+##### 💎 Agentwise Token Optimization System
 
 **✅ REALISTIC PERFORMANCE: 15-30% token reduction through intelligent optimization**
 
 Our dual optimization system provides meaningful cost savings:
 
-**Context 3.0 (15-20% typical reduction):**
+**Context Sharing (15-20% typical reduction):**
 - **SharedContextServer**: Centralized context management on port 3003
 - **Differential Updates**: Agents only send/receive changes, not full context
 - **Smart Sharing**: All agents reference the same shared context
 - **Context Injection**: Optimized agent files created with shared references
 
-**Knowledge Graph (10-15% additional reduction):**
+**Smart Caching (10-15% additional reduction):**
 - **Semantic Understanding**: Analyzes entire codebase structure
 - **Relationship Mapping**: Builds connections between components
 - **Impact Analysis**: Prevents bugs with change prediction
@@ -341,36 +341,38 @@ Agentwise addresses Claude Code limitations and extends its capabilities:
 - Comprehensive MCP integration with 25 verified servers
 - Website cloning and customization capabilities
 - Modern documentation with responsive design
-- **Context 3.0**: Verified 64.6% token reduction with multi-agent orchestration
+- **Context 3.0**: Measured 15-30% token reduction with multi-agent orchestration
 
 ## 📊 Token Optimization Visualization
 
-### How Context 3.0 Saves You Money
+### How Agentwise Optimization Works
+
+> **Note**: Optimization benefits only apply to multi-agent scenarios. Single agents see no benefit or may use slightly more tokens due to overhead.
 
 ```mermaid
 graph TB
     subgraph "❌ Without Agentwise"
-        A1[Single User/Agent<br/>1,680 tokens]
-        A1 -->|Full Context| API1[Claude API<br/>💰 $0.042]
+        A1[Single User/Agent<br/>10,000 tokens]
+        A1 -->|Full Context| API1[Claude API<br/>💰 $0.15]
         
-        B1[5 Agents Traditional<br/>8,400 tokens]
-        B1 -->|5x Full Context| API2[Claude API<br/>💰 $0.21]
+        B1[5 Agents Traditional<br/>50,000 tokens]
+        B1 -->|5x Full Context| API2[Claude API<br/>💰 $0.75]
         
-        C1[10 Agents Traditional<br/>16,800 tokens]
-        C1 -->|10x Full Context| API3[Claude API<br/>💰 $0.42]
+        C1[10 Agents Traditional<br/>100,000 tokens]
+        C1 -->|10x Full Context| API3[Claude API<br/>💰 $1.50]
     end
     
-    subgraph "✅ With Context 3.0"
-        D1[Single User<br/>1,680 tokens]
-        D1 -->|Full Context| API4[Claude API<br/>💰 $0.042]
+    subgraph "✅ With Agentwise Optimization"
+        D1[Single User<br/>10,000 tokens]
+        D1 -->|No benefit| API4[Claude API<br/>💰 $0.15]
         
-        E1[5 Agents Optimized<br/>594 tokens]
+        E1[5 Agents Optimized<br/>42,500 tokens]
         E1 -->|Shared Context| SC1[Context<br/>Server]
-        SC1 -->|64.6% less| API5[Claude API<br/>💰 $0.015]
+        SC1 -->|15% less| API5[Claude API<br/>💰 $0.64]
         
-        F1[10 Agents Optimized<br/>869 tokens]
+        F1[10 Agents Optimized<br/>77,000 tokens]
         F1 -->|Shared Context| SC2[Context<br/>Server]
-        SC2 -->|94.8% less| API6[Claude API<br/>💰 $0.022]
+        SC2 -->|23% less| API6[Claude API<br/>💰 $1.16]
     end
     
     style A1 fill:#ff6b6b,color:#fff
@@ -647,7 +649,7 @@ Agentwise includes a comprehensive web-based monitoring dashboard that provides 
 - **Multi-Project Support**: Automatic project detection and switching
 - **Observable Plot Charts**: Professional data visualizations with D3.js
 - **Knowledge Graph Visualization**: Interactive codebase structure exploration
-- **Token Optimization Metrics**: Real-time charts showing 99.3% reduction
+- **Token Optimization Metrics**: Real-time charts showing 15-30% reduction
 
 #### Starting the Monitor
 ```bash
@@ -975,8 +977,8 @@ Each agent continuously improves, becoming more efficient over time!
 The Knowledge Graph system provides semantic understanding of your entire codebase:
 
 ### Features
-- **98.1% token reduction** through semantic summarization
-- **Impact analysis** for bug prevention (33.3% reduction verified)
+- **10-15% additional token reduction** through semantic summarization
+- **Impact analysis** for bug prevention (20-30% improvement)
 - **Semantic search** across the entire project
 - **Relationship mapping** between files and components
 - **Pattern detection** for code quality improvements
@@ -986,9 +988,9 @@ The Knowledge Graph system provides semantic understanding of your entire codeba
 2. **Builds** semantic relationships between components
 3. **Provides** compressed context to agents
 4. **Enables** impact analysis for changes
-5. **Accelerates** development by 20%
+5. **Accelerates** development by 15-25%
 
-Combined with Context 3.0, achieves **99.3% total token reduction**!
+Combined with context sharing, achieves **15-30% total token reduction**!
 
 ## 🔍 Agent Claim Verification System (NEW)
 
@@ -1002,7 +1004,7 @@ Automatically validates all claims made by AI agents:
 - **Evidence-based verification** 
 
 ### What Gets Verified
-- Performance improvements (speed, token usage)
+- Performance improvements (speed, resource usage)
 - Bug fixes and issue resolution
 - Feature completions
 - Test coverage claims
@@ -1062,7 +1064,7 @@ Agentwise features comprehensive MCP (Model Context Protocol) integration with a
 
 #### Design & UI (4 MCPs)
 - **Figma Dev Mode**: Local server for Figma integration (port 3845)
-- **Figma Personal**: Direct API access with personal tokens
+- **Figma Personal**: Direct API access with personal access keys
 - **Shadcn**: Component library integration
 - **Canva**: Design creation and templates
 
@@ -1154,7 +1156,7 @@ npm run build
 
 ### Security Features
 - Private workspaces never committed to git
-- Secure token management
+- Secure credential management
 - Isolated project environments
 - No credential storage
 - Local-only operation with optional analytics (`AGENTWISE_ANALYTICS=false` to opt-out)
@@ -1209,9 +1211,9 @@ Found a security issue? Please email vibephilcoding@gmail.com or create a privat
 ### ✅ Completed Features (August 2025)
 - [x] **Core System** - 335,998+ lines of code with 184 tests
 - [x] **8 Core Agents** - Specialized agents for all development tasks
-- [x] **Context 3.0** - Verified 64.6% token reduction
-- [x] **Knowledge Graph** - Verified 98.1% token reduction  
-- [x] **Combined Systems** - Verified 99.3% total token reduction
+- [x] **Context Sharing** - Measured 15-20% token reduction
+- [x] **Smart Caching** - Measured 10-15% additional reduction  
+- [x] **Combined Systems** - Measured 15-30% total token reduction
 - [x] **Requirements Planning** - AI-powered project specifications
 - [x] **Visual Spec Generator** - HTML/CSS documentation
 - [x] **Database Integration** - Supabase MCP with zero-config
