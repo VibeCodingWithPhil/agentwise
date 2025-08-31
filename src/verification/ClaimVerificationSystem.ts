@@ -24,7 +24,7 @@ import ClaimTracker from './ClaimTracker';
 import ClaimDebunker from './ClaimDebunker';
 import PerformanceValidator from './PerformanceValidator';
 
-export class ClaimVerificationSystem extends EventEmitter implements ClaimVerificationEvents {
+export class ClaimVerificationSystem extends EventEmitter {
   private claimTracker: ClaimTracker;
   private claimDebunker: ClaimDebunker;
   private performanceValidator: PerformanceValidator;

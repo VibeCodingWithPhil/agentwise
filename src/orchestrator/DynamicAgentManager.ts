@@ -772,7 +772,7 @@ ${agent.tools.map(t => `- ${t}`).join('\n')}
         specialization: a.specialization,
         priority: a.priority
       })),
-      tasks: [],
+      tasks: [] as any[],
       sharedContextEnabled: this.contextServerStarted
     };
 

@@ -198,8 +198,8 @@ export class SmartModelRouter {
       // Check if LM Studio is running
       const response = await fetch('http://localhost:1234/v1/models');
       if (response.ok) {
-        const data = await response.json();
-        return data.data.map((model: any) => ({
+        const data = await response.json() as any;
+        return (data.data || []).map((model: any) => ({
           provider: 'lmstudio' as const,
           model: model.id,
           endpoint: 'http://localhost:1234'

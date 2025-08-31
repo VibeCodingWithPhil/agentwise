@@ -232,7 +232,7 @@ export class KnowledgeGraphCommand {
       if (errorCount > 0) console.log(`     Errors: ${errorCount}`);
       
       if (node.semantics.operations.length > 0) {
-        console.log(`     Operations: ${node.semantics.operations.map(op => op.name).join(', ')}`);
+        console.log(`     Operations: ${node.semantics.operations.map((op: { name: string }) => op.name).join(', ')}`);
       }
       
       if (node.tags.length > 0) {

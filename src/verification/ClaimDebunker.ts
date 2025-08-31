@@ -14,6 +14,7 @@ import {
   ClaimValidation,
   ValidationTest,
   ValidationResult,
+  ValidationIssue,
   ClaimDiscrepancy,
   TestEvidence,
   ValidationMethod,
@@ -32,7 +33,7 @@ interface DebunkingStrategy {
   execute: (claim: AgentClaim) => Promise<ValidationResult>;
 }
 
-export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerificationEvents> {
+export class ClaimDebunker extends EventEmitter {
   private projectPath: string;
   private hallucinationDetector: HallucinationDetector;
   private performanceValidator: PerformanceValidator;
@@ -256,10 +257,13 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
     } catch (error: any) {
       validation.endTime = new Date();
       validation.overallResult.issues.push({
-        type: 'validation_error',
+        type: 'inconsistency',
         severity: 'critical',
-        description: `Validation failed: ${error.message}`
-      });
+        description: `Validation failed: ${error.message}`,
+        claimId: claim.id,
+        autoFixable: false,
+        impact: 'critical'
+      } as ValidationIssue);
       
       console.error('Claim debunking failed:', error);
     }
@@ -318,11 +322,14 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
             if (pattern.test(content)) {
               hasPhantomCode = true;
               result.issues.push({
-                type: 'phantom_implementation',
+                type: 'fabrication',
                 severity: 'high',
                 description: `File ${filePath} contains placeholder/TODO code`,
-                evidence: [pattern.source]
-              });
+                evidence: [pattern.source],
+                claimId: claim.id,
+                autoFixable: true,
+                impact: 'high'
+              } as ValidationIssue);
               break;
             }
           }
@@ -340,11 +347,14 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
 
         } else {
           result.issues.push({
-            type: 'missing_file',
+            type: 'contradiction',
             severity: 'critical',
             description: `Claimed file ${filePath} does not exist`,
-            evidence: [`File path: ${filePath}`]
-          });
+            evidence: [`File path: ${filePath}`],
+            claimId: claim.id,
+            autoFixable: false,
+            impact: 'critical'
+          } as ValidationIssue);
         }
       }
     }
@@ -470,11 +480,14 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
           if (pattern.test(content)) {
             fakeTestCount++;
             result.issues.push({
-              type: 'fake_test',
+              type: 'fabrication',
               severity: 'high',
               description: `Fake test detected in ${testFile}`,
-              evidence: [pattern.source]
-            });
+              evidence: [pattern.source],
+              claimId: claim.id,
+              autoFixable: true,
+              impact: 'high'
+            } as ValidationIssue);
           }
         }
       }
@@ -503,10 +516,13 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
 
     } catch (error: any) {
       result.issues.push({
-        type: 'test_execution_error',
+        type: 'inconsistency',
         severity: 'high',
-        description: `Test execution failed: ${error.message}`
-      });
+        description: `Test execution failed: ${error.message}`,
+        claimId: claim.id,
+        autoFixable: false,
+        impact: 'high'
+      } as ValidationIssue);
     }
 
     return result;
@@ -569,10 +585,13 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
               }
             } else {
               result.issues.push({
-                type: 'missing_dependency',
+                type: 'contradiction',
                 severity: 'high',
-                description: `Claimed dependency ${depName} not found in package.json`
-              });
+                description: `Claimed dependency ${depName} not found in package.json`,
+                claimId: claim.id,
+                autoFixable: true,
+                impact: 'high'
+              } as ValidationIssue);
             }
           }
         }
@@ -640,10 +659,13 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
           
         } catch (error) {
           result.issues.push({
-            type: 'invalid_configuration',
+            type: 'inconsistency',
             severity: 'medium',
-            description: `Configuration file ${configFile} is invalid`
-          });
+            description: `Configuration file ${configFile} is invalid`,
+            claimId: claim.id,
+            autoFixable: false,
+            impact: 'medium'
+          } as ValidationIssue);
           
           result.actualValues[`${configFile}_valid`] = false;
         }
@@ -670,7 +692,7 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
           id: crypto.randomUUID(),
           claimId: claim.id,
           specificClaimId: '',
-          type: 'exaggerated_improvement',
+          type: 'insufficient_improvement',
           severity: 'major',
           description: 'Claim contains exaggerated language',
           expected: 'realistic improvement metrics',
@@ -782,15 +804,15 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
       validation.recommendations.push('Ensure claimed metrics are accurate and measurable');
     }
 
-    if (discrepancies.some(d => d.type === 'exaggerated_improvement')) {
+    if (discrepancies.some(d => d.type === 'insufficient_improvement')) {
       validation.recommendations.push('Use realistic language and avoid hyperbolic claims');
     }
 
-    if (overallResult.issues.some(i => i.type === 'phantom_implementation')) {
+    if (overallResult.issues.some(i => i.type === 'fabrication')) {
       validation.recommendations.push('Remove TODO/placeholder code and implement actual functionality');
     }
 
-    if (overallResult.issues.some(i => i.type === 'fake_test')) {
+    if (overallResult.issues.some(i => i.type === 'fabrication')) {
       validation.recommendations.push('Write meaningful tests that actually verify functionality');
     }
 
@@ -874,7 +896,7 @@ export class ClaimDebunker extends EventEmitter implements Partial<ClaimVerifica
   private async runSecurityScan(): Promise<Record<string, any>> {
     try {
       // This would run actual security tools in production
-      const result = { 
+      const result: Record<string, any> = { 
         vulnerabilities: 0, 
         security_score: 100 
       };

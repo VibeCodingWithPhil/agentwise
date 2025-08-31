@@ -757,15 +757,16 @@ export class KnowledgeGraphStore extends EventEmitter {
         const data = await fs.readJson(indicesPath);
         // Convert plain objects back to Maps
         for (const [graphId, indexData] of Object.entries(data)) {
+          const typedIndexData = indexData as any;
           const index: StorageIndex = {
-            byType: new Map(Object.entries(indexData.byType).map(([k, v]) => [k as NodeType, new Set(v as string[])])),
-            byPath: new Map(Object.entries(indexData.byPath)),
-            byName: new Map(Object.entries(indexData.byName).map(([k, v]) => [k, new Set(v as string[])])),
-            byTag: new Map(Object.entries(indexData.byTag).map(([k, v]) => [k, new Set(v as string[])])),
-            byLanguage: new Map(Object.entries(indexData.byLanguage).map(([k, v]) => [k, new Set(v as string[])])),
-            relationships: new Map(Object.entries(indexData.relationships).map(([k, v]) => [k, new Set(v as string[])])),
-            lastUpdated: new Date(indexData.lastUpdated),
-            version: indexData.version
+            byType: new Map(Object.entries(typedIndexData.byType || {}).map(([k, v]) => [k as NodeType, new Set(v as string[])])),
+            byPath: new Map(Object.entries(typedIndexData.byPath || {})),
+            byName: new Map(Object.entries(typedIndexData.byName || {}).map(([k, v]) => [k, new Set(v as string[])])),
+            byTag: new Map(Object.entries(typedIndexData.byTag || {}).map(([k, v]) => [k, new Set(v as string[])])),
+            byLanguage: new Map(Object.entries(typedIndexData.byLanguage || {}).map(([k, v]) => [k, new Set(v as string[])])),
+            relationships: new Map(Object.entries(typedIndexData.relationships || {}).map(([k, v]) => [k, new Set(v as string[])])),
+            lastUpdated: new Date(typedIndexData.lastUpdated || Date.now()),
+            version: typedIndexData.version || 1
           };
           this.indices.set(graphId, index);
         }
@@ -801,10 +802,11 @@ export class KnowledgeGraphStore extends EventEmitter {
       try {
         const data = await fs.readJson(metadataPath);
         for (const [graphId, metadata] of Object.entries(data)) {
+          const typedMetadata = metadata as any;
           this.metadata.set(graphId, {
-            ...metadata,
-            lastSync: new Date((metadata as any).lastSync),
-            checksums: new Map(Object.entries((metadata as any).checksums || {}))
+            ...typedMetadata,
+            lastSync: new Date(typedMetadata.lastSync),
+            checksums: new Map(Object.entries(typedMetadata.checksums || {}))
           } as StorageMetadata);
         }
       } catch (error) {

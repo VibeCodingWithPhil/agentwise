@@ -307,7 +307,7 @@ async function simulateAgentExecution(
   agent: { id: string; name: string },
   context: any
 ): Promise<void> {
-  const agentResponses = {
+  const agentResponses: Record<string, string> = {
     'frontend-specialist': 'Implemented responsive dashboard with 15% faster load times. Added 8 new React components with full accessibility support.',
     'backend-specialist': 'Created RESTful API with 99.9% uptime. Database queries optimized for 40% better performance.',
     'testing-specialist': 'Achieved 88% test coverage with 25 new tests. All critical paths covered with integration tests.',
@@ -333,7 +333,7 @@ function setupMonitoringListeners(verification: AgentClaimVerificationIntegratio
 
   verificationSystem.on('claim-debunked', (claim, discrepancies) => {
     console.log(`❌ [MONITOR] Claim debunked: ${claim.agentName} - ${discrepancies.length} issues found`);
-    if (discrepancies.some(d => d.severity === 'critical')) {
+    if (discrepancies.some((d: any) => d.severity === 'critical')) {
       console.log(`🚨 [ALERT] Critical discrepancy detected for agent ${claim.agentName}`);
     }
   });
@@ -455,14 +455,7 @@ export async function runAllExamples(): Promise<void> {
   }
 }
 
-// Export individual examples for selective testing
-export {
-  basicSetupExample,
-  integratedSetupExample,
-  agentOrchestrationExample,
-  monitoringExample,
-  validationScenariosExample
-};
+// Functions are already exported individually above
 
 // Run all examples if this file is executed directly
 if (require.main === module) {

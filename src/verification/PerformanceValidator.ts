@@ -17,7 +17,8 @@ import {
   ValidationResult,
   SystemSnapshot,
   PerformanceSnapshot,
-  Deviation
+  Deviation,
+  ValidationIssue
 } from './types';
 
 const execAsync = promisify(exec);
@@ -172,10 +173,13 @@ export class PerformanceValidator extends EventEmitter {
         expectedValues: {},
         deviations: [],
         issues: [{
-          type: 'test_error',
+          type: 'inconsistency',
           severity: 'high',
-          description: `Test execution failed: ${error.message}`
-        }]
+          description: `Test execution failed: ${error.message}`,
+          claimId: claim.id,
+          autoFixable: false,
+          impact: 'high'
+        } as ValidationIssue]
       };
     } finally {
       test.endTime = new Date();

@@ -145,7 +145,7 @@ export class AgentClaimVerificationIntegration {
       console.log(`[VERIFICATION] ❌ Claim DEBUNKED: ${claim.agentName} - ${claim.description.substring(0, 50)}...`);
       console.log(`[VERIFICATION]    Discrepancies: ${discrepancies.length} issues found`);
       
-      if (discrepancies.some(d => d.severity === 'critical')) {
+      if (discrepancies.some((d: any) => d.severity === 'critical')) {
         console.log(`[VERIFICATION] 🚨 CRITICAL ISSUES DETECTED - Agent may require retraining`);
       }
     });

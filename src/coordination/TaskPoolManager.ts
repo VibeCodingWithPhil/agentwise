@@ -157,7 +157,7 @@ export class TaskPoolManager extends EventEmitter {
     
     // Share context if applicable
     if (task.contextHash) {
-      await this.contextClient.shareContext(task.projectId, bestAgent.agentId, task.contextHash);
+      await this.contextClient.setContext(task.contextHash);
     }
     
     this.emit('task:assigned', task, bestAgent);
@@ -498,15 +498,9 @@ export class TaskPoolManager extends EventEmitter {
   }
 
   private setupAgentEvents(): void {
-    // Listen for agent discovery
-    this.agentManager.on('agent:discovered', (agentData: any) => {
-      this.registerAgent(agentData.id, agentData.capabilities || [], agentData.maxLoad || 3);
-    });
-    
-    // Listen for agent status changes
-    this.agentManager.on('agent:status_changed', (agentId: string, isActive: boolean) => {
-      this.updateAgentStatus(agentId, isActive);
-    });
+    // Note: DynamicAgentManager does not extend EventEmitter
+    // Agent discovery and status changes are handled through polling
+    // If needed, these can be implemented as callback-based methods
   }
 
   private startPeriodicTasks(): void {

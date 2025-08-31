@@ -17,7 +17,7 @@ import {
   ClaimVerificationEvents
 } from './types';
 
-export class ClaimTracker extends EventEmitter implements Partial<ClaimVerificationEvents> {
+export class ClaimTracker extends EventEmitter {
   private claims: Map<string, AgentClaim> = new Map();
   private claimsPath: string;
   private patterns: Map<ClaimType, RegExp[]> = new Map();

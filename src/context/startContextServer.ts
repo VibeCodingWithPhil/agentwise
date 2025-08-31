@@ -32,7 +32,7 @@ async function startContextServer() {
       wsIntegration = new WebSocketIntegration(progressTracker);
       console.log('📊 Monitoring integration enabled');
     } catch (error) {
-      console.log('⚠️  Monitoring integration not available:', error.message);
+      console.log('⚠️  Monitoring integration not available:', error instanceof Error ? error.message : 'Unknown error');
     }
 
     // Create context integration system

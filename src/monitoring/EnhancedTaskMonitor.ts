@@ -173,10 +173,12 @@ export class EnhancedTaskMonitor extends EventEmitter {
     
     // Update agent status
     const agentKey = `${projectName}:${data.agent}`;
-    const agentStatus = this.agentStatuses.get(agentKey) || {
+    const agentStatus: AgentStatus = this.agentStatuses.get(agentKey) || {
       name: data.agent,
       status: 'working' as const,
-      completionPercentage: 0
+      completionPercentage: 0,
+      currentTask: undefined,
+      currentPhase: undefined
     };
     
     // Get completion percentage from validator
@@ -323,12 +325,10 @@ export class EnhancedTaskMonitor extends EventEmitter {
    */
   private sendDashboardUpdate(type: string, data: any): void {
     try {
-      // Send update through progress tracker which WebSocket monitors
-      this.progressTracker.updateProjectProgress(data.project || 'default', {
-        type,
-        ...data,
-        timestamp: new Date().toISOString()
-      });
+      // TODO: Implement dashboard update mechanism
+      // The ProgressTracker doesn't have an updateProjectProgress method
+      // For now, we'll just log the updates
+      console.log(`[Dashboard Update] ${type}:`, data);
     } catch (error) {
       // Silent fail if WebSocket not connected
     }

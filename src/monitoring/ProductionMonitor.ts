@@ -239,7 +239,7 @@ export class ProductionMonitor extends EventEmitter {
         agents: {
           active: memoryStats.agents?.length || 0,
           throttled: memoryStats.throttledAgents?.length || 0,
-          totalMemory: memoryStats.agents?.reduce((sum, agent) => sum + agent.totalMemory, 0) / 1024 / 1024 || 0
+          totalMemory: memoryStats.agents?.reduce((sum: number, agent: any) => sum + agent.totalMemory, 0) / 1024 / 1024 || 0
         },
         performance: {
           responseTime: avgResponseTime,

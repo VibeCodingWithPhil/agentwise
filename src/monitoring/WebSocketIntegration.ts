@@ -5,7 +5,7 @@
 
 import { EventEmitter } from 'events';
 import { ProgressTracker, ProjectProgress, TaskProgress } from './ProgressTracker';
-import * as WebSocket from 'ws';
+import WebSocket from 'ws';
 
 export class WebSocketIntegration extends EventEmitter {
   private progressTracker: ProgressTracker;

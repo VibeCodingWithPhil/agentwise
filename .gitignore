@@ -140,3 +140,7 @@ VERIFIED_RESULTS.md
 # Keep .claude folder and its contents
 !.claude/
 !.claude/**/*.agentwise-config.json
+
+# Figma documentation (local only)
+figma-website-documentation.md
+figma-interactive-demo.md

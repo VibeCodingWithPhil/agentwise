@@ -833,7 +833,7 @@ export class KnowledgeGraphQuery {
     graphId: string,
     node1: KnowledgeNode,
     node2: KnowledgeNode
-  ): number {
+  ): Promise<number> {
     const rel1 = await this.store.findRelationships(graphId, node1.id);
     const rel2 = await this.store.findRelationships(graphId, node2.id);
     

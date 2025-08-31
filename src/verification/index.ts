@@ -16,6 +16,10 @@ export {
   resetVerificationIntegration
 } from './integration';
 
+// Import for default export
+import { default as ClaimVerificationSystemClass } from './ClaimVerificationSystem';
+import { AgentClaimVerificationIntegration as AgentClaimVerificationIntegrationClass, getVerificationIntegration as getVerificationIntegrationFunc } from './integration';
+
 // Type definitions
 export * from './types';
 
@@ -63,7 +67,7 @@ export async function initializeVerification(options: {
     }
   };
 
-  const Integration = AgentClaimVerificationIntegration;
+  const Integration = AgentClaimVerificationIntegrationClass;
   const verification = new Integration(
     options.projectPath || process.cwd(),
     config
@@ -86,8 +90,7 @@ export const VerificationFactory = {
    * Development configuration - lenient settings for development
    */
   development: (projectPath?: string) => {
-    const Integration = AgentClaimVerificationIntegration;
-    return new Integration(projectPath, {
+    return new AgentClaimVerificationIntegrationClass(projectPath, {
       enabled: true,
       strictMode: false,
       tolerances: {
@@ -107,7 +110,7 @@ export const VerificationFactory = {
    * Production configuration - strict settings for production
    */
   production: (projectPath?: string) => {
-    const Integration = AgentClaimVerificationIntegration;
+    const Integration = AgentClaimVerificationIntegrationClass;
     return new Integration(projectPath, {
       enabled: true,
       strictMode: true,
@@ -132,8 +135,7 @@ export const VerificationFactory = {
    * Testing configuration - optimized for test environments
    */
   testing: (projectPath?: string) => {
-    const Integration = AgentClaimVerificationIntegration;
-    return new Integration(projectPath, {
+    return new AgentClaimVerificationIntegrationClass(projectPath, {
       enabled: true,
       strictMode: false,
       timeouts: {
@@ -157,8 +159,7 @@ export const VerificationFactory = {
    * High-performance configuration - optimized for speed
    */
   highPerformance: (projectPath?: string) => {
-    const Integration = AgentClaimVerificationIntegration;
-    return new Integration(projectPath, {
+    return new AgentClaimVerificationIntegrationClass(projectPath, {
       enabled: true,
       strictMode: false,
       timeouts: {
@@ -314,7 +315,11 @@ export async function healthCheck(verification?: any): Promise<{
     message: string;
   }>;
 }> {
-  const checks = [];
+  const checks: Array<{
+    name: string;
+    status: 'pass' | 'warn' | 'fail';
+    message: string;
+  }> = [];
   let overallStatus: 'healthy' | 'warning' | 'critical' = 'healthy';
 
   // Check if verification system is provided and functional
@@ -417,9 +422,9 @@ export async function healthCheck(verification?: any): Promise<{
 
 // Default export for convenience
 export default {
-  ClaimVerificationSystem: ClaimVerificationSystem as any,
-  AgentClaimVerificationIntegration: undefined as any,
-  getVerificationIntegration: getVerificationIntegration as any,
+  ClaimVerificationSystem: ClaimVerificationSystemClass,
+  AgentClaimVerificationIntegration: AgentClaimVerificationIntegrationClass,
+  getVerificationIntegration: getVerificationIntegrationFunc,
   initializeVerification,
   VerificationFactory,
   VerificationUtils,

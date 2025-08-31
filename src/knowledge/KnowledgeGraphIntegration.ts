@@ -222,19 +222,21 @@ export class KnowledgeGraphIntegration extends EventEmitter {
     const relations: { file: string; relationship: string; score: number }[] = [];
 
     for (const node of fileNodes) {
-      // Get neighbors
-      const neighbors = await this.query.getNeighbors(graphId, node.id, 2);
+      // Get neighbors using findNodesInRadius
+      const neighbors = await this.query.findNodesInRadius(graphId, node.id, 2);
       
-      for (const neighbor of neighbors) {
-        if (neighbor.path !== filePath) {
+      for (const [neighborId, distance] of neighbors) {
+        const neighborNode = (await this.store.loadGraph(graphId))?.nodes.get(neighborId);
+        const neighborPath = (neighborNode?.metadata as any)?.path;
+        if (neighborNode && neighborPath && neighborPath !== filePath) {
           const relationships = await this.store.findRelationships(graphId, node.id);
           const directRelationship = relationships.find(
-            r => r.from === neighbor.id || r.to === neighbor.id
+            r => r.from === neighborId || r.to === neighborId
           );
           
           if (directRelationship) {
             relations.push({
-              file: neighbor.path,
+              file: neighborPath,
               relationship: directRelationship.type,
               score: directRelationship.weight
             });

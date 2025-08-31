@@ -128,14 +128,14 @@ export class DynamicAgentGenerator {
     const specContent = JSON.stringify(projectSpecs).toLowerCase();
     
     // Analyze for missing agent capabilities
-    const capabilityGaps = {
+    const capabilityGaps: Record<string, { keywords: string[]; notCoveredBy: string[] }> = {
       'designer-specialist': {
         keywords: ['design', 'figma', 'ui/ux', 'wireframe', 'mockup', 'prototype'],
         notCoveredBy: ['frontend-specialist']
       },
       'ai-integration-specialist': {
         keywords: ['ai', 'machine learning', 'llm', 'openai', 'claude', 'gpt'],
-        notCoveredBy: []
+        notCoveredBy: [] as string[]
       },
       'performance-specialist': {
         keywords: ['optimize', 'performance', 'speed', 'cache', 'cdn', 'load time'],
@@ -151,7 +151,7 @@ export class DynamicAgentGenerator {
       },
       'blockchain-specialist': {
         keywords: ['blockchain', 'crypto', 'smart contract', 'web3', 'ethereum'],
-        notCoveredBy: []
+        notCoveredBy: [] as string[]
       },
       'data-specialist': {
         keywords: ['analytics', 'data science', 'visualization', 'bi', 'reporting'],

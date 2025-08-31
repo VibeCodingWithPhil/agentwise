@@ -379,7 +379,7 @@ export class LocalModelSupport {
     } catch (error) {
       return {
         success: false,
-        error: error.message,
+        error: error instanceof Error ? error.message : 'Unknown error',
         latency: Date.now() - startTime
       };
     }
@@ -448,17 +448,22 @@ export class LocalModelSupport {
       let response;
       
       switch (config.provider) {
-        case 'ollama':
-          response = await axios.post(`${provider.baseUrl}/api/generate`, {
+        case 'ollama': {
+          const requestResponse = await fetch(`${provider.baseUrl}/api/generate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
             model: config.model,
             prompt: config.systemPrompt ? `${config.systemPrompt}\n\n${prompt}` : prompt,
             stream: false,
-            options: {
-              temperature: config.temperature,
-              top_p: config.topP,
-              num_predict: config.maxTokens
-            }
+              options: {
+                temperature: config.temperature,
+                top_p: config.topP,
+                num_predict: config.maxTokens
+              }
+            })
           });
+          response = { data: await requestResponse.json() };
           
           return {
             text: response.data.response,
@@ -467,9 +472,10 @@ export class LocalModelSupport {
             provider: config.provider,
             model: config.model
           };
+        }
           
         case 'lm-studio':
-        case 'openrouter':
+        case 'openrouter': {
           const messages = config.systemPrompt
             ? [
                 { role: 'system', content: config.systemPrompt },
@@ -494,11 +500,15 @@ export class LocalModelSupport {
               }
             : {};
           
-          response = await axios.post(
+          const requestResponse = await fetch(
             `${provider.baseUrl}/chat/completions`,
-            requestBody,
-            { headers }
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', ...headers },
+              body: JSON.stringify(requestBody)
+            }
           );
+          response = { data: await requestResponse.json() };
           
           return {
             text: response.data.choices[0].message.content,
@@ -507,6 +517,7 @@ export class LocalModelSupport {
             provider: config.provider,
             model: config.model
           };
+        }
           
         default:
           throw new Error(`Unsupported provider: ${config.provider}`);

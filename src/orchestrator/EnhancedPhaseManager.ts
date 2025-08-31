@@ -401,7 +401,7 @@ export class EnhancedPhaseManager {
       const statusFile = path.join(agentDir, 'phase-status.json');
       const status = {
         currentPhase: 1,
-        completedPhases: [],
+        completedPhases: [] as any[],
         totalPhases: phases,
         lastUpdated: new Date().toISOString(),
         ready: true
