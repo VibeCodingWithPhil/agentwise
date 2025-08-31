@@ -1,0 +1,1222 @@
+{
+  "timestamp": "2025-08-31T22:39:46.001109",
+  "test_count": 8,
+  "iterations_per_test": 10,
+  "analysis": {
+    "summary": {
+      "tasks_tested": 8,
+      "tasks_with_benefit": 6,
+      "best_improvement": 28.09,
+      "worst_improvement": -38.1,
+      "recommendation": "Multi-agent system recommended for moderate token savings"
+    },
+    "by_complexity": {
+      "simple": {
+        "average_reduction_percent": -29.05,
+        "task_count": 2
+      },
+      "medium": {
+        "average_reduction_percent": 25.23,
+        "task_count": 3
+      },
+      "complex": {
+        "average_reduction_percent": 25.64,
+        "task_count": 3
+      }
+    },
+    "by_task": {
+      "simple_crud_api": {
+        "complexity": "simple",
+        "parallelizable": false,
+        "avg_single_tokens": 10000,
+        "avg_multi_tokens": 12000,
+        "reduction_percent": -20.0,
+        "is_beneficial": false
+      },
+      "react_dashboard": {
+        "complexity": "medium",
+        "parallelizable": true,
+        "avg_single_tokens": 33500,
+        "avg_multi_tokens": 25166,
+        "reduction_percent": 24.88,
+        "is_beneficial": true
+      },
+      "fullstack_app": {
+        "complexity": "complex",
+        "parallelizable": true,
+        "avg_single_tokens": 108000,
+        "avg_multi_tokens": 77666,
+        "reduction_percent": 28.09,
+        "is_beneficial": true
+      },
+      "refactor_legacy": {
+        "complexity": "complex",
+        "parallelizable": true,
+        "avg_single_tokens": 80000,
+        "avg_multi_tokens": 59333,
+        "reduction_percent": 25.83,
+        "is_beneficial": true
+      },
+      "test_suite": {
+        "complexity": "medium",
+        "parallelizable": true,
+        "avg_single_tokens": 41900,
+        "avg_multi_tokens": 30666,
+        "reduction_percent": 26.81,
+        "is_beneficial": true
+      },
+      "single_bug_fix": {
+        "complexity": "simple",
+        "parallelizable": false,
+        "avg_single_tokens": 5250,
+        "avg_multi_tokens": 7250,
+        "reduction_percent": -38.1,
+        "is_beneficial": false
+      },
+      "documentation": {
+        "complexity": "medium",
+        "parallelizable": true,
+        "avg_single_tokens": 30700,
+        "avg_multi_tokens": 23333,
+        "reduction_percent": 24.0,
+        "is_beneficial": true
+      },
+      "performance_optimization": {
+        "complexity": "complex",
+        "parallelizable": true,
+        "avg_single_tokens": 60400,
+        "avg_multi_tokens": 46500,
+        "reduction_percent": 23.01,
+        "is_beneficial": true
+      }
+    },
+    "overall_metrics": {
+      "total_single_tokens": 3697500,
+      "total_multi_tokens": 2819140,
+      "overall_reduction_percent": 23.76,
+      "average_reduction_percent": 11.82
+    }
+  },
+  "raw_results": [
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "single",
+      "total_tokens": 10000,
+      "input_tokens": 7000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "simple_crud_api",
+      "agent_type": "multi",
+      "total_tokens": 12000,
+      "input_tokens": 9000,
+      "output_tokens": 3000
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "single",
+      "total_tokens": 33500,
+      "input_tokens": 26000,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "react_dashboard",
+      "agent_type": "multi",
+      "total_tokens": 25166,
+      "input_tokens": 17666,
+      "output_tokens": 7500
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "single",
+      "total_tokens": 108000,
+      "input_tokens": 78000,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "fullstack_app",
+      "agent_type": "multi",
+      "total_tokens": 77666,
+      "input_tokens": 47666,
+      "output_tokens": 30000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "single",
+      "total_tokens": 80000,
+      "input_tokens": 65000,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "refactor_legacy",
+      "agent_type": "multi",
+      "total_tokens": 59333,
+      "input_tokens": 44333,
+      "output_tokens": 15000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "single",
+      "total_tokens": 41900,
+      "input_tokens": 29900,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "test_suite",
+      "agent_type": "multi",
+      "total_tokens": 30666,
+      "input_tokens": 18666,
+      "output_tokens": 12000
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "single",
+      "total_tokens": 5250,
+      "input_tokens": 5100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "single_bug_fix",
+      "agent_type": "multi",
+      "total_tokens": 7250,
+      "input_tokens": 7100,
+      "output_tokens": 150
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "single",
+      "total_tokens": 30700,
+      "input_tokens": 24700,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "documentation",
+      "agent_type": "multi",
+      "total_tokens": 23333,
+      "input_tokens": 17333,
+      "output_tokens": 6000
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "single",
+      "total_tokens": 60400,
+      "input_tokens": 55900,
+      "output_tokens": 4500
+    },
+    {
+      "task_name": "performance_optimization",
+      "agent_type": "multi",
+      "total_tokens": 46500,
+      "input_tokens": 42000,
+      "output_tokens": 4500
+    }
+  ]
+}

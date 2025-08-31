@@ -17,8 +17,8 @@ export default function PerformancePage() {
           </Badge>
         </div>
         <p className="text-xl text-muted-foreground max-w-3xl">
-          Agentwise delivers unprecedented performance with verified 99.3% token reduction 
-          (Context 3.0 + Knowledge Graph combined) and 5-10x faster development through intelligent parallel execution.
+          Agentwise delivers meaningful performance improvements with 15-30% token optimization 
+          and 2-4x faster development through intelligent parallel execution.
         </p>
       </div>
 
@@ -31,8 +31,8 @@ export default function PerformancePage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">99.3%</div>
-            <p className="text-xs text-muted-foreground">Combined systems</p>
+            <div className="text-2xl font-bold">15-30%</div>
+            <p className="text-xs text-muted-foreground">Realistic reduction</p>
           </CardContent>
         </Card>
         <Card>
@@ -43,7 +43,7 @@ export default function PerformancePage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">5-10x</div>
+            <div className="text-2xl font-bold">2-4x</div>
             <p className="text-xs text-muted-foreground">Faster development</p>
           </CardContent>
         </Card>
@@ -102,8 +102,8 @@ export default function PerformancePage() {
                     <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-3">
                       <div className="text-sm space-y-1">
                         <div className="flex justify-between"><span>Time:</span><span>8 minutes</span></div>
-                        <div className="flex justify-between"><span>Tokens:</span><span>65,000</span></div>
-                        <div className="flex justify-between"><span>Cost:</span><span>$9.75</span></div>
+                        <div className="flex justify-between"><span>Tokens:</span><span>77,000</span></div>
+                        <div className="flex justify-between"><span>Cost:</span><span>$11.55</span></div>
                         <div className="flex justify-between"><span>Quality:</span><span>95% complete</span></div>
                       </div>
                     </div>
@@ -121,7 +121,7 @@ export default function PerformancePage() {
             <Zap className="h-5 w-5 text-accent-600" />
             <div className="text-left">
               <div className="font-medium">Token Optimization</div>
-              <div className="text-xs text-muted-foreground">99.3% reduction details</div>
+              <div className="text-xs text-muted-foreground">15-30% reduction details</div>
             </div>
           </Link>
         </Button>

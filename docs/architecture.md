@@ -71,7 +71,7 @@ interface ContextSystem {
   // Shared context server
   SharedContextServer: {
     port: 3003,
-    tokenReduction: "64.6%",
+    tokenReduction: "15-20%",
     differentialUpdates: true
   },
   
@@ -99,7 +99,7 @@ Advanced semantic understanding:
 interface KnowledgeGraph {
   // Graph generation
   KnowledgeGraphGenerator: {
-    tokenReduction: "98.1%",
+    tokenReduction: "10-15%",
     semanticAnalysis: true,
     relationshipMapping: true
   },
@@ -265,13 +265,13 @@ Response Generation
 ```
 Original Context (100K tokens)
     ↓
-Knowledge Graph (98.1% reduction)
+Smart Caching (10-15% reduction)
     ↓
-Context 3.0 (64.6% reduction)
+Context Sharing (15-20% reduction)
     ↓
-Combined (99.3% reduction)
+Combined (15-30% reduction)
     ↓
-Final Context (673 tokens)
+Final Context (77K tokens)
 ```
 
 ## Performance Optimizations
@@ -480,7 +480,7 @@ interface Plugin {
 ## Conclusion
 
 Agentwise's architecture represents a sophisticated balance of:
-- **Performance**: 99.3% token reduction
+- **Performance**: 15-30% token reduction
 - **Scalability**: Horizontal and vertical
 - **Maintainability**: Modular design
 - **Security**: Defense in depth

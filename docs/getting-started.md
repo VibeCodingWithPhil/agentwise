@@ -278,8 +278,8 @@ npm run context:restart
 ```
 
 **Token Limit Exceeded**
-- Enable Context 3.0: 64.6% reduction
-- Enable Knowledge Graph: 98.1% reduction
+- Enable Context Sharing: 15-20% reduction
+- Enable Smart Caching: 10-15% additional reduction
 
 **Build Errors**
 ```bash
