@@ -198,4 +198,18 @@ results/
 # Figma documentation (local only)
 figma-website-documentation.md
 figma-interactive-demo.md
+figma-docs/
+
+# Wiki directories (local only)
+wiki/
 wiki-repo/
+
+# NPM package (local only)
+create-agentwise-cli/
+
+# Documentation files that should not be in repo
+SECURITY_REVIEW.md
+RELEASE_NOTES_*.md
+IMPLEMENTATION_SUMMARY.md
+NPM_*.md
+INSTALLATION_GUIDE.md
