@@ -32,19 +32,29 @@
 <tr>
 <td>
 
-### 🎯 One-Click Setup for Claude Code
+### 🎯 Streamlined Installation (No Build Errors!)
 
-**Copy this entire block and paste into Claude Code:**
-
+**Option 1: Automated Script (Recommended)**
+```bash
+# Download and run the installer
+curl -o- https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.sh | bash
 ```
-Please set up Agentwise by:
-1. Clone: git clone https://github.com/VibeCodingWithPhil/agentwise.git ~/agentwise
-2. Install: cd ~/agentwise && npm install && npm run build
-3. Configure: Create workspace directory and set up global monitor
-4. Start: node dist/index.js
-5. Enable sandboxed execution (no --dangerously-skip-permissions needed)
 
-Full setup instructions: https://github.com/VibeCodingWithPhil/agentwise/blob/main/CLAUDE_CODE_SETUP_PROMPT.md
+**Option 2: One-Command Setup**
+```bash
+# Clone and setup with error handling
+git clone https://github.com/VibeCodingWithPhil/agentwise.git ~/agentwise && \
+cd ~/agentwise && \
+npm install --legacy-peer-deps && \
+./start-agentwise.sh
+```
+
+**Option 3: Claude Code Integration**
+```
+Please set up Agentwise using the new installer:
+1. Download installer: curl -o install.sh https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.sh
+2. Run: bash install.sh
+3. Start: cd ~/agentwise && ./start-agentwise.sh
 ```
 
 **That's it!** Claude Code will handle the entire setup automatically.

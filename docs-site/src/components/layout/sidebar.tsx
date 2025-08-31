@@ -25,6 +25,19 @@ const sidebarNavItems: NavItem[] = [
       { title: "Quick Start", href: "/docs/quick-start" },
       { title: "First Project", href: "/docs/first-project" },
       { title: "Configuration", href: "/docs/configuration" },
+      { title: "Updating", href: "/docs/updating" },
+    ],
+  },
+  {
+    title: "Core Features",
+    href: "/docs/features",
+    icon: FileText,
+    items: [
+      { title: "Project Wizard", href: "/docs/project-wizard" },
+      { title: "Requirements Planning", href: "/docs/requirements-planning" },
+      { title: "Database Integration", href: "/docs/database-integration" },
+      { title: "GitHub Integration", href: "/docs/github-integration" },
+      { title: "Protection System", href: "/docs/protection-system" },
     ],
   },
   {
