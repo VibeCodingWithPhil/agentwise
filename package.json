@@ -1,6 +1,6 @@
 {
   "name": "agentwise",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Multi-agent orchestration system for Claude Code with 99.3% token reduction, self-improving agents, and automatic claim verification",
   "main": "dist/index.js",
   "scripts": {

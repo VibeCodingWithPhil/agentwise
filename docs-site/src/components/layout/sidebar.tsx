@@ -41,17 +41,110 @@ const sidebarNavItems: NavItem[] = [
     ],
   },
   {
-    title: "Commands",
+    title: "Commands (45)",
     href: "/docs/commands",
     icon: Code,
     items: [
       { title: "Overview", href: "/docs/commands" },
-      { title: "/create", href: "/docs/commands/create" },
-      { title: "/task", href: "/docs/commands/task" },
-      { title: "/monitor", href: "/docs/commands/monitor" },
-      { title: "/projects", href: "/docs/commands/projects" },
-      { title: "/figma", href: "/docs/commands/figma" },
-      { title: "/upload", href: "/docs/commands/upload" },
+      { 
+        title: "Project Management (11)",
+        href: "/docs/commands#project-management",
+        items: [
+          { title: "/create", href: "/docs/commands#create" },
+          { title: "/create-plan", href: "/docs/commands#create-plan" },
+          { title: "/create-project", href: "/docs/commands#create-project" },
+          { title: "/projects", href: "/docs/commands#projects" },
+          { title: "/project-status", href: "/docs/commands#project-status" },
+          { title: "/task", href: "/docs/commands#task" },
+          { title: "/task-dynamic", href: "/docs/commands#task-dynamic" },
+          { title: "/task-plan", href: "/docs/commands#task-plan" },
+          { title: "/task-import", href: "/docs/commands#task-import" },
+          { title: "/init-import", href: "/docs/commands#init-import" },
+          { title: "/clone-website", href: "/docs/commands#clone-website" },
+        ]
+      },
+      { 
+        title: "Requirements & Planning (4)",
+        href: "/docs/commands#requirements-planning",
+        items: [
+          { title: "/requirements", href: "/docs/commands#requirements" },
+          { title: "/requirements-enhance", href: "/docs/commands#requirements-enhance" },
+          { title: "/requirements-visualize", href: "/docs/commands#requirements-visualize" },
+          { title: "/requirements-to-tasks", href: "/docs/commands#requirements-to-tasks" },
+        ]
+      },
+      { 
+        title: "Database Integration (3)",
+        href: "/docs/commands#database-integration",
+        items: [
+          { title: "/database-wizard", href: "/docs/commands#database-wizard" },
+          { title: "/database-setup", href: "/docs/commands#database-setup" },
+          { title: "/database-connect", href: "/docs/commands#database-connect" },
+        ]
+      },
+      { 
+        title: "Security & Protection (5)",
+        href: "/docs/commands#security-protection",
+        items: [
+          { title: "/enable-protection", href: "/docs/commands#enable-protection" },
+          { title: "/protection-status", href: "/docs/commands#protection-status" },
+          { title: "/security-review", href: "/docs/commands#security-review" },
+          { title: "/security-report", href: "/docs/commands#security-report" },
+          { title: "/rollback", href: "/docs/commands#rollback" },
+        ]
+      },
+      { 
+        title: "Figma Integration (8)",
+        href: "/docs/commands#figma-integration",
+        items: [
+          { title: "/figma", href: "/docs/commands#figma" },
+          { title: "/figma-auth", href: "/docs/commands#figma-auth" },
+          { title: "/figma-list", href: "/docs/commands#figma-list" },
+          { title: "/figma-select", href: "/docs/commands#figma-select" },
+          { title: "/figma-inspect", href: "/docs/commands#figma-inspect" },
+          { title: "/figma-generate", href: "/docs/commands#figma-generate" },
+          { title: "/figma-sync", href: "/docs/commands#figma-sync" },
+          { title: "/figma-create", href: "/docs/commands#figma-create" },
+        ]
+      },
+      { 
+        title: "Models & Agent Management (6)",
+        href: "/docs/commands#models-agent-management",
+        items: [
+          { title: "/generate-agent", href: "/docs/commands#generate-agent" },
+          { title: "/setup-ollama", href: "/docs/commands#setup-ollama" },
+          { title: "/setup-lmstudio", href: "/docs/commands#setup-lmstudio" },
+          { title: "/local-models", href: "/docs/commands#local-models" },
+          { title: "/configure-routing", href: "/docs/commands#configure-routing" },
+          { title: "/setup-mcps", href: "/docs/commands#setup-mcps" },
+        ]
+      },
+      { 
+        title: "Monitoring & Analysis (3)",
+        href: "/docs/commands#monitoring-analysis",
+        items: [
+          { title: "/monitor", href: "/docs/commands#monitor" },
+          { title: "/visual-test", href: "/docs/commands#visual-test" },
+          { title: "/docs", href: "/docs/commands#docs" },
+        ]
+      },
+      { 
+        title: "Deployment & Updates (2)",
+        href: "/docs/commands#deployment-updates",
+        items: [
+          { title: "/deploy", href: "/docs/commands#deploy" },
+          { title: "/update-agentwise", href: "/docs/commands#update-agentwise" },
+        ]
+      },
+      { 
+        title: "Configuration & Tools (3)",
+        href: "/docs/commands#configuration-tools",
+        items: [
+          { title: "/configure-agentwise", href: "/docs/commands#configure-agentwise" },
+          { title: "/upload", href: "/docs/commands#upload" },
+          { title: "/image", href: "/docs/commands#image" },
+        ]
+      },
     ],
   },
   {

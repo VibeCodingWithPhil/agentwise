@@ -59,7 +59,7 @@ agentwise/
 ```json
 {
   "name": "agentwise",
-  "version": "1.3.0",
+  "version": "2.3.0",
   "description": "Multi-agent orchestration for Claude Code",
   "bin": {
     "agentwise": "./bin/agentwise.js"
@@ -253,7 +253,7 @@ If approved, the following actions are needed:
 3. **Restructure codebase** for NPM distribution
 4. **Create CLI wrapper** for commands
 5. **Test extensively** on multiple platforms
-6. **Publish v1.3.0** as first NPM release
+6. **Publish v2.3.0** as first NPM release
 
 ## 💡 Alternative: NPX Support
 
