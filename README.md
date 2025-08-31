@@ -21,7 +21,7 @@
 
 ---
 
-## ⚡ Quick Install (30 Seconds)
+## ⚡ Quick Install (30 Seconds) - No Shell Scripts!
 
 > **Created**: August 20, 2025  
 > **Lines of Code**: 335,998+ in src/ folder alone  
@@ -32,32 +32,27 @@
 <tr>
 <td>
 
-### 🎯 Streamlined Installation (No Build Errors!)
+### 🔒 Secure NPM Installation (Recommended)
 
-**Option 1: Automated Script (Recommended)**
+**No shell scripts, no security concerns, full transparency.**
+
 ```bash
-# Download and run the installer
-curl -o- https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.sh | bash
+# Install with interactive prompts (secure & easy)
+npm create agentwise@latest
+
+# Or with yarn
+yarn create agentwise
+
+# Or with pnpm
+pnpm create agentwise
 ```
 
-**Option 2: One-Command Setup**
-```bash
-# Clone and setup with error handling
-git clone https://github.com/VibeCodingWithPhil/agentwise.git ~/agentwise && \
-cd ~/agentwise && \
-npm install --legacy-peer-deps && \
-./start-agentwise.sh
-```
-
-**Option 3: Claude Code Integration**
-```
-Please set up Agentwise using the new installer:
-1. Download installer: curl -o install.sh https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.sh
-2. Run: bash install.sh
-3. Start: cd ~/agentwise && ./start-agentwise.sh
-```
-
-**That's it!** Claude Code will handle the entire setup automatically.
+**What this does:**
+✅ Interactive menu to choose installation path  
+✅ Auto-detects existing installations  
+✅ Full user control with confirmation prompts  
+✅ Cross-platform (Windows, macOS, Linux)  
+✅ Pure JavaScript - no shell scripts  
 
 </td>
 </tr>
@@ -90,21 +85,21 @@ claude /configure-agentwise
 
 ### 🔄 Updating Agentwise
 
-**Automatic Update Command:**
+**NPM Update (Recommended):**
 ```bash
-/update-agentwise
+# Run the installer again - it will detect and update existing installations
+npm create agentwise@latest
+# Choose "Update existing installation" when prompted
 ```
-- Checks current version
-- Downloads latest from GitHub
-- Preserves your settings
-- Restarts services automatically
 
 **Manual Update (if preferred):**
-```
-cd ~/agentwise && git stash && git pull origin main && npm install && npm run build && echo "✅ Updated!"
+```bash
+cd ~/agentwise
+git pull origin main
+npm install --legacy-peer-deps
 ```
 
-[📖 Full Setup Guide](CLAUDE_CODE_SETUP_PROMPT.md) | [🔧 Manual Installation](#manual-installation)
+[📖 Complete Installation Guide](INSTALLATION_GUIDE.md) | [🔧 Manual Installation](#manual-installation)
 
 ---
 
@@ -461,21 +456,24 @@ sequenceDiagram
 
 ### Installation
 
-#### Quick Install (Recommended)
+#### NPM Installation (Recommended)
 
-##### macOS/Linux:
+**Secure installation without shell scripts:**
 ```bash
-# Download and run installer
-curl -fsSL https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.sh | bash
+# Interactive installer - works on all platforms
+npm create agentwise@latest
+
+# Alternative package managers
+yarn create agentwise
+pnpm create agentwise
 ```
 
-##### Windows (PowerShell as Administrator):
-```powershell
-# Download and run installer
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/VibeCodingWithPhil/agentwise/main/installers/install.ps1" -OutFile "install.ps1"
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-.\install.ps1
-```
+**What you get:**
+- Secure, transparent installation process
+- Choice of installation location
+- Automatic existing installation detection
+- Cross-platform compatibility
+- No shell scripts or security concerns
 
 ## 🔧 Manual Installation
 
