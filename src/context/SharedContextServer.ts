@@ -168,17 +168,24 @@ export class SharedContextServer extends EventEmitter {
         'http://127.0.0.1:3000',
         'http://127.0.0.1:3001',
         'http://127.0.0.1:3002',
-        'http://127.0.0.1:3003',
-        'file://'  // For local development tools
+        'http://127.0.0.1:3003'
+        // Removed 'file://' for security, do not allow it for credentialed CORS
       ];
       
-      if (allowedOrigins.includes(origin)) {
+      // Never allow "null" or "file://" as credentialed CORS origin
+      if (allowedOrigins.includes(origin) && origin !== "null" && origin !== "file://") {
         res.setHeader('Access-Control-Allow-Origin', origin);
         res.setHeader('Access-Control-Allow-Credentials', 'true');
-      } else if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
-        // Allow any localhost port for development flexibility
+      } else if ((origin && (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')))
+        && origin !== "null" && origin !== "file://") {
+        // Allow development flexibility but never send credential header
         res.setHeader('Access-Control-Allow-Origin', origin);
-        // Don't allow credentials for dynamic origins
+        res.setHeader('Access-Control-Allow-Credentials', 'false');
+      } else {
+        // For all other cases, do not reflect origin nor allow credentials
+        // Optionally, you could omit CORS headers entirely,
+        // or respond with a safe default:
+        res.setHeader('Access-Control-Allow-Origin', 'false');
         res.setHeader('Access-Control-Allow-Credentials', 'false');
       }
       
