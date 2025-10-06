@@ -33,7 +33,7 @@
   "dependencies": {
     "@observablehq/plot": "^0.6.17",
     "@types/ws": "^8.18.1",
-    "axios": "^1.11.0",
+    "axios": "^1.12.2",
     "blessed": "^0.1.81",
     "chalk": "^4.1.2",
     "chokidar": "^4.0.3",
